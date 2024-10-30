@@ -6,63 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novo Começo</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="home.css">
 </head>
 
 <body>
     <header>  
-        <nav class="navbar">
+        <nav class="navbar nav-lg-screen" id="navbar">
+            <button class="btn-icon-header" onclick="toggleSideBar()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list"
+                    viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                </svg>
+            </button>
             <div>
-                <img class="img-logo" src="../Projeto_NovoComeco/assets/logo.png">
+                <img class="img-logo" id="logo" src="../Projeto_NovoComeco/assets/logo.png" alt="Logo">
             </div>
-            <div class="nav-links">
+            <div class="nav-links" id="nav-links">
                 <ul>
                     <li>
-                        <a>HOME</a>
+                        <button class="btn-icon-header" onclick="toggleSideBar()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path
+                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                            </svg>
+                        </button>
                     </li>
-                    <li>
-                        <a>ONG'S</a>
-                    </li>
-                    <li>
-                        <a>SOBRE</a>
-                    </li>
-                    <li>
-                        <a>CONTATO</a>
-                    </li>
+                    <li class="nav-link"><a href="#">HOME</a></li>
+                    <li class="nav-link"><a href="#">ONG'S</a></li>
+                    <li class="nav-link"><a href="#">SOBRE</a></li>
+                    <li class="nav-link"><a href="#">CONTATO</a></li>
+                    <li class="nav-link btn-login"><a href="">LOGIN</a></li>
                 </ul>
             </div>
-            <div>
-                <img class="img-user" src="../Projeto_NovoComeco/assets/user.png">
+            <div class="user">
+                <img class="img-user" src="../Projeto_NovoComeco/assets/user.png" alt="Usuário">
             </div>
         </nav>
-        
-
     </header>
-    <main>
-        <div class="container-fluid row">
-            <div class="col-8">
-                <span>NOVO</span>
-                <span>COMEÇO</span>
+
+    <main tabindex="0" class="content" id="content" onclick="closeSideBar()">
+        <div>
+            <div>
+                <span class="">NOVO</span>
+                <span class="">COMEÇ</span>
             </div>
-            <div class="col-4">   
-                <a class="btn btn-primary btn-">QUERO DOAR</a>
+            <div>
+                <a href="#">QUERO DOAR</a>
             </div>
         </div>
     </main>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <script src="../Projeto_NovoComeco/header.js"></script>
 
 </body>
-
 </html>

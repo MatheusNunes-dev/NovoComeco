@@ -1,4 +1,6 @@
 
+/* Reset do css */
+
 html,
 body,
 div,
@@ -86,6 +88,7 @@ video {
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
+    text-decoration: none;
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -131,20 +134,13 @@ table {
     border-spacing: 0;
 }
 
-.navbar{
-    display:flex;
-    justify-content: space-between  ;
+
+
+body {
+    background-color: #FDF3C0;
+    margin: 0;
+    font-family: Arial, sans-serif;
+
 }
 
 
-.nav-links ul{
-    display: flex;
-}
-
-.img-logo{
-    width: 5rem;
-}
-
-.img-user{
-    width: 5rem;
-}
