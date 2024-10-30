@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Conta - Novo Começo</title>
+    <link rel="stylesheet" href="styleRegister.css">
+</head>
+<body>
+    <div class="container">
+        <section class="register-section">
+            <h1>Criar conta</h1>
+            <p>Use o seu email para se registrar</p>
+            <form action="/register" method="POST">
+                <div class="input-group">
+                    <input type="text" id="name" name="name" placeholder="Nome" required>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" name="password" placeholder="Senha" required>
+                </div>
+                <button type="submit" class="register-button">Criar conta</button>
+            </form>
+        </section>
+    </div>
+</body>
+</html>
