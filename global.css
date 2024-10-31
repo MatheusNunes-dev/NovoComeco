@@ -442,3 +442,18 @@ header {
     font-weight: 700;
     font-style: normal;
 }
+
+
+
+
+@media (max-width: 768px) {
+    html {
+        font-size: 87.5%;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 75%;
+    }
+}
