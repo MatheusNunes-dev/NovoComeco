@@ -9,14 +9,17 @@ function toggleSideBar() {
     if (showSideBar) {
         navLinks.classList.add('show');
         navLinks.style.animationName = 'showSideBar'
-        content.style.backgroundColor = 'rgba(0, 0, 0, 0.4)'
-        navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.4)'
-        logo.style.filter = 'brightness(0.4 )';
+        // content.style.backgroundColor = 'rgba(0, 0, 0, 0.4)'
+        // navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.4)'
+        // logo.style.filter = 'brightness(0.4 )';
+        document.body.classList.add('no-scroll');
     } else {
         navLinks.classList.remove('show');
-        content.style.backgroundColor = 'rgba(0, 0, 0, 0)'
-        navbar.style.backgroundColor = 'rgba(0, 0, 0, 0)'
-        logo.style.filter = 'brightness(1)';
+        // content.style.backgroundColor = 'rgba(0, 0, 0, 0)'
+        // navbar.style.backgroundColor = 'rgba(0, 0, 0, 0)'
+        // logo.style.filter = 'brightness(1)';
+        document.body.classList.remove('no-scroll');
+        
     }
 }
 

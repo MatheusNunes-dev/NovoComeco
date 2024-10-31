@@ -70,22 +70,15 @@
 }
 
 
-.btn-login{
+.btn-login {
     background-color: #dab547;
     width: 3rem;
-    height: 1   rem;
+    height: 1 rem;
     padding: 0.5rem 1rem;
     border-style: solid;
     border-radius: 1rem;
 
 }
-
-
-
-
-
-
-
 
 @keyframes showSideBar {
     from {

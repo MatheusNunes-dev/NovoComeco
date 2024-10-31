@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novo Começo</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
@@ -20,7 +20,7 @@
                 </svg>
             </button>
             <div>
-                <img class="img-logo" id="logo" src="../Projeto_NovoComeco/assets/logo.png" alt="Logo">
+                <img class="img-logo" id="logo" src="assets/logo.png" alt="Logo">
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
@@ -40,24 +40,97 @@
                 </ul>
             </div>
             <div class="user">
-                <img class="img-user" src="../Projeto_NovoComeco/assets/user.png" alt="Usuário">
+                <img class="img-user" src="assets/user.png" alt="Usuário">
             </div>
         </nav>
     </header>
 
-    <main tabindex="0" class="content" id="content" onclick="closeSideBar()">
-        <div>
+    <main tax`bindex="0" class="content" id="content" onclick="closeSideBar()">
+        <section class="banner-intro">
             <div>
-                <span class="">NOVO</span>
-                <span class="">COMEÇ</span>
+                <p class="tittle-banner">NOVO</p>
+                <p class="tittle-banner">COMEÇO</p>
             </div>
             <div>
-                <a href="#">QUERO DOAR</a>
+                <img class="img-banner" src="assets/banner.png">
             </div>
-        </div>
+            <div class="quero-doar">
+                <a class="btn-quero-doar" href="#">QUERO DOAR</a>
+            </div>
+        </section>
+
+        <section class="banner-cards-ongs">
+            
+        </section>
+
+        <section class="banner-cards-clientes">
+            <div class="card-doador">
+                <p>
+                    "Doar é um ato de amor. Cada contribuição, por menor que seja, faz a diferença na vida de alguém. Fico feliz em
+                    poder
+                    ajudar!"
+                </p>
+                <span>
+                    Cesar Yoshio
+                </span>
+            </div>
+            <div class="card-doador">
+                <p>
+                    A doação é uma maneira simples de espalhar esperança. Saber que minha contribuição pode mudar uma vida me motiva a
+                    continuar ajudando!"
+                </p>
+                <span>
+                    Tiago Gorri
+                </span>
+            </div>
+            <div class="card-doador">
+                <p>
+                    "Cada vez que doo, sinto que estou fazendo parte de algo maior. Juntos, podemos transformar realidades e construir um
+                    futuro melhor!"
+                    ajudar!"
+                </p>
+                <span>
+                    Matheus Muller
+                </span>
+            </div>
+        </section>
     </main>
 
-    <script src="../Projeto_NovoComeco/header.js"></script>
+    <footer>
+        <div class="footer">
+            <div class="img-footer-start">
+                <img class="boneco-footer" class="img-footer" src="assets/img-footer.png">
+            </div>
+
+            <div class="socias">
+                <div class="icons-col-1">
+                    <div class="social-footer">
+                        <img class="icon-footer" src="assets/google.png"> 
+                        <p>novocomeço@gmail.com</p>
+                    </div>
+                    <div class="social-footer">
+                        <img class="icon-footer" src="assets/instagram.png">
+                        <p>@novocomeço</p>
+                    </div>
+                </div>
+                <div class="icons-col-2">
+                    <div class="social-footer">
+                        <img class="icon-footer" src="assets/whatsapp.png">
+                        <p>(41)99997676</p>
+                    </div>
+                    <div class="social-footer">
+                        <img class="icon-footer" src="assets/facebook.png">
+                        <p>@novocomeco</p>
+                    </div>
+                </div>
+            </div>
+            <div class="img-footer-end">
+                <img class="boneco-footer" class="img-footer" src="assets/img-footer.png">
+            </div>
+        </div>
+    </footer>
+
+    <script src="header.js"></script>
 
 </body>
 </html>
