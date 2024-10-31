@@ -10,7 +10,7 @@
     <div class="container">
         <section class="register-section">
             <h1>Criar conta</h1>
-            <p>Use o seu email para se registrar</p>
+            <p>Use o seu email para se registrar sua ONG</p>
             <form action="/register" method="POST">
                 <div class="input-group">
                     <input type="text" id="name" name="name" placeholder="Nome" required>
@@ -25,7 +25,16 @@
                     <input type="tel" id="phone" name="phone" placeholder="Telefone" required>
                 </div>
                 <div class="input-group">
-                    <input type="text" id="cpf" name="cpf" placeholder="CPF" required>
+                    <input type="text" id="cpf" name="cpf" placeholder="CNPJ" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="constituicao" name="constituicao" placeholder="Constituição" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="comprobatorio" name="comprobatorio" placeholder="Comprobatório" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="estatuto" name="estatuto" placeholder="Estatuto Social" required>
                 </div>
                 <div class="input-group">
                     <input type="text" id="logradouro" name="logradouro" placeholder="Logradouro" required>
@@ -44,6 +53,15 @@
                 </div>
                 <div class="input-group">
                     <input type="text" id="estado" name="estado" placeholder="Estado" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="bank_account" name="bank_account" placeholder="Conta Bancária" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="current_account" name="current_account" placeholder="Conta Corrente" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="pix_key" name="pix_key" placeholder="Chave Pix" required>
                 </div>
                 <button type="submit" class="register-button">Criar conta</button>
             </form>
