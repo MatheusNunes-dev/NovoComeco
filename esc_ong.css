@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lilita One', sans-serif;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    background: #FDF3C0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.donation-box {
+    width: 80%;
+    max-width: 800px;
+    background: #F8E2A1;
+    border: 6px solid #FFA114;
+    border-radius: 60px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.donation-image {
+    width: 80%;
+    max-width: 600px;
+    padding: 50px;
+    background: #FFA114;
+    color: black;
+    font-size: 1.8vw;
+    border-radius: 60px;
+    text-align: center;
+}
+
+.input-box {
+    width: 80%;
+    max-width: 600px;
+    padding: 15px;
+    background: white;
+    border: 6px solid black;
+    border-radius: 60px;
+    font-size: 1.2vw;
+    color: black;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.note {
+    font-size: 1.2vw;
+    color: black;
+    text-align: center;
+}
+
+.confirm-button, .cancel-button {
+    width: 60%;
+    max-width: 400px;
+    padding: 15px;
+    border-radius: 60px;
+    text-align: center;
+    color: white;
+    font-size: 1.5vw;
+    cursor: pointer;
+}
+
+.confirm-button {
+    background: #94CCD4;
+}
+
+.cancel-button {
+    background: #FFA114;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .donation-box {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .donation-image, .input-box {
+        font-size: 4vw;
+        padding: 10px;
+    }
+
+    .note {
+        font-size: 3vw;
+    }
+
+    .confirm-button, .cancel-button {
+        font-size: 4vw;
+        padding: 10px;
+    }
+}

@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lilita One', sans-serif;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #FDF3C0;
+}
+
+.main-container {
+    width: 90%;
+    max-width: 1100px;
+    background: #FDF3C0;
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.pix-box {
+    width: 90%;
+    max-width: 900px;
+    background: #F8E2A1;
+    border: 6px solid #FFA114;
+    border-radius: 60px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+}
+
+.pix-image {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-box {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    background: #2E3436;
+    border-radius: 10%;
+    aspect-ratio: 1;
+}
+
+.pix-countdown {
+    width: 80%;
+    max-width: 700px;
+    background: white;
+    border: 6px solid #FFA114;
+    border-radius: 60px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.countdown-box {
+    width: 100%;
+    max-width: 500px;
+    background: #4379E3;
+    border: 1px solid #1753CA;
+    border-radius: 60px;
+    color: white;
+    font-size: 2vw;
+    text-align: center;
+    padding: 10px;
+}
+
+.pix-expiration {
+    width: 80%;
+    max-width: 700px;
+    background: #94CCD4;
+    border: 1px solid black;
+    border-radius: 60px;
+    color: white;
+    font-size: 2vw;
+    text-align: center;
+    padding: 15px;
+}
+
+.home-button {
+    width: 60%;
+    max-width: 400px;
+    background: #FFA114;
+    border-radius: 60px;
+    text-align: center;
+    color: black;
+    font-size: 2vw;
+    padding: 20px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .countdown-box, .pix-expiration, .home-button {
+        font-size: 4vw;
+    }
+
+    .image-box {
+        width: 60%;
+    }
+}
