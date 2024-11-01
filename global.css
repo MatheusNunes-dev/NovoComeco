@@ -161,14 +161,14 @@ header {
     width: 4rem;
 }
 
-/* Ícones de Botão */
+
 .btn-icon-header {
     background: none;
     border: none;
     cursor: pointer;
 }
 
-/* Media Queries */
+
 
 
 .nav-links {
@@ -201,6 +201,8 @@ header {
     margin: 10px 0;
     z-index: 2;
 }
+
+
 
 .navbar {
     display: flex;
@@ -241,12 +243,13 @@ header {
     height: 100vh;
 }
 
-.footer {
+#Footer
+.footer, .footer{
     margin-top: 2rem;
-    background: #FFA114;
     font-weight: 700;
     text-align: center;
     padding-top: 2rem;
+    background: #FFA114;
 }
 
 
@@ -271,9 +274,17 @@ header {
     margin-top: 1rem;
 }
 
+
+.img-footer-end{
+   display: flex;
+   justify-content: center;
+}
+
 .img-footer-start{
     display: none;
 }
+
+
 
 
 
@@ -285,7 +296,7 @@ header {
     padding: 20px;
     align-items: center;
     text-align: center;
-    font-size: 1rem;
+    font-size: 1rem;   
     }
 
     .socias{
@@ -439,7 +450,7 @@ header {
 @font-face {
     font-family: 'Lilita One';
     src: url('/assets/fonts/Lilita_One/LilitaOne-Regular.ttf') format('truetype');
-    font-weight: 700;
+    font-weight: 400;
     font-style: normal;
 }
 
