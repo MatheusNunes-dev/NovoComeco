@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar Senha - Novo Começo</title>
+    <link rel="stylesheet" href="mudar_senha.css">
+</head>
+<body>
+    <section class="password-change-section">
+        <form action="/alterar-senha" method="POST">
+            <div class="input-group">
+                <label for="current-password">Senha Atual</label>
+                <input type="password" id="current-password" name="current-password" placeholder="Digite sua senha atual" required>
+            </div>
+            <div class="input-group">
+                <label for="new-password">Nova Senha</label>
+                <input type="password" id="new-password" name="new-password" placeholder="Digite sua nova senha" required>
+            </div>
+            <div class="input-group">
+                <label for="confirm-password">Confirmar Senha</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirme sua nova senha" required>
+            </div>
+            <div class="action-buttons">
+                <button type="submit" class="action-button">Confirmar</button>
+                <button type="reset" class="action-button">Limpar </button>
+            </div>
+        </form>
+    </section>
+</body>
+</html>
