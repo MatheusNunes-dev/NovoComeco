@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Novo Começo</title>
+    <title>Doação ONG</title>
     <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/confirmacaoPagamento.css">
+    <link rel="stylesheet" href="../css/esc_ong.css">
 </head>
 <body>
     <header>
@@ -44,24 +43,30 @@
             </div>
         </nav>
     </header>
-
-    <main>   
-        <div class="container">
-            <div class="content">
-                <h1>Confirmação de Pagamento</h1><br>
-                <p>Seu pagamento foi realizado com sucesso!</p><br>
-                <p>Obrigado por ajudar a mudar o mundo!</p>
+    <div class="container">
+        <div class="donation-box">
+            <div class="donation-image">
+                <p>TRANSFERIR</p>
             </div>
-            <a href="../html/index.html" class="btn">Voltar para a página inicial</a>
+            <div class="input-box">
+                <p>NOME:</p>
+            </div>
+            <div class="input-box">
+                <p>VALOR:</p>
+            </div>
+            <div class="confirm-button" onclick="window.location.href='confirmar_pagamento.html'">
+                <p>CONFIRMAR DOAÇÃO</p>
+            </div>
+            <div class="cancel-button" onclick="window.location.href='queroDoar.html'">
+                <p>CANCELAR DOAÇÃO</p>
+            </div>
         </div>
-    </main>
-
+    </div>
     <footer>
         <div class="footer">
             <div class="img-footer-start">
                 <img class="boneco-footer" class="img-footer" src="../assets/img-footer.png">
             </div>
-    
             <div class="socias">
                 <div class="icons-col-1">
                     <div class="social-footer">
@@ -89,7 +94,6 @@
             </div>
         </div>
     </footer>
-
     <script src="../js/header.js"></script>
 </body>
 </html>
