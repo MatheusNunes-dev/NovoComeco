@@ -243,8 +243,8 @@ header {
     height: 100vh;
 }
 
-#Footer
-.footer, .footer{
+
+.footer{
     margin-top: 2rem;
     font-weight: 700;
     text-align: center;
@@ -377,31 +377,10 @@ header {
         display: none;
     }
 }
-/* 
-        display: none;
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 60vw;
-        background-color: #FFD864;
-        flex-direction: column;
-        padding: 16px;
-        animation-duration: 0.8s;
-        z-index: 1; */
 
 @media only screen and (min-width: 577px){
 
 }
-
-
-
-
-
-
-
-
-
 
 
 /* Fonts */

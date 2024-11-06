@@ -2,11 +2,11 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novo Começo</title>
-    <link rel="stylesheet" href="global.css">
-    <link rel="stylesheet" href="confirmacaoPagamento.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/confirmar_pagamento.css">
+
 </head>
 <body>
     <header>
@@ -19,7 +19,7 @@
                 </svg>
             </button>
             <div>
-                <img class="img-logo" id="logo" src="assets/logo.png" alt="Logo">
+                <img class="img-logo" id="logo" src="../assets/logo.png" alt="Logo">
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
@@ -32,57 +32,68 @@
                             </svg>
                         </button>
                     </li>
-                    <li class="nav-link"><a href="#">HOME</a></li>
-                    <li class="nav-link"><a href="#">ONG'S</a></li>
-                    <li class="nav-link"><a href="quemSomos.html">SOBRE</a></li>
-                    <li class="nav-link"><a href="#">CONTATO</a></li>
-                    <li class="nav-link btn-login"><a href="">LOGIN</a></li>
+                    <li class="nav-link"><a href="../html/index.html">HOME</a></li>
+                    <li class="nav-link"><a href="../html/queroDoar.html">ONG'S</a></li>
+                    <li class="nav-link"><a href="../html/quemSomos.html">SOBRE</a></li>
+                    <li class="nav-link"><a href="../html/contato.html">CONTATO</a></li>
+                    <li class="nav-link btn-login"><a href="../html/login.html">LOGIN</a></li>
                 </ul>
             </div>
             <div class="user">
-                <img class="img-user" src="assets/user.png" alt="Usuário">
+                <img class="img-user" src="../assets/user.png" alt="Usuário">
             </div>
         </nav>
     </header>
-
-    <main>
-
-    </main>
-
+    <div class="main-container">
+        <div class="pix-box">
+            <div class="pix-countdown">
+                <div class="pix-image">
+                    <div class="image-box"></div>
+                </div>
+            </div>
+            <div class="countdown-box">
+                <p>PIX vence em: 00:00:00</p>
+            </div>
+            <div>
+                <p>Chave Aleatória: dcta478j-196l-03fm-t6gh-4298er7845m2</p>
+            </div>
+        </div>
+        <div class="home-button" onclick="window.location.href=index.html">
+            <p>HOME</p>
+        </div>
+    </div>
     <footer>
         <div class="footer">
             <div class="img-footer-start">
-                <img class="boneco-footer" class="img-footer" src="assets/img-footer.png">
+                <img class="boneco-footer" class="img-footer" src="../assets/img-footer.png">
             </div>
-    
             <div class="socias">
                 <div class="icons-col-1">
                     <div class="social-footer">
-                        <img class="icon-footer" src="assets/google.png">
+                        <img class="icon-footer" src="../assets/google.png"> 
                         <p>novocomeço@gmail.com</p>
                     </div>
                     <div class="social-footer">
-                        <img class="icon-footer" src="assets/instagram.png">
+                        <img class="icon-footer" src="../assets/instagram.png">
                         <p>@novocomeço</p>
                     </div>
                 </div>
                 <div class="icons-col-2">
                     <div class="social-footer">
-                        <img class="icon-footer" src="assets/whatsapp.png">
+                        <img class="icon-footer" src="../assets/whatsapp.png">
                         <p>(41)99997676</p>
                     </div>
                     <div class="social-footer">
-                        <img class="icon-footer" src="assets/facebook.png">
+                        <img class="icon-footer" src="../assets/facebook.png">
                         <p>@novocomeco</p>
                     </div>
                 </div>
             </div>
             <div class="img-footer-end">
-                <img class="boneco-footer" class="img-footer" src="assets/img-footer.png">
+                <img class="boneco-footer" class="img-footer" src="../assets/img-footer.png">
             </div>
         </div>
     </footer>
-
-
+    <script src="../js/header.js"></script>
 </body>
 </html>
