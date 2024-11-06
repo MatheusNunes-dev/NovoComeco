@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Novo Começo</title>
+    <title>Alterar Senha - Novo Começo</title>
     <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/styleLogin.css">
+    <link rel="stylesheet" href="../css/mudar_senha.css">
 </head>
 <body>
     <header>
@@ -43,30 +43,25 @@
             </div>
         </nav>
     </header>
-    <section class="login-section">
-        <h1>LOGIN</h1>
-        <form action="/login" method="POST">
+    <section class="password-change-section">
+        <form action="/alterar-senha" method="POST">
             <div class="input-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Email" required>
+                <label for="current-password">CPF/CNPJ</label>
+                <input type="password" id="current-password" name="current-password" placeholder="Digite sua senha atual" required>
             </div>
             <div class="input-group">
-                <label for="password">Senha</label>
-                <input type="password" id="password" name="password" placeholder="Senha" required>
+                <label for="new-password">Nova Senha</label>
+                <input type="password" id="new-password" name="new-password" placeholder="Digite sua nova senha" required>
             </div>
-            <div class="remember-forgot">
-                <div>
-                    <input type="checkbox" id="remember" name="remember">
-                    <label for="remember">Lembrar de mim</label>
-                </div>
-                <a href="esqueceuSenha.html">Esqueceu a senha?</a>
+            <div class="input-group">
+                <label for="confirm-password">Confirmar Senha</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirme sua nova senha" required>
             </div>
-            <button type="submit" class="login-button">Entrar</button>
+            <div class="action-buttons">
+                <button type="submit" class="action-button">Confirmar</button>
+                <button type="reset" class="action-button">Limpar </button>
+            </div>
         </form>
-        <div class="register">
-            <span>Não tem uma conta?</span> <a href="register.html">Criar conta Doador</a>
-            <span>Não tem uma conta?</span> <a href="registerONG.html">Criar conta ONG</a>
-        </div>
     </section>
         <footer>
             <div class="footer">
