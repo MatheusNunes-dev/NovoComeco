@@ -48,6 +48,17 @@
     font-size: 36px; 
     padding: 0 20px;
     color: #848484;
+    background-color: #fff9e7;
+}
+
+.input-group a{
+    color: #FFA114;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.input-group label, .input-group input {
+    margin-bottom: 10px; 
 }
 
 .remember-forgot {
@@ -74,6 +85,11 @@
 .register {
     font-size: 24px; 
     margin-top: 15px; 
+}
+
+.register a {
+    color: #FFA114;
+    text-decoration: none;
 }
 
 @media (max-width: 480px) {
