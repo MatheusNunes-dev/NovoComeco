@@ -1,72 +1,85 @@
-main{
-    margin-top: 3rem;
+form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #F8E2A1;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #FFA114;  /* Adicionando borda ao formulário */
 }
 
-.form{
+/* Título do formulário */
+.title-form {
+    font-weight: 700;
+    color: #FFA114;
+    font-size: 4rem;
+    margin-bottom: 2rem;
     text-align: center;
 }
 
-.title-form{
-    font-weight: 700;
-    color: #FFA114;
-    font-size: 5vw;
-    border-radius: 2px;
-    margin-bottom: 3rem;
-}
-
-.title-form-text{
-    display: inline;    
-    border-left-style: solid;
-    border-right-style: solid;
-    border-width: 2px;
-    padding: 0 1rem;
-}
-
-.input{
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
+/* Input e Textarea */
+.input,
+.text-area {
+    font-size: 1rem;
     font-weight: 500;
-    background: #F8E2A1;
-    border: 3px solid #FFA114;
+    background: #fff;  /* Cor de fundo original */
+    border: 3px solid #FFA114;  /* Cor de borda original */
     border-radius: 1rem;
-    padding: 0.4rem 0.8rem;
-    width: 35vw;
-    max-width: 35vw;
-}
-
-.text-area{
+    padding: 0.8rem 1.2rem;
+    width: 90%;  /* Ajuste para garantir que o campo não ultrapasse a box */
+    max-width: 500px;  /* Limita a largura máxima do campo */
     margin-bottom: 1.5rem;
-    font-weight: 500;
-    background: #F8E2A1;
-    border: 3px solid #FFA114;
-    border-radius: 1rem;
-    padding: 0.4rem 0.8rem;
-    width: 35vw;
-    height: 20vw;
-    max-width: 35vw;
-    font-size: 1.1rem;
-
+    transition: all 0.3s ease;
 }
 
+.input:focus,
+.text-area:focus {
+    border-color: #FF8C00;  /* Cor do foco com transição */
+    box-shadow: 0 0 8px rgba(255, 140, 0, 0.5);  /* Sombra de foco */
+}
 
-.btn-submit{
-    padding: 8px 14px;
-    border: 3px solid #FFA114;
-    border-radius: 1rem;
-    background: #F8E2A1;
+/* Textarea com altura maior */
+.text-area {
+    width: 30rem;  /* Aumentando a altura da textarea */
+    height: 15rem;  /* Aumentando a altura da textarea */
+    resize: vertical;
+}
+
+/* Botão de envio */
+.btn-submit {
+    padding: 12px 24px;
+        border: 3px solid #FFA114;
+    border-radius: 2rem;
+    background: #FFA114;
     font-weight: 700;
-    font-size: 16px;
-    color:#FFA114;
+    font-size: 1rem;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+.btn-submit:hover {
+    background: #FF8C00;
+    transform: translateY(-3px);
+}
+
+.btn-submit:active {
+    transform: translateY(1px);
+}
+
+/* Responsividade */
 @media (max-width: 768px) {
-    .input{
-        width: 12rem;
-        max-width: 12rem;
+    .input, .text-area {
+        width: 100%;
+        max-width: 100%;
     }
 
-    .text-area{
-        width: 12rem;
-        max-width: 12rem;
+    .title-form {
+        font-size: 3rem;
     }
 }

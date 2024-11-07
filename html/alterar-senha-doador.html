@@ -2,17 +2,16 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar Senha - Novo Começo</title>
     <link rel="shortcut icon" href="../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/contato.css">
-    <title>Novo Começo</title>
+    <link rel="stylesheet" href="../css/mudar-senha.css">
 </head>
 <body>
     <header>
         <nav class="navbar nav-lg-screen" id="navbar">
-            <button class="btn-icon-header" onclick="toggleSideBar()">
+            <button class="btn-icon-header" onclick="toggleSideBar()" aria-label="Abrir menu">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list"
                     viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
@@ -20,12 +19,12 @@
                 </svg>
             </button>
             <div>
-                <img class="img-logo" id="logo" src="../assets/logo.png" alt="Logo">
+                <img class="img-logo" id="logo" src="../assets/logo.png" alt="Logo do Novo Começo">
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
                     <li>
-                        <button class="btn-icon-header" onclick="toggleSideBar()">
+                        <button class="btn-icon-header" onclick="toggleSideBar()" aria-label="Fechar menu">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                 class="bi bi-x" viewBox="0 0 16 16">
                                 <path
@@ -48,23 +47,27 @@
         </nav>
     </header>
     <main>
-        <section>
-            <form class="form">
-                <div class="title-form">
-                    <h1 class="title-form-text">ENTRE EM CONTATO</h1>
+        <div class="title-container">
+            <h1>Alterar Senha</h1>
+        </div>
+        <section class="password-change-section">
+            <form action="/alterar-senha" method="POST" aria-labelledby="password-change-section">
+                <div class="input-group">
+                    <label for="current-password">CPF</label>
+                    <input type="text" id="current-password" name="current-password" placeholder="Digite seu CPF (XXX.XXX.XXX-XX)" required aria-required="true">
                 </div>
-                <div>
-                    <input class="input" type="text" placeholder="Nome:" id="name"> 
+                <div class="input-group">
+                    <label for="new-password">Nova Senha</label>
+                    <input type="password" id="new-password" name="new-password" placeholder="Digite sua nova senha" required aria-required="true">
                 </div>
-                <div>
-                    <input class="input" type="text" placeholder="E-mail:" id="email">
+                <div class="input-group">
+                    <label for="confirm-password">Confirmar Senha</label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirme sua nova senha" required aria-required="true">
                 </div>
-                <div>
-                    <textarea class="text-area" placeholder="Mensagem:" id="mensagem"></textarea>
+                <div class="action-buttons">
+                    <button class="confirm-button">Confirmar</button>
+                    <button class="action-button">Cancelar</button>
                 </div>
-                <button type="submit" class="btn-submit">
-                    Enviar
-                </button>
             </form>
         </section>
     </main>
@@ -72,37 +75,36 @@
     <footer>
         <div class="footer">
             <div class="img-footer-start">
-                <img class="boneco-footer" class="img-footer" src="../assets/img-footer.png">
+                <img class="boneco-footer" class="img-footer" src="../assets/img-footer.png" alt="Personagem do rodapé">
             </div>
-    
             <div class="socias">
                 <div class="icons-col-1">
                     <div class="social-footer">
-                        <img class="icon-footer" src="../assets/google.png">
+                        <img class="icon-footer" src="../assets/google.png" alt="Ícone Google">
                         <p>novocomeço@gmail.com</p>
                     </div>
                     <div class="social-footer">
-                        <img class="icon-footer" src="../assets/instagram.png">
+                        <img class="icon-footer" src="../assets/instagram.png" alt="Ícone Instagram">
                         <p>@novocomeço</p>
                     </div>
                 </div>
                 <div class="icons-col-2">
                     <div class="social-footer">
-                        <img class="icon-footer" src="../assets/whatsapp.png">
+                        <img class="icon-footer" src="../assets/whatsapp.png" alt="Ícone WhatsApp">
                         <p>(41)99997676</p>
                     </div>
                     <div class="social-footer">
-                        <img class="icon-footer" src="../assets/facebook.png">
+                        <img class="icon-footer" src="../assets/facebook.png" alt="Ícone Facebook">
                         <p>@novocomeco</p>
                     </div>
                 </div>
             </div>
             <div class="img-footer-end">
-                <img class="boneco-footer" class="img-footer" src="assets/img-footer.png">
+                <img class="boneco-footer" class="img-footer" src="../assets/img-footer.png" alt="Personagem do rodapé">
             </div>
         </div>
     </footer>
+
     <script src="../js/header.js"></script>
-    
 </body>
 </html>

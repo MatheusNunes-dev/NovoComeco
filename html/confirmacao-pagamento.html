@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doação ONG</title>
+    <title>Novo Começo</title>
+    <link rel="shortcut icon" href="../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/esc_ong.css">
+    <link rel="stylesheet" href="../css/confirmacao-pagamento.css">
 </head>
 <body>
     <header>
@@ -32,43 +34,38 @@
                         </button>
                     </li>
                     <li class="nav-link"><a href="../html/index.html">HOME</a></li>
-                    <li class="nav-link"><a href="../html/queroDoar.html">ONG'S</a></li>
-                    <li class="nav-link"><a href="../html/quemSomos.html">SOBRE</a></li>
+                    <li class="nav-link"><a href="../html/pagina-quero-doar.html">ONG'S</a></li>
+                    <li class="nav-link"><a href="../html/sobre.html">SOBRE</a></li>
                     <li class="nav-link"><a href="../html/contato.html">CONTATO</a></li>
-                    <li class="nav-link btn-login"><a href="../html/login.html">LOGIN</a></li>
+                    <li class="nav-link"><a href="../html/login.html">LOGIN</a></li>
                 </ul>
             </div>
             <div class="user">
-                <a href="../html/login.html">
+                <a href="../html/configuracoes-doador.html">
                     <img class="img-user" src="../assets/user.png" alt="Usuário">
                 </a>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <div class="donation-box">
-            <div class="donation-image">
-                <p>TRANSFERIR</p>
+
+    <main>   
+        <div class="container">
+            <div class="content">
+                <h1>Pagamento Confirmado!</h1><br>
+                <p>Seu pagamento foi realizado com sucesso!</p><br>
+                <img class="img-ong-logo" src="../assets/amigosdaterra.png" alt="Logo Amigos da Terra">
             </div>
-            <div class="input-box">
-                <p>NOME:</p>
-            </div>
-            <div class="input-box">
-                <p>VALOR:</p>
-            </div>
-            <div class="confirm-button" onclick="window.location.href='confirmar_pagamento.html'">
-                <p>CONFIRMAR DOAÇÃO</p>
-            </div>
-            <div class="cancel-button" onclick="window.location.href='queroDoar.html'">
-                <p>CANCELAR DOAÇÃO</p>
-            </div>
+            <a href="../html/index.html" class="btn">Voltar para a página inicial</a>
         </div>
-    </div>
+    </main>
+    
+
     <footer>
         <div class="footer">
             <div class="img-footer-start">
                 <img class="boneco-footer" class="img-footer" src="../assets/img-footer.png">
             </div>
+    
             <div class="socias">
                 <div class="icons-col-1">
                     <div class="social-footer">
@@ -96,6 +93,7 @@
             </div>
         </div>
     </footer>
+
     <script src="../js/header.js"></script>
 </body>
 </html>
