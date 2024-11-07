@@ -226,8 +226,6 @@ header {
     width: 1rem;
 }
 
-
-
 .btn-login {
     background-color: #dab547;
     width: 3rem;
@@ -347,8 +345,8 @@ header {
     .nav-links ul {
         color: #BF8F47C2;
         display: flex;
-        margin: 0 1rem;
-        font-size: 1.2rem;
+        margin: 0 1rem; 
+        font-size: 1.5rem;
     }
 
 
