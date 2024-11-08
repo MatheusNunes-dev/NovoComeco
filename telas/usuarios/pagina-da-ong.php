@@ -66,36 +66,36 @@
     <footer>
         <div class="footer">
             <div class="img-footer-start">
-                <img class="boneco-footer" src="../assets/img-footer.png" alt="Imagem de rodapé 1" />
+                <img class="boneco-footer" src="../../assets/img-footer.png" alt="Imagem de rodapé 1" />
             </div>
             <div class="socias">
                 <div class="icons-col-1">
                     <div class="social-footer">
-                        <img class="icon-footer" src="../assets/google.png" alt="Ícone do Google" />
+                        <img class="icon-footer" src="../../assets/google.png" alt="Ícone do Google" />
                         <p>novocomeço@gmail.com</p>
                     </div>
                     <div class="social-footer">
-                        <img class="icon-footer" src="../assets/instagram.png" alt="Ícone do Instagram" />
+                        <img class="icon-footer" src="../../assets/instagram.png" alt="Ícone do Instagram" />
                         <p>@novocomeço</p>
                     </div>
                 </div>
                 <div class="icons-col-2">
                     <div class="social-footer">
-                        <img class="icon-footer" src="../assets/whatsapp.png" alt="Ícone do WhatsApp" />
+                        <img class="icon-footer" src="../../assets/whatsapp.png" alt="Ícone do WhatsApp" />
                         <p>(41)99997676</p>
                     </div>
                     <div class="social-footer">
-                        <img class="icon-footer" src="../assets/facebook.png" alt="Ícone do Facebook" />
+                        <img class="icon-footer" src="../../assets/facebook.png" alt="Ícone do Facebook" />
                         <p>@novocomeco</p>
                     </div>
                 </div>
             </div>
             <div class="img-footer-end">
-                <img class="boneco-footer" src="../assets/img-footer.png" alt="Imagem de rodapé 2" />
+                <img class="boneco-footer" src="../../assets/img-footer.png" alt="Imagem de rodapé 2" />
             </div>
         </div>
     </footer>
 
-    <script src="../js/header.js"></script>
+    <script src="../../js/header.js"></script>
 </body>
 </html>

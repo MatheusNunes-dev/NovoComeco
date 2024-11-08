@@ -128,7 +128,7 @@
     <footer>
         <div class="footer">
             <div class="img-footer-start">
-                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
+                <img class="boneco-footer" class="img-footer" <script src="../../js/header.js"></script>>
             </div>
             <div class="socias">
                 <div class="icons-col-1">
@@ -153,12 +153,12 @@
                 </div>
             </div>
             <div class="img-footer-end">
-                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
+                <img class="boneco-footer" class="img-footer" <script src="../../js/header.js"></script>>
             </div>
         </div>
     </footer>
 
-    <script src="../js/header.js"></script>
+    <script src="../../js/header.js"></script>
 
 </body>
 

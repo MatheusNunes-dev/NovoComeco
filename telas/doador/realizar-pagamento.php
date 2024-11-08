@@ -67,35 +67,35 @@
     <footer>
         <div class="footer">
             <div class="img-footer-start">
-                <img class="boneco-footer" class="img-footer" src="../assets/img-footer.png">
+                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
             </div>
             <div class="socias">
                 <div class="icons-col-1">
                     <div class="social-footer">
-                        <img class="icon-footer" src="../assets/google.png"> 
+                        <img class="icon-footer" src="../../assets/google.png"> 
                         <p>novocomeço@gmail.com</p>
                     </div>
                     <div class="social-footer">
-                        <img class="icon-footer" src="../assets/instagram.png">
+                        <img class="icon-footer" src="../../assets/instagram.png">
                         <p>@novocomeço</p>
                     </div>
                 </div>
                 <div class="icons-col-2">
                     <div class="social-footer">
-                        <img class="icon-footer" src="../assets/whatsapp.png">
+                        <img class="icon-footer" src="../../assets/whatsapp.png">
                         <p>(41)99997676</p>
                     </div>
                     <div class="social-footer">
-                        <img class="icon-footer" src="../assets/facebook.png">
+                        <img class="icon-footer" src="../../assets/facebook.png">
                         <p>@novocomeco</p>
                     </div>
                 </div>
             </div>
             <div class="img-footer-end">
-                <img class="boneco-footer" class="img-footer" src="../assets/img-footer.png">
+                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
             </div>
         </div>
     </footer>
-    <script src="../js/header.js"></script>
+    <script src="../../js/header.js"></script>
 </body>
 </html>
