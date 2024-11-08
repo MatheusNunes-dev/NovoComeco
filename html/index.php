@@ -1,3 +1,12 @@
+<?php
+    include('protect.php');
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -5,13 +14,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novo Começo</title>
-    <link rel="shortcut icon" href="../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/index.css">
 </head>
 
 <body>
-    <header>  
+    <header>
         <nav class="navbar nav-lg-screen" id="navbar">
             <button class="btn-icon-header" onclick="toggleSideBar()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list"
@@ -27,21 +35,23 @@
                 <ul>
                     <li>
                         <button class="btn-icon-header" onclick="toggleSideBar()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-x" viewBox="0 0 16 16">
                                 <path
                                     d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                             </svg>
                         </button>
                     </li>
                     <li class="nav-link"><a href="../html/index.html">HOME</a></li>
-                    <li class="nav-link"><a href="../html/pagina-quero-doar.html">ONG'S</a></li>
-                    <li class="nav-link"><a href="../html/sobre.html">SOBRE</a></li>
+                    <li class="nav-link"><a href="../html/queroDoar.html">ONG'S</a></li>
+                    <li class="nav-link"><a href="../html/quemSomos.html">SOBRE</a></li>
                     <li class="nav-link"><a href="../html/contato.html">CONTATO</a></li>
                     <li class="nav-link"><a href="../html/login.html">LOGIN</a></li>
+                    <li class="nav-link btn-login"><a href="../html/login.html">LOGIN</a></li>
                 </ul>
             </div>
             <div class="user">
-                <a href="../html/configuracoes-doador.html">
+                <a href="../html/login.html">
                     <img class="img-user" src="../assets/user.png" alt="Usuário">
                 </a>
             </div>
@@ -56,9 +66,9 @@
                         <span class="tittle-banner">NOVO</span>
                     </div>
                     <div class="a">
-                        <a class="btn-quero-doar" href="pagina-quero-doar.html">QUERO DOAR!</a>
+                        <a class="btn-quero-doar" href="queroDoar.html">QUERO DOAR!</a>
                     </div>
-                </div>  
+                </div>
                 <div>
                     <span class="tittle-banner">COMEÇO</span>
                 </div>
@@ -74,38 +84,44 @@
         <section class="banner-cards-ongs">
             <div class="card-ong">
                 <img class="img-ong" src="../assets/amigosdaterra.png">
-                <a class="btn-conhecer" href="pagina-da-ong.html">Saiba Mais</a>
+                <a class="btn-conhecer">CONHECER</a>
             </div>
             <div class="card-ong">
                 <img class="img-ong" src="../assets/amoranimal.gif">
-                <a class="btn-conhecer" href="pagina-da-ong.html">Saiba Mais</a>
+                <a class="btn-conhecer">CONHECER</a>
             </div>
             <div class="card-ong">
                 <img class="img-ong" src="../assets/maoamiga.png">
-                <a class="btn-conhecer" href="pagina-da-ong.html">Saiba Mais</a>
-            </div>
+                <a class="btn-conhecer">CONHECER</a>
+                </iv>
         </section>
 
         <section class="banner-cards-clientes">
             <div class="card-doador">
+                <div>
+
+                </div>
                 <p>
-                    "A solidariedade é um ato poderoso que transforma vidas. Contribuir com amor e compaixão é um pequeno gesto que pode criar um impacto enorme!"
-                    <span class="autor">Cesar Yoshio</span>
-                </p>
-            </div>            
-            <div class="card-doador">
-                <p>
-                    "A solidariedade é um ato poderoso que transforma vidas. Contribuir com amor e compaixão é um pequeno gesto que pode criar um impacto enorme!"
-                    <span class="autor">Cesar Yoshio</span>
+                    "A solidariedade é um ato poderoso que transforma vidas. Contribuir com amor e compaixão é um
+                    pequeno gesto que pode
+                    criar um impacto enorme!"<br>Cesar Yoshio
                 </p>
             </div>
             <div class="card-doador">
                 <p>
-                    "A solidariedade é um ato poderoso que transforma vidas. Contribuir com amor e compaixão é um pequeno gesto que pode criar um impacto enorme!"
-                    <span class="autor">Cesar Yoshio</span>
+                    A doação é uma maneira simples de espalhar esperança. Saber que minha contribuição pode mudar uma
+                    vida me motiva a
+                    continuar ajudando!"<br>Tiago Gorri
+                </p>
+
+            </div>
+            <div class="card-doador">
+                <p>
+                    "Ao ajudar o próximo, plantamos sementes de esperança. Cada doação traz um pouco mais de luz e faz a
+                    diferença no
+                    caminho de alguém."<br>Matheus Muller
                 </p>
             </div>
-            
         </section>
     </main>
 
@@ -117,7 +133,7 @@
             <div class="socias">
                 <div class="icons-col-1">
                     <div class="social-footer">
-                        <img class="icon-footer" src="../assets/google.png"> 
+                        <img class="icon-footer" src="../assets/google.png">
                         <p>novocomeço@gmail.com</p>
                     </div>
                     <div class="social-footer">
@@ -145,4 +161,5 @@
     <script src="../js/header.js"></script>
 
 </body>
+
 </html>

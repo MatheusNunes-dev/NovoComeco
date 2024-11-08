@@ -1,3 +1,44 @@
+<?php
+include('../conexao.php');
+
+if(isset($_POST['email']) || isset($_POST['senha'])){
+    if(strlen($_POST['email']) == 0){
+        echo "Preencha seu email";
+    }
+    else if(strlen($_POST['senha']) == 0){
+        echo "Preencha sua senha";
+    }
+    else{
+        $email = $mysqli->real_escape_string($_POST['email']);
+        $senha = $mysqli->real_escape_string($_POST['senha']);
+
+        $sql_code = "SELECT * FROM doador where email = '$email' AND senha = '$senha'" ;
+        $sql_query = $mysqli->query($sql_code) or die("Falha na execução!"  . $mysqli->error);
+
+
+        $quantidade = $sql_query->num_rows;
+        if($quantidade == 1){
+            $usuario = $sql_query->fetch_assoc();
+
+
+            if(!isset($_SESSION)){
+                session_start();
+            }
+
+            $_SESSION['id'] = $usuario['id'];
+
+            header("Location: ../html/index.php");
+        }
+        else{
+            echo "Falha ao logar! E-mail ou senha incorretos";
+        }
+    }
+}
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -46,30 +87,32 @@
             </div>
         </nav>
     </header>
-    <section class="login-section">
-        <h1>LOGIN</h1>
-        <form action="/login" method="POST">
-            <div class="input-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Email" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Senha <a href="alterar-senha-doador.html">(Esqueceu a senha?)</a></label>
-                <input type="password" id="password" name="password" placeholder="Senha" required>
-            </div>
-            <div class="remember-forgot">
-                <div>
-                    <input type="checkbox" id="remember" name="remember">
-                    <label for="remember">Lembrar de mim</label>
+    <main>
+        <h1 class="title">Login</h1>
+        <section class="login">
+            <form action="" method="POST">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email"
+                        placeholder="Digite seu email" required>
                 </div>
-            </div>
-            <button type="submit" class="login-button">Entrar</button>
-        </form>
-        <div class="register">
-            <br><span>Não tem uma conta? Crie agora!</span><br>
-            <br><a href="cadastrar-doador.html">Criar conta de Doador</a><br>
-            <a href="cadastrar-ong.html">Criar conta para ONG</a>
-        </div>
+                <div class="input-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="senha" placeholder="Digite sua senha"
+                        required>
+                </div>
+                <div class="secondary-action">
+                    <a class="esqueci-senha">Esqueci minha senha</a>
+                </div>
+                <div class="action-buttons">
+                    <button type="submit" class="action-button">Entrar</button>
+                </div>
+                <div class="secondary-action div-cadastrar">
+                    <a>Nao Tem Uma Conta? <span class="cadastrar">Cadastrar-se</span></a>
+                </div>
+            </form>
+        </section>
+    </main>
     </section>
         <footer>
             <div class="footer">

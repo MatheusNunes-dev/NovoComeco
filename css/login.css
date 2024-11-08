@@ -1,180 +1,233 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Lora', serif;
+html,
+body {
+    height: 100%;
+    /* Garante que a altura do HTML e do body seja 100% */
+    display: flex;
+    flex-direction: column;
+    /* Organiza o conteúdo na direção vertical */
 }
 
-
-
-.container {
-    width: 100%;
-    max-width: 600px;
-    padding: 20px;
+footer {
+    margin-top: auto;
+    /* Isso faz com que o footer vá para a parte inferior */
 }
 
-.login-section {
-    width: 100%;
-    max-width: 400px; 
-    text-align: center;
-    margin: 0 auto; 
-}
-
-.login-section h1 {
-    font-size: 72px; 
+.title {
+    font-size: 4rem;
     color: #FFA114;
-    margin-bottom: 10px; 
+    margin: 2vw 0;
+    text-align: center;
+    
+}
+
+.login{
+    flex: 1;
+    /* Faz com que a seção de mudança de senha ocupe o espaço disponível, empurrando o footer para baixo */
+    width: 100%;
+    /* A largura será 90% da tela, com um máximo definido */
+    max-width: 500px;
+    /* Largura máxima para telas maiores */
+    margin: 50px auto;
+    /* Centraliza a seção */
+    background-color: white;
+    /* Fundo branco para destacar a seção */
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    /* Sombra suave para dar destaque */
+    padding: 20px;
+    /* Adiciona espaçamento interno para os elementos */
+    box-sizing: border-box;
+    /* Garante que o padding não afete o tamanho total */
+    border: 2px solid #FFA114;
+    /* Borda ao redor da box */
+}
+
+.title-container {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+
+.title-container h1 {
+    color: #e59400;
+    /* A cor desejada */
+    font-size: 3rem;
+    margin: 0;
+    /* Removendo margem adicional */
+}
+
+.login h1 {
+    font-size: 36px;
+    color: #2C3E50;
+    /* Cor do título (um tom mais escuro) */
+    margin-bottom: 30px;
+    text-align: center;
+    /* Centraliza o título */
 }
 
 .input-group {
-    margin-bottom: 15px; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin-bottom: 20px;
 }
 
 .input-group label {
-    font-size: 32px; 
+    font-size: 18px;
     color: black;
-    width: 100%;
-    text-align: left;
+    margin-bottom: 10px;
+    display: block;
 }
 
 .input-group input {
     width: 100%;
-    height: 100px; 
-    border-radius: 50px; 
-    border: 2px solid black;
-    font-size: 36px; 
-    padding: 0 20px;
-    color: #848484;
-    background-color: #fff9e7;
+    /* Garante que o input ocupe toda a largura disponível */
+    height: 50px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    font-size: 18px;
+    padding: 0 15px;
+    color: #333;
+    transition: border-color 0.3s ease-in-out;
+    box-sizing: border-box;
+    /* Garante que o padding e a borda não afetem a largura do input */
 }
 
-.input-group a{
-    color: #FFA114;
-    text-decoration: none;
-    font-size: 20px;
+.input-group input:focus {
+    border-color: #FFA114;
+    /* Cor de borda ao focar */
+    outline: none;
 }
 
-.input-group label, .input-group input {
-    margin-bottom: 10px; 
+.secondary-action{
+    cursor:pointer;
+    padding-right: 0.5rem;
+    text-align: end;
 }
 
-.remember-forgot {
+.esqueci-senha{
+    color: #0066c0;
+}
+
+.cadastrar{
+    color: #0066c0;
+    text-decoration: underline;
+}
+
+.div-cadastrar{
+    margin-top: 2rem;
+}
+
+
+
+
+.action-buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    /* Centraliza os botões horizontalmente */
     align-items: center;
-    width: 100%;
-    font-size: 24px; 
-    color: black;
-    margin-top: 15px; 
+    /* Alinha verticalmente se necessário */
+    gap: 10px;
+    /* Espaçamento entre os botões */
+    margin-top: 20px;
+    /* Espaçamento acima dos botões */
 }
 
-.login-button {
-    width: 100%;
-    height: 80px; 
-    background-color: #FFA114;
-    border-radius: 50px; 
-    font-size: 36px; 
-    color: black;
-    margin-top: 30px; 
+
+.action-button {
+    width: 45%;
+    height: 50px;
+    font-size: 18px;
+    color: white;
+    border-radius: 25px;
     cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    /* Sombra suave */
 }
 
-.register {
-    font-size: 24px; 
-    margin-top: 15px; 
+
+/* Estilo para o botão Cancelar */
+.action-button {
+    background-color: #FFA114;
+    border: 2px solid #e59400;
 }
 
-.register a {
-    color: #FFA114;
-    text-decoration: none;
+.action-button:hover {
+    background-color: #e59400;
+    border-color: #FFA114;
 }
 
+
+
+
+
+/* Responsividade */
 @media (max-width: 480px) {
-    .login-section h1 {
-        font-size: 36px;
+    .login h1 {
+        font-size: 28px;
         margin-bottom: 20px;
     }
 
     .input-group label {
-        font-size: 24px;
+        font-size: 16px;
     }
 
     .input-group input {
-        height: 50px;
-        font-size: 24px;
+        height: 40px;
+        font-size: 16px;
     }
 
-    .remember-forgot {
-        font-size: 18px;
-    }
-
-    .login-button {
-        height: 50px;
-        font-size: 24px;
-    }
-
-    .register {
-        font-size: 18px;
+    .action-button {
+        height: 45px;
+        font-size: 16px;
     }
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
-    .login-section h1 {
-        font-size: 48px; 
-        margin-bottom: 25px; 
+    .login h1 {
+        font-size: 32px;
+        margin-bottom: 25px;
     }
 
     .input-group label {
-        font-size: 28px; 
+        font-size: 18px;
     }
 
     .input-group input {
-        height: 80px; 
-        font-size: 28px; 
+        height: 50px;
+        font-size: 18px;
     }
 
-    .remember-forgot {
-        font-size: 20px; 
-    }
-
-    .login-button {
-        height: 60px; 
-        font-size: 28px; 
-    }
-
-    .register {
-        font-size: 20px; 
+    .action-button {
+        height: 50px;
+        font-size: 18px;
     }
 }
 
 @media (min-width: 769px) {
-    .login-section h1 {
-        font-size: 72px; 
-        margin-bottom: 30px; 
+    .login h1 {
+        font-size: 36px;
+        margin-bottom: 30px;
     }
 
     .input-group label {
-        font-size: 32px; 
+        font-size: 20px;
     }
 
     .input-group input {
-        height: 70px; 
-        font-size: 26px; 
+        height: 50px;
+        font-size: 20px;
     }
 
-    .remember-forgot {
-        font-size: 24px; 
+    .action-button {
+        height: 50px;
+        font-size: 20px;
     }
+}
 
-    .login-button {
-        height: 70px; 
-        font-size: 30px; 
-    }
 
-    .register {
-        font-size: 24px; 
+@media(max-width:530px){
+    main{
+        margin: 0 1rem;
+        
     }
 }

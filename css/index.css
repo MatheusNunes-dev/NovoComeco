@@ -11,7 +11,9 @@ main {
     font-size: 15vw;
     color: #FFA114;
     font-weight: bold;
+
 }
+
 
 .quero-doar {
     text-align: center;
@@ -21,6 +23,7 @@ main {
 .img-banner {
     width: 40vw;
 }
+
 
 .quero-doar {
     margin-top: 3rem;
@@ -34,26 +37,12 @@ main {
     border-radius: 1rem;
     font-weight: 900;
     color: #FFD864;
-}
-
-.btn-quero-doar {
-    display: inline;
-    font-size: 3.5vw;
-    background-color: #FFA114;
-    padding: 2rem 2rem;
-    border-style: solid;
-    border-radius: 1rem;
-    font-weight: 900;
-    color: #FFD864;
-    margin-left: 4rem;
-    text-align: center;
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.btn-quero-doar:hover {
-    background-color: #FF8C00;
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+.btn-quero-doar {
+    display: none;
+    
 }
 
 .banner-cards-ongs {
@@ -63,81 +52,56 @@ main {
     background-color: #FFD864;
     place-items: center;
     gap: 2rem;
-    padding: 3rem 1rem;
+    padding: 2rem 0;
     margin-top: 10rem;
+    
+
 }
 
 .card-ong {
     text-align: center;
-    width: 80%;
-    height: 75vh;
+    width: 70%;
+    height: 60vh;
     background-color: #FFD864;
-    padding: 2rem;
+    padding: 1.5rem 1rem;
     border-radius: 18px;
     border: 2px solid #FFA114;
-    max-width: 420px;
-    max-height: 450px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 380px;
+    max-height: 340px;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+
 }
 
-.banner-cards-clientes .card-doador {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 1.5rem; /* Ajuste no padding para mais espaço interno */
-    background-color: #FFFFFF;
-    width: 90%;
-    height: 20vh;
-    border: 2px solid #FFA114;
-    border-radius: 18px;
-    margin-top: 1rem;
-    max-width: 320px;
-    max-height: 200px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-
-.banner-cards-clientes , .card-doador p .autor {
-    display: block;
-    font-weight: bold;
-    margin-top: 1rem; /* Espaçamento entre o texto e o autor */
-}
-
-
-.card-ong:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
 
 .img-ong {
-    width: 100%;
-    height: 70%;
-    margin-bottom: 2rem;
+    width: 90%;
+    height: 75%;
+    margin-bottom: 2.5rem;
     border-radius: 18px;
-    object-fit: cover;
 }
+
+
 
 .btn-conhecer {
     font-size: 1.5rem;
     color: #F8E2A1;
     background-color: #FFA114;
-    padding: 1rem 2rem;
+    padding: 0.8rem 1.6rem;
     border-style: solid;
     border-radius: 18px;
-    margin-top: 2rem;
-    max-width: 220px;
+    margin-top: 5rem;
+    max-width: 185px;
     max-height: 60px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+
 }
 
-.btn-conhecer:hover {
-    background-color: #FF8C00;
-}
+
+
 
 .banner-cards-clientes {
-    margin-top: 3rem;
+    margin-top: 6rem;
     display: grid;
     grid-template-columns: 1fr;
     place-items: center;
@@ -145,55 +109,65 @@ main {
 
 .card-doador {
     background-color: #FDF3C0;
-    width: 90%;
-    height: 45vh;
+    width: 80%;
+    height: 40vh;
     border: 2px solid #FFA114;
     border-radius: 18px;
     text-align: center;
     margin-top: 2rem;
-    max-width: 320px;
-    max-height: 200px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 250px;
+    max-height: 150px;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+.card-doador p {
+    padding: 1.5rem 0.8rem;
+}
+
+.btn-quero-doar:hover {
+    background-color: #FF8C00;
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-ong:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-conhecer:hover {
+    background-color: #FF8C00;
 }
 
 .card-doador:hover {
     transform: scale(1.05);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
-
-.card-doador p {
-    padding: 1.5rem 1rem;
-    font-size: 1.1rem;
-    color: #4d4d4d;
-}
-
-@media (min-width: 768px) {
+@media(min-width:768px) {
     .banner-cards-ongs {
         grid-template-columns: repeat(2, 1fr);
-        column-gap: 2rem;
+        column-gap: 0;
     }
 
-    .card-ong {
-        max-width: 500px;
-        max-height: 500px;
-    }
-
-    .banner-cards-ongs > .card-ong:nth-child(3) {
+    .banner-cards-ongs>.card-ong:nth-child(3) {
         grid-column: 1 / -1;
         justify-self: center;
     }
 
     .card-doador {
-        max-width: 350px;
-        max-height: 220px;
+        max-width: 300px;
+        max-height: 160px;
     }
 
     .banner-cards-clientes {
         grid-template-columns: repeat(3, 1fr);
+
     }
 }
 
-@media (min-width: 1010px) {
+
+@media (min-width:1010px) {
     .banner-intro {
         padding: 0 4rem;
     }
@@ -213,6 +187,7 @@ main {
         color: #FFD864;
         margin-left: 4rem;
         text-align: center;
+        transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .a {
@@ -228,18 +203,19 @@ main {
     }
 }
 
-@media (min-width: 1200px) {
+
+@media (min-width:1200px) {
     .banner-cards-ongs {
         grid-template-columns: repeat(3, 1fr);
-        column-gap: 2rem;
+        column-gap: 0;
     }
 
     .card-ong {
-        max-width: 550px;
-        max-height: 500px;
+        max-width: 500px;
+        max-height: 400px;
     }
 
-    .banner-cards-ongs > .card-ong:nth-child(3) {
+    .banner-cards-ongs>.card-ong:nth-child(3) {
         grid-column: auto;
         justify-self: center;
     }

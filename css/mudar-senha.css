@@ -9,7 +9,7 @@ footer {
 }
 
 .title {
-    font-size: 4vw;
+    font-size: 4rem;
     color: #FFA114;
     margin: 2vw 0;
     text-align: center;
@@ -180,5 +180,12 @@ footer {
     .action-button {
         height: 50px;
         font-size: 20px;
+    }
+}
+
+@media(max-width:530px) {
+    main {
+        margin: 0 1rem;
+
     }
 }
