@@ -1,53 +1,12 @@
-<?php
-include('../conexao.php');
-
-if(isset($_POST['email']) || isset($_POST['senha'])){
-    if(strlen($_POST['email']) == 0){
-        echo "Preencha seu email";
-    }
-    else if(strlen($_POST['senha']) == 0){
-        echo "Preencha sua senha";
-    }
-    else{
-        $email = $mysqli->real_escape_string($_POST['email']);
-        $senha = $mysqli->real_escape_string($_POST['senha']);
-
-        $sql_code = "SELECT * FROM doador where email = '$email' AND senha = '$senha'" ;
-        $sql_query = $mysqli->query($sql_code) or die("Falha na execução!"  . $mysqli->error);
-
-
-        $quantidade = $sql_query->num_rows;
-        if($quantidade == 1){
-            $usuario = $sql_query->fetch_assoc();
-
-
-            if(!isset($_SESSION)){
-                session_start();
-            }
-
-            $_SESSION['id'] = $usuario['id'];
-
-            header("Location: ../html/index.php");
-        }
-        else{
-            echo "Falha ao logar! E-mail ou senha incorretos";
-        }
-    }
-}
-
-
-
-?>
-
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Novo Começo</title>
-    <link rel="shortcut icon" href="../assets/logo.png" type="Alegrinho">
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/login.css">
+    <title>Excluir</title>
+    <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/exclusao.css">
 </head>
 <body>
     <header>
@@ -60,7 +19,7 @@ if(isset($_POST['email']) || isset($_POST['senha'])){
                 </svg>
             </button>
             <div>
-                <img class="img-logo" id="logo" src="../assets/logo.png" alt="Logo">
+                <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo">
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
@@ -73,47 +32,32 @@ if(isset($_POST['email']) || isset($_POST['senha'])){
                             </svg>
                         </button>
                     </li>
-                    <li class="nav-link"><a href="../html/index.html">HOME</a></li>
-                    <li class="nav-link"><a href="../html/pagina-quero-doar.html">ONG'S</a></li>
-                    <li class="nav-link"><a href="../html/sobre.html">SOBRE</a></li>
-                    <li class="nav-link"><a href="../html/contato.html">CONTATO</a></li>
-                    <li class="nav-link"><a href="../html/login.html">LOGIN</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/index.php">HOME</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/pagina-quero-doar.php">ONG'S</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/sobre.php">SOBRE</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/contato.php">CONTATO</a></li>
                 </ul>
             </div>
             <div class="user">
-                <a href="../html/configuracoes-doador.html">
-                    <img class="img-user" src="../assets/user.png" alt="Usuário">
+                <a href="../../telas/ong/configuracoes-ong.php" >
+                    <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
         </nav>
     </header>
-    <main>
-        <h1 class="title">Login</h1>
-        <section class="login">
-            <form action="" method="POST">
-                <div class="input-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email"
-                        placeholder="Digite seu email" required>
-                </div>
-                <div class="input-group">
-                    <label for="password">Senha</label>
-                    <input type="password" id="password" name="senha" placeholder="Digite sua senha"
-                        required>
-                </div>
-                <div class="secondary-action">
-                    <a class="esqueci-senha">Esqueci minha senha</a>
-                </div>
-                <div class="action-buttons">
-                    <button type="submit" class="action-button">Entrar</button>
-                </div>
-                <div class="secondary-action div-cadastrar">
-                    <a>Nao Tem Uma Conta? <span class="cadastrar">Cadastrar-se</span></a>
-                </div>
-            </form>
-        </section>
-    </main>
-    </section>
+    <div class="container">
+        <div class="content-box">
+            <h1>Desvincular ONG</h1>
+            <p>
+                Você está prestes a desvincular permanentemente a sua ONG do nosso sistema.
+            </p>
+            <p>
+                Esta ação não pode ser desfeita e todos os dados associados à sua ONG serão removidos. Tem certeza de que deseja continuar?
+            </p>
+            <button class="cancel">Cancelar</button>
+            <button class="confirm">Sim</button>
+        </div>
+    </div>
         <footer>
             <div class="footer">
                 <div class="img-footer-start">
@@ -147,5 +91,4 @@ if(isset($_POST['email']) || isset($_POST['senha'])){
             </div>
         </footer>
     <script src="../js/header.js"></script>
-</body>
 </html>

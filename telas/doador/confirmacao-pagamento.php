@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novo Começo</title>
-    <link rel="shortcut icon" href="../assets/logo.png" type="Alegrinho">
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/sobre.css">
+    <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/confirmacao-pagamento.css">
 </head>
 <body>
     <header>
@@ -20,7 +20,7 @@
                 </svg>
             </button>
             <div>
-                <img class="img-logo" id="logo" src="../assets/logo.png" alt="Logo">
+                <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo">
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
@@ -32,50 +32,31 @@
                                     d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                             </svg>
                         </button>
-                    </li>
-                    <li class="nav-link"><a href="../html/index.html">HOME</a></li>
-                    <li class="nav-link"><a href="../html/pagina-quero-doar.html">ONG'S</a></li>
-                    <li class="nav-link"><a href="../html/sobre.html">SOBRE</a></li>
-                    <li class="nav-link"><a href="../html/contato.html">CONTATO</a></li>
-                    <li class="nav-link"><a href="../html/login.html">LOGIN</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/index.php">HOME</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/pagina-quero-doar.php">ONG'S</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/sobre.php">SOBRE</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/contato.php">CONTATO</a></li>
                 </ul>
             </div>
             <div class="user">
-                <a href="../html/configuracoes-doador.html">
-                    <img class="img-user" src="../assets/user.png" alt="Usuário">
+                <a href="../../telas/doador/configuracoes.doador.php">
+                    <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
         </nav>
     </header>
-    <main>
-        <section class="boxes">
-            <div class="box">
-                <h2 class="box-title">QUEM SOMOS?</h2>
-                <p>
-                    A Novo Começo é uma ONG intermediária que facilita o processo de doação entre ONGs e doadores, promovendo uma doação
-                    inteligente e eficiente. Com o objetivo de dar início a novos ciclos e ajudar pessoas em situações de vulnerabilidade, a
-                    Novo Começo conecta doadores a diversas causas, garantindo que as doações sejam direcionadas de forma transparente e
-                    impactante. A organização atua como um elo, simplificando o processo de doação e potencializando o alcance das
-                    iniciativas de solidariedade.
-                </p>
-            </div>
-        </section>
 
-        <section class="boxes">
-            <div class="box">
-                <h2 class="box-title">POR QUE DOAR? </h2>
-                <p>
-                    Doar é um ato que vai além da ajuda financeira; é uma forma de transformar vidas e contribuir para um mundo melhor.
-                    Quando você doa, oferece a oportunidade de recomeço para aqueles que mais precisam, ajudando a suprir necessidades
-                    básicas, como alimentação, saúde, e educação. Além disso, a doação promove igualdade social, fortalece comunidades e
-                    inspira outras pessoas a fazerem o mesmo. É também uma forma de exercer empatia, solidariedade e responsabilidade
-                    social, gerando impacto positivo tanto para quem recebe quanto para quem doa. Cada contribuição, por menor que pareça,
-                    tem o poder de mudar destinos e criar um futuro mais justo e solidário.
-                </p>
+    <main>   
+        <div class="container">
+            <div class="content">
+                <h1>Pagamento Confirmado!</h1><br>
+                <p>Seu pagamento foi realizado com sucesso!</p><br>
+                <img class="img-ong-logo" src="../assets/amigosdaterra.png" alt="Logo Amigos da Terra">
             </div>
-        </section>
-
+            <a href="../telas/index.php" class="btn">Voltar para a página inicial</a>
+        </div>
     </main>
+    
 
     <footer>
         <div class="footer">
@@ -110,7 +91,7 @@
             </div>
         </div>
     </footer>
-    
+
     <script src="../js/header.js"></script>
 </body>
 </html>

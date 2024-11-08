@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criar Conta - Novo Começo</title>
-    <link rel="shortcut icon" href="../assets/logo.png" type="Alegrinho">
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/cadastrar.css">
+    <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/cadastrar.css">
 </head>
 <body>
     <header>
@@ -19,7 +19,7 @@
                 </svg>
             </button>
             <div>
-                <img class="img-logo" id="logo" src="../assets/logo.png" alt="Logo">
+                <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo">
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
@@ -32,16 +32,15 @@
                             </svg>
                         </button>
                     </li>
-                    <li class="nav-link"><a href="../html/index.html">HOME</a></li>
-                    <li class="nav-link"><a href="../html/pagina-quero-doar.html">ONG'S</a></li>
-                    <li class="nav-link"><a href="../html/sobre.html">SOBRE</a></li>
-                    <li class="nav-link"><a href="../html/contato.html">CONTATO</a></li>
-                    <li class="nav-link"><a href="../html/login.html">LOGIN</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/index.php">HOME</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/pagina-quero-doar.php">ONG'S</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/sobre.php">SOBRE</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/contato.php">CONTATO</a></li>
                 </ul>
             </div>
             <div class="user">
-                <a href="../html/configuracoes-doador.html">
-                    <img class="img-user" src="../assets/user.png" alt="Usuário">
+                <a href="../../telas/usuarios/login.php">
+                    <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
         </nav>
@@ -49,7 +48,7 @@
     <div class="container">
         <section class="register-section">
             <h1>Criar conta</h1>
-            <p>Crie sua conta e ajude próximo!</p>
+            <p>Use o seu email para se registrar sua ONG</p>
             <form action="/register" method="POST">
                 <div class="input-group">
                     <input type="text" id="name" name="name" placeholder="Nome" required>
@@ -64,7 +63,16 @@
                     <input type="tel" id="phone" name="phone" placeholder="Telefone" required>
                 </div>
                 <div class="input-group">
-                    <input type="text" id="cpf" name="cpf" placeholder="CPF" required>
+                    <input type="text" id="cpf" name="cpf" placeholder="CNPJ" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="constituicao" name="constituicao" placeholder="Constituição" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="comprobatorio" name="comprobatorio" placeholder="Comprobatório" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="estatuto" name="estatuto" placeholder="Estatuto Social" required>
                 </div>
                 <div class="input-group">
                     <input type="text" id="logradouro" name="logradouro" placeholder="Logradouro" required>
@@ -83,6 +91,15 @@
                 </div>
                 <div class="input-group">
                     <input type="text" id="estado" name="estado" placeholder="Estado" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="bank_account" name="bank_account" placeholder="Conta Bancária" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="current_account" name="current_account" placeholder="Conta Corrente" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="pix_key" name="pix_key" placeholder="Chave Pix" required>
                 </div>
                 <button type="submit" class="register-button">Criar conta</button>
             </form>

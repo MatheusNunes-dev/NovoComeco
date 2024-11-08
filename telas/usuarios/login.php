@@ -1,12 +1,53 @@
+<?php
+include('../conexao.php');
+
+if(isset($_POST['email']) || isset($_POST['senha'])){
+    if(strlen($_POST['email']) == 0){
+        echo "Preencha seu email";
+    }
+    else if(strlen($_POST['senha']) == 0){
+        echo "Preencha sua senha";
+    }
+    else{
+        $email = $mysqli->real_escape_string($_POST['email']);
+        $senha = $mysqli->real_escape_string($_POST['senha']);
+
+        $sql_code = "SELECT * FROM doador where email = '$email' AND senha = '$senha'" ;
+        $sql_query = $mysqli->query($sql_code) or die("Falha na execução!"  . $mysqli->error);
+
+
+        $quantidade = $sql_query->num_rows;
+        if($quantidade == 1){
+            $usuario = $sql_query->fetch_assoc();
+
+
+            if(!isset($_SESSION)){
+                session_start();
+            }
+
+            $_SESSION['id'] = $usuario['id'];
+
+            header("Location: ../html/index.php");
+        }
+        else{
+            echo "Falha ao logar! E-mail ou senha incorretos";
+        }
+    }
+}
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alterar Senha - Novo Começo</title>
-    <link rel="shortcut icon" href="../assets/logo.png" type="Alegrinho">
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/mudar-senha.css">
+    <title>Login - Novo Começo</title>
+    <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/login.css">
 </head>
 <body>
     <header>
@@ -19,7 +60,7 @@
                 </svg>
             </button>
             <div>
-                <img class="img-logo" id="logo" src="../assets/logo.png" alt="Logo">
+                <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo">
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
@@ -32,43 +73,46 @@
                             </svg>
                         </button>
                     </li>
-                    <li class="nav-link"><a href="../html/index.html">HOME</a></li>
-                    <li class="nav-link"><a href="../html/pagina-quero-doar.html">ONG'S</a></li>
-                    <li class="nav-link"><a href="../html/sobre.html">SOBRE</a></li>
-                    <li class="nav-link"><a href="../html/contato.html">CONTATO</a></li>
-                    <li class="nav-link"><a href="../html/login.html">LOGIN</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/index.php">HOME</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/pagina-quero-doar.php">ONG'S</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/sobre.php">SOBRE</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/contato.php">CONTATO</a></li>
                 </ul>
             </div>
             <div class="user">
-                <a href="../html/configuracoes-doador.html">
-                    <img class="img-user" src="../assets/user.png" alt="Usuário">
+                <a href="../../telas/usuarios/login.php">
+                    <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
         </nav>
     </header>
     <main>
-        <h1 class="title">Mudar Senha</h1>
-        <section class="password-change-section">
-            <form action="/alterar-senha" method="POST">
+        <h1 class="title">Login</h1>
+        <section class="login">
+            <form action="" method="POST">
                 <div class="input-group">
-                    <label for="current-password">Senha Atual</label>
-                    <input type="password" id="current-password" name="current-password" placeholder="Digite sua senha atual" required>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email"
+                        placeholder="Digite seu email" required>
                 </div>
                 <div class="input-group">
-                    <label for="new-password">Nova Senha</label>
-                    <input type="password" id="new-password" name="new-password" placeholder="Digite sua nova senha" required>
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="senha" placeholder="Digite sua senha"
+                        required>
                 </div>
-                <div class="input-group">
-                    <label for="confirm-password">Confirmar Senha</label>
-                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirme sua nova senha" required>
+                <div class="secondary-action">
+                    <a href="../telas/alterar-senha-doador.php" class="esqueci-senha">Esqueci minha senha</a>
                 </div>
                 <div class="action-buttons">
-                    <button type="submit" class="action-button">Confirmar</button>
-                    <button type="reset" class="action-button">Limpar </button>
+                    <button type="submit" class="action-button">Entrar</button>
+                </div>
+                <div class="secondary-action div-cadastrar">
+                    <a>Nao Tem Uma Conta? <span class="cadastrar">Cadastrar-se</span></a>
                 </div>
             </form>
         </section>
     </main>
+    </section>
         <footer>
             <div class="footer">
                 <div class="img-footer-start">

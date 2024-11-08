@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Histórico de Transferencia</title>
-    <link rel="shortcut icon" href="../assets/logo.png" type="Alegrinho">
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/historicos.css">
+    <title>Novo Começo</title>
+    <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/realizar-pagamento.css">
+
 </head>
 <body>
     <header>
@@ -19,7 +20,7 @@
                 </svg>
             </button>
             <div>
-                <img class="img-logo" id="logo" src="../assets/logo.png" alt="Logo">
+                <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo">
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
@@ -32,61 +33,35 @@
                             </svg>
                         </button>
                     </li>
-                    <li class="nav-link"><a href="../html/index.html">HOME</a></li>
-                    <li class="nav-link"><a href="../html/pagina-quero-doar.html">ONG'S</a></li>
-                    <li class="nav-link"><a href="../html/sobre.html">SOBRE</a></li>
-                    <li class="nav-link"><a href="../html/contato.html">CONTATO</a></li>
-                    <li class="nav-link"><a href="../html/login.html">LOGIN</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/index.php">HOME</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/pagina-quero-doar.php">ONG'S</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/sobre.php">SOBRE</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/contato.php">CONTATO</a></li>
                 </ul>
             </div>
             <div class="user">
-                <a href="../html/configuracoes-doador.html">
-                    <img class="img-user" src="../assets/user.png" alt="Usuário">
+                <a href="../../telas/doador/configuracoes.doador.php">
+                    <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <h1 class="title">Histórico de Transferência</h1>
-        <div class="filter-options">
-            <select id="filter-ong">
-            <option value="all">Filtros</option>
-            <option value="ong1">ONG 1</option>
-            <option value="ong2">ONG 2</option>
-            <option value="ong3">ONG 3</option>
-            </select>
-        </div>
-        <div class="donation-box">
-            <div class="circle">
-                <p>ONG: xxx</p>
+    <div class="main-container">
+        <div class="pix-box">
+            <div class="pix-countdown">
+                <div class="pix-image">
+                    <div class="image-box"></div>
+                </div>
             </div>
-            <div class="donation-details">
-                <p>Doação para a ONG xxx</p>
-                <p>Data de doação: xx/xx/xxxx</p>
-                <p>Valor da doação: R$ xxx,xx</p>
+            <div class="countdown-box">
+                <p>PIX vence em: 00:00:00</p>
+            </div>
+            <div>
+                <p>Chave Aleatória: dcta478j-196l-03fm-t6gh-4298er7845m2</p>
             </div>
         </div>
-    
-        <div class="donation-box">
-            <div class="circle">
-                <p>ONG: xxx</p>
-            </div>
-            <div class="donation-details">
-                <p>Doação para a ONG xxx</p>
-                <p>Data de doação: xx/xx/xxxx</p>
-                <p>Valor da doação: R$ xxx,xx</p>
-            </div>
-        </div>
-
-        <div class="donation-box">
-            <div class="circle">
-                <p>ONG: xxx</p>
-            </div>
-            <div class="donation-details">
-                <p>Doação para a ONG xxx</p>
-                <p>Data de doação: xx/xx/xxxx</p>
-                <p>Valor da doação: R$ xxx,xx</p>
-            </div>
+        <div class="home-button" onclick="window.location.href=index.html">
+            <p>Voltar</p>
         </div>
     </div>
     <footer>
@@ -97,7 +72,7 @@
             <div class="socias">
                 <div class="icons-col-1">
                     <div class="social-footer">
-                        <img class="icon-footer" src="../assets/google.png">
+                        <img class="icon-footer" src="../assets/google.png"> 
                         <p>novocomeço@gmail.com</p>
                     </div>
                     <div class="social-footer">

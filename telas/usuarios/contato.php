@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doação ONG</title>
-    <link rel="shortcut icon" href="../assets/logo.png" type="Alegrinho">
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/pagina-da-ong.css">
+    <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/contato.css">
+    <title>Novo Começo</title>
 </head>
 <body>
     <header>
@@ -19,7 +20,7 @@
                 </svg>
             </button>
             <div>
-                <img class="img-logo" id="logo" src="../assets/logo.png" alt="Logo">
+                <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo">
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
@@ -32,47 +33,47 @@
                             </svg>
                         </button>
                     </li>
-                    <li class="nav-link"><a href="../html/index.html">HOME</a></li>
-                    <li class="nav-link"><a href="../html/pagina-quero-doar.html">ONG'S</a></li>
-                    <li class="nav-link"><a href="../html/sobre.html">SOBRE</a></li>
-                    <li class="nav-link"><a href="../html/contato.html">CONTATO</a></li>
-                    <li class="nav-link"><a href="../html/login.html">LOGIN</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/index.php">HOME</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/pagina-quero-doar.php">ONG'S</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/sobre.php">SOBRE</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/contato.php">CONTATO</a></li>
                 </ul>
             </div>
             <div class="user">
-                <a href="../html/configuracoes-doador.html">
-                    <img class="img-user" src="../assets/user.png" alt="Usuário">
+                <a href="../../telas/usuarios/login.php">
+                    <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
         </nav>
     </header>
-    <main class="container">
-        <section class="donation-box">
-            <div class="ong-name">Nome da ONG</div>
-            <div class="donation-image">
-                <img src="../assets/ong.jpg" alt="Imagem da ONG">
-            </div>  
-            <div class="input-box">
-                <p>Nome:</p>
-            </div>
-            <div class="input-box">
-                <label for="valor">Valor (R$):</label>
-                <input type="number" id="valor" name="valor" placeholder="Digite o valor da transferência" required>
-            </div>
-            <p class="note">*Somente PIX</p>
-            <div class="confirm-button" onclick="window.location.href='confirmar_pagamento.html'">
-                <p>Confirmar doação</p>
-            </div>
-            <div class="cancel-button" onclick="window.location.href='queroDoar.html'">
-                <p>Cancelar doação</p>
-            </div>
+    <main>
+        <section>
+            <form class="form">
+                <div class="title-form">
+                    <h1 class="title-form-text">ENTRE EM CONTATO</h1>
+                </div>
+                <div>
+                    <input class="input" type="text" placeholder="Nome:" id="name"> 
+                </div>
+                <div>
+                    <input class="input" type="email" placeholder="E-mail:" id="email">
+                </div>
+                <div>
+                    <textarea class="text-area" placeholder="Mensagem:" id="mensagem"></textarea>
+                </div>
+                <button type="submit" class="btn-submit">
+                    Enviar
+                </button>
+            </form>
         </section>
     </main>
+
     <footer>
         <div class="footer">
             <div class="img-footer-start">
                 <img class="boneco-footer" class="img-footer" src="../assets/img-footer.png">
             </div>
+    
             <div class="socias">
                 <div class="icons-col-1">
                     <div class="social-footer">
@@ -96,10 +97,11 @@
                 </div>
             </div>
             <div class="img-footer-end">
-                <img class="boneco-footer" class="img-footer" src="../assets/img-footer.png">
+                <img class="boneco-footer" class="img-footer" src="assets/img-footer.png">
             </div>
         </div>
     </footer>
     <script src="../js/header.js"></script>
+    
 </body>
 </html>

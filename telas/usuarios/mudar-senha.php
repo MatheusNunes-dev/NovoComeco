@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Excluir</title>
-    <link rel="shortcut icon" href="../assets/logo.png" type="Alegrinho">
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/infidelizacao-ong.css">
+    <title>Alterar Senha - Novo Começo</title>
+    <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/mudar-senha.css">
 </head>
 <body>
     <header>
@@ -19,7 +19,7 @@
                 </svg>
             </button>
             <div>
-                <img class="img-logo" id="logo" src="../assets/logo.png" alt="Logo">
+                <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo">
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
@@ -32,33 +32,38 @@
                             </svg>
                         </button>
                     </li>
-                    <li class="nav-link"><a href="../html/index.html">HOME</a></li>
-                    <li class="nav-link"><a href="../html/pagina-quero-doar.html">ONG'S</a></li>
-                    <li class="nav-link"><a href="../html/sobre.html">SOBRE</a></li>
-                    <li class="nav-link"><a href="../html/contato.html">CONTATO</a></li>
-                    <li class="nav-link"><a href="../html/login.html">LOGIN</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/index.php">HOME</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/pagina-quero-doar.php">ONG'S</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/sobre.php">SOBRE</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/contato.php">CONTATO</a></li>
                 </ul>
             </div>
             <div class="user">
-                <a href="../html/configuracoes-doador.html">
-                    <img class="img-user" src="../assets/user.png" alt="Usuário">
+                <a href="../../telas/configuracoes-doador.php">
+                    <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <div class="content-box">
-            <h1>Excluir ONG</h1>
-            <p>
-                Você está prestes a excluir permanentemente a sua ONG do nosso sistema.
-            </p>
-            <p>
-                Esta ação não pode ser desfeita e todos os dados associados à sua ONG serão removidos. Tem certeza de que deseja continuar?
-            </p>
-            <button class="cancel">Cancelar</button>
-            <button class="confirm">Sim</button>
-        </div>
-    </div>
+    <main>
+        <h1 class="title">Mudar Senha</h1>
+        <section class="password-change-section">
+            <form action="/alterar-senha" method="POST">
+                <div class="input-group">
+                    <label for="new-password">Nova Senha</label>
+                    <input type="password" id="new-password" name="new-password" placeholder="Digite sua nova senha" required>
+                </div>
+                <div class="input-group">
+                    <label for="confirm-password">Confirmar Senha</label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirme sua nova senha" required>
+                </div>
+                <div class="action-buttons">
+                    <button type="reset" class="action-button">Limpar </button>
+                    <button type="submit" class="action-button">Confirmar</button>
+                </div>
+            </form>
+        </section>
+    </main>
         <footer>
             <div class="footer">
                 <div class="img-footer-start">
@@ -92,4 +97,5 @@
             </div>
         </footer>
     <script src="../js/header.js"></script>
+</body>
 </html>

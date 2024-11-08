@@ -14,8 +14,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novo Começo</title>
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/index.css">
 </head>
 
 <body>
@@ -29,7 +29,9 @@
                 </svg>
             </button>
             <div>
-                <img class="img-logo" id="logo" src="../assets/logo.png" alt="Logo">
+                <a href="../telas/index.php">
+                    <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo">
+                </a>
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
@@ -42,17 +44,15 @@
                             </svg>
                         </button>
                     </li>
-                    <li class="nav-link"><a href="../html/index.html">HOME</a></li>
-                    <li class="nav-link"><a href="../html/queroDoar.html">ONG'S</a></li>
-                    <li class="nav-link"><a href="../html/quemSomos.html">SOBRE</a></li>
-                    <li class="nav-link"><a href="../html/contato.html">CONTATO</a></li>
-                    <li class="nav-link"><a href="../html/login.html">LOGIN</a></li>
-                    <li class="nav-link btn-login"><a href="../html/login.html">LOGIN</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/index.php">HOME</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/pagina-quero-doar.php">ONG'S</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/sobre.php">SOBRE</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/contato.php">CONTATO</a></li>
                 </ul>
             </div>
             <div class="user">
-                <a href="../html/login.html">
-                    <img class="img-user" src="../assets/user.png" alt="Usuário">
+                <a href="../../telas/usuarios/login.php">
+                    <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
         </nav>
@@ -66,7 +66,7 @@
                         <span class="tittle-banner">NOVO</span>
                     </div>
                     <div class="a">
-                        <a class="btn-quero-doar" href="queroDoar.html">QUERO DOAR!</a>
+                        <a class="btn-quero-doar" href="../telas/pagina-quero-doar.php">QUERO DOAR!</a>
                     </div>
                 </div>
                 <div>
@@ -74,7 +74,7 @@
                 </div>
             </div>
             <div>
-                <img class="img-banner" src="../assets/banner.png">
+                <img class="img-banner" src="../../assets/banner.png">
             </div>
             <div class="quero-doar">
                 <a class="btn-quero-doar-mobile" href="queroDoar.html">QUERO DOAR!</a>
@@ -83,15 +83,15 @@
 
         <section class="banner-cards-ongs">
             <div class="card-ong">
-                <img class="img-ong" src="../assets/amigosdaterra.png">
+                <img class="img-ong" src="../../assets/amigosdaterra.png">
                 <a class="btn-conhecer">CONHECER</a>
             </div>
             <div class="card-ong">
-                <img class="img-ong" src="../assets/amoranimal.gif">
+                <img class="img-ong" src="../../assets/amoranimal.gif">
                 <a class="btn-conhecer">CONHECER</a>
             </div>
             <div class="card-ong">
-                <img class="img-ong" src="../assets/maoamiga.png">
+                <img class="img-ong" src="../../assets/maoamiga.png">
                 <a class="btn-conhecer">CONHECER</a>
                 </iv>
         </section>
@@ -128,32 +128,32 @@
     <footer>
         <div class="footer">
             <div class="img-footer-start">
-                <img class="boneco-footer" class="img-footer" src="../assets/img-footer.png">
+                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
             </div>
             <div class="socias">
                 <div class="icons-col-1">
                     <div class="social-footer">
-                        <img class="icon-footer" src="../assets/google.png">
+                        <img class="icon-footer" src="../../assets/google.png">
                         <p>novocomeço@gmail.com</p>
                     </div>
                     <div class="social-footer">
-                        <img class="icon-footer" src="../assets/instagram.png">
+                        <img class="icon-footer" src="../../assets/instagram.png">
                         <p>@novocomeço</p>
                     </div>
                 </div>
                 <div class="icons-col-2">
                     <div class="social-footer">
-                        <img class="icon-footer" src="../assets/whatsapp.png">
+                        <img class="icon-footer" src="../../assets/whatsapp.png">
                         <p>(41)99997676</p>
                     </div>
                     <div class="social-footer">
-                        <img class="icon-footer" src="../assets/facebook.png">
+                        <img class="icon-footer" src="../../assets/facebook.png">
                         <p>@novocomeco</p>
                     </div>
                 </div>
             </div>
             <div class="img-footer-end">
-                <img class="boneco-footer" class="img-footer" src="../assets/img-footer.png">
+                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
             </div>
         </div>
     </footer>

@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alterar Senha - Novo Começo</title>
-    <link rel="shortcut icon" href="../assets/logo.png" type="Alegrinho">
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/mudar-senha.css">
+    <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/mudar-senha.css">
 </head>
 <body>
     <header>
@@ -19,7 +19,7 @@
                 </svg>
             </button>
             <div>
-                <img class="img-logo" id="logo" src="../assets/logo.png" alt="Logo do Novo Começo">
+                <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo do Novo Começo">
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
@@ -32,16 +32,15 @@
                             </svg>
                         </button>
                     </li>
-                    <li class="nav-link"><a href="../html/index.html">HOME</a></li>
-                    <li class="nav-link"><a href="../html/pagina-quero-doar.html">ONG'S</a></li>
-                    <li class="nav-link"><a href="../html/sobre.html">SOBRE</a></li>
-                    <li class="nav-link"><a href="../html/contato.html">CONTATO</a></li>
-                    <li class="nav-link"><a href="../html/login.html">LOGIN</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/index.php">HOME</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/pagina-quero-doar.php">ONG'S</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/sobre.php">SOBRE</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/contato.php">CONTATO</a></li>
                 </ul>
             </div>
             <div class="user">
-                <a href="../html/configuracoes-doador.html">
-                    <img class="img-user" src="../assets/user.png" alt="Usuário">
+                <a href="../../telas/usuarios/login.php">
+                    <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
         </nav>
@@ -53,20 +52,12 @@
         <section class="password-change-section">
             <form action="/alterar-senha" method="POST" aria-labelledby="password-change-section">
                 <div class="input-group">
-                    <label for="current-password">CNPJ</label>
-                    <input type="text" id="current-password" name="current-password" placeholder="Digite seu CNPJ (XXX/0001-XX)" required aria-required="true">
-                </div>
-                <div class="input-group">
-                    <label for="new-password">Nova Senha</label>
-                    <input type="password" id="new-password" name="new-password" placeholder="Digite sua nova senha" required aria-required="true">
-                </div>
-                <div class="input-group">
-                    <label for="confirm-password">Confirmar Senha</label>
-                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirme sua nova senha" required aria-required="true">
+                    <label for="current-password">Informe CPF, CNPJ ou E-mail</label>
+                    <input type="text" id="current-password" name="current-password" placeholder="Digite seu CPF, CNPJ ou E-mail" required aria-required="true">
                 </div>
                 <div class="action-buttons">
-                    <button class="confirm-button">Confirmar</button>
                     <button class="action-button">Cancelar</button>
+                    <button class="confirm-button">Confirmar</button>
                 </div>
             </form>
         </section>

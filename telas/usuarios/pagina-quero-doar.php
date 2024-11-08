@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../assets/logo.png" type="Alegrinho">
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/pagina-quero-doar.css">
+    <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/pagina-quero-doar.css">
     <title>Novo Começo</title>
 </head>
 <body>
@@ -20,7 +20,7 @@
                 </svg>
             </button>
             <div>
-                <img class="img-logo" id="logo" src="../assets/logo.png" alt="Logo">
+                <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo">
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
@@ -33,16 +33,15 @@
                             </svg>
                         </button>
                     </li>
-                    <li class="nav-link"><a href="../html/index.html">HOME</a></li>
-                    <li class="nav-link"><a href="../html/pagina-quero-doar.html">ONG'S</a></li>
-                    <li class="nav-link"><a href="../html/sobre.html">SOBRE</a></li>
-                    <li class="nav-link"><a href="../html/contato.html">CONTATO</a></li>
-                    <li class="nav-link"><a href="../html/login.html">LOGIN</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/index.php">HOME</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/pagina-quero-doar.php">ONG'S</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/sobre.php">SOBRE</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/contato.php">CONTATO</a></li>
                 </ul>
             </div>
             <div class="user">
-                <a href="../html/configuracoes-doador.html">
-                    <img class="img-user" src="../assets/user.png" alt="Usuário">
+                <a href="../../telas/usuarios/login.php">
+                    <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
         </nav>
@@ -51,12 +50,12 @@
     <main>
         <section>
             <div class="banner">
-                <img class="img-banner" src="../assets/banner-ongs.png">
+                <img class="img-banner" src="../../assets/banner-ongs.png">
             </div>
             <div class="grid-ongs">
                 <div class="ong">
                     <div class="img-cards">
-                        <img class="img-card" src="../assets/banner-ongs.png">
+                        <img class="img-card" src="../../assets/banner-ongs.png">
                     </div>
                     <div class="btns-card">
                         <a class="btn-card" href="pagina-da-ong.html">Doar</a>
@@ -64,7 +63,7 @@
                 </div>
                 <div class="ong">
                     <div class="img-cards">
-                        <img class="img-card" src="../assets/banner-ongs.png">
+                        <img class="img-card" src="../../assets/banner-ongs.png">
                     </div>
                     <div class="btns-card">
                         <a class="btn-card" href="pagina-da-ong.html">Doar</a>
@@ -72,7 +71,7 @@
                 </div>
                 <div class="ong">
                     <div class="img-cards">
-                        <img class="img-card" src="../assets/banner-ongs.png">
+                        <img class="img-card" src="../../assets/banner-ongs.png">
                     </div>
                     <div class="btns-card">
                         <a class="btn-card" href="pagina-da-ong.html">Doar</a>
@@ -80,7 +79,7 @@
                 </div>
                 <div class="ong">
                     <div class="img-cards">
-                        <img class="img-card" src="../assets/banner-ongs.png">
+                        <img class="img-card" src="../../assets/banner-ongs.png">
                     </div>
                     <div class="btns-card">
                         <a class="btn-card" href="pagina-da-ong.html">Doar</a>
@@ -88,7 +87,7 @@
                 </div>
                 <div class="ong">
                     <div class="img-cards">
-                        <img class="img-card" src="../assets/banner-ongs.png">
+                        <img class="img-card" src="../../assets/banner-ongs.png">
                     </div>
                     <div class="btns-card">
                         <a class="btn-card" href="pagina-da-ong.html">Doar</a>
@@ -96,7 +95,7 @@
                 </div>
                 <div class="ong">
                     <div class="img-cards">
-                        <img class="img-card" src="../assets/banner-ongs.png">
+                        <img class="img-card" src="../../assets/banner-ongs.png">
                     </div>
                     <div class="btns-card">
                         <a class="btn-card" href="pagina-da-ong.html">Doar</a>

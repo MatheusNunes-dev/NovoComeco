@@ -46,20 +46,36 @@ button {
     border-radius: 50px;
     border: none;
     outline: none;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
 
+/* Botão Confirmar (Sim) */
 .confirm {
     color: #FF0004;
     background-color: #FFF;
     border: 2px solid #FF0004;
 }
 
+.confirm:hover {
+    background-color: #FF0004;
+    color: #FFF;
+    transform: scale(1.05);
+    /* Efeito de leve aumento */
+}
+
+/* Botão Cancelar */
 .cancel {
     color: #000;
     background-color: #FFF;
     border: 2px solid #000;
     margin-right: 15px;
+}
+
+.cancel:hover {
+    background-color: #000;
+    color: #FFF;
+    transform: scale(1.05);
+    /* Efeito de leve aumento */
 }
 
 @media (max-width: 768px) {
