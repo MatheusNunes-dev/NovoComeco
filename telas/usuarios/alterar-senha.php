@@ -52,7 +52,7 @@
         <section class="password-change-section">
             <form action="/alterar-senha" method="POST" aria-labelledby="password-change-section">
                 <div class="input-group">
-                    <label for="current-password">Informe CPF, CNPJ ou E-mail</label>
+                    <label for="login">Informe CPF, CNPJ ou E-mail</label>
                     <input type="text" id="current-password" name="current-password" placeholder="Digite seu CPF, CNPJ ou E-mail" required aria-required="true">
                 </div>
                 <div class="action-buttons">

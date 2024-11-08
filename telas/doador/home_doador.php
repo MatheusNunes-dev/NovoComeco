@@ -1,11 +1,3 @@
-<?php
-    include('../../protect.php');
-
-
-?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -51,7 +43,7 @@
                 </ul>
             </div>
             <div class="user">
-                <a href="../../telas/usuarios/login.php">
+                <a href="../../telas/doador/configuracoes.doador.php">
                     <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>

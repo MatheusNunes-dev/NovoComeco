@@ -9,12 +9,15 @@ CREATE TABLE DOADOR (
  telefone VARCHAR(15),
  cpf VARCHAR(14) NOT NULL UNIQUE,
  data_cadastro DATE NOT NULL,
- end_logradouro VARCHAR(100) NOT NULL,
+ end_rua VARCHAR(100) NOT NULL,
  end_numero VARCHAR(10) NOT NULL,
  end_bairro VARCHAR(50) NOT NULL,
  end_cidade VARCHAR(50) NOT NULL,
- end_estado VARCHAR(2) NOT NULL
+ end_estado VARCHAR(2) NOT NULL,
+ end_completento varchar(50)
 );
+
+
 
 CREATE TABLE ONG (
  id_ong INT AUTO_INCREMENT PRIMARY KEY,
@@ -29,16 +32,22 @@ CREATE TABLE ONG (
  constituicao VARCHAR(255) NOT NULL,
  comprobatorio VARCHAR(255) NOT NULL,
  estatuto_social VARCHAR(255) NOT NULL,
- end_logradouro VARCHAR(100) NOT NULL,
+ end_rua VARCHAR(100) NOT NULL,
  end_numero VARCHAR(10) NOT NULL,
  end_bairro VARCHAR(50) NOT NULL,
  end_cidade VARCHAR(50) NOT NULL,
  end_estado VARCHAR(2) NOT NULL,
+ end_completento varchar(50),
  banco VARCHAR(100) NOT NULL,
  agencia VARCHAR(10) NOT NULL,
  conta_corrente VARCHAR(20) NOT NULL,
  chave_pix VARCHAR(100) NOT NULL
 );
+
+
+
+
+
 
 CREATE TABLE DOACAO (
  id_doacao INT AUTO_INCREMENT PRIMARY KEY,
@@ -61,13 +70,15 @@ CREATE TABLE ADMINISTRADOR (
  email VARCHAR(100) NOT NULL UNIQUE,
  senha VARCHAR(255) NOT NULL,
  telefone VARCHAR(15),
- end_logradouro VARCHAR(100) NOT NULL,
+ end_rua VARCHAR(100) NOT NULL,
  end_numero VARCHAR(10) NOT NULL,
  end_bairro VARCHAR(50) NOT NULL,
  end_cidade VARCHAR(50) NOT NULL,
  end_estado VARCHAR(2) NOT NULL,
+ end_completento varchar(50),
  cpf VARCHAR(14) UNIQUE
 );
+
 
 CREATE TABLE DOACOES_ACUMULADAS (
  id_doacoes_acumuladas INT AUTO_INCREMENT PRIMARY KEY,

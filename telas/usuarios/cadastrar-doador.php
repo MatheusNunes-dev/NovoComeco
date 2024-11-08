@@ -48,8 +48,9 @@
     <div class="container">
         <section class="register-section">
             <h1>Criar conta</h1>
-            <p>Crie sua conta e ajude próximo!</p>
+            <p>Crie sua conta e ajude o próximo!</p>
             <form action="/register" method="POST">
+    <!-- Informações Pessoais -->
                 <div class="input-group">
                     <input type="text" id="name" name="name" placeholder="Nome" required>
                 </div>
@@ -57,34 +58,37 @@
                     <input type="email" id="email" name="email" placeholder="Email" required>
                 </div>
                 <div class="input-group">
-                    <input type="password" id="password" name="password" placeholder="Senha" required>
-                </div>
-                <div class="input-group">
                     <input type="tel" id="phone" name="phone" placeholder="Telefone" required>
                 </div>
                 <div class="input-group">
                     <input type="text" id="cpf" name="cpf" placeholder="CPF" required>
                 </div>
+
+                <!-- Endereço -->
                 <div class="input-group">
-                    <input type="text" id="logradouro" name="logradouro" placeholder="Logradouro" required>
-                </div>
-                <div class="input-group">
-                    <input type="text" id="numero" name="numero" placeholder="Número" required>
-                </div>
-                <div class="input-group">
-                    <input type="text" id="rua" name="rua" placeholder="Rua" required>
-                </div>
-                <div class="input-group">
-                    <input type="text" id="bairro" name="bairro" placeholder="Bairro" required>
+                    <input type="text" id="estado" name="estado" placeholder="Estado" required>
                 </div>
                 <div class="input-group">
                     <input type="text" id="cidade" name="cidade" placeholder="Cidade" required>
                 </div>
                 <div class="input-group">
-                    <input type="text" id="estado" name="estado" placeholder="Estado" required>
+                    <input type="text" id="bairro" name="bairro" placeholder="Bairro" required>
                 </div>
+                <div class="input-group">
+                    <input type="text" id="rua" name="rua" placeholder="Rua" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="numero" name="numero" placeholder="Número" required>
+                </div>
+
+                <div class="input-group">
+                    <input type="password" id="password" name="password" placeholder="Senha" required>
+                </div>
+
                 <button type="submit" class="register-button">Criar conta</button>
             </form>
+
+
         
         </section>
     </div>

@@ -50,21 +50,21 @@
             <h1>Criar conta</h1>
             <p>Use o seu email para se registrar sua ONG</p>
             <form action="/register" method="POST">
+                <!-- Informações Básicas -->
                 <div class="input-group">
-                    <input type="text" id="name" name="name" placeholder="Nome" required>
+                    <input type="text" id="name" name="name" placeholder="Nome da Empresa" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="cpf" name="cpf" placeholder="CNPJ" required>
                 </div>
                 <div class="input-group">
                     <input type="email" id="email" name="email" placeholder="Email" required>
                 </div>
                 <div class="input-group">
-                    <input type="password" id="password" name="password" placeholder="Senha" required>
-                </div>
-                <div class="input-group">
                     <input type="tel" id="phone" name="phone" placeholder="Telefone" required>
                 </div>
-                <div class="input-group">
-                    <input type="text" id="cpf" name="cpf" placeholder="CNPJ" required>
-                </div>
+
+                <!-- Documentos -->
                 <div class="input-group">
                     <input type="text" id="constituicao" name="constituicao" placeholder="Constituição" required>
                 </div>
@@ -74,24 +74,28 @@
                 <div class="input-group">
                     <input type="text" id="estatuto" name="estatuto" placeholder="Estatuto Social" required>
                 </div>
+
+                <!-- Endereço -->
                 <div class="input-group">
-                    <input type="text" id="logradouro" name="logradouro" placeholder="Logradouro" required>
-                </div>
-                <div class="input-group">
-                    <input type="text" id="numero" name="numero" placeholder="Número" required>
-                </div>
-                <div class="input-group">
-                    <input type="text" id="rua" name="rua" placeholder="Rua" required>
-                </div>
-                <div class="input-group">
-                    <input type="text" id="bairro" name="bairro" placeholder="Bairro" required>
+                    <input type="text" id="estado" name="estado" placeholder="Estado" required>
                 </div>
                 <div class="input-group">
                     <input type="text" id="cidade" name="cidade" placeholder="Cidade" required>
                 </div>
                 <div class="input-group">
-                    <input type="text" id="estado" name="estado" placeholder="Estado" required>
+                    <input type="text" id="bairro" name="bairro" placeholder="Bairro" required>
                 </div>
+                <div class="input-group">
+                    <input type="text" id="rua" name="rua" placeholder="Rua" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="numero" name="numero" placeholder="Número" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="complemento" name="complemento" placeholder="Complemento">
+                </div>
+
+                <!-- Informações Bancárias -->
                 <div class="input-group">
                     <input type="text" id="bank_account" name="bank_account" placeholder="Conta Bancária" required>
                 </div>
@@ -101,6 +105,12 @@
                 <div class="input-group">
                     <input type="text" id="pix_key" name="pix_key" placeholder="Chave Pix" required>
                 </div>
+
+                <!-- Senha - sempre por último -->
+                <div class="input-group">
+                    <input type="password" id="password" name="password" placeholder="Senha" required>
+                </div>
+
                 <button type="submit" class="register-button">Criar conta</button>
             </form>
         

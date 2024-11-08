@@ -1,10 +1,3 @@
-<?php
-    include('../../protect.php');
-
-
-?>
-
-
 
 
 <!DOCTYPE html>
@@ -51,7 +44,7 @@
                 </ul>
             </div>
             <div class="user">
-                <a href="../../telas/usuarios/login.php">
+                <a href="../../telas/ong/configuracoes-ong.php">
                     <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
