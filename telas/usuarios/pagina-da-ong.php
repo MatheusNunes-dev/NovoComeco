@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="../../css/global.css">
     <link rel="stylesheet" href="../../css/pagina-da-ong.css">
 </head>
+
 <body>
     <header>
         <nav class="navbar nav-lg-screen" id="navbar" aria-label="Menu principal">
@@ -22,10 +24,10 @@
             <div class="nav-links" id="nav-links">
                 <ul>
                     <li><button class="btn-icon-header" onclick="toggleSideBar()" aria-label="Fechar menu lateral">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                        </svg>
-                    </button></li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                            </svg>
+                        </button></li>
                     <li class="nav-link"><a href="../../telas/usuarios/index.php">HOME</a></li>
                     <li class="nav-link"><a href="../../telas/usuarios/pagina-quero-doar.php">ONG'S</a></li>
                     <li class="nav-link"><a href="../../telas/usuarios/sobre.php">SOBRE</a></li>
@@ -45,7 +47,7 @@
             <div class="ong-name">Nome da ONG</div>
             <div class="donation-image">
                 <img src="../assets/ong.jpg" alt="Imagem da ONG">
-            </div>  
+            </div>
             <div class="input-box">
                 <p>Nome:</p>
             </div>
@@ -97,5 +99,17 @@
     </footer>
 
     <script src="../../js/header.js"></script>
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 </body>
+
 </html>

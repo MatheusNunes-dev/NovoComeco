@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="../../css/global.css">
     <link rel="stylesheet" href="../../css/historicos.css">
 </head>
+
 <body>
     <header>
         <nav class="navbar nav-lg-screen" id="navbar">
@@ -49,10 +51,10 @@
         <h1 class="title">Histórico de doações</h1>
         <div class="filter-options">
             <select id="filter-ong">
-            <option value="all">Filtros</option>
-            <option value="ong1">ONG 1</option>
-            <option value="ong2">ONG 2</option>
-            <option value="ong3">ONG 3</option>
+                <option value="all">Filtros</option>
+                <option value="ong1">ONG 1</option>
+                <option value="ong2">ONG 2</option>
+                <option value="ong3">ONG 3</option>
             </select>
         </div>
         <div class="donation-box">
@@ -65,7 +67,7 @@
                 <p>Valor da doação: R$ xxx,xx</p>
             </div>
         </div>
-    
+
         <div class="donation-box">
             <div class="circle">
                 <p>ONG: xxx</p>
@@ -111,7 +113,7 @@
                     </div>
                     <div class="social-footer">
                         <img class="icon-footer" src="../../assets/facebook.png">
-                           <p>@novocomeco</p>
+                        <p>@novocomeco</p>
                     </div>
                 </div>
             </div>
@@ -120,6 +122,19 @@
             </div>
         </div>
     </footer>
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
     <script src="../../js/header.js"></script>
 </body>
+
 </html>

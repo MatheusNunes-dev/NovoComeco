@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +10,10 @@
     <link rel="stylesheet" href="../../css/configuracoes.css">
     <link rel="stylesheet" href="../../css/configuracoes-doador.css">
 </head>
+
 <body>
     <!-- Cabeçalho -->
-    <header>  
+    <header>
         <nav class="navbar nav-lg-screen" id="navbar">
             <button class="btn-icon-header" onclick="toggleSideBar()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list"
@@ -79,7 +81,7 @@
             <div class="socias">
                 <div class="icons-col-1">
                     <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/google.png" alt="Google"> 
+                        <img class="icon-footer" src="../../assets/google.png" alt="Google">
                         <p>novocomeço@gmail.com</p>
                     </div>
                     <div class="social-footer">
@@ -104,6 +106,18 @@
         </div>
     </footer>
 
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
     <script src="../../js/header.js"></script>
 </body>
+
 </html>

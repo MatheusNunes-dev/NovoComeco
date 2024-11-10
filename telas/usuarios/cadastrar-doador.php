@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="../../css/global.css">
     <link rel="stylesheet" href="../../css/cadastrar.css">
 </head>
+
 <body>
     <header>
         <nav class="navbar nav-lg-screen" id="navbar">
@@ -50,7 +52,7 @@
             <h1>Criar conta</h1>
             <p>Crie sua conta e ajude o próximo!</p>
             <form action="/register" method="POST">
-    <!-- Informações Pessoais -->
+                <!-- Informações Pessoais -->
                 <div class="input-group">
                     <input type="text" id="name" name="name" placeholder="Nome" required>
                 </div>
@@ -89,41 +91,53 @@
             </form>
 
 
-        
+
         </section>
     </div>
-        <footer>
-            <div class="footer">
-                <div class="img-footer-start">
-                    <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
-                </div>
-                <div class="socias">
-                    <div class="icons-col-1">
-                        <div class="social-footer">
-                            <img class="icon-footer" src="../../assets/google.png">
-                            <p>novocomeço@gmail.com</p>
-                        </div>
-                        <div class="social-footer">
-                            <img class="icon-footer" src="../../assets/instagram.png">
-                            <p>@novocomeço</p>
-                        </div>
+    <footer>
+        <div class="footer">
+            <div class="img-footer-start">
+                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
+            </div>
+            <div class="socias">
+                <div class="icons-col-1">
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/google.png">
+                        <p>novocomeço@gmail.com</p>
                     </div>
-                    <div class="icons-col-2">
-                        <div class="social-footer">
-                            <img class="icon-footer" src="../../assets/whatsapp.png">
-                            <p>(41)99997676</p>
-                        </div>
-                        <div class="social-footer">
-                            <img class="icon-footer" src="../../assets/facebook.png">
-                            <p>@novocomeco</p>
-                        </div>
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/instagram.png">
+                        <p>@novocomeço</p>
                     </div>
                 </div>
-                <div class="img-footer-end">
-                    <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
+                <div class="icons-col-2">
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/whatsapp.png">
+                        <p>(41)99997676</p>
+                    </div>
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/facebook.png">
+                        <p>@novocomeco</p>
+                    </div>
                 </div>
             </div>
-        </footer>
+            <div class="img-footer-end">
+                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
+            </div>
+        </div>
+    </footer>
     <script src="../../js/header.js"></script>
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 </body>
+
 </html>

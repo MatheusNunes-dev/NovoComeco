@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="../../css/pagina-quero-doar.css">
     <title>Novo Começo</title>
 </head>
+
 <body>
     <header>
         <nav class="navbar nav-lg-screen" id="navbar">
@@ -113,7 +115,7 @@
             <div class="img-footer-start">
                 <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
             </div>
-    
+
             <div class="socias">
                 <div class="icons-col-1">
                     <div class="social-footer">
@@ -142,5 +144,17 @@
         </div>
     </footer>
     <script src="../../js/header.js"></script>
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 </body>
+
 </html>

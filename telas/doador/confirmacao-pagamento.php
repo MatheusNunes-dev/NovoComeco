@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="../../css/global.css">
     <link rel="stylesheet" href="../../css/confirmacao-pagamento.css">
 </head>
+
 <body>
     <header>
         <nav class="navbar nav-lg-screen" id="navbar">
@@ -46,7 +48,7 @@
         </nav>
     </header>
 
-    <main>   
+    <main>
         <div class="container">
             <div class="content">
                 <h1>Pagamento Confirmado!</h1><br>
@@ -56,14 +58,14 @@
             <a href="../telas/index.php" class="btn">Voltar para a página inicial</a>
         </div>
     </main>
-    
+
 
     <footer>
         <div class="footer">
             <div class="img-footer-start">
                 <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
             </div>
-    
+
             <div class="socias">
                 <div class="icons-col-1">
                     <div class="social-footer">
@@ -92,6 +94,18 @@
         </div>
     </footer>
 
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
     <script src="../../js/header.js"></script>
 </body>
+
 </html>

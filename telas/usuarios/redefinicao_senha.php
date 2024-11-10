@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="../../css/global.css">
     <link rel="stylesheet" href="../../css/mudar-senha.css">
 </head>
+
 <body>
     <header>
         <nav class="navbar nav-lg-screen" id="navbar">
@@ -57,7 +59,7 @@
                 </div>
                 <div class="input-group">
                     <label for="confirme-nova-senha">Confirme sua nova senha</label>
-                    <input type="text" id="confirme-nova-senha" name="confirme-nova-senha"  required aria-required="true">
+                    <input type="text" id="confirme-nova-senha" name="confirme-nova-senha" required aria-required="true">
                 </div>
                 <div class="action-buttons">
                     <button class="action-button">Cancelar</button>
@@ -101,5 +103,17 @@
     </footer>
 
     <script src="../../js/header.js"></script>
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 </body>
+
 </html>

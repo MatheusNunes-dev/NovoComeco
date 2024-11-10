@@ -1,35 +1,32 @@
 <?php
 include('../../conexao.php');
 
-if(isset($_POST['email']) || isset($_POST['senha'])){
-    if(strlen($_POST['email']) == 0){
+if (isset($_POST['email']) || isset($_POST['senha'])) {
+    if (strlen($_POST['email']) == 0) {
         echo "Preencha seu email";
-    }
-    else if(strlen($_POST['senha']) == 0){
+    } else if (strlen($_POST['senha']) == 0) {
         echo "Preencha sua senha";
-    }
-    else{
+    } else {
         $email = $mysqli->real_escape_string($_POST['email']);
         $senha = $mysqli->real_escape_string($_POST['senha']);
 
-        $sql_code = "SELECT * FROM doador where email = '$email' AND senha = '$senha'" ;
+        $sql_code = "SELECT * FROM doador where email = '$email' AND senha = '$senha'";
         $sql_query = $mysqli->query($sql_code) or die("Falha na execução!"  . $mysqli->error);
 
 
         $quantidade = $sql_query->num_rows;
-        if($quantidade == 1){
+        if ($quantidade == 1) {
             $usuario = $sql_query->fetch_assoc();
 
 
-            if(!isset($_SESSION)){
+            if (!isset($_SESSION)) {
                 session_start();
             }
 
             $_SESSION['id'] = $usuario['id'];
 
             header("Location: ../telas/administrador/home_admin.php");
-        }
-        else{
+        } else {
             echo "Falha ao logar! E-mail ou senha incorretos";
         }
     }
@@ -41,6 +38,7 @@ if(isset($_POST['email']) || isset($_POST['senha'])){
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,6 +47,7 @@ if(isset($_POST['email']) || isset($_POST['senha'])){
     <link rel="stylesheet" href="../../css/global.css">
     <link rel="stylesheet" href="../../css/login.css">
 </head>
+
 <body>
     <header>
         <nav class="navbar nav-lg-screen" id="navbar">
@@ -113,38 +112,50 @@ if(isset($_POST['email']) || isset($_POST['senha'])){
         </section>
     </main>
     </section>
-        <footer>
-            <div class="footer">
-                <div class="img-footer-start">
-                    <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
-                </div>
-                <div class="socias">
-                    <div class="icons-col-1">
-                        <div class="social-footer">
-                            <img class="icon-footer" src="../../assets/google.png">
-                            <p>novocomeço@gmail.com</p>
-                        </div>
-                        <div class="social-footer">
-                            <img class="icon-footer" src="../../assets/instagram.png">
-                            <p>@novocomeço</p>
-                        </div>
+    <footer>
+        <div class="footer">
+            <div class="img-footer-start">
+                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
+            </div>
+            <div class="socias">
+                <div class="icons-col-1">
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/google.png">
+                        <p>novocomeço@gmail.com</p>
                     </div>
-                    <div class="icons-col-2">
-                        <div class="social-footer">
-                            <img class="icon-footer" src="../../assets/whatsapp.png">
-                            <p>(41)99997676</p>
-                        </div>
-                        <div class="social-footer">
-                            <img class="icon-footer" src="../../assets/facebook.png">
-                            <p>@novocomeco</p>
-                        </div>
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/instagram.png">
+                        <p>@novocomeço</p>
                     </div>
                 </div>
-                <div class="img-footer-end">
-                    <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
+                <div class="icons-col-2">
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/whatsapp.png">
+                        <p>(41)99997676</p>
+                    </div>
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/facebook.png">
+                        <p>@novocomeco</p>
+                    </div>
                 </div>
             </div>
-        </footer>
+            <div class="img-footer-end">
+                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
+            </div>
+        </div>
+    </footer>
     <script src="../../js/header.js"></script>
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 </body>
+
 </html>
