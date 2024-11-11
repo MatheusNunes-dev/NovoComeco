@@ -56,11 +56,16 @@
                 <label for="ong">Nome da ONG:</label>
 
                 <select id="ong" name="ong" required>
-                    <option value="" disabled selected>Selecione a ONG</option>
                     <option value="ong1">ONG 1</option>
                     <option value="ong2">ONG 2</option>
                     <option value="ong3">ONG 3</option>
                     <option value="ong4">ONG 4</option>
+                    <option value="ong5">ONG 5</option>
+                    <option value="ong6">ONG 6</option>
+                    <option value="ong7">ONG 7</option>
+                    <option value="ong8">ONG 8</option>
+                    <option value="ong9">ONG 9</option>
+                    <option value="ong10">ONG 10</option>
                     <!-- Adicione mais opções de ONGs aqui -->
                 </select>
             </div>
@@ -69,14 +74,21 @@
                 <label for="valor">Valor (R$):</label>
                 <input type="number" id="valor" name="valor" placeholder="Digite o valor da doação (somente números)" required>
             </div>
+
+            <!-- Notas ajustadas para aparecerem abaixo do campo -->
             <p class="note">*Somente PIX</p>
-            <p class="note">* Min: R$5</p>
-            <div class="confirm-button" onclick="window.location.href='../doador/realizar-pagamento.php.'">
-                <p>Confirmar doação</p>
+            <p class="note">*Minimo: R$5</p>
+
+            <!-- Container dos botões confirm e cancel -->
+            <div class="button-container">
+                <div class="cancel-button" onclick="window.location.href='../usuarios/pagina-quero-doar.php'">
+                    <p>Cancelar doação</p>
+                </div>
+                <div class="confirm-button" onclick="window.location.href='../doador/realizar-pagamento.php.'">
+                    <p>Confirmar doação</p>
+                </div>
             </div>
-            <div class="cancel-button" onclick="window.location.href='../usuarios/pagina-quero-doar.php'">
-                <p>Cancelar doação</p>
-            </div>
+
         </section>
     </main>
 
