@@ -6,6 +6,14 @@ body {
     background-color: #FDF3C0;
 }
 
+.donation-box {
+    display: block;  /* Inicialmente, todas as caixas são exibidas */
+}
+
+.donation-box[data-ong] {
+    display: none;  /* Fica oculta até que o filtro seja aplicado */
+}
+
 .container {
     max-width: 1200px;
     margin: 20px auto;

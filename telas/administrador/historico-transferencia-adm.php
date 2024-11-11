@@ -51,45 +51,47 @@
         <h1 class="title">Histórico de Transferência</h1>
         <div class="filter-options">
             <select id="filter-ong">
-                <option value="all">Filtros</option>
+                <option value="all">Todas as ONGs</option> <!-- Nova opção -->
                 <option value="ong1">ONG 1</option>
                 <option value="ong2">ONG 2</option>
                 <option value="ong3">ONG 3</option>
             </select>
         </div>
-        <div class="donation-box">
+
+        <div class="donation-box" data-ong="ong1">
             <div class="circle">
-                <p>ONG: xxx</p>
+                <p>ONG 1</p>
             </div>
             <div class="donation-details">
-                <p>Doação para a ONG xxx</p>
-                <p>Data de doação: xx/xx/xxxx</p>
-                <p>Valor da doação: R$ xxx,xx</p>
+                <p>Doação para a ONG 1</p>
+                <p>Data de doação: 01/01/2024</p>
+                <p>Valor da doação: R$ 100,00</p>
             </div>
         </div>
 
-        <div class="donation-box">
+        <div class="donation-box" data-ong="ong2">
             <div class="circle">
-                <p>ONG: xxx</p>
+                <p>ONG 2</p>
             </div>
             <div class="donation-details">
-                <p>Doação para a ONG xxx</p>
-                <p>Data de doação: xx/xx/xxxx</p>
-                <p>Valor da doação: R$ xxx,xx</p>
+                <p>Doação para a ONG 2</p>
+                <p>Data de doação: 02/01/2024</p>
+                <p>Valor da doação: R$ 200,00</p>
             </div>
         </div>
 
-        <div class="donation-box">
+        <div class="donation-box" data-ong="ong3">
             <div class="circle">
-                <p>ONG: xxx</p>
+                <p>ONG 3</p>
             </div>
             <div class="donation-details">
-                <p>Doação para a ONG xxx</p>
-                <p>Data de doação: xx/xx/xxxx</p>
-                <p>Valor da doação: R$ xxx,xx</p>
+                <p>Doação para a ONG 3</p>
+                <p>Data de doação: 03/01/2024</p>
+                <p>Valor da doação: R$ 300,00</p>
             </div>
         </div>
     </div>
+
     <footer>
         <div class="footer">
             <div class="img-footer-start">
@@ -135,6 +137,7 @@
     </script>
 
     <script src="../../js/header.js"></script>
+    <script src="../../js/transferencia.js"></script>
 
 </body>
 

@@ -43,12 +43,15 @@
     </header>
 
     <main class="container">
-        <h1 class="donation-title">Realizar Doação</h1> <!-- Adiciona o título fora da donation-box -->
+        <h1 class="donation-title">Realizar Doação</h1> <!-- Título acima da donation-box -->
         <section class="donation-box">
-            <div class="ong-name">Nome da ONG</div>
+            <div class="ong-name">AMIGOS DO BEM</div>
             <div class="donation-image">
-                <img src="../assets/ong.jpg" alt="Imagem da ONG">
+                <img src="../../assets/imagem-ong-1.jpg" alt="Imagem da ONG">
             </div>
+            <p class="ong-description">
+                A ONG Amigos do Bem trabalha para transformar a vida de comunidades carentes no Brasil. Com projetos focados em educação, saúde e alimentação, a organização busca promover a inclusão social e oferecer oportunidades para um futuro melhor.
+            </p>
             <div class="input-box">
                 <p>Nome:</p>
             </div>

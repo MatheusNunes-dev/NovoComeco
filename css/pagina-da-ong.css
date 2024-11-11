@@ -32,6 +32,31 @@
     position: relative; /* Necessário para o posicionamento do texto acima da imagem */
 }
 
+.donation-title {
+    text-align: center; /* Centraliza o título */
+    font-size: 2rem; /* Ajuste o tamanho conforme necessário */
+    margin-bottom: 20px; /* Adiciona espaço abaixo do título */
+}
+
+.donation-box {
+    /* Outras propriedades da caixa */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+
+.ong-description {
+    font-size: 1.2vw;
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+    padding: 0 20px;
+    line-height: 1.6;
+}
+
+
 .ong-name {
     font-size: 2.5vw; /* Ajuste o tamanho da fonte */
     color: white; /* Cor do texto */

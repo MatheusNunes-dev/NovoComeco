@@ -48,8 +48,10 @@
         </nav>
     </header>
     <div class="container">
+        <h1 class="main-title">Criar Conta</h1>
+
         <section class="register-section">
-            <h1>Criar conta - Administrador</h1>
+            <h2 class="section-title">Administrador</h2>
             <p>Crie sua conta e ajude o próximo!</p>
             <form action="/register" method="POST">
                 <!-- Informações Pessoais -->
