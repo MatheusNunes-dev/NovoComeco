@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="../../css/global.css">
     <link rel="stylesheet" href="../../css/cadastrar.css">
 </head>
+
 <body>
     <header>
         <nav class="navbar nav-lg-screen" id="navbar">
@@ -48,81 +50,109 @@
     <div class="container">
         <section class="register-section">
             <h1>Criar conta</h1>
-            <p>Crie sua conta de administrador</p>
-            <form action="/admin/register" method="POST" class="admin-form">
+            <p>Crie sua conta e ajude o próximo!</p>
+            <form action="/register" method="POST">
+                <!-- Informações Pessoais -->
                 <div class="input-group">
-                    <input type="text" id="name" name="name" placeholder="Nome Completo" maxlength="100" required>
+                    <input type="text" id="codigo" name="codigo" placeholder="Código" required>
                 </div>
                 <div class="input-group">
-                    <input type="text" id="cpf" name="cpf" placeholder="CPF" maxlength="14" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" title="Digite um CPF válido"></div>
-                <div class="input-group">
-                    <input type="email" id="email" name="email" placeholder="Email" maxlength="100" required>
+                    <input type="text" id="name" name="name" placeholder="Nome Completo" required>
                 </div>
                 <div class="input-group">
-                    <input type="tel" id="telefone" name="telefone" placeholder="Telefone" maxlength="15" pattern="\(\d{2}\)\s?\d{4,5}-?\d{4}">
+                    <input type="email" id="email" name="email" placeholder="E-mail" required>
                 </div>
                 <div class="input-group">
-                    <input type="text" id="end_estado" name="end_estado" placeholder="Estado (UF)" maxlength="2" pattern="[A-Za-z]{2}" required>
+                    <input type="tel" id="phone" name="phone" placeholder="Telefone (XX-XXXXXXXXX)" required>
                 </div>
                 <div class="input-group">
-                    <input type="text" id="end_cidade" name="end_cidade" placeholder="Cidade" maxlength="50" required>
+                    <input type="text" id="cpf" name="cpf" placeholder="CPF (XXX.XXX.XXX-XX)" required>
+                </div>
+
+                <!-- Endereço -->
+                <div class="input-group">
+                    <input type="text" id="cep" name="cep" placeholder="CEP (XXXXX-XXX)" required maxlength="10">
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="estado" name="estado" placeholder="Estado" required readonly>
                 </div>
                 <div class="input-group">
-                    <input type="text" id="end_bairro" name="end_bairro" placeholder="Bairro" maxlength="50" required>
+                    <input type="text" id="cidade" name="cidade" placeholder="Cidade" required readonly>
                 </div>
                 <div class="input-group">
-                    <input type="text" id="end_rua" name="end_rua" placeholder="Rua" maxlength="100" required>
+                    <input type="text" id="bairro" name="bairro" placeholder="Bairro" required readonly>
                 </div>
                 <div class="input-group">
-                    <input type="text" id="end_numero" name="end_numero" placeholder="Número" maxlength="10" required>
+                    <input type="text" id="rua" name="rua" placeholder="Rua" required>
                 </div>
                 <div class="input-group">
-                    <input type="text" id="end_completento" name="end_completento" placeholder="Complemento" maxlength="50">
+                    <input type="text" id="numero" name="numero" placeholder="Número" required>
                 </div>
                 <div class="input-group">
-                    <input type="password" id="senha" name="senha" placeholder="Senha" minlength="8" required>
+                    <input type="text" id="complemento" name="complemento" placeholder="Complemento">
                 </div>
-                <div class="input-group">
-                    <input type="password" id="confirm_senha" name="confirm_senha" placeholder="Confirme a Senha" minlength="8" required>
+
+                <!-- Separação para senha -->
+                <div class="password-section">
+                    <div class="input-group">
+                        <input type="password" id="password" name="password" placeholder="Senha" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirmar Senha" required>
+                    </div>
                 </div>
+
                 <button type="submit" class="register-button">Criar conta</button>
             </form>
-
-
         </section>
     </div>
-        <footer>
-            <div class="footer">
-                <div class="img-footer-start">
-                    <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
-                </div>
-                <div class="socias">
-                    <div class="icons-col-1">
-                        <div class="social-footer">
-                            <img class="icon-footer" src="../../assets/google.png">
-                            <p>novocomeço@gmail.com</p>
-                        </div>
-                        <div class="social-footer">
-                            <img class="icon-footer" src="../../assets/instagram.png">
-                            <p>@novocomeço</p>
-                        </div>
+    <footer>
+        <div class="footer">
+            <div class="img-footer-start">
+                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
+            </div>
+            <div class="socias">
+                <div class="icons-col-1">
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/google.png">
+                        <p>novocomeço@gmail.com</p>
                     </div>
-                    <div class="icons-col-2">
-                        <div class="social-footer">
-                            <img class="icon-footer" src="../../assets/whatsapp.png">
-                            <p>(41)99997676</p>
-                        </div>
-                        <div class="social-footer">
-                            <img class="icon-footer" src="../../assets/facebook.png">
-                            <p>@novocomeco</p>
-                        </div>
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/instagram.png">
+                        <p>@novocomeço</p>
                     </div>
                 </div>
-                <div class="img-footer-end">
-                    <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
+                <div class="icons-col-2">
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/whatsapp.png">
+                        <p>(41)99997676</p>
+                    </div>
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/facebook.png">
+                        <p>@novocomeco</p>
+                    </div>
                 </div>
             </div>
-        </footer>
+            <div class="img-footer-end">
+                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
+            </div>
+        </div>
+    </footer>
     <script src="../../js/header.js"></script>
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+    <script src="../../js/cadastro-administrador.js"></script>
 </body>
-</html> 
+
+</html>

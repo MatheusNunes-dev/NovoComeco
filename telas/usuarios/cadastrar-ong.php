@@ -50,20 +50,19 @@
     <div class="container">
         <section class="register-section">
             <h1>Criar conta</h1>
-            <p>Cadastre sua ONG</p>
             <form action="/register" method="POST">
                 <!-- Informações Básicas -->
                 <div class="input-group">
-                    <input type="text" id="name" name="name" placeholder="Nome da Empresa" required>
+                    <input type="text" id="name" name="name" placeholder="Nome ONG" required>
                 </div>
                 <div class="input-group">
-                    <input type="text" id="cpf" name="cpf" placeholder="CNPJ" required>
+                    <input type="text" id="cnpj" name="cnpj" placeholder="CNPJ (XX.XXX.XXX/0001-XX)" required>
                 </div>
                 <div class="input-group">
-                    <input type="email" id="email" name="email" placeholder="Email" required>
+                    <input type="email" id="email" name="email" placeholder="E-mail" required>
                 </div>
                 <div class="input-group">
-                    <input type="tel" id="phone" name="phone" placeholder="Telefone" required>
+                    <input type="tel" id="phone" name="phone" placeholder="Telefone (XX-XXXXXXXXX)" required>
                 </div>
 
                 <!-- Documentos -->
@@ -78,6 +77,9 @@
                 </div>
 
                 <!-- Endereço -->
+                <div class="input-group">
+                    <input type="text" id="cep" name="cep" placeholder="CEP (XXXXX-XXX)" required maxlength="10">
+                </div>
                 <div class="input-group">
                     <input type="text" id="estado" name="estado" placeholder="Estado" required>
                 </div>
@@ -111,6 +113,9 @@
                 <!-- Senha - sempre por último -->
                 <div class="input-group">
                     <input type="password" id="password" name="password" placeholder="Senha" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirmar Senha" required>
                 </div>
 
                 <button type="submit" class="register-button">Criar conta</button>
@@ -162,6 +167,8 @@
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
+
+    <script src="../../js/cadastro-ong.js"></script>
 </body>
 
 </html>
