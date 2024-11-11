@@ -49,7 +49,7 @@
     </header>
     <div class="container">
         <section class="register-section">
-            <h1>Criar conta</h1>
+            <h1>Criar conta - Doador</h1>
             <p>Crie sua conta e ajude o próximo!</p>
             <form action="/register" method="POST">
                 <!-- Informações Pessoais -->

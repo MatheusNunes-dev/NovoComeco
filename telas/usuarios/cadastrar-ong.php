@@ -49,7 +49,7 @@
     </header>
     <div class="container">
         <section class="register-section">
-            <h1>Criar conta</h1>
+            <h1>Criar conta - ONG</h1>
             <form action="/register" method="POST">
                 <!-- Informações Básicas -->
                 <div class="input-group">
