@@ -7,7 +7,7 @@
     <title>Histórico de Transferencia</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/historicos.css">
+    <link rel="stylesheet" href="../../css/historico-transferencias.css">
 </head>
 
 <body>
@@ -48,49 +48,158 @@
         </nav>
     </header>
     <div class="container">
-        <h1 class="title">Histórico de Transferência</h1>
+        <h1 class="title">Histórico de doações</h1>
         <div class="filter-options">
             <select id="filter-ong">
-                <option value="all">Todas as ONGs</option> <!-- Nova opção -->
+                <option value="all">Mostrar todas as ONGs</option>
                 <option value="ong1">ONG 1</option>
                 <option value="ong2">ONG 2</option>
                 <option value="ong3">ONG 3</option>
+                <option value="ong4">ONG 4</option>
+                <option value="ong5">ONG 5</option>
+                <option value="ong6">ONG 6</option>
+                <option value="ong7">ONG 7</option>
+                <option value="ong8">ONG 8</option>
+                <option value="ong9">ONG 9</option>
+                <option value="ong10">ONG 10</option>
+                <option value="ong11">ONG 11</option>
+                <option value="ong12">ONG 12</option>
             </select>
+
+            <div class="date-filters">
+                <label for="start-date">De:</label>
+                <input type="date" id="start-date" placeholder="Data de Início">
+                <label for="end-date">Até:</label>
+                <input type="date" id="end-date" placeholder="Data de Término">
+                <button class="filter-btn" onclick="filterDonations()">Filtrar</button>
+            </div>
         </div>
 
-        <div class="donation-box" data-ong="ong1">
+        <!-- Boxes de Doação -->
+        <div class="donation-box" data-ong="ong1" data-date="2023-11-01">
             <div class="circle">
-                <p>ONG 1</p>
+                <p>ONG: xxx</p>
             </div>
             <div class="donation-details">
-                <p>Doação para a ONG 1</p>
-                <p>Data de doação: 01/01/2024</p>
+                <p>Doação para a ONG xxx</p>
+                <p>Data de doação: 01/11/2023</p>
                 <p>Valor da doação: R$ 100,00</p>
             </div>
         </div>
-
-        <div class="donation-box" data-ong="ong2">
+        <div class="donation-box" data-ong="ong2" data-date="2023-11-10">
             <div class="circle">
-                <p>ONG 2</p>
+                <p>ONG: yyy</p>
             </div>
             <div class="donation-details">
-                <p>Doação para a ONG 2</p>
-                <p>Data de doação: 02/01/2024</p>
+                <p>Doação para a ONG yyy</p>
+                <p>Data de doação: 10/11/2023</p>
+                <p>Valor da doação: R$ 150,00</p>
+            </div>
+        </div>
+        <div class="donation-box" data-ong="ong3" data-date="2023-11-15">
+            <div class="circle">
+                <p>ONG: zzz</p>
+            </div>
+            <div class="donation-details">
+                <p>Doação para a ONG zzz</p>
+                <p>Data de doação: 15/11/2023</p>
                 <p>Valor da doação: R$ 200,00</p>
             </div>
         </div>
-
-        <div class="donation-box" data-ong="ong3">
+        <!-- Novas ONGs -->
+        <div class="donation-box" data-ong="ong4" data-date="2023-11-20">
             <div class="circle">
-                <p>ONG 3</p>
+                <p>ONG: aaa</p>
             </div>
             <div class="donation-details">
-                <p>Doação para a ONG 3</p>
-                <p>Data de doação: 03/01/2024</p>
+                <p>Doação para a ONG aaa</p>
+                <p>Data de doação: 20/11/2023</p>
+                <p>Valor da doação: R$ 250,00</p>
+            </div>
+        </div>
+        <div class="donation-box" data-ong="ong5" data-date="2023-11-25">
+            <div class="circle">
+                <p>ONG: bbb</p>
+            </div>
+            <div class="donation-details">
+                <p>Doação para a ONG bbb</p>
+                <p>Data de doação: 25/11/2023</p>
                 <p>Valor da doação: R$ 300,00</p>
             </div>
         </div>
+        <div class="donation-box" data-ong="ong6" data-date="2023-11-30">
+            <div class="circle">
+                <p>ONG: ccc</p>
+            </div>
+            <div class="donation-details">
+                <p>Doação para a ONG ccc</p>
+                <p>Data de doação: 30/11/2023</p>
+                <p>Valor da doação: R$ 350,00</p>
+            </div>
+        </div>
+        <div class="donation-box" data-ong="ong7" data-date="2023-12-01">
+            <div class="circle">
+                <p>ONG: ddd</p>
+            </div>
+            <div class="donation-details">
+                <p>Doação para a ONG ddd</p>
+                <p>Data de doação: 01/12/2023</p>
+                <p>Valor da doação: R$ 400,00</p>
+            </div>
+        </div>
+        <div class="donation-box" data-ong="ong8" data-date="2023-12-05">
+            <div class="circle">
+                <p>ONG: eee</p>
+            </div>
+            <div class="donation-details">
+                <p>Doação para a ONG eee</p>
+                <p>Data de doação: 05/12/2023</p>
+                <p>Valor da doação: R$ 450,00</p>
+            </div>
+        </div>
+        <div class="donation-box" data-ong="ong9" data-date="2023-12-10">
+            <div class="circle">
+                <p>ONG: fff</p>
+            </div>
+            <div class="donation-details">
+                <p>Doação para a ONG fff</p>
+                <p>Data de doação: 10/12/2023</p>
+                <p>Valor da doação: R$ 500,00</p>
+            </div>
+        </div>
+        <div class="donation-box" data-ong="ong10" data-date="2023-12-15">
+            <div class="circle">
+                <p>ONG: ggg</p>
+            </div>
+            <div class="donation-details">
+                <p>Doação para a ONG ggg</p>
+                <p>Data de doação: 15/12/2023</p>
+                <p>Valor da doação: R$ 550,00</p>
+            </div>
+        </div>
+        <div class="donation-box" data-ong="ong11" data-date="2023-12-20">
+            <div class="circle">
+                <p>ONG: hhh</p>
+            </div>
+            <div class="donation-details">
+                <p>Doação para a ONG hhh</p>
+                <p>Data de doação: 20/12/2023</p>
+                <p>Valor da doação: R$ 600,00</p>
+            </div>
+        </div>
+        <div class="donation-box" data-ong="ong12" data-date="2023-12-25">
+            <div class="circle">
+                <p>ONG: iii</p>
+            </div>
+            <div class="donation-details">
+                <p>Doação para a ONG iii</p>
+                <p>Data de doação: 25/12/2023</p>
+                <p>Valor da doação: R$ 650,00</p>
+            </div>
+        </div>
     </div>
+
+
 
     <footer>
         <div class="footer">

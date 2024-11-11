@@ -1,4 +1,7 @@
+// Filtro por ONG
 document.getElementById('filter-ong').addEventListener('change', filterDonations);
+
+// Filtro por data
 document.getElementById('start-date').addEventListener('change', filterDonations);
 document.getElementById('end-date').addEventListener('change', filterDonations);
 
@@ -18,11 +21,11 @@ function filterDonations() {
             show = false;
         }
 
-        // Filtra por data de início e término
-        if (startDate && new Date(donationDate) < new Date(startDate)) {
+        // Filtra por data
+        if (show && startDate && new Date(donationDate) < new Date(startDate)) {
             show = false;
         }
-        if (endDate && new Date(donationDate) > new Date(endDate)) {
+        if (show && endDate && new Date(donationDate) > new Date(endDate)) {
             show = false;
         }
 

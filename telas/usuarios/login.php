@@ -1,39 +1,49 @@
 <?php
 include('../../conexao.php');
 
-if (isset($_POST['email']) || isset($_POST['senha'])) {
-    if (strlen($_POST['email']) == 0) {
+// Iniciar a sessão
+session_start();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Verifica se o formulário foi enviado via POST
+    $email = isset($_POST['email']) ? $_POST['email'] : '';
+    $senha = isset($_POST['senha']) ? $_POST['senha'] : '';
+
+    // Validação de campos obrigatórios
+    if (empty($email)) {
         echo "Preencha seu email";
-    } else if (strlen($_POST['senha']) == 0) {
+    } else if (empty($senha)) {
         echo "Preencha sua senha";
     } else {
-        $email = $mysqli->real_escape_string($_POST['email']);
-        $senha = $mysqli->real_escape_string($_POST['senha']);
+        // Escape para evitar SQL Injection
+        $email = $mysqli->real_escape_string($email);
+        $senha = $mysqli->real_escape_string($senha);
 
-        $sql_code = "SELECT * FROM doador where email = '$email' AND senha = '$senha'";
-        $sql_query = $mysqli->query($sql_code) or die("Falha na execução!"  . $mysqli->error);
+        // Verifica o banco de dados
+        $sql_code = "SELECT * FROM doador WHERE email = '$email'";
+        $sql_query = $mysqli->query($sql_code);
 
+        // Se a consulta falhar, mostra erro
+        if (!$sql_query) {
+            die("Falha na execução da consulta: " . $mysqli->error);
+        }
 
         $quantidade = $sql_query->num_rows;
         if ($quantidade == 1) {
             $usuario = $sql_query->fetch_assoc();
 
-
-            if (!isset($_SESSION)) {
-                session_start();
+            // Verificar se a senha está correta (usando password_verify)
+            if (password_verify($senha, $usuario['senha'])) {
+                $_SESSION['id'] = $usuario['id']; // Salva o ID do usuário na sessão
+                header("Location: ../telas/administrador/home_admin.php"); // Redireciona para a página de administração
+                exit();
+            } else {
+                echo "Falha ao logar! E-mail ou senha incorretos";
             }
-
-            $_SESSION['id'] = $usuario['id'];
-
-            header("Location: ../telas/administrador/home_admin.php");
         } else {
             echo "Falha ao logar! E-mail ou senha incorretos";
         }
     }
 }
-
-
-
 ?>
 
 <!DOCTYPE html>

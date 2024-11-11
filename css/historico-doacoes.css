@@ -6,6 +6,62 @@ body {
     background-color: #FDF3C0;
 }
 
+    /* Container de filtros alinhado lado a lado */
+    .filter-options {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        /* Espaçamento entre os filtros */
+        margin-bottom: 20px;
+    }
+
+    .filter-options select,
+    .filter-options .date-filters {
+        display: flex;
+        gap: 10px;
+        /* Espaçamento entre o botão e os campos de data */
+        align-items: center;
+    }
+
+    .date-filters label {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .date-filters input {
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        width: 150px;
+        font-size: 14px;
+        color: #333;
+        transition: all 0.3s;
+    }
+
+    .date-filters input:focus {
+        border-color: #007BFF;
+        outline: none;
+    }
+
+    .date-filters input::placeholder {
+        color: #aaa;
+    }
+
+    .filter-btn {
+        padding: 10px 20px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s;
+    }
+
+    .filter-btn:hover {
+        background-color: #0056b3;
+    }
+
 .donation-box {
     display: block;  /* Inicialmente, todas as caixas são exibidas */
 }

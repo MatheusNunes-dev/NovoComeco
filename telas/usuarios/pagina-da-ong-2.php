@@ -7,7 +7,7 @@
     <title>Doação ONG</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/pagina-da-ong.css">
+    <link rel="stylesheet" href="../../css/pagina-da-ong-2.css">
 </head>
 
 <body>
@@ -44,22 +44,37 @@
 
     <main class="container">
         <section class="donation-box">
-            <div class="ong-name">Nome da ONG</div>
+            <h1 class="ong-name">Realizar Doação</h1> <!-- O título fora da donation-box -->
             <div class="donation-image">
-                <img src="../assets/ong.jpg" alt="Imagem da ONG">
+                <img src="../../assets/imagem-ong-1.jpg" alt="Imagem da ONG">
             </div>
+            <div class="ong-description-box">
+                <p>A ONG realiza várias atividades focadas no bem-estar social, educação e saúde da comunidade. A missão é melhorar as condições de vida das pessoas em situação de vulnerabilidade.</p>
+            </div>
+
             <div class="input-box">
-                <p>Nome:</p>
+                <label for="ong">Nome da ONG:</label>
+
+                <select id="ong" name="ong" required>
+                    <option value="" disabled selected>Selecione a ONG</option>
+                    <option value="ong1">ONG 1</option>
+                    <option value="ong2">ONG 2</option>
+                    <option value="ong3">ONG 3</option>
+                    <option value="ong4">ONG 4</option>
+                    <!-- Adicione mais opções de ONGs aqui -->
+                </select>
             </div>
+
             <div class="input-box">
                 <label for="valor">Valor (R$):</label>
-                <input type="number" id="valor" name="valor" placeholder="Digite o valor da doação" required>
+                <input type="number" id="valor" name="valor" placeholder="Digite o valor da doação (somente números)" required>
             </div>
             <p class="note">*Somente PIX</p>
-            <div class="confirm-button" onclick="window.location.href='confirmar_pagamento.html'">
+            <p class="note">* Min: R$5</p>
+            <div class="confirm-button" onclick="window.location.href='../doador/realizar-pagamento.php.'">
                 <p>Confirmar doação</p>
             </div>
-            <div class="cancel-button" onclick="window.location.href='queroDoar.html'">
+            <div class="cancel-button" onclick="window.location.href='../usuarios/pagina-quero-doar.php'">
                 <p>Cancelar doação</p>
             </div>
         </section>

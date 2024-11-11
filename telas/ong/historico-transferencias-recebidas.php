@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Histórico de Transferencia</title>
-    <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
+    <title>Histórico de Transferência</title>
+    <link rel="shortcut icon" href="../../assets/logo.png" type="image/png">
     <link rel="stylesheet" href="../../css/global.css">
     <link rel="stylesheet" href="../../css/historicos.css">
 </head>
+
 <body>
     <header>
         <nav class="navbar nav-lg-screen" id="navbar">
@@ -46,15 +48,26 @@
         </nav>
     </header>
     <div class="container">
-        <h1 class="title">Histórico de Transferência Recebidas  </h1>
+        <h1 class="title">Histórico de Transferência Recebidas</h1>
         <div class="filter-options">
+            <!-- Filtro de ONG -->
             <select id="filter-ong">
-            <option value="all">Filtros</option>
-            <option value="ong1">ONG 1</option>
-            <option value="ong2">ONG 2</option>
-            <option value="ong3">ONG 3</option>
+                <option value="all">Filtros</option>
+                <option value="ong1">ONG 1</option>
+                <option value="ong2">ONG 2</option>
+                <option value="ong3">ONG 3</option>
             </select>
+
+            <!-- Filtro de Data -->
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <label for="start-date">De:</label>
+                <input type="date" id="start-date">
+                <label for="end-date">Até:</label>
+                <input type="date" id="end-date">
+            </div>
         </div>
+
+        <!-- Exemplo de histórico de doações -->
         <div class="donation-box">
             <div class="circle">
                 <p>ONG: xxx</p>
@@ -65,7 +78,7 @@
                 <p>Valor da doação: R$ xxx,xx</p>
             </div>
         </div>
-    
+
         <div class="donation-box">
             <div class="circle">
                 <p>ONG: xxx</p>
@@ -122,4 +135,5 @@
     </footer>
     <script src="../../js/header.js"></script>
 </body>
+
 </html>
