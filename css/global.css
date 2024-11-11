@@ -354,7 +354,7 @@ header {
     }
 
     .nav-links ul {
-        color: #BF8F47C2;
+        color: #FFA114;
         display: flex;
         margin: 0 1rem; 
         font-size: 1.5rem;
@@ -371,7 +371,7 @@ header {
 
     .nav-link a{
         padding: 0 1rem;
-        color: #BF8F47C2;
+        color: #FFA114;
     }
 
     .user{

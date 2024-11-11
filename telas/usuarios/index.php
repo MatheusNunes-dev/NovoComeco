@@ -1,5 +1,5 @@
 <?php
-include('../../protect.php');
+include('g../protect.php');
 
 
 ?>
