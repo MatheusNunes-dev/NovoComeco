@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Verifica se o formulário foi en
                 </div>
 
                 <div class="secondary-action">
-                    <a href="../telas/alterar-senha-doador.php" class="esqueci-senha">
+                    <a href="../usuarios/alterar-senha.php" class="esqueci-senha">
                         Esqueci minha senha
                     </a>
                 </div>

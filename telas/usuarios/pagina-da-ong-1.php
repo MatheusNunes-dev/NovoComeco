@@ -7,7 +7,7 @@
     <title>Doação ONG</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/pagina-da-ong.css">
+    <link rel="stylesheet" href="../../css/pagina-da-ong-2.css">
 </head>
 
 <body>
@@ -43,29 +43,52 @@
     </header>
 
     <main class="container">
-        <h1 class="donation-title">Realizar Doação</h1> <!-- O título fora da donation-box -->
         <section class="donation-box">
-            <div class="ong-name">AMIGOS DO BEM</div>
+            <h1 class="ong-name">Realizar Doação</h1> <!-- O título fora da donation-box -->
             <div class="donation-image">
                 <img src="../../assets/imagem-ong-1.jpg" alt="Imagem da ONG">
             </div>
-            <p class="ong-description">
-                A ONG Amigos do Bem trabalha para transformar a vida de comunidades carentes no Brasil. Com projetos focados em educação, saúde e alimentação, a organização busca promover a inclusão social e oferecer oportunidades para um futuro melhor.
-            </p>
-            <div class="input-box">
-                <p>Nome:</p>
+            <div class="ong-description-box">
+                <p>A ONG realiza várias atividades focadas no bem-estar social, educação e saúde da comunidade. A missão é melhorar as condições de vida das pessoas em situação de vulnerabilidade.</p>
             </div>
+
+            <div class="input-box">
+                <label for="ong">Nome da ONG:</label>
+
+                <select id="ong" name="ong" required>
+                    <option value="ong1">ONG 1</option>
+                    <option value="ong2">ONG 2</option>
+                    <option value="ong3">ONG 3</option>
+                    <option value="ong4">ONG 4</option>
+                    <option value="ong5">ONG 5</option>
+                    <option value="ong6">ONG 6</option>
+                    <option value="ong7">ONG 7</option>
+                    <option value="ong8">ONG 8</option>
+                    <option value="ong9">ONG 9</option>
+                    <option value="ong10">ONG 10</option>
+                    <!-- Adicione mais opções de ONGs aqui -->
+                </select>
+            </div>
+
             <div class="input-box">
                 <label for="valor">Valor (R$):</label>
-                <input type="number" id="valor" name="valor" placeholder="Digite o valor da doação" required>
+                <input type="number" id="valor" name="valor" placeholder="Digite o valor da doação (somente números)" required>
             </div>
+
+            <!-- Notas ajustadas para aparecerem abaixo do campo -->
             <p class="note">*Somente PIX</p>
-            <div class="confirm-button" onclick="window.location.href='confirmar_pagamento.html'">
-                <p>Confirmar doação</p>
+            <p class="note">*Minimo: R$5</p>
+
+            <!-- Container dos botões confirm e cancel -->
+            <div class="button-container">
+                <div class="cancel-button" onclick="window.location.href='../usuarios/pagina-quero-doar.php'">
+                    <p>Cancelar doação</p>
+                </div>
+                <div class="confirm-button" onclick="window.location.href='../doador/realizar-pagamento.php.'">
+                    <p>Confirmar doação</p>
+                </div>
             </div>
-            <div class="cancel-button" onclick="window.location.href='queroDoar.html'">
-                <p>Cancelar doação</p>
-            </div>
+
         </section>
     </main>
 

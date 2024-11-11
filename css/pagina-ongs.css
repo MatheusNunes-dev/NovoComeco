@@ -2,6 +2,7 @@
 main {
     margin: 2rem 2rem;
 }
+
 /* Estilo do banner */
 .banner {
     display: flex;
@@ -15,8 +16,6 @@ main {
     object-fit: cover; /* Garante que a imagem se ajuste sem distorcer */
     border-radius: 10px; /* Bordas arredondadas */
 }
-
-
 
 /* Estilo da grid de ONGs */
 .grid-ongs {
