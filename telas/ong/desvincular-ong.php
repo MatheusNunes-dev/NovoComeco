@@ -7,7 +7,7 @@
     <title>Excluir</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/exclusao.css">
+    <link rel="stylesheet" href="../../css/desvincular.css">
 </head>
 
 <body>
@@ -48,7 +48,7 @@
         </nav>
     </header>
     <div class="container">
-        <h1 class="desvincular-title">Desvincular ONG</h1>
+        <h1 class="title">Desvincular ONG</h1>
         <div class="content-box">
             <p>
                 Você está prestes a desvincular permanentemente a sua ONG do nosso sistema.

@@ -1,3 +1,10 @@
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Garante que o body ocupe 100% da altura da janela */
+}
+
 main {
     background: white;
     padding: 2.5rem;
@@ -6,7 +13,7 @@ main {
     width: 90%;
     max-width: 500px;
     margin: 2rem auto;
-    /* Centraliza horizontalmente e adiciona espaço vertical */
+    flex: 1; /* Faz com que o main ocupe o espaço disponível */
 }
 
 .title {

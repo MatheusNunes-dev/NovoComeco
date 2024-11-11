@@ -18,14 +18,16 @@ footer {
     margin-top: auto; /* Isso vai empurrar o footer para o final da página */
 }
 
-h1.desvincular-title {
+.title {
     text-align: center;
     color: #333;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
+    font-size: 3rem;
+    margin-bottom: 2rem;
     position: absolute;
-    top: 10%; /* Coloca o título um pouco abaixo do topo */
+    top: 20%; /* Coloca o título um pouco abaixo do topo */
     width: 100%;
+    text-align: center;
+    color: #FFA114;
 }
 
 .content-box {
@@ -39,7 +41,6 @@ h1.desvincular-title {
 }
 
 p {
-    color: #666;
     line-height: 1.6;
     margin-bottom: 1rem;
 }
@@ -59,16 +60,17 @@ button:hover {
 }
 
 .container .content-box .cancel-button {
-    background-color: #FFA114;
-    color: #333;
-    border: 2px solid #FF8C00; /* Borda contrastante */
+    background-color: #6c757d; /* Cor de fundo cinza */
+    color: white; /* Cor do texto em branco */
+    border: 2px solid #5a6268; /* Borda cinza mais escura */
 }
 
 .cancel-button:hover {
-    background-color: #FF8C00;
+    background-color: #5a6268; /* Cor de fundo mais escura no hover */
     transform: translateY(-4px); /* Efeito de elevação ao passar o mouse */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
 }
+
 
 .confirm-button {
     background-color: #dc3545;
