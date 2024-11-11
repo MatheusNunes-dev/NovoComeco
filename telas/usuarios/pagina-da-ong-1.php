@@ -43,6 +43,7 @@
     </header>
 
     <main class="container">
+        <h1 class="donation-title">Realizar Doação</h1> <!-- Adiciona o título fora da donation-box -->
         <section class="donation-box">
             <div class="ong-name">Nome da ONG</div>
             <div class="donation-image">
