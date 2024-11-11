@@ -35,8 +35,10 @@
 .donation-title {
     text-align: center; /* Centraliza o título */
     font-size: 2rem; /* Ajuste o tamanho conforme necessário */
-    margin-bottom: 20px; /* Adiciona espaço abaixo do título */
+    margin-bottom: 30px; /* Aumenta o espaço abaixo do título */
+    margin-top: 20px; /* Espaço acima do título */
 }
+
 
 .donation-box {
     /* Outras propriedades da caixa */

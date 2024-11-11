@@ -1,5 +1,11 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Faz com que o body ocupe toda a altura da tela */
+}
+
 .container {
-    padding: 0;
+    flex: 1; /* Isso garante que o conteúdo principal ocupe o espaço disponível */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,6 +13,11 @@
     margin-top: 5rem;
     margin-bottom: 12rem;
 }
+
+footer {
+    margin-top: auto; /* Isso vai empurrar o footer para o final da página */
+}
+
 
 .content-box {
     background: white;
