@@ -66,8 +66,8 @@
 
         <!-- Ações do Usuário -->
         <div class="action-buttons">
-            <button class="action-button" onclick="window.location.href='alterar-senha-ong.html'">Mudar Senha</button>
-            <button class="action-button" onclick="window.location.href='infidelizacao-ong.html'">Excluir ONG</button>
+            <button class="action-button" onclick="window.location.href='../usuarios/redefinicao_senha.php'">Redefinir Senha</button>
+            <button class="action-button" onclick="window.location.href='desvincular-ong.php'">Desvincular ONG</button>
         </div>
     </main>
 

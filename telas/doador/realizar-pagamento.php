@@ -62,7 +62,7 @@
                 <p>Chave Aleatória: dcta478j-196l-03fm-t6gh-4298er7845m2</p>
             </div>
         </div>
-        <div class="home-button" onclick="window.location.href=index.html">
+        <div class="home-button" onclick="window.location.href='../usuarios/pagina-quero-doar.php'">
             <p>Voltar</p>
         </div>
     </div>

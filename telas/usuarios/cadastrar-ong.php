@@ -50,7 +50,7 @@
     <div class="container">
         <section class="register-section">
             <h1>Criar conta</h1>
-            <p>Use o seu email para se registrar sua ONG</p>
+            <p>Cadastre sua ONG</p>
             <form action="/register" method="POST">
                 <!-- Informações Básicas -->
                 <div class="input-group">

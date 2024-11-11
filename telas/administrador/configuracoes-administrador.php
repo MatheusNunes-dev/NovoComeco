@@ -66,8 +66,8 @@
 
         <!-- Ações do Usuário -->
         <div class="action-buttons">
-            <button class="action-button" onclick="window.location.href='alterar-senha-doador.html'">Alterar Senha</button>
-            <button class="action-button" onclick="window.location.href='historico-transferencia-adm.html'">Histórico Transferências</button>
+            <button class="action-button" onclick="window.location.href='../usuarios/redefinicao_senha.php'">Alterar Senha</button>
+            <button class="action-button" onclick="window.location.href='historico-transferencia-adm.php'">Histórico Transferências</button>
         </div>
     </main>
 

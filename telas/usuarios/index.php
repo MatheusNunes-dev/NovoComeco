@@ -128,7 +128,7 @@ include('g../protect.php');
     <footer>
         <div class="footer">
             <div class="img-footer-start">
-                <img class="boneco-footer" class="img-footer" <script src="../../js/header.js"></script>>
+                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
             </div>
             <div class="socias">
                 <div class="icons-col-1">

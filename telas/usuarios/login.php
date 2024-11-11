@@ -91,22 +91,33 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
             <form action="" method="POST">
                 <div class="input-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email"
-                        placeholder="Digite seu email" required>
+                    <input type="email" id="email" name="email" placeholder="Digite seu email" required>
                 </div>
+
                 <div class="input-group">
                     <label for="password">Senha</label>
-                    <input type="password" id="password" name="senha" placeholder="Digite sua senha"
-                        required>
+                    <input type="password" id="password" name="senha" placeholder="Digite sua senha" required>
                 </div>
+
                 <div class="secondary-action">
-                    <a href="../telas/alterar-senha-doador.php" class="esqueci-senha">Esqueci minha senha</a>
+                    <a href="../telas/alterar-senha-doador.php" class="esqueci-senha">
+                        Esqueci minha senha
+                    </a>
                 </div>
+
                 <div class="action-buttons">
-                    <button type="submit" class="action-button">Entrar</button>
+                    <button type="submit" class="action-button">
+                        Entrar
+                    </button>
                 </div>
+
                 <div class="secondary-action div-cadastrar">
-                    <a>Nao Tem Uma Conta? <span class="cadastrar">Cadastrar-se</span></a>
+                    <p>Não Tem Uma Conta? Cadastrar-se como:</p>
+                    <div class="opcoes-cadastro">
+                        <a href="cadastrar-administrador.php">Administrador</a>
+                        <a href="cadastrar-doador.php">Doador</a>
+                        <a href="cadastrar-ong.php">ONG</a>
+                    </div>
                 </div>
             </form>
         </section>

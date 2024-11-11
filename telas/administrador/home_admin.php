@@ -38,7 +38,6 @@
                     <li class="nav-link"><a href="../../telas/usuarios/index.php">HOME</a></li>
                     <li class="nav-link"><a href="../../telas/usuarios/pagina-quero-doar.php">ONG'S</a></li>
                     <li class="nav-link"><a href="../../telas/usuarios/sobre.php">SOBRE</a></li>
-                    <li class="nav-link"><a href="../../telas/usuarios/contato.php">CONTATO</a></li>
                 </ul>
             </div>
             <div class="user">
@@ -119,7 +118,7 @@
     <footer>
         <div class="footer">
             <div class="img-footer-start">
-                <img class="boneco-footer" class="img-footer" <script src="../../js/header.js"></script>>
+                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
             </div>
             <div class="socias">
                 <div class="icons-col-1">
