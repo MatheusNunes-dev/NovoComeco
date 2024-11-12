@@ -53,7 +53,7 @@
         <section class="register-section">
             <h2 class="section-title">ONG</h2>
             <p>Crie sua conta e ajude o próximo!</p>
-            <form action="/register" method="POST">
+            <form action="/register-ong.php" method="POST">
                 <!-- Informações Básicas -->
                 <div class="input-group">
                     <input type="text" id="name" name="name" placeholder="Nome ONG" required>

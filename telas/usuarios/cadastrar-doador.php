@@ -53,7 +53,7 @@
         <section class="register-section">
             <h2 class="section-title">Doador</h2>
             <p>Crie sua conta e ajude o próximo!</p>
-            <form action="/register" method="POST">
+            <form action="/register-doador.php" method="POST">
                 <!-- Informações Pessoais -->
                 <div class="input-group">
                     <input type="text" id="name" name="name" placeholder="Nome Completo" required>

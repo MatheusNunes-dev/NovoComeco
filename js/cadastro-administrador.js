@@ -87,3 +87,5 @@
     document.getElementById('cep').addEventListener('input', validarSomenteNumeros);
     document.getElementById('name').addEventListener('input', validarNome);
     document.getElementById('numero').addEventListener('input', validarSomenteNumeros);
+
+    

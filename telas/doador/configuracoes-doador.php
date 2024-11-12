@@ -1,3 +1,13 @@
+<?php
+session_start(); // Inicia a sessão
+
+// Verifica se a variável de sessão 'is_doador' está setada e é verdadeira
+if (!isset($_SESSION['is_doador']) || $_SESSION['is_doador'] !== true) {
+    // Se não for doador, redireciona para a página de login
+    header('Location: login.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
