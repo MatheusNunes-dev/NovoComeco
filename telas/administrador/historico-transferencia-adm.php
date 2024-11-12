@@ -24,6 +24,10 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
 </head>
 
 <body>
+    <div id="error-message" class="error-message" style="display:none;">
+        <p id="error-text"></p>
+    </div>
+
     <header>
         <nav class="navbar nav-lg-screen" id="navbar">
             <button class="btn-icon-header" onclick="toggleSideBar()">
@@ -262,5 +266,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
     <script src="../../js/transferencia.js"></script>
 
 </body>
+
+
 
 </html>
