@@ -21,6 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['is_doador'] = true;
 
     // Redireciona para a página restrita do doador
-    header('Location: pagina-doador.php');
+    header('Location: telas/doador/configuracoes-doador.php');
     exit;
 }

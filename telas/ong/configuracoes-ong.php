@@ -78,6 +78,7 @@ if (!isset($_SESSION['is_ong']) || $_SESSION['is_ong'] !== true) {
         <div class="action-buttons">
             <button class="action-button" onclick="window.location.href='../usuarios/redefinicao_senha.php'">Redefinir Senha</button>
             <button class="action-button" onclick="window.location.href='desvincular-ong.php'">Desvincular ONG</button>
+            <button class="action-button" onclick="window.location.href='../../logout.php'">Logout</button>
         </div>
     </main>
 

@@ -79,6 +79,7 @@ if (!isset($_SESSION['is_doador']) || $_SESSION['is_doador'] !== true) {
             <button class="action-button" onclick="window.location.href='../usuarios/redefinicao_senha.php'">Alterar Senha</button>
             <button class="action-button" onclick="window.location.href='excluir-conta.php'">Excluir Conta</button>
             <button class="action-button" onclick="window.location.href='historico-doacao-doador.php'">Histórico Doações</button>
+            <button class="action-button" onclick="window.location.href='../../logout.php'">Logout</button>
         </div>
     </main>
 

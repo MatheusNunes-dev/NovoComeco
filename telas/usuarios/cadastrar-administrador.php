@@ -212,4 +212,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="../../js/cadastro-administrador.js"></script>
 </body>
 
+<?php
+// Para exibir uma mensagem de sucesso
+if (isset($_SESSION['admin_nome'])) {
+    echo "<p>Administrador " . $_SESSION['admin_nome'] . " cadastrado com sucesso!</p>";
+}
+?>
+
 </html>

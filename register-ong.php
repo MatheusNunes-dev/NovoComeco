@@ -21,6 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['is_ong'] = true;
 
     // Redireciona para a página restrita da ONG
-    header('Location: pagina-ong.php');
+    header('Location: telas/ong/configuracoes-ong.php');
     exit;
 }
