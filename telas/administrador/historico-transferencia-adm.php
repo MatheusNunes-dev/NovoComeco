@@ -20,13 +20,18 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
     <title>Histórico de Transferencia</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/historico-transferencias.css">
+    <link rel="stylesheet" href="../../css/historico-transferenciass.css">
 </head>
 
 <body>
     <div id="error-message" class="error-message" style="display:none;">
-        <p id="error-text"></p>
+        <div class="error-popup">
+            <button class="close-btn" onclick="closeError()">×</button> <!-- Botão de fechar -->
+            <p id="error-text"></p>
+        </div>
     </div>
+
+
 
     <header>
         <nav class="navbar nav-lg-screen" id="navbar">
@@ -264,6 +269,59 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
 
     <script src="../../js/header.js"></script>
     <script src="../../js/transferencia.js"></script>
+
+    <script>
+        function filterDonations() {
+            // Pega as datas selecionadas no formulário
+            var startDate = document.getElementById('start-date').value;
+            var endDate = document.getElementById('end-date').value;
+
+            // Verifica se a data de início é maior que a data de término
+            if (startDate && endDate && new Date(startDate) > new Date(endDate)) {
+                // Mostra o erro se a data de início for maior que a data de término
+                showError("A data de início não pode ser maior que a data de término.");
+                return; // Impede o restante da função de ser executado
+            }
+
+            var selectedOng = document.getElementById('filter-ong').value;
+            var donationBoxes = document.querySelectorAll('.donation-box');
+            var filtered = false;
+
+            donationBoxes.forEach(function(box) {
+                var boxOng = box.getAttribute('data-ong');
+                var boxDate = box.getAttribute('data-date');
+
+                // Lógica de filtro
+                if ((selectedOng === 'all' || boxOng === selectedOng) &&
+                    (startDate === '' || boxDate >= startDate) &&
+                    (endDate === '' || boxDate <= endDate)) {
+                    box.style.display = 'block'; // Exibe a doação
+                    filtered = true;
+                } else {
+                    box.style.display = 'none'; // Oculta a doação
+                }
+            });
+
+            // Se não houver doações após o filtro
+            if (!filtered) {
+                showError("Nenhuma doação encontrada com os critérios selecionados.");
+            }
+        }
+
+        // Função para mostrar o pop-up de erro
+        function showError(message) {
+            // Atualiza o texto do erro
+            document.getElementById('error-text').textContent = message;
+
+            // Exibe o pop-up
+            document.getElementById('error-message').style.display = 'block';
+        }
+
+        // Função para fechar o pop-up de erro
+        function closeError() {
+            document.getElementById('error-message').style.display = 'none';
+        }
+    </script>
 
 </body>
 

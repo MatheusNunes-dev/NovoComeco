@@ -7,7 +7,57 @@
     <title>Login - Novo Começo</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/login.css">
+    <link rel="stylesheet" href="../../css/login-geral.css">
+    <style>
+        /* O Modal */
+        .modal {
+            display: none;
+            /* Esconde o modal por padrão */
+            position: fixed;
+            z-index: 1;
+            /* Fica sobre o conteúdo */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Fundo semitransparente */
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* O conteúdo do Modal */
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            border-radius: 10px;
+            position: relative;
+            /* Necessário para posicionar o "X" */
+        }
+
+        /* O botão de fechar */
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-family: sans-serif;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -50,7 +100,7 @@
     <main>
         <h1 class="title">Login</h1>
         <section class="login">
-            <form action="../../login.php" method="POST">
+            <form action="../../login.php" method="POST" onsubmit="handleLoginError(); return false;">
                 <div class="input-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" placeholder="Digite seu email" required>
@@ -84,7 +134,16 @@
             </form>
         </section>
     </main>
-    </section>
+
+    <!-- Modal de erro -->
+    <div id="errorModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Erro</h2>
+            <p id="errorMessage">Ocorreu um erro! Tente novamente.</p>
+        </div>
+    </div>
+
     <footer>
         <div class="footer">
             <div class="img-footer-start">
@@ -117,7 +176,9 @@
             </div>
         </div>
     </footer>
+
     <script src="../../js/header.js"></script>
+    <script src="../../js/login.js"></script>
 
     <div vw class="enabled">
         <div vw-access-button class="active"></div>
@@ -130,7 +191,24 @@
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
 
-    <script src="../../js/login.js"></script>
+    <script>
+        // Função para abrir o modal e exibir a mensagem de erro
+        function showError(message) {
+            document.getElementById('errorMessage').innerText = message;
+            document.getElementById('errorModal').style.display = "block";
+        }
+
+        // Função para fechar o modal
+        function closeModal() {
+            document.getElementById('errorModal').style.display = "none";
+        }
+
+        // Função para simular um erro de login
+        function handleLoginError() {
+            // Aqui você pode adicionar a lógica para verificar o login e se houver erro, mostrar o modal
+            showError("Email ou senha incorretos. Tente novamente.");
+        }
+    </script>
 </body>
 
 </html>

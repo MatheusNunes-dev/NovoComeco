@@ -10,7 +10,6 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -21,6 +20,54 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/global.css">
     <link rel="stylesheet" href="../../css/transferencia.css">
+    <style>
+        /* O Modal */
+        .modal {
+            display: none;
+            /* Esconde o modal por padrão */
+            position: fixed;
+            z-index: 1;
+            /* Fica sobre o conteúdo */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Fundo semitransparente */
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* O conteúdo do Modal */
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        /* O botão de fechar */
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -58,14 +105,13 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
     <main>
         <div class="container">
             <section class="donation-box">
-                <h1 class="ong-name">Transferir Para ONG</h1> <!-- O título fora da donation-box -->
+                <h1 class="ong-name">Transferir Para ONG</h1>
                 <div class="donation-image">
                     <img src="../../assets/imagem-ong-1.jpg" alt="Imagem da ONG">
                 </div>
 
                 <div class="input-box">
                     <label for="ong">Nome da ONG:</label>
-
                     <select id="ong" name="ong" required>
                         <option value="ong1">ONG 1</option>
                         <option value="ong2">ONG 2</option>
@@ -77,7 +123,6 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
                         <option value="ong8">ONG 8</option>
                         <option value="ong9">ONG 9</option>
                         <option value="ong10">ONG 10</option>
-                        <!-- Adicione mais opções de ONGs aqui -->
                     </select>
                 </div>
 
@@ -86,20 +131,17 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
                     <input type="number" id="valor" name="valor" placeholder="Digite o valor da transferência (somente números)" required>
                 </div>
 
-                <!-- Notas ajustadas para aparecerem abaixo do campo -->
                 <p class="note">*Somente PIX</p>
-                <p class="note">*Minimo: R$5</p>
+                <p class="note">*Mínimo: R$5</p>
 
-                <!-- Container dos botões confirm e cancel -->
                 <div class="button-container">
                     <div class="cancel-button" onclick="window.location.href='../usuarios/pagina-quero-doar.php'">
                         <p>Cancelar doação</p>
                     </div>
-                    <div class="confirm-button" onclick="window.location.href='../doador/realizar-pagamento.php.'">
+                    <div class="confirm-button" onclick="confirmDonation()">
                         <p>Confirmar doação</p>
                     </div>
                 </div>
-
             </section>
         </div>
     </main>
@@ -109,7 +151,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
             <div class="img-footer-start">
                 <img class="boneco-footer" src="../../assets/img-footer.png" alt="Imagem de rodapé 1" />
             </div>
-            <div class="socias">
+            <div class="sociais">
                 <div class="icons-col-1">
                     <div class="social-footer">
                         <img class="icon-footer" src="../../assets/google.png" alt="Ícone do Google" />
@@ -138,6 +180,32 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
     </footer>
 
     <script src="../../js/header.js"></script>
+
+    <!-- Pop-up de erro -->
+    <div id="errorModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>O valor mínimo para doação é R$5,00. Por favor, insira um valor válido.</p>
+        </div>
+    </div>
+
+    <script>
+        function confirmDonation() {
+            var valor = document.getElementById("valor").value;
+            if (valor < 5) {
+                // Exibe o pop-up de erro
+                document.getElementById("errorModal").style.display = "flex";
+            } else {
+                // Redireciona para a página de pagamento
+                window.location.href = "../doador/realizar-pagamento.php";
+            }
+        }
+
+        function closeModal() {
+            // Fecha o pop-up de erro
+            document.getElementById("errorModal").style.display = "none";
+        }
+    </script>
 
     <div vw class="enabled">
         <div vw-access-button class="active"></div>
