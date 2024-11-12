@@ -50,18 +50,18 @@
     </header>
     <main>
         <section>
-            <form class="form">
+            <form class="form" action="https://usebasin.com/f/3a0bd8f96b66" method="post">
                 <div class="title-form">
                     <h1 class="title-form-text">ENTRE EM CONTATO</h1>
                 </div>
                 <div>
-                    <input class="input" type="text" placeholder="Nome:" id="name">
+                    <input class="input" type="text" name="name" placeholder="Nome:" id="name">
                 </div>
                 <div>
-                    <input class="input" type="email" placeholder="E-mail:" id="email">
+                    <input class="input" type="email" name="email" placeholder="E-mail:" id="email">
                 </div>
                 <div>
-                    <textarea class="text-area" placeholder="Mensagem:" id="mensagem"></textarea>
+                    <textarea class="text-area" placeholder="Mensagem:" type="message" name="message" id="mensagem"></textarea>
                 </div>
                 <button type="submit" class="btn-submit">
                     Enviar
