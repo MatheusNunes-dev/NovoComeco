@@ -1,3 +1,16 @@
+<?php
+// Verifica se o usuário tem permissão para acessar a página de administrador
+session_start(); // Inicia a sessão
+
+// Verifica se a variável de sessão 'is_admin' está setada e é verdadeira
+if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
+    // Se não for administrador, redireciona para uma página de erro ou página pública
+    header('Location: ../usuarios/login.php');
+    exit;
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -6,7 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novo Começo</title>
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="../../css/home.css">
 </head>
 
 <body>
@@ -119,7 +132,7 @@
     <footer>
         <div class="footer">
             <div class="img-footer-start">
-                <img class="boneco-footer" class="img-footer" <script src="../../js/header.js"></script>>
+                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
             </div>
             <div class="socias">
                 <div class="icons-col-1">

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/pagina-quero-doar.css">
+    <link rel="stylesheet" href="../../css/pagina-ongs.css">
     <title>Novo Começo</title>
 </head>
 
@@ -52,12 +52,21 @@
     <main>
         <section>
             <div class="banner">
-                <img class="img-banner" src="../../assets/banner-ongs.png">
+                <img class="img-banner" src="../../assets/cc871fd6-b19d-4b0f-ba7b-a5481a69996b.jpg">
             </div>
             <div class="grid-ongs">
                 <div class="ong">
                     <div class="img-cards">
-                        <img class="img-card" src="../../assets/banner-ongs.png">
+                        <img class="img-card" src="../../assets/imagem-ong.jpg">
+                    </div>
+                    <div class="btns-card">
+                        <a class="btn-card" href="pagina-da-ong.html">Doar</a>
+                    </div>
+                </div>
+
+                <div class="ong">
+                    <div class="img-cards">
+                        <img class="img-card" src="../../assets/imagem-ong.jpg">
                     </div>
                     <div class="btns-card">
                         <a class="btn-card" href="pagina-da-ong.html">Doar</a>
@@ -65,7 +74,7 @@
                 </div>
                 <div class="ong">
                     <div class="img-cards">
-                        <img class="img-card" src="../../assets/banner-ongs.png">
+                        <img class="img-card" src="../../assets/imagem-ong.jpg">
                     </div>
                     <div class="btns-card">
                         <a class="btn-card" href="pagina-da-ong.html">Doar</a>
@@ -73,7 +82,7 @@
                 </div>
                 <div class="ong">
                     <div class="img-cards">
-                        <img class="img-card" src="../../assets/banner-ongs.png">
+                        <img class="img-card" src="../../assets/imagem-ong.jpg">
                     </div>
                     <div class="btns-card">
                         <a class="btn-card" href="pagina-da-ong.html">Doar</a>
@@ -81,7 +90,7 @@
                 </div>
                 <div class="ong">
                     <div class="img-cards">
-                        <img class="img-card" src="../../assets/banner-ongs.png">
+                        <img class="img-card" src="../../assets/imagem-ong.jpg">
                     </div>
                     <div class="btns-card">
                         <a class="btn-card" href="pagina-da-ong.html">Doar</a>
@@ -89,15 +98,7 @@
                 </div>
                 <div class="ong">
                     <div class="img-cards">
-                        <img class="img-card" src="../../assets/banner-ongs.png">
-                    </div>
-                    <div class="btns-card">
-                        <a class="btn-card" href="pagina-da-ong.html">Doar</a>
-                    </div>
-                </div>
-                <div class="ong">
-                    <div class="img-cards">
-                        <img class="img-card" src="../../assets/banner-ongs.png">
+                        <img class="img-card" src="../../assets/imagem-ong.jpg">
                     </div>
                     <div class="btns-card">
                         <a class="btn-card" href="pagina-da-ong.html">Doar</a>
@@ -155,6 +156,8 @@
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
+
+
 </body>
 
 </html>

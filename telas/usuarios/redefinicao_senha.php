@@ -7,7 +7,7 @@
     <title>Alterar Senha - Novo Começo</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/mudar-senha.css">
+    <link rel="stylesheet" href="../../css/redefinicao-senha.css">
 </head>
 
 <body>

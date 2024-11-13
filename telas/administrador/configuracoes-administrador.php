@@ -1,3 +1,16 @@
+<?php
+// Verifica se o usuário tem permissão para acessar a página de administrador
+session_start(); // Inicia a sessão
+
+// Verifica se a variável de sessão 'is_admin' está setada e é verdadeira
+if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
+    // Se não for administrador, redireciona para uma página de erro ou página pública
+    header('Location: ../usuarios/login.php');
+    exit;
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -66,8 +79,10 @@
 
         <!-- Ações do Usuário -->
         <div class="action-buttons">
-            <button class="action-button" onclick="window.location.href='alterar-senha-doador.html'">Alterar Senha</button>
-            <button class="action-button" onclick="window.location.href='historico-transferencia-adm.html'">Histórico Transferências</button>
+            <button class="action-button" onclick="window.location.href='../usuarios/alterar-senha.php'">Alterar Senha</button>
+            <button class="action-button" onclick="window.location.href='historico-transferencia-adm.php'">Histórico Transferências</button>
+            <button class="action-button" onclick="window.location.href='x'">Gráfico Transferências</button>
+            <button class="action-button" onclick="window.location.href='../../logout.php'">Logout</button>
         </div>
     </main>
 

@@ -1,5 +1,5 @@
 <?php
-include('../../protect.php');
+//include('../../protect.php');
 
 
 ?>
@@ -11,7 +11,7 @@ include('../../protect.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novo Começo</title>
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="../../css/home.css">
 </head>
 
 <body>
@@ -62,7 +62,7 @@ include('../../protect.php');
                         <span class="tittle-banner">NOVO</span>
                     </div>
                     <div class="a">
-                        <a class="btn-quero-doar" href="../telas/pagina-quero-doar.php">QUERO DOAR!</a>
+                        <a class="btn-quero-doar" href="../usuarios/pagina-quero-doar.php">QUERO DOAR!</a>
                     </div>
                 </div>
                 <div>
@@ -124,7 +124,11 @@ include('../../protect.php');
     <footer>
         <div class="footer">
             <div class="img-footer-start">
+<<<<<<< HEAD
                 <img class="boneco-footer" class="img-footer">
+=======
+                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
+>>>>>>> 137f6d9cad2eb70cc142f14f9226d3d37d4ce5f1
             </div>
             <div class="socias">
                 <div class="icons-col-1">

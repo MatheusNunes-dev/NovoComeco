@@ -1,3 +1,62 @@
+<<<<<<< HEAD
+=======
+<?php
+session_start();
+include('../db.php');
+
+// Verifica se o formulário foi enviado
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Recebe os dados do formulário
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT); // Criptografa a senha
+    $telefone = $_POST['telefone'];
+    $end_rua = $_POST['end_rua'];
+    $end_numero = $_POST['end_numero'];
+    $end_bairro = $_POST['end_bairro'];
+    $end_cidade = $_POST['end_cidade'];
+    $end_estado = $_POST['end_estado'];
+    $end_completento = $_POST['end_completento'];
+    $cpf = $_POST['cpf'];
+
+    // Insere os dados no banco
+    $stmt = $conn->prepare("INSERT INTO ADMINISTRADOR (nome, email, senha, telefone, end_rua, end_numero, end_bairro, end_cidade, end_estado, end_completento, cpf)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssssssss", $nome, $email, $senha, $telefone, $end_rua, $end_numero, $end_bairro, $end_cidade, $end_estado, $end_completento, $cpf);
+
+    if ($stmt->execute() === TRUE) {
+        // O cadastro foi bem-sucedido, agora vamos fazer login automaticamente
+
+        // Buscar o administrador recém-cadastrado
+        $stmt = $conn->prepare("SELECT * FROM ADMINISTRADOR WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+
+            // Verifica se a senha bate com a armazenada
+            if (password_verify($_POST['senha'], $row['senha'])) {
+                // Salva as informações do administrador na sessão
+                $_SESSION['admin_id'] = $row['id_administrador'];
+                $_SESSION['admin_nome'] = $row['nome'];
+                $_SESSION['admin_email'] = $row['email'];
+
+                // Redireciona para o painel do administrador
+                header("Location: ../administrador/configuracoes-administrador.php");
+                exit();
+            } else {
+                echo "Erro ao verificar a senha!";
+            }
+        }
+    } else {
+        echo "Erro ao cadastrar o administrador: " . $stmt->error;
+    }
+}
+?>
+
+>>>>>>> 137f6d9cad2eb70cc142f14f9226d3d37d4ce5f1
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -48,6 +107,7 @@
         </nav>
     </header>
     <div class="container">
+<<<<<<< HEAD
         <section class="register-section">
             <h1>Criar conta</h1>
             <p>Crie sua conta e ajude o próximo!</p>
@@ -55,6 +115,19 @@
                 <!-- Informações Pessoais -->
                 <div class="input-group">
                     <input type="text" id="codigo" name="codigo" placeholder="Código" required>
+=======
+        <h1 class="main-title">Criar Conta</h1>
+
+        <section class="register-section">
+            <h2 class="section-title">Administrador</h2>
+            <p>Crie sua conta e ajude o próximo!</p>
+
+
+            <form action="../../register.php" method="POST">
+                <!-- Informações Pessoais -->
+                <div class="input-group">
+                    <input type="text" id="codigo" name="codigo" placeholder="Código de Administrador" required>
+>>>>>>> 137f6d9cad2eb70cc142f14f9226d3d37d4ce5f1
                 </div>
                 <div class="input-group">
                     <input type="text" id="name" name="name" placeholder="Nome Completo" required>
@@ -155,4 +228,14 @@
     <script src="../../js/cadastro-administrador.js"></script>
 </body>
 
+<<<<<<< HEAD
+=======
+<?php
+// Para exibir uma mensagem de sucesso
+if (isset($_SESSION['admin_nome'])) {
+    echo "<p>Administrador " . $_SESSION['admin_nome'] . " cadastrado com sucesso!</p>";
+}
+?>
+
+>>>>>>> 137f6d9cad2eb70cc142f14f9226d3d37d4ce5f1
 </html>

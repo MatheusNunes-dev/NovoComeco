@@ -1,3 +1,13 @@
+<?php
+session_start(); // Inicia a sessão
+
+// Verifica se a variável de sessão 'is_ong' está setada e é verdadeira
+if (!isset($_SESSION['is_ong']) || $_SESSION['is_ong'] !== true) {
+    // Se não for ONG, redireciona para a página de login
+    header('Location: login.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +17,7 @@
     <title>Excluir</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/exclusao.css">
+    <link rel="stylesheet" href="../../css/desvincular.css">
 </head>
 
 <body>
@@ -48,16 +58,16 @@
         </nav>
     </header>
     <div class="container">
+        <h1 class="title">Desvincular ONG</h1>
         <div class="content-box">
-            <h1>Desvincular ONG</h1>
             <p>
                 Você está prestes a desvincular permanentemente a sua ONG do nosso sistema.
             </p>
             <p>
                 Esta ação não pode ser desfeita e todos os dados associados à sua ONG serão removidos. Tem certeza de que deseja continuar?
             </p>
-            <button class="cancel">Cancelar</button>
-            <button class="confirm">Sim</button>
+            <button class="cancel-button">Cancelar</button>
+            <button class="confirm-button">Sim</button>
         </div>
     </div>
     <footer>
@@ -104,5 +114,7 @@
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
+
+</body>
 
 </html>

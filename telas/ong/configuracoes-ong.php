@@ -1,3 +1,13 @@
+<?php
+session_start(); // Inicia a sessão
+
+// Verifica se a variável de sessão 'is_ong' está setada e é verdadeira
+if (!isset($_SESSION['is_ong']) || $_SESSION['is_ong'] !== true) {
+    // Se não for ONG, redireciona para a página de login
+    header('Location: login.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -66,8 +76,9 @@
 
         <!-- Ações do Usuário -->
         <div class="action-buttons">
-            <button class="action-button" onclick="window.location.href='alterar-senha-ong.html'">Mudar Senha</button>
-            <button class="action-button" onclick="window.location.href='infidelizacao-ong.html'">Excluir ONG</button>
+            <button class="action-button" onclick="window.location.href='../usuarios/redefinicao_senha.php'">Redefinir Senha</button>
+            <button class="action-button" onclick="window.location.href='desvincular-ong.php'">Desvincular ONG</button>
+            <button class="action-button" onclick="window.location.href='../../logout.php'">Logout</button>
         </div>
     </main>
 

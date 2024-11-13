@@ -18,7 +18,7 @@
 .donation-box {
     width: 50%;
     max-width: 1000px;
-    background: #ffffff8f; /* Fundo branco para destacar a box */
+    background: white; /* Fundo branco para destacar a box */
     border: 3px solid #FFA114;
     border-radius: 30px;
     display: flex;
@@ -73,7 +73,7 @@
     font-size: 1.1vw;
     border: 3px solid #FFA114;
     border-radius: 30px;
-    background-color: #ffffff8f;
+    background-color: white;
     color: #000000;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.3s ease; /* Transição suave nos botões */

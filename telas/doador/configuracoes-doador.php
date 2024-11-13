@@ -1,3 +1,13 @@
+<?php
+session_start(); // Inicia a sessão
+
+// Verifica se a variável de sessão 'is_doador' está setada e é verdadeira
+if (!isset($_SESSION['is_doador']) || $_SESSION['is_doador'] !== true) {
+    // Se não for doador, redireciona para a página de login
+    header('Location: login.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -66,9 +76,10 @@
 
         <!-- Ações do Usuário -->
         <div class="action-buttons">
-            <button class="action-button" onclick="window.location.href='alterar-senha-doador.html'">Alterar Senha</button>
-            <button class="action-button" onclick="window.location.href='infidelizacao-doador.html'">Excluir Conta</button>
-            <button class="action-button" onclick="window.location.href='historico-doacao-doador.html'">Histórico Doações</button>
+            <button class="action-button" onclick="window.location.href='../usuarios/redefinicao_senha.php'">Alterar Senha</button>
+            <button class="action-button" onclick="window.location.href='excluir-conta.php'">Excluir Conta</button>
+            <button class="action-button" onclick="window.location.href='historico-doacao-doador.php'">Histórico Doações</button>
+            <button class="action-button" onclick="window.location.href='../../logout.php'">Logout</button>
         </div>
     </main>
 

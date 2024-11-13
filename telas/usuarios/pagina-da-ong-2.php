@@ -7,7 +7,7 @@
     <title>Doação ONG</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/pagina-da-ong.css">
+    <link rel="stylesheet" href="../../css/pagina-da-ongg.css">
 </head>
 
 <body>
@@ -42,26 +42,63 @@
         </nav>
     </header>
 
+    <!-- Pop-up de erro -->
+
+
     <main class="container">
         <section class="donation-box">
-            <div class="ong-name">Nome da ONG</div>
+            <h1 class="ong-name">Realizar Doação</h1> <!-- O título fora da donation-box -->
             <div class="donation-image">
-                <img src="../assets/ong.jpg" alt="Imagem da ONG">
+                <img src="../../assets/imagem-ong-1.jpg" alt="Imagem da ONG">
             </div>
+            <div class="ong-description-box">
+                <p>A ONG realiza várias atividades focadas no bem-estar social, educação e saúde da comunidade. A missão é melhorar as condições de vida das pessoas em situação de vulnerabilidade.</p>
+            </div>
+
+            <div class="error-message" id="error-message" style="display: none;">
+                <div class="error-popup">
+                    <p><strong>Erro:</strong> O valor da doação deve ser no mínimo R$5.</p>
+                    <button class="close-btn" onclick="closeErrorPopup()">X</button>
+                </div>
+            </div>
+
             <div class="input-box">
-                <p>Nome:</p>
+                <label for="ong">Nome da ONG:</label>
+
+                <select id="ong" name="ong" required>
+                    <option value="ong1">ONG 1</option>
+                    <option value="ong2">ONG 2</option>
+                    <option value="ong3">ONG 3</option>
+                    <option value="ong4">ONG 4</option>
+                    <option value="ong5">ONG 5</option>
+                    <option value="ong6">ONG 6</option>
+                    <option value="ong7">ONG 7</option>
+                    <option value="ong8">ONG 8</option>
+                    <option value="ong9">ONG 9</option>
+                    <option value="ong10">ONG 10</option>
+                    <!-- Adicione mais opções de ONGs aqui -->
+                </select>
             </div>
+
             <div class="input-box">
                 <label for="valor">Valor (R$):</label>
-                <input type="number" id="valor" name="valor" placeholder="Digite o valor da doação" required>
+                <input type="number" id="valor" name="valor" placeholder="Digite o valor da doação (somente números)" required>
             </div>
+
+            <!-- Notas ajustadas para aparecerem abaixo do campo -->
             <p class="note">*Somente PIX</p>
-            <div class="confirm-button" onclick="window.location.href='confirmar_pagamento.html'">
-                <p>Confirmar doação</p>
+            <p class="note">*Minimo: R$5</p>
+
+            <!-- Container dos botões confirm e cancel -->
+            <div class="button-container">
+                <div class="cancel-button" onclick="window.location.href='../usuarios/pagina-quero-doar.php'">
+                    <p>Cancelar doação</p>
+                </div>
+                <div class="confirm-button" onclick="window.location.href='../doador/realizar-pagamento.php.'">
+                    <p>Confirmar doação</p>
+                </div>
             </div>
-            <div class="cancel-button" onclick="window.location.href='queroDoar.html'">
-                <p>Cancelar doação</p>
-            </div>
+
         </section>
     </main>
 
@@ -110,6 +147,35 @@
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
+
+    <script>
+        // Função para validar o valor da doação
+        function validateDonation() {
+            var valor = document.getElementById('valor').value;
+
+            // Verifica se o valor é menor que 5
+            if (parseFloat(valor) < 5) {
+                // Exibe o pop-up de erro
+                document.getElementById('error-message').style.display = 'flex';
+                return false; // Impede o envio do formulário
+            } else {
+                // Caso o valor seja válido, redireciona para o próximo passo
+                window.location.href = '../doador/realizar-pagamento.php';
+            }
+        }
+
+        // Função para fechar o pop-up
+        function closeErrorPopup() {
+            document.getElementById('error-message').style.display = 'none';
+        }
+
+        // Adiciona a validação no clique do botão "Confirmar doação"
+        document.querySelector('.confirm-button').addEventListener('click', function(event) {
+            event.preventDefault(); // Impede a ação padrão do link
+            validateDonation();
+        });
+    </script>
+
 </body>
 
 </html>
