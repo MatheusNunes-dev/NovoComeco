@@ -6,59 +6,75 @@
     font-weight: 400;
     font-style: normal;
 }
+
 .container {
     width: 100%;
     height: 100vh;
-    background: #FDF3C0;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: "Roboto", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+    padding: 20px; /* Adiciona espaçamento nas bordas */
+    box-sizing: border-box; /* Garante que o padding não afete o tamanho da box */
 }
 
 .donation-box {
-    width: 80%;
+    width: 100%;
     max-width: 800px;
-    background: #F8E2A1;
     border: 6px solid #FFA114;
     border-radius: 60px;
-    padding: 40px; /* Aumentando o padding */
+    padding: 40px;
     display: flex;
     flex-direction: column;
+    background-color: #F9F9F9;
     align-items: center;
     gap: 30px;
-    position: relative; /* Necessário para o posicionamento do texto acima da imagem */
+    margin-top: 20px; /* Espaço superior */
+    margin-bottom: 20px; /* Espaço inferior */
+}
+.ong-description-box {
+    width: 100%;
+    max-width: 600px;
+    background-color: #FDF3C0; /* Cor de fundo para a box */
+    padding: 20px; /* Adiciona espaçamento interno */
+    border-radius: 10px; /* Arredondamento das bordas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra leve para a box */
+    color: #333; /* Cor do texto */
+    font-size: 1vw;
+    text-align: center;
+    line-height: 1.6;
+    margin-top: 20px; /* Adiciona um pequeno espaçamento */
+}
+
+.ong-description-box p {
+    margin-bottom: 10px;
 }
 
 .ong-name {
-    font-size: 2.5vw; /* Ajuste o tamanho da fonte */
-    color: white; /* Cor do texto */
-    font-weight: 700; /* Deixar o texto em negrito */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Adicionando sombra ao texto */
-    text-align: center; /* Centraliza o texto dentro da box */
-    width: 100%; /* Garante que o texto ocupe toda a largura disponível */
-    margin-bottom: 15px; /* Adiciona um pequeno espaço entre o nome e a imagem */
+    font-size: 2.5vw;
+    color: #FFA114;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    width: 100%;
+    margin-bottom: 5px; /* Reduzir a margem inferior para diminuir o espaço para o parágrafo */
 }
+
 
 .donation-image {
     width: 80%;
-    max-width: 600px;
-    height: 250px; /* Ajuste a altura conforme necessário */
-    background-color: #FFA114;
+    max-width: 500px;
+    height: 250px;
     color: black;
-    font-size: 1.8vw;
-    border-radius: 60px;
+    border-radius: 20px;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombreado para melhorar a legibilidade */
-    overflow: hidden; /* Garante que a imagem não ultrapasse os limites da div */
-    position: relative; /* Necessário para posicionar o texto dentro dessa área */
+    overflow: hidden;
+    position: relative;
 }
+
 
 .donation-image img {
     width: 100%;
@@ -73,11 +89,17 @@
     margin-top: -25px;
 }
 
+.button-container {
+    display: flex;
+    gap: 20px; /* Adiciona espaçamento entre os botões */
+    justify-content: center; /* Alinha os botões ao centro */
+    width: 100%;
+    max-width: 800px;
+    margin-top: 20px; /* Espaço superior */
+}
 
-/* Estilo para os botões de confirmação e cancelamento */
 .confirm-button, .cancel-button {
-    width: 60%;
-    max-width: 400px;
+    width: 45%; /* Ajusta a largura dos botões */
     padding: 15px;
     border-radius: 30px; /* Reduzindo o raio da borda para um efeito mais suave */
     text-align: center;
@@ -89,12 +111,12 @@
 }
 
 .confirm-button {
-    background: linear-gradient(135deg, #94CCD4, #78A9BB); /* Gradiente moderno para o botão de confirmação */
-    border: none; /* Removendo a borda para dar um visual mais limpo */
+    background: #4379E3;
+    border: 1px solid #1753CA;
 }
 
 .confirm-button:hover {
-    background: linear-gradient(135deg, #78A9BB, #94CCD4); /* Invertendo o gradiente ao passar o mouse */
+    background: #3a66c2; /* Invertendo o gradiente ao passar o mouse */
     transform: translateY(-4px); /* Efeito de elevação ao passar o mouse */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
 }
@@ -120,27 +142,39 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra reduzida no clique */
 }
 
-/* Aumentar o padding na box principal */
-.donation-box {
-    width: 80%;
-    max-width: 800px;
-    background: #F8E2A1;
-    border: 6px solid #FFA114;
-    border-radius: 60px;
-    padding: 40px; /* Aumentando o padding */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
+/* Responsividade */
+@media (max-width: 768px) {
+    .button-container {
+        flex-direction: column; /* Para telas menores, os botões ficam empilhados */
+        gap: 10px;
+    }
+
+    .confirm-button, .cancel-button {
+        width: 100%; /* A largura dos botões ocupa toda a largura disponível */
+        font-size: 4vw; /* Ajusta o tamanho da fonte */
+    }
 }
 
-/* Deixar a fonte mais fina nas caixas de descrição e valor */
+
+
+/* Box que agrupa os campos de valor e ONG */
+.donation-input-box {
+    width: 100%;
+    background-color: #F9F9F9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.37);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+}
+
 .input-box {
-    width: 80%;
-    max-width: 600px;
+    width: 100%;
     padding: 10px;
     background: white;
-    border: 2px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.37);
     border-radius: 10px;
     font-size: 1vw;
     color: black;
@@ -151,25 +185,37 @@
 
 #valor {
     width: 100%;
-    max-width: 240px;
-    padding: 5px;
-    font-size: 1vw;
-    border: 2px solid #FFA114;
-    border-radius: 20px;
-    background-color: #FFF8E1;
+    max-width: 410px;
+    padding: 6px;
+    font-size: 0.8vw;
+    border: 1px solid black;
+    border-radius: 10px;
     color: #333;
     outline: none;
     transition: all 0.3s ease-in-out;
-    font-weight: 300; /* Fonte mais fina */
+    font-weight: 300;
 }
 
-
-
+select {
+    width: 100%;
+    max-width: 100px;
+    padding: 6px;
+    font-size: 0.8vw;
+    border: 1px solid black;
+    border-radius: 10px;
+    color: #333;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+    font-weight: 300;
+}
 
 /* Responsividade */
 @media (max-width: 768px) {
+    .container {
+        padding: 10px; /* Ajuste no padding para telas menores */
+    }
+
     .donation-box {
-        width: 90%;
         padding: 15px;
     }
 
@@ -190,5 +236,9 @@
     #valor {
         font-size: 4vw;
         padding: 12px;
+    }
+
+    .donation-input-box {
+        gap: 15px;
     }
 }

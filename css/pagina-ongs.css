@@ -1,0 +1,104 @@
+/* Estilo geral da página */
+main {
+    margin: 2rem 2rem;
+}
+
+/* Estilo do banner */
+.banner {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem; /* Espaço abaixo do banner */
+}
+
+.img-banner {
+    width: 90%;  /* Mantém o banner mais largo horizontalmente */
+    height: 400px; /* Ajusta a altura do banner para ser menor na vertical */
+    object-fit: cover; /* Garante que a imagem se ajuste sem distorcer */
+    border-radius: 10px; /* Bordas arredondadas */
+}
+
+/* Estilo da grid de ONGs */
+.grid-ongs {
+    margin: 5rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    place-items: center;
+    gap: 2rem; /* Aumenta o espaço entre os cards */
+}
+
+.ong {
+    background: #F8E2A1;
+    border: 2px solid #FFA114;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 90%;  /* Ajusta a largura para ser mais responsiva */
+    max-width: 300px; /* Limita a largura máxima */
+    height: auto;  /* Deixa a altura ajustável para melhor adaptação */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.ong:hover {
+    transform: translateY(-5px); /* Levanta o card ao passar o mouse */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Aumenta a sombra no hover */
+}
+
+.btns-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%; /* Ocupa toda a largura disponível */
+    margin-top: auto; /* Coloca o botão mais para baixo */
+}
+
+/* Estilo dos botões com transição */
+.btn-card {
+    text-align: center;
+    background: #FFA114;
+    color: white;
+    border: 2px solid #FFA114;
+    border-radius: 20px;
+    padding: 0.8rem 1.5rem; /* Aumenta o padding para um botão mais confortável */
+    width: 80%; /* Ajusta o botão para ser mais largo */
+    margin-bottom: 1rem;
+    font-weight: 700;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-card:hover {
+    background-color: #FF8C00;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo das imagens dentro dos cards */
+.img-cards {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.img-card {
+    width: 100%;
+    height: 150px; /* Ajusta a altura da imagem */
+    object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
+    border-radius: 10px; /* Bordas arredondadas */
+}
+
+/* Responsividade: para telas de 768px ou mais */
+@media (min-width: 768px) {
+    .grid-ongs {
+        grid-template-columns: 1fr 1fr; /* Exibe 2 colunas em telas maiores */
+    }
+}
+
+/* Responsividade: para telas de 992px ou mais */
+@media (min-width: 992px) {
+    .grid-ongs {
+        grid-template-columns: 1fr 1fr 1fr; /* Exibe 3 colunas em telas grandes */
+    }
+}

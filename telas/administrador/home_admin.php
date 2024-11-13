@@ -1,3 +1,16 @@
+<?php
+// Verifica se o usuário tem permissão para acessar a página de administrador
+session_start(); // Inicia a sessão
+
+// Verifica se a variável de sessão 'is_admin' está setada e é verdadeira
+if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
+    // Se não for administrador, redireciona para uma página de erro ou página pública
+    header('Location: ../usuarios/login.php');
+    exit;
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -6,7 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novo Começo</title>
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="../../css/home.css">
 </head>
 
 <body>
@@ -38,6 +51,7 @@
                     <li class="nav-link"><a href="../../telas/usuarios/index.php">HOME</a></li>
                     <li class="nav-link"><a href="../../telas/usuarios/pagina-quero-doar.php">ONG'S</a></li>
                     <li class="nav-link"><a href="../../telas/usuarios/sobre.php">SOBRE</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/contato.php">CONTATO</a></li>
                 </ul>
             </div>
             <div class="user">

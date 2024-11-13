@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alterar Senha - Novo Começo</title>
-    <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
+    <title>Login - Novo Começo</title>
+    <link rel="shortcut icon" href="../../assets/logo.png" type="image/png">
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/mudar-senha.css">
+    <link rel="stylesheet" href="../../css/mudar-a-senha.css">
 </head>
 
 <body>
     <header>
         <nav class="navbar nav-lg-screen" id="navbar">
-            <button class="btn-icon-header" onclick="toggleSideBar()" aria-label="Abrir menu">
+            <button class="btn-icon-header" onclick="toggleSideBar()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list"
                     viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
@@ -21,12 +21,12 @@
                 </svg>
             </button>
             <div>
-                <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo do Novo Começo">
+                <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo">
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
                     <li>
-                        <button class="btn-icon-header" onclick="toggleSideBar()" aria-label="Fechar menu">
+                        <button class="btn-icon-header" onclick="toggleSideBar()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                 class="bi bi-x" viewBox="0 0 16 16">
                                 <path
@@ -47,19 +47,24 @@
             </div>
         </nav>
     </header>
+
     <main>
-        <div class="title-container">
+        <div class="title">
             <h1>Alterar Senha</h1>
         </div>
-        <section class="password-change-section">
-            <form action="/alterar-senha" method="POST" aria-labelledby="password-change-section">
+        <section class="password-change">
+            <form action="/alterar-senha" method="POST">
                 <div class="input-group">
-                    <label for="login">Informe CPF, CNPJ ou E-mail</label>
-                    <input type="text" id="current-password" name="current-password" placeholder="Digite seu CPF, CNPJ ou E-mail" required aria-required="true">
+                    <label for="new-password">Nova Senha</label>
+                    <input type="password" id="new-password" name="new-password" placeholder="Digite sua nova senha" required>
+                </div>
+                <div class="input-group">
+                    <label for="confirm-password">Confirmar Nova Senha</label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirme sua nova senha" required>
                 </div>
                 <div class="action-buttons">
-                    <button class="action-button">Cancelar</button>
-                    <button class="confirm-button">Confirmar</button>
+                    <button type="reset" class="action-button">Cancelar</button>
+                    <button type="submit" class="action-button">Confirmar</button>
                 </div>
             </form>
         </section>

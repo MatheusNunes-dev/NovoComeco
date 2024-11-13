@@ -1,11 +1,31 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Faz com que o body ocupe toda a altura da tela */
+}
+
 .container {
-    padding: 0;
+    flex: 1; /* Isso garante que o conteúdo principal ocupe o espaço disponível */
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #FDF3C0;
-    margin-top: 5rem;
+    margin-top: 2rem; /* Ajustado para dar mais espaço entre o título e a caixa */
     margin-bottom: 12rem;
+}
+
+footer {
+    margin-top: auto; /* Isso vai empurrar o footer para o final da página */
+}
+
+h1.desvincular-title {
+    text-align: center;
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    position: absolute;
+    top: 10%; /* Coloca o título um pouco abaixo do topo */
+    width: 100%;
 }
 
 .content-box {
@@ -16,12 +36,6 @@
     text-align: center;
     max-width: 500px;
     width: 90%;
-}
-
-h1 {
-    color: #333;
-    margin-bottom: 1.5rem;
-    font-size: 1.8rem;
 }
 
 p {
@@ -37,19 +51,34 @@ button {
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
-    transition: opacity 0.2s;
+    transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
 button:hover {
     opacity: 0.9;
 }
 
-.cancel {
-    background-color: #e0e0e0;
+.container .content-box .cancel-button {
+    background-color: #FFA114;
     color: #333;
+    border: 2px solid #FF8C00; /* Borda contrastante */
 }
 
-.confirm {
+.cancel-button:hover {
+    background-color: #FF8C00;
+    transform: translateY(-4px); /* Efeito de elevação ao passar o mouse */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
+}
+
+.confirm-button {
     background-color: #dc3545;
     color: white;
+    border: 2px solid #c82333; /* Adiciona borda */
+}
+
+.confirm-button:hover {
+    background-color: #c82333;
+    border-color: #a71d2a; /* Borda mais escura no hover */
+    transform: translateY(-4px); /* Efeito de elevação ao passar o mouse */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
 }

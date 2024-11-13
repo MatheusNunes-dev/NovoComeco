@@ -1,5 +1,5 @@
 <?php
-include('g../protect.php');
+//include('../../protect.php');
 
 
 ?>
@@ -15,7 +15,7 @@ include('g../protect.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novo Começo</title>
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="../../css/home.css">
 </head>
 
 <body>
@@ -66,7 +66,7 @@ include('g../protect.php');
                         <span class="tittle-banner">NOVO</span>
                     </div>
                     <div class="a">
-                        <a class="btn-quero-doar" href="../telas/pagina-quero-doar.php">QUERO DOAR!</a>
+                        <a class="btn-quero-doar" href="../usuarios/pagina-quero-doar.php">QUERO DOAR!</a>
                     </div>
                 </div>
                 <div>

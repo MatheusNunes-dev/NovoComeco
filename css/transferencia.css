@@ -1,0 +1,255 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Adiciona espaçamento nas bordas */
+    box-sizing: border-box; /* Garante que o padding não afete o tamanho da box */
+}
+
+.donation-box {
+    width: 100%;
+    max-width: 800px;
+    border: 6px solid #FFA114;
+    border-radius: 60px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    background-color: #F9F9F9;
+    align-items: center;
+    gap: 30px;
+    margin-top: 20px; /* Espaço superior */
+    margin-bottom: 20px; /* Espaço inferior */
+}
+.ong-description-box {
+    width: 100%;
+    max-width: 600px;
+    background-color: #FDF3C0; /* Cor de fundo para a box */
+    padding: 20px; /* Adiciona espaçamento interno */
+    border-radius: 10px; /* Arredondamento das bordas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra leve para a box */
+    color: #333; /* Cor do texto */
+    font-size: 1vw;
+    text-align: center;
+    line-height: 1.6;
+    margin-top: 20px; /* Adiciona um pequeno espaçamento */
+}
+
+.ong-description-box p {
+    margin-bottom: 10px;
+}
+
+.ong-name {
+    font-size: 2.5vw;
+    color: #FFA114;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    width: 100%;
+    margin-bottom: 5px; /* Reduzir a margem inferior para diminuir o espaço para o parágrafo */
+}
+
+
+.donation-image {
+    width: 80%;
+    max-width: 500px;
+    height: 250px;
+    color: black;
+    border-radius: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    overflow: hidden;
+    position: relative;
+}
+
+
+.donation-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* A imagem será redimensionada para cobrir completamente a div sem distorção */
+}
+
+.note {
+    font-size: 0.8vw;
+    color: black;
+    text-align: center;
+    margin-top: -25px;
+}
+
+.button-container {
+    display: flex;
+    gap: 20px; /* Adiciona espaçamento entre os botões */
+    justify-content: center; /* Alinha os botões ao centro */
+    width: 100%;
+    max-width: 800px;
+    margin-top: 20px; /* Espaço superior */
+}
+
+.confirm-button, .cancel-button {
+    width: 45%; /* Ajusta a largura dos botões */
+    padding: 15px;
+    border-radius: 30px; /* Reduzindo o raio da borda para um efeito mais suave */
+    text-align: center;
+    color: white;
+    font-size: 1.1vw;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Adicionando transições mais suaves */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adicionando sombra suave */
+}
+
+.confirm-button {
+    background: #4379E3;
+    border: 1px solid #1753CA;
+}
+
+.confirm-button:hover {
+    background: #3a66c2; /* Invertendo o gradiente ao passar o mouse */
+    transform: translateY(-4px); /* Efeito de elevação ao passar o mouse */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
+}
+
+.confirm-button:active {
+    transform: translateY(2px); /* Efeito de pressionamento */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra reduzida no clique */
+}
+
+.cancel-button {
+    background: #FFA114;
+    border: 2px solid #FF8C00; /* Adicionando borda contrastante */
+}
+
+.cancel-button:hover {
+    background: #FF8C00;
+    transform: translateY(-4px); /* Efeito de elevação ao passar o mouse */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
+}
+
+.cancel-button:active {
+    transform: translateY(2px); /* Efeito de pressionamento */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra reduzida no clique */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .button-container {
+        flex-direction: column; /* Para telas menores, os botões ficam empilhados */
+        gap: 10px;
+    }
+
+    .confirm-button, .cancel-button {
+        width: 100%; /* A largura dos botões ocupa toda a largura disponível */
+        font-size: 4vw; /* Ajusta o tamanho da fonte */
+    }
+}
+
+
+
+/* Box que agrupa os campos de valor e ONG */
+.donation-input-box {
+    width: 100%;
+    background-color: #F9F9F9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.37);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+}
+
+.input-box {
+    width: 100%;
+    padding: 10px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.37);
+    border-radius: 10px;
+    font-size: 1vw;
+    color: black;
+    text-align: left;
+    padding-left: 20px;
+    font-weight: 300; /* Fonte mais fina */
+}
+
+#valor {
+    width: 100%;
+    max-width: 410px;
+    padding: 6px;
+    font-size: 0.8vw;
+    border: 1px solid black;
+    border-radius: 10px;
+    color: #333;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+    font-weight: 300;
+}
+
+select {
+    width: 100%;
+    max-width: 100px;
+    padding: 6px;
+    font-size: 0.8vw;
+    border: 1px solid black;
+    border-radius: 10px;
+    color: #333;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+    font-weight: 300;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px; /* Ajuste no padding para telas menores */
+    }
+
+    .donation-box {
+        padding: 15px;
+    }
+
+    .donation-image, .input-box {
+        font-size: 4vw;
+        padding: 10px;
+    }
+
+    .note {
+        font-size: 3vw;
+    }
+
+    .confirm-button, .cancel-button {
+        font-size: 4vw;
+        padding: 10px;
+    }
+
+    #valor {
+        font-size: 4vw;
+        padding: 12px;
+    }
+
+    .donation-input-box {
+        gap: 15px;
+    }
+}

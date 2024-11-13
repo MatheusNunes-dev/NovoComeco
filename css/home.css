@@ -36,7 +36,7 @@ main {
     border-style: solid;
     border-radius: 1rem;
     font-weight: 900;
-    color: #FFD864;
+    color: #FF8C00;
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -49,7 +49,7 @@ main {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr;
-    background-color: #FFD864;
+    background-color: #FF8C00;
     place-items: center;
     gap: 2rem;
     padding: 2rem 0;
@@ -62,23 +62,29 @@ main {
     text-align: center;
     width: 70%;
     height: 60vh;
-    background-color: #FFD864;
+    background-color: #FDF3C0;
     padding: 1.5rem 1rem;
     border-radius: 18px;
     border: 2px solid #FFA114;
     max-width: 380px;
     max-height: 340px;
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-
+    position: relative;
+    overflow: hidden;  /* Garante que a imagem não ultrapasse o contêiner */
 }
-
 
 .img-ong {
     width: 90%;
-    height: 75%;
+    height: 80%;
     margin-bottom: 2.5rem;
-    border-radius: 18px;
+    border-radius: 50px;
 }
+
+
+
+
+
+
 
 
 
@@ -108,22 +114,53 @@ main {
 }
 
 .card-doador {
-    background-color: #FDF3C0;
-    width: 80%;
-    height: 40vh;
+    background-color: white;  /* Altera o fundo para branco */
+    width: 90%;  /* Aumenta a largura para ser mais espaçoso */
+    max-width: 300px; /* Limita a largura máxima */
+    height: 250px;  /* Ajusta a altura para uma forma mais equilibrada */
     border: 2px solid #FFA114;
-    border-radius: 18px;
+    border-radius: 15px; /* Bordas mais suaves */
     text-align: center;
-    margin-top: 2rem;
-    max-width: 250px;
-    max-height: 150px;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-
+    padding: 1.5rem; /* Ajusta o padding interno */
+    transition: all 0.3s ease; /* Efeito suave de transição */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Adiciona sombra suave */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Garante que o conteúdo fique espaçado */
 }
 
 .card-doador p {
-    padding: 1.5rem 0.8rem;
+    font-size: 1.1rem; /* Ajusta o tamanho da fonte */
+    color: #333;  /* Cor do texto */
+    font-family: 'Arial', sans-serif; /* Fonte mais limpa */
+    line-height: 1.4; /* Melhor espaçamento entre as linhas */
+    margin: 0; /* Remove margens extras */
+    flex-grow: 1; /* Faz o texto ocupar o restante do espaço disponível */
 }
+
+.card-doador .nome-autor {
+    font-weight: bold; /* Nome em negrito */
+    margin-top: 1.5rem; /* Espaço do texto principal para o nome */
+    font-size: 1.2rem; /* Ajusta o tamanho do nome */
+    color: #333; /* Cor do texto */
+}
+
+.card-doador:hover {
+    transform: translateY(-5px); /* Efeito de elevação suave ao passar o mouse */
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2); /* Aumenta a sombra no hover */
+    cursor: pointer; /* Adiciona o cursor de mão */
+}
+
+.card-doador img {
+    max-width: 80%;  /* Limita a largura da imagem */
+    max-height: 50%; /* Limita a altura da imagem */
+    object-fit: cover; /* Garante que a imagem preencha sem distorcer */
+    border-radius: 50%; /* Torna a imagem redonda */
+    margin-bottom: 1rem; /* Adiciona espaçamento abaixo da imagem */
+}
+
+
+
 
 .btn-quero-doar:hover {
     background-color: #FF8C00;
