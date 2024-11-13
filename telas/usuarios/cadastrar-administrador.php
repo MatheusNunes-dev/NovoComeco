@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../db.php');
+include('../db.php');
 
 // Verifica se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -18,15 +18,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $cpf = $_POST['cpf'];
 
     // Insere os dados no banco
-    $sql = "INSERT INTO ADMINISTRADOR (nome, email, senha, telefone, end_rua, end_numero, end_bairro, end_cidade, end_estado, end_completento, cpf)
-            VALUES ('$nome', '$email', '$senha', '$telefone', '$end_rua', '$end_numero', '$end_bairro', '$end_cidade', '$end_estado', '$end_completento', '$cpf')";
+    $stmt = $conn->prepare("INSERT INTO ADMINISTRADOR (nome, email, senha, telefone, end_rua, end_numero, end_bairro, end_cidade, end_estado, end_completento, cpf)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssssssss", $nome, $email, $senha, $telefone, $end_rua, $end_numero, $end_bairro, $end_cidade, $end_estado, $end_completento, $cpf);
 
-    if ($conn->query($sql) === TRUE) {
+    if ($stmt->execute() === TRUE) {
         // O cadastro foi bem-sucedido, agora vamos fazer login automaticamente
 
         // Buscar o administrador recém-cadastrado
-        $sql = "SELECT * FROM ADMINISTRADOR WHERE email = '$email'";
-        $result = $conn->query($sql);
+        $stmt = $conn->prepare("SELECT * FROM ADMINISTRADOR WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
@@ -46,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     } else {
-        echo "Erro ao cadastrar o administrador: " . $conn->error;
+        echo "Erro ao cadastrar o administrador: " . $stmt->error;
     }
 }
 ?>

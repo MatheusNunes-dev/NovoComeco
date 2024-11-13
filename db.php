@@ -6,7 +6,7 @@ $dbname = "NovoComeco";                              // nome do banco de dados
 $port = 3306;                                        // porta padrão do MySQL
 
 // Caminho para o certificado SSL da CA (normalmente é baixado do Azure)
-$ca_cert_path = "/caminho/para/ca-cert.pem";
+$ca_cert_path = "BaltimoreCyberTrustRoot.crt.pem";
 
 // Inicializa a conexão com SSL
 $con = mysqli_init();
