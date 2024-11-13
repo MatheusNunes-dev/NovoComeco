@@ -3,10 +3,6 @@ include('../../protect.php');
 
 
 ?>
-
-
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -128,7 +124,7 @@ include('../../protect.php');
     <footer>
         <div class="footer">
             <div class="img-footer-start">
-                <img class="boneco-footer" class="img-footer" <script src="../../js/header.js"></script>>
+                <img class="boneco-footer" class="img-footer">
             </div>
             <div class="socias">
                 <div class="icons-col-1">
@@ -153,7 +149,7 @@ include('../../protect.php');
                 </div>
             </div>
             <div class="img-footer-end">
-                <img class="boneco-footer" class="img-footer" <script src="../../js/header.js"></script>>
+                <img class="boneco-footer" class="img-footer">
             </div>
         </div>
     </footer>

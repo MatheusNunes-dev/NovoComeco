@@ -50,13 +50,14 @@
     <div class="container">
         <section class="register-section">
             <h1>Criar conta</h1>
+            <p>Crie sua conta e ajude o próximo!</p>
             <form action="/register" method="POST">
-                <!-- Informações Básicas -->
+                <!-- Informações Pessoais -->
                 <div class="input-group">
-                    <input type="text" id="name" name="name" placeholder="Nome ONG" required>
+                    <input type="text" id="codigo" name="codigo" placeholder="Código" required>
                 </div>
                 <div class="input-group">
-                    <input type="text" id="cnpj" name="cnpj" placeholder="CNPJ (XX.XXX.XXX/0001-XX)" required>
+                    <input type="text" id="name" name="name" placeholder="Nome Completo" required>
                 </div>
                 <div class="input-group">
                     <input type="email" id="email" name="email" placeholder="E-mail" required>
@@ -64,30 +65,23 @@
                 <div class="input-group">
                     <input type="tel" id="phone" name="phone" placeholder="Telefone (XX-XXXXXXXXX)" required>
                 </div>
-
-                <!-- Documentos -->
                 <div class="input-group">
-                    <input type="text" id="constituicao" name="constituicao" placeholder="Constituição" required>
-                </div>
-                <div class="input-group">
-                    <input type="text" id="comprobatorio" name="comprobatorio" placeholder="Comprobatório" required>
-                </div>
-                <div class="input-group">
-                    <input type="text" id="estatuto" name="estatuto" placeholder="Estatuto Social" required>
+                    <input type="text" id="cpf" name="cpf" placeholder="CPF (XXX.XXX.XXX-XX)" required>
                 </div>
 
                 <!-- Endereço -->
                 <div class="input-group">
                     <input type="text" id="cep" name="cep" placeholder="CEP (XXXXX-XXX)" required maxlength="10">
                 </div>
+
                 <div class="input-group">
-                    <input type="text" id="estado" name="estado" placeholder="Estado" required>
+                    <input type="text" id="estado" name="estado" placeholder="Estado" required readonly>
                 </div>
                 <div class="input-group">
-                    <input type="text" id="cidade" name="cidade" placeholder="Cidade" required>
+                    <input type="text" id="cidade" name="cidade" placeholder="Cidade" required readonly>
                 </div>
                 <div class="input-group">
-                    <input type="text" id="bairro" name="bairro" placeholder="Bairro" required>
+                    <input type="text" id="bairro" name="bairro" placeholder="Bairro" required readonly>
                 </div>
                 <div class="input-group">
                     <input type="text" id="rua" name="rua" placeholder="Rua" required>
@@ -99,28 +93,18 @@
                     <input type="text" id="complemento" name="complemento" placeholder="Complemento">
                 </div>
 
-                <!-- Informações Bancárias -->
-                <div class="input-group">
-                    <input type="text" id="bank_account" name="bank_account" placeholder="Conta Bancária" required>
-                </div>
-                <div class="input-group">
-                    <input type="text" id="current_account" name="current_account" placeholder="Conta Corrente" required>
-                </div>
-                <div class="input-group">
-                    <input type="text" id="pix_key" name="pix_key" placeholder="Chave Pix" required>
-                </div>
-
-                <!-- Senha - sempre por último -->
-                <div class="input-group">
-                    <input type="password" id="password" name="password" placeholder="Senha" required>
-                </div>
-                <div class="input-group">
-                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirmar Senha" required>
+                <!-- Separação para senha -->
+                <div class="password-section">
+                    <div class="input-group">
+                        <input type="password" id="password" name="password" placeholder="Senha" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirmar Senha" required>
+                    </div>
                 </div>
 
                 <button type="submit" class="register-button">Criar conta</button>
             </form>
-
         </section>
     </div>
     <footer>
@@ -168,7 +152,7 @@
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
 
-    <script src="../../js/cadastro-ong.js"></script>
+    <script src="../../js/cadastro-administrador.js"></script>
 </body>
 
 </html>

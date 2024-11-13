@@ -34,7 +34,7 @@
                             </svg>
                         </button>
                     </li>
-                    <li class="nav-link"><a href="../../telas/usuarios/index.php">HOME</a></li>
+                    <li class="nav-link"><a href="home_admin.php">HOME</a></li>
                     <li class="nav-link"><a href="../../telas/usuarios/pagina-quero-doar.php">ONG'S</a></li>
                     <li class="nav-link"><a href="../../telas/usuarios/sobre.php">SOBRE</a></li>
                     <li class="nav-link"><a href="../../telas/usuarios/contato.php">CONTATO</a></li>

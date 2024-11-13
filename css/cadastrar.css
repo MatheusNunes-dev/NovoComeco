@@ -79,6 +79,32 @@ body {
     background-color: #e59400;
 }
 
+/* Adicionando estilo para a seção de senha */
+.password-section {
+    margin-top: 2rem;
+}
+
+.password-section .input-group {
+    margin-bottom: 1.5rem;
+}
+
+.password-section .input-group input {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    transition: border-color 0.3s ease;
+    background-color: #fff9e7;
+    box-sizing: border-box;
+}
+
+.password-section .input-group input:focus {
+    border-color: #FFA114;
+    outline: none;
+}
+
+
 /* Responsive Styles */
 @media (max-width: 1024px) {
     .register-section {
