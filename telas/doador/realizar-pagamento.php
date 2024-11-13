@@ -64,14 +64,14 @@
         <div class="pix-box">
             <div class="pix-countdown">
                 <div class="pix-image">
-                    <div class="image-box"></div>
+                    <img id="qrCode" alt="QR Code Aleatório">
                 </div>
             </div>
-            <div class="countdown-box">
-                <p>PIX vence em: 00:00:00</p>
+            <div>
+                <p>Chave gerada: <span id="chave"></span></p>
             </div>
             <div>
-                <p>Chave Aleatória: dcta478j-196l-03fm-t6gh-4298er7845m2</p>
+                <button onclick="gerarQRCodeComChave()">Gerar QR Code com Chave Aleatória</button>
             </div>
         </div>
         <div class="home-button" onclick="window.location.href='../usuarios/pagina-quero-doar.php'">
@@ -122,6 +122,30 @@
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
+
+    <script>
+        // Função para gerar uma chave aleatória
+        function gerarChaveAleatoria(tamanho = 16) {
+            const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let chave = '';
+            for (let i = 0; i < tamanho; i++) {
+                chave += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+            }
+            return chave;
+        }
+
+        // Função para gerar e exibir o QR code com a chave aleatória
+        function gerarQRCodeComChave() {
+            const chaveAleatoria = gerarChaveAleatoria();
+            const url = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(chaveAleatoria)}`;
+            document.getElementById("qrCode").src = url;
+            document.getElementById("chave").innerText = chaveAleatoria;
+        }
+
+        // Gera um QR code inicial com chave aleatória
+        gerarQRCodeComChave();
+    </script>
+
 </body>
 
 </html>
