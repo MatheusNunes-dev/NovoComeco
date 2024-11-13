@@ -1,31 +1,6 @@
 <?php
-    include('../db.php');
+    include('../../db.php');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $cpf = $_POST['cpf'];
-    $cep = $_POST['cep'];
-    $estado = $_POST['estado'];
-    $cidade = $_POST['cidade'];
-    $bairro = $_POST['bairro'];
-    $rua = $_POST['rua'];
-    $numero = $_POST['numero'];
-    $complemento = $_POST['complemento'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-
-    $sql = "INSERT INTO doadores (name, email, phone, cpf, cep, estado, cidade, bairro, rua, numero, complemento, password) 
-            VALUES ('$name', '$email', '$phone', '$cpf', '$cep', '$estado', '$cidade', '$bairro', '$rua', '$numero', '$complemento', '$password')";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-
-    $conn->close();
-}
 ?>
 
 <!DOCTYPE html>

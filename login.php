@@ -1,18 +1,6 @@
 <?php
 session_start();  // Inicia a sessão
 
-// Conectar ao banco de dados
-$servername = "localhost";  // Ou seu servidor MySQL
-$username = "root";         // Usuário do banco de dados
-$password = "";             // Senha do banco de dados
-$dbname = "novocomeco";     // Nome do banco de dados
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar a conexão
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 // Verificar se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -45,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $admin = $result_admin->fetch_assoc();
         $_SESSION['admin_id'] = $admin['id_administrador'];
         $_SESSION['admin_nome'] = $admin['nome'];
-        header("Location: administrador_dashboard.php");  // Redireciona para a área administrativa
+        header("Location: /telas/usuarios/index.php");  // Redireciona para a área administrativa
         exit();
     }
     // Verificar se o doador existe
@@ -53,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $doador = $result_doador->fetch_assoc();
         $_SESSION['doador_id'] = $doador['id_doador'];
         $_SESSION['doador_nome'] = $doador['nome'];
-        header("Location: doador_dashboard.php");  // Redireciona para a área do doador
+        header("Location: /telas/usuarios/index.php");  // Redireciona para a área do doador
         exit();
     }
     // Verificar se a ONG existe
@@ -61,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $ong = $result_ong->fetch_assoc();
         $_SESSION['ong_id'] = $ong['id_ong'];
         $_SESSION['ong_nome'] = $ong['nome'];
-        header("Location: ong_dashboard.php");  // Redireciona para a área da ONG
+        header("Location: /telas/usuarios/index.php");  // Redireciona para a área da ONG
         exit();
     } else {
         // Caso o login seja inválido

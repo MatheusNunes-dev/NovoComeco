@@ -1,6 +1,32 @@
+<?php
+
+include('../../db.php');
+
+// Conecta ao banco de dados com SSL
+if (!$mysqli->real_connect($servername, $username, $password, $dbname, $port, NULL, MYSQLI_CLIENT_SSL)) {
+    die("Falha na conexão: " . $mysqli->connect_error);
+}
+
+// Código de inserção
+$sql_code = "INSERT INTO DOADOR(nome, email, senha, telefone, cpf, data_cadastro, end_rua, end_numero, end_bairro, end_cidade, end_estado, end_complemento) 
+             VALUES ('Mathesu', 'mthanus@gmail.com', 'matheus', '41991839622', '08540931984', '2024-11-13', 'a', 'a', 'a', 'a', 'a', 'a')";
+
+// Executa a consulta
+$sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
+
+// Exibe mensagem de sucesso
+echo "Registro inserido com sucesso!";
+
+// Fecha a conexão
+$mysqli->close();
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,24 +35,19 @@
     <link rel="stylesheet" href="../../css/global.css">
     <link rel="stylesheet" href="../../css/login-geral.css">
     <style>
-        /* O Modal */
         .modal {
             display: none;
-            /* Esconde o modal por padrão */
             position: fixed;
             z-index: 1;
-            /* Fica sobre o conteúdo */
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.4);
-            /* Fundo semitransparente */
             justify-content: center;
             align-items: center;
         }
 
-        /* O conteúdo do Modal */
         .modal-content {
             background-color: #fff;
             margin: 15% auto;
@@ -37,10 +58,8 @@
             text-align: center;
             border-radius: 10px;
             position: relative;
-            /* Necessário para posicionar o "X" */
         }
 
-        /* O botão de fechar */
         .close {
             color: #aaa;
             font-size: 28px;
@@ -59,15 +78,12 @@
         }
     </style>
 </head>
-
 <body>
     <header>
         <nav class="navbar nav-lg-screen" id="navbar">
             <button class="btn-icon-header" onclick="toggleSideBar()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list"
-                    viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                        d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
                 </svg>
             </button>
             <div>
@@ -77,10 +93,8 @@
                 <ul>
                     <li>
                         <button class="btn-icon-header" onclick="toggleSideBar()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                class="bi bi-x" viewBox="0 0 16 16">
-                                <path
-                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
                             </svg>
                         </button>
                     </li>
@@ -97,10 +111,11 @@
             </div>
         </nav>
     </header>
+
     <main>
         <h1 class="title">Login</h1>
         <section class="login">
-            <form action="../../login.php" method="POST" onsubmit="handleLoginError(); return false;">
+            <form method="POST">
                 <div class="input-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" placeholder="Digite seu email" required>
@@ -135,80 +150,39 @@
         </section>
     </main>
 
-    <!-- Modal de erro -->
-    <div id="errorModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Erro</h2>
-            <p id="errorMessage">Ocorreu um erro! Tente novamente.</p>
-        </div>
-    </div>
-
     <footer>
         <div class="footer">
             <div class="img-footer-start">
-                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
+                <img class="boneco-footer" src="../../assets/img-footer.png" alt="Boneco footer">
             </div>
             <div class="socias">
                 <div class="icons-col-1">
                     <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/google.png">
+                        <img class="icon-footer" src="../../assets/google.png" alt="Google">
                         <p>novocomeço@gmail.com</p>
                     </div>
                     <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/instagram.png">
+                        <img class="icon-footer" src="../../assets/instagram.png" alt="Instagram">
                         <p>@novocomeço</p>
                     </div>
                 </div>
                 <div class="icons-col-2">
                     <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/whatsapp.png">
+                        <img class="icon-footer" src="../../assets/whatsapp.png" alt="WhatsApp">
                         <p>(41)99997676</p>
                     </div>
                     <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/facebook.png">
+                        <img class="icon-footer" src="../../assets/facebook.png" alt="Facebook">
                         <p>@novocomeco</p>
                     </div>
                 </div>
             </div>
             <div class="img-footer-end">
-                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
+                <img class="boneco-footer" src="../../assets/img-footer.png" alt="Boneco footer">
             </div>
         </div>
     </footer>
 
     <script src="../../js/header.js"></script>
-    <script src="../../js/login.js"></script>
-
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
-    </div>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
-
-    <script>
-        // Função para abrir o modal e exibir a mensagem de erro
-        function showError(message) {
-            document.getElementById('errorMessage').innerText = message;
-            document.getElementById('errorModal').style.display = "block";
-        }
-
-        // Função para fechar o modal
-        function closeModal() {
-            document.getElementById('errorModal').style.display = "none";
-        }
-
-        // Função para simular um erro de login
-        function handleLoginError() {
-            // Aqui você pode adicionar a lógica para verificar o login e se houver erro, mostrar o modal
-            showError("Email ou senha incorretos. Tente novamente.");
-        }
-    </script>
 </body>
-
 </html>
