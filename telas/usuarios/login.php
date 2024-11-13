@@ -43,7 +43,7 @@ if (!$mysqli->real_connect($servername, $username, $password, $dbname, $port, NU
 
 //  Código de inserção
 $sql_code = "INSERT INTO DOADOR(nome, email, senha, telefone, cpf, data_cadastro, end_rua, end_numero, end_bairro, end_cidade, end_estado, end_complemento) 
-              VALUES ('teste', 'teste', 'teste', 'teste', 'teste', '2024-11-13', 'a', 'a', 'a', 'a', 'a', 'a')";
+              VALUES ('Muller', 'te', 'te', 'te', 'te', '2024-11-13', 'a', 'a', 'a', 'a', 'a', 'a')";
 
 // Executa a consulta
 $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
