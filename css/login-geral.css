@@ -105,14 +105,13 @@ main {
 }
 
 .esqueci-senha {
-    color: #764ba2;
+    color: #667eea;
     text-decoration: none;
     font-size: 0.9rem;
     transition: color 0.3s ease;
 }
 
 .esqueci-senha:hover {
-    color: #667eea;
     text-decoration: underline;
 }
 
@@ -134,7 +133,7 @@ main {
 }
 
 .action-button:hover {
-    background: #667eea;
+    background: #fa9b0c;
 }
 
 .div-cadastrar {
@@ -166,7 +165,7 @@ main {
 }
 
 .opcoes-cadastro a:hover {
-    background: #e68c06;
+    background: #fa9b0c;
     color: white;
     transform: translateY(-2px);
 }
