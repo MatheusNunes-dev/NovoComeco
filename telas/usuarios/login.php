@@ -1,57 +1,111 @@
 <?php
 
-include('../../db.php');
+session_start();
 
-// // Verifique se o formulário foi enviado
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//     // Receba os dados do formulário
-//     $codigo = $_POST["codigo"];
-//     $name = $_POST["name"];
-//     $email = $_POST["email"];
-//     $phone = $_POST["phone"];
-//     $cpf = $_POST["cpf"];
-//     $cep = $_POST["cep"];
-//     $estado = $_POST["estado"];
-//     $cidade = $_POST["cidade"];
-//     $bairro = $_POST["bairro"];
-//     $rua = $_POST["rua"];
-//     $numero = $_POST["numero"];
-//     $complemento = $_POST["complemento"];
-//     $password = $_POST["password"];
-//     $confirm_password = $_POST["confirm-password"];
+// Verificar se o formulário foi enviado
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    include('../../db.php'); // Certifique-se que o caminho está correto
+    
+    $email = trim($_POST['email']);
+    $senha = trim($_POST['senha']);
+    
+    // Validação básica
+    if(empty($email) || empty($senha)) {
+        echo "<div class='error-message'>Por favor, preencha todos os campos.</div>";
+        exit();
+    }
 
+    try {
+        // Verificar na tabela de Administradores
+        $sql_admin = "SELECT * FROM ADMINISTRADOR WHERE email = ? AND senha = ?";
+        $stmt = $conn->prepare($sql_admin);
+        $stmt->bind_param("ss", $email, $senha);
+        $stmt->execute();
+        $result_admin = $stmt->get_result();
 
+        // Verificar na tabela de Doadores
+        $sql_doador = "SELECT * FROM DOADOR WHERE email = ? AND senha = ?";
+        $stmt2 = $conn->prepare($sql_doador);
+        $stmt2->bind_param("ss", $email, $senha);
+        $stmt2->execute();
+        $result_doador = $stmt2->get_result();
 
+        // Verificar na tabela de ONGs
+        $sql_ong = "SELECT * FROM ONG WHERE email = ? AND senha = ?";
+        $stmt3 = $conn->prepare($sql_ong);
+        $stmt3->bind_param("ss", $email, $senha);
+        $stmt3->execute();
+        $result_ong = $stmt3->get_result();
 
+        // Verificar se o administrador existe
+        if ($result_admin->num_rows > 0) {
+            $admin = $result_admin->fetch_assoc();
+            $_SESSION['user_id'] = $admin['id_administrador'];
+            $_SESSION['user_nome'] = $admin['nome'];
+            $_SESSION['user_email'] = $admin['email'];
+            $_SESSION['user_tipo'] = 'administrador';
+            $_SESSION['logged_in'] = true;
+            
+            echo "<div class='success-message'>Login realizado com sucesso!</div>";
+            echo "<script>
+                setTimeout(function() {
+                    window.location.href = '/telas/administrador/home_administrador.php';
+                }, 2000);
+            </script>";
+            exit();
+        }
+        // Verificar se o doador existe
+        elseif ($result_doador->num_rows > 0) {
+            $doador = $result_doador->fetch_assoc();
+            $_SESSION['user_id'] = $doador['id_doador'];
+            $_SESSION['user_nome'] = $doador['nome'];
+            $_SESSION['user_email'] = $doador['email'];
+            $_SESSION['user_tipo'] = 'doador';
+            $_SESSION['logged_in'] = true;
+            
+            echo "<div class='success-message'>Login realizado com sucesso!</div>";
+            echo "<script>
+                setTimeout(function() {
+                    window.location.href = '/telas/doador/home_doador.php';
+                }, 2000);
+            </script>";
+            exit();
+        }
+        // Verificar se a ONG existe
+        elseif ($result_ong->num_rows > 0) {
+            $ong = $result_ong->fetch_assoc();
+            $_SESSION['user_id'] = $ong['id_ong'];
+            $_SESSION['user_nome'] = $ong['nome'];
+            $_SESSION['user_email'] = $ong['email'];
+            $_SESSION['user_tipo'] = 'ong';
+            $_SESSION['logged_in'] = true;
+            
+            echo "<div class='success-message'>Login realizado com sucesso!</div>";
+            echo "<script>
+                setTimeout(function() {
+                    window.location.href = '/telas/ong/home_ong.php';
+                }, 2000);
+            </script>";
+            exit();
+        } else {
+            echo "<div class='error-message'>Email ou senha inválidos.</div>";
+        }
 
-
-
-
-
-
-
-
-
-
-
-// }
-
-
-if (!$mysqli->real_connect($servername, $username, $password, $dbname, $port, NULL, MYSQLI_CLIENT_SSL)) {
-    die("Falha na conexão: " . $mysqli->connect_error);
+    } catch (Exception $e) {
+        echo "<div class='error-message'>Erro ao realizar login. Tente novamente mais tarde.</div>";
+    } finally {
+        // Fechar todas as conexões
+        if(isset($stmt)) $stmt->close();
+        if(isset($stmt2)) $stmt2->close();
+        if(isset($stmt3)) $stmt3->close();
+        if(isset($conn)) $conn->close();
+    }
 }
-
-//  Código de inserção
-$sql_code = "INSERT INTO DOADOR(nome, email, senha, telefone, cpf, data_cadastro, end_rua, end_numero, end_bairro, end_cidade, end_estado, end_complemento) 
-              VALUES ('Muller', 'te', 'te', 'te', 'te', '2024-11-13', 'a', 'a', 'a', 'a', 'a', 'a')";
-
-// Executa a consulta
-$sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
-
-
-
-$mysqli->close();
 ?>
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -115,7 +169,7 @@ $mysqli->close();
 
         <section class="login">
             <<<<<<< HEAD
-                <form id="loginForm" action="" method="POST" novalidate>
+                <form id="loginForm" action="login.php" method="POST" novalidate>
                 <div class="input-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" placeholder="Digite seu email" required aria-required="true">

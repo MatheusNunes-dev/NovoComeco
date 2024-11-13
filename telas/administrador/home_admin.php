@@ -1,14 +1,17 @@
 <?php
-// Verifica se o usuário tem permissão para acessar a página de administrador
-session_start(); // Inicia a sessão
+session_start();
+if (!isset($_SESSION['logged_in']) || !isset($_SESSION['user_tipo'])) {
+    header("Location: /telas/login.php");
+    exit();
+}
 
-// Verifica se a variável de sessão 'is_admin' está setada e é verdadeira
-if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
-    // Se não for administrador, redireciona para uma página de erro ou página pública
-    header('Location: ../usuarios/login.php');
-    exit;
+// Verificação específica para cada tipo de página
+if ($_SESSION['user_tipo'] !== 'administrador') { // ou 'doador' ou 'ong'
+    header("Location: /telas/login.php");
+    exit();
 }
 ?>
+
 
 
 <!DOCTYPE html>

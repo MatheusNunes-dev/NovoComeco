@@ -1,15 +1,12 @@
 <?php
 include('../../db.php');
-
+session_start(); // Adicionando início da sessão
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Dados pessoais
     $name = $_POST['name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
     $cpf = $_POST['cpf'];
-
-    // Endereço
     $cep = $_POST['cep'];
     $estado = $_POST['estado'];
     $cidade = $_POST['cidade'];
@@ -17,32 +14,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $rua = $_POST['rua'];
     $numero = $_POST['numero'];
     $complemento = $_POST['complemento'];
-
-    // Senha
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm-password'];
 
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
+    // Variável para armazenar mensagens de erro
+    $error_message = "";
 
+    // Validando se as senhas coincidem
+    if ($password !== $confirmPassword) {
+        $error_message = "As senhas não coincidem.";
+    } else {
+        // Verifica duplicidade de e-mail e CPF
+        $email_check_query = "SELECT * FROM administrador WHERE email = '$email'";
+        $email_result = $mysqli->query($email_check_query);
 
+        $cpf_check_query = "SELECT * FROM administrador WHERE cpf = '$cpf'";
+        $cpf_result = $mysqli->query($cpf_check_query);
 
-    if (!$mysqli->real_connect($servername, $username, $password, $dbname, $port, NULL, MYSQLI_CLIENT_SSL)) {
-    die("Falha na conexão: " . $mysqli->connect_error);
+        if ($email_result->num_rows > 0) {
+            $error_message = "Já existe uma conta cadastrada com este e-mail.";
+        } elseif ($cpf_result->num_rows > 0) {
+            $error_message = "Já existe uma conta cadastrada com este CPF.";
+        } else {
+            // Inserção no banco de dados
+            $sql_code = "INSERT INTO administrador (nome, email, senha, telefone, cpf, end_rua, end_numero, end_bairro, end_cidade, end_estado, end_complemento) 
+                         VALUES ('$name', '$email', '$password', '$phone', '$cpf', '$rua', '$numero', '$bairro', '$cidade', '$estado', '$complemento')";
+
+            if ($mysqli->query($sql_code) === TRUE) {
+                // Pegando o ID do usuário recém inserido
+                $id_usuario = $mysqli->insert_id;
+                
+                // Criando a sessão do usuário
+                $_SESSION['id'] = $id_usuario;
+                $_SESSION['nome'] = $name;
+                $_SESSION['email'] = $email;
+                $_SESSION['tipo'] = 'administrador'; // Adicione o tipo de usuário se necessário
+                
+                echo "<div class='success-message'>Cadastro realizado com sucesso!</div>";
+                echo "<script>
+                    setTimeout(function() {
+                        window.location.href = '../administrador/home_admin.php';
+                    }, 2000);
+                </script>";
+
+            } else {
+                $error_message = "Erro ao cadastrar: " . $mysqli->error;
+            }
+        }
+    }
+
+    // Exibindo a mensagem de erro, se existir
+    if (!empty($error_message)) {
+        echo "<div class='error-message'>$error_message</div>";
+    }
 }
-    $sql_code = "INSERT INTO administrador(nome, email, senha, telefone, cpf, end_rua, end_numero, end_bairro, end_cidade, end_estado, end_complemento, cep) 
-             VALUES ('$name', '$email', '$password', '$phone', '$cpf', '$rua', '$numero', '$bairro', '$cidade', '$estado', '$complemento', '$cep')";
-
-
-// Executa a consulta
-    $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
-
-    $mysqli->close();
-}
-
-
-
-
 ?>
 
 

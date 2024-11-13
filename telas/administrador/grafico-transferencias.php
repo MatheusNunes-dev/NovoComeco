@@ -1,5 +1,17 @@
+<php
 
+session_start();
+if (!isset($_SESSION['logged_in']) || !isset($_SESSION['user_tipo'])) {
+    header("Location: /telas/login.php");
+    exit();
+}
 
+// Verificação específica para cada tipo de página
+if ($_SESSION['user_tipo'] !== 'administrador') { // ou 'doador' ou 'ong'
+    header("Location: /telas/login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 

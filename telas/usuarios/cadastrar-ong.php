@@ -1,3 +1,76 @@
+<?php
+include('../../db.php');
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST['name'];
+    $cnpj = $_POST['cnpj'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $constituicao = $_POST['constituicao'];
+    $comprobatorio = $_POST['comprobatorio'];
+    $estatuto = $_POST['estatuto'];
+    $cep = $_POST['cep'];
+    $estado = $_POST['estado'];
+    $cidade = $_POST['cidade'];
+    $bairro = $_POST['bairro'];
+    $rua = $_POST['rua'];
+    $numero = $_POST['numero'];
+    $complemento = $_POST['complemento'];
+    $banco = $_POST['banco'];
+    $agencia = $_POST['agencia'];
+    $conta_corrente = $_POST['conta_corrente'];
+    $pix_key = $_POST['chave_pix'];
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirm-password'];
+
+
+
+    // Variável para armazenar mensagens de erro
+    $error_message = "";
+
+    // Validando se as senhas coincidem
+    if ($password !== $confirmPassword) {
+        $error_message = "As senhas não coincidem.";
+    } else {
+        // Verifica duplicidade de e-mail e CPF
+        $email_check_query = "SELECT * FROM ong WHERE email = '$email'";
+        $email_result = $mysqli->query($email_check_query);
+
+        $cpf_check_query = "SELECT * FROM ong WHERE cpf = '$cnpj'";
+        $cpf_result = $mysqli->query($cpf_check_query);
+
+        if ($email_result->num_rows > 0) {
+            $error_message = "Já existe uma conta cadastrada com este e-mail.";
+        } elseif ($cpf_result->num_rows > 0) {
+            $error_message = "Já existe uma conta cadastrada com este CPF.";
+        } else {
+            // Inserção no banco de dados
+    $sql_code = "INSERT INTO ong (nome, email, senha, telefone, cnpj, status, constituicao, comprobatorio, estatuto_social, 
+                                  end_rua, end_numero, end_bairro, end_cidade, end_estado, end_complemento, banco, agencia, conta_corrente, chave_pix, data_cadastro) 
+                 VALUES ('$name', '$email', '$password', '$phone', '$cnpj', 'pendente', '$constituicao', '$comprobatorio', '$estatuto', 
+                         '$rua', '$numero', '$bairro', '$cidade', '$estado', '$complemento', '$banco', '$agencia', '$conta_corrente', '$pix_key', now())";
+            if ($mysqli->query($sql_code) === TRUE) {
+                echo "<div class='success-message'>Cadastro realizado com sucesso!</div>";
+                echo "<script>
+                    setTimeout(function() {
+                        window.location.href = '../ong/home_ong.php';
+                    }, 2000);
+                </script>";
+            } else {
+                $error_message = "Erro ao cadastrar: " . $mysqli->error;
+            }
+        }
+    }
+
+    // Exibindo a mensagem de erro, se existir
+    if (!empty($error_message)) {
+        echo "<div class='error-message'>$error_message</div>";
+    }
+}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -51,8 +124,8 @@
         <h1 class="main-title">Criar Conta</h1>
 
         <section class="register-section">
-            <h1>Criar conta</h1>
-            <form action="/register" method="POST">
+            <p class="title">Adicione sua ong em nosso site!</p>
+            <form action="cadastrar-ong.php" method="POST">
                 <!-- Informações Básicas -->
                 <div class="input-group">
                     <input type="text" id="name" name="name" placeholder="Nome ONG" required>
@@ -103,16 +176,19 @@
 
                 <!-- Informações Bancárias -->
                 <div class="input-group">
-                    <input type="text" id="bank_account" name="bank_account" placeholder="Conta Bancária" required>
+                    <input type="text" id="banco" name="banco" placeholder="Banco" required>
                 </div>
                 <div class="input-group">
-                    <input type="text" id="current_account" name="current_account" placeholder="Conta Corrente" required>
+                    <input type="text" id="agencia" name="agencia" placeholder="Agência" required>
                 </div>
                 <div class="input-group">
-                    <input type="text" id="pix_key" name="pix_key" placeholder="Chave Pix" required>
+                    <input type="text" id="conta_corrente" name="conta_corrente" placeholder="Conta Corrente" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="chave_pix" name="chave_pix" placeholder="Chave Pix" required>
                 </div>
 
-                <!-- Senha - sempre por último -->
+                <!-- Senha -->
                 <div class="input-group">
                     <input type="password" id="password" name="password" placeholder="Senha" required>
                 </div>
