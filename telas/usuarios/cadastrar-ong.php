@@ -51,14 +51,8 @@
         <h1 class="main-title">Criar Conta</h1>
 
         <section class="register-section">
-<<<<<<< HEAD
             <h1>Criar conta</h1>
             <form action="/register" method="POST">
-=======
-            <h2 class="section-title">ONG</h2>
-            <p>Crie sua conta e ajude o próximo!</p>
-            <form action="../../register-ong.php" method="POST">
->>>>>>> 137f6d9cad2eb70cc142f14f9226d3d37d4ce5f1
                 <!-- Informações Básicas -->
                 <div class="input-group">
                     <input type="text" id="name" name="name" placeholder="Nome ONG" required>

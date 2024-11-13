@@ -79,7 +79,6 @@ body {
     background-color: #e59400;
 }
 
-<<<<<<< HEAD
 /* Adicionando estilo para a seção de senha */
 .password-section {
     margin-top: 2rem;
@@ -105,12 +104,6 @@ body {
     outline: none;
 }
 
-
-=======
-/* Estilo do título principal fora da caixa */
-
-
-/* Estilo do título dentro da caixa */
 .section-title {
     font-size: 48px;
     color: #FFA114;
@@ -118,12 +111,11 @@ body {
 }
 
 /* Ajustes no formulário */
-/* Estilo do título principal fora da caixa */
 .main-title {
-    text-align: center;  /* Centraliza o texto */
+    text-align: center;
     font-size: 72px;
     color: #FFA114;
-    margin-bottom: 20px;  /* Espaçamento entre o título e a caixa */
+    margin-bottom: 20px;
 }
 
 /* Estilo da seção de cadastro */
@@ -134,7 +126,7 @@ body {
     align-items: center;
     padding-top: 50px;
     background: #FDF3C0;
-    height: 100vh;  /* Garante que o container ocupe toda a altura da tela */
+    height: 100vh;
 }
 
 .register-section {
@@ -145,12 +137,9 @@ body {
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 30px;
-    margin-top: 20px;  /* Espaçamento entre o título e a caixa */
+    margin-top: 20px;
 }
 
-
-
->>>>>>> 137f6d9cad2eb70cc142f14f9226d3d37d4ce5f1
 /* Responsive Styles */
 @media (max-width: 1024px) {
     .register-section {
@@ -200,4 +189,3 @@ body {
         padding: 12px;
     }
 }
-

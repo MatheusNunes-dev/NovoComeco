@@ -7,7 +7,7 @@
     <title>Doação ONG</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/pagina-da-ong-2.css">
+    <link rel="stylesheet" href="../../css/pagina-da-ongg.css">
 </head>
 
 <body>
@@ -42,6 +42,9 @@
         </nav>
     </header>
 
+    <!-- Pop-up de erro -->
+
+
     <main class="container">
         <section class="donation-box">
             <h1 class="ong-name">Realizar Doação</h1> <!-- O título fora da donation-box -->
@@ -50,6 +53,13 @@
             </div>
             <div class="ong-description-box">
                 <p>A ONG realiza várias atividades focadas no bem-estar social, educação e saúde da comunidade. A missão é melhorar as condições de vida das pessoas em situação de vulnerabilidade.</p>
+            </div>
+
+            <div class="error-message" id="error-message" style="display: none;">
+                <div class="error-popup">
+                    <p><strong>Erro:</strong> O valor da doação deve ser no mínimo R$5.</p>
+                    <button class="close-btn" onclick="closeErrorPopup()">X</button>
+                </div>
             </div>
 
             <div class="input-box">
@@ -137,6 +147,35 @@
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
+
+    <script>
+        // Função para validar o valor da doação
+        function validateDonation() {
+            var valor = document.getElementById('valor').value;
+
+            // Verifica se o valor é menor que 5
+            if (parseFloat(valor) < 5) {
+                // Exibe o pop-up de erro
+                document.getElementById('error-message').style.display = 'flex';
+                return false; // Impede o envio do formulário
+            } else {
+                // Caso o valor seja válido, redireciona para o próximo passo
+                window.location.href = '../doador/realizar-pagamento.php';
+            }
+        }
+
+        // Função para fechar o pop-up
+        function closeErrorPopup() {
+            document.getElementById('error-message').style.display = 'none';
+        }
+
+        // Adiciona a validação no clique do botão "Confirmar doação"
+        document.querySelector('.confirm-button').addEventListener('click', function(event) {
+            event.preventDefault(); // Impede a ação padrão do link
+            validateDonation();
+        });
+    </script>
+
 </body>
 
 </html>

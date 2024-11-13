@@ -57,51 +57,51 @@
             <div class="grid-ongs">
                 <div class="ong">
                     <div class="img-cards">
-                        <img class="img-card" src="../../assets/imagem-ong.jpg">
+                        <img class="img-card" src="../../assets/ong-1.png">
                     </div>
                     <div class="btns-card">
-                        <a class="btn-card" href="pagina-da-ong.html">Doar</a>
+                        <a class="btn-card" href="pagina-da-ong-1.php">Doar</a>
                     </div>
                 </div>
 
                 <div class="ong">
                     <div class="img-cards">
-                        <img class="img-card" src="../../assets/imagem-ong.jpg">
+                        <img class="img-card" src="../../assets/ong-2.png">
                     </div>
                     <div class="btns-card">
-                        <a class="btn-card" href="pagina-da-ong.html">Doar</a>
+                        <a class="btn-card" href="pagina-da-ong-2.php">Doar</a>
                     </div>
                 </div>
                 <div class="ong">
                     <div class="img-cards">
-                        <img class="img-card" src="../../assets/imagem-ong.jpg">
+                        <img class="img-card" src="../../assets/ong-3.png">
                     </div>
                     <div class="btns-card">
-                        <a class="btn-card" href="pagina-da-ong.html">Doar</a>
+                        <a class="btn-card" href="pagina-da-ong-3.php">Doar</a>
                     </div>
                 </div>
                 <div class="ong">
                     <div class="img-cards">
-                        <img class="img-card" src="../../assets/imagem-ong.jpg">
+                        <img class="img-card" src="../../assets/ong-4.png">
                     </div>
                     <div class="btns-card">
-                        <a class="btn-card" href="pagina-da-ong.html">Doar</a>
+                        <a class="btn-card" href="pagina-da-ong-4.php">Doar</a>
                     </div>
                 </div>
                 <div class="ong">
                     <div class="img-cards">
-                        <img class="img-card" src="../../assets/imagem-ong.jpg">
+                        <img class="img-card" src="../../assets/ong-6.png">
                     </div>
                     <div class="btns-card">
-                        <a class="btn-card" href="pagina-da-ong.html">Doar</a>
+                        <a class="btn-card" href="pagina-da-ong-4.php">Doar</a>
                     </div>
                 </div>
                 <div class="ong">
                     <div class="img-cards">
-                        <img class="img-card" src="../../assets/imagem-ong.jpg">
+                        <img class="img-card" src="../../assets/ong-7.gif">
                     </div>
                     <div class="btns-card">
-                        <a class="btn-card" href="pagina-da-ong.html">Doar</a>
+                        <a class="btn-card" href="pagina-da-ong-4.php">Doar</a>
                     </div>
                 </div>
             </div>

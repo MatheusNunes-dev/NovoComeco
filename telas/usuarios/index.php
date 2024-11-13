@@ -79,18 +79,19 @@
 
         <section class="banner-cards-ongs">
             <div class="card-ong">
-                <img class="img-ong" src="../../assets/amigosdaterra.png">
-                <a class="btn-conhecer">CONHECER</a>
+                <img class="img-ong" src="../../assets/ong-1.png">
+                <a class="btn-conhecer" href="pagina-da-ong-1.php">CONHECER</a>
             </div>
             <div class="card-ong">
-                <img class="img-ong" src="../../assets/amoranimal.gif">
-                <a class="btn-conhecer">CONHECER</a>
+                <img class="img-ong" src="../../assets/ong-2.png">
+                <a class="btn-conhecer" href="pagina-da-ong-2.php">CONHECER</a>
             </div>
             <div class="card-ong">
-                <img class="img-ong" src="../../assets/maoamiga.png">
-                <a class="btn-conhecer">CONHECER</a>
-                </iv>
+                <img class="img-ong" src="../../assets/ong-3.png">
+                <a class="btn-conhecer" href="pagina-da-ong-3.php">CONHECER</a>
+            </div>
         </section>
+
 
         <section class="banner-cards-clientes">
             <div class="card-doador">
@@ -124,11 +125,7 @@
     <footer>
         <div class="footer">
             <div class="img-footer-start">
-<<<<<<< HEAD
-                <img class="boneco-footer" class="img-footer">
-=======
                 <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
->>>>>>> 137f6d9cad2eb70cc142f14f9226d3d37d4ce5f1
             </div>
             <div class="socias">
                 <div class="icons-col-1">
@@ -153,7 +150,7 @@
                 </div>
             </div>
             <div class="img-footer-end">
-                <img class="boneco-footer" class="img-footer">
+                <img class="boneco-footer" class="img-footer" <script src="../../js/header.js"></script>>
             </div>
         </div>
     </footer>
