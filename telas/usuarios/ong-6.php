@@ -1,3 +1,15 @@
+<?php
+session_start();
+$isLoggedIn = isset($_SESSION['user_id']); // Verifica se o usuário está logado
+$tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, caso esteja logado
+
+// Verifica e inicializa variáveis se não estiverem definidas
+$ong_id = isset($_GET['ong']) ? $_GET['ong'] : null; // ou um valor padrão, como '1'
+$valor = isset($_GET['valor']) ? $_GET['valor'] : '0.00';
+$taxa = isset($_GET['taxa']) ? $_GET['taxa'] : '0.00';
+$nome_doador = isset($_GET['doador']) ? $_GET['doador'] : 'Anônimo';
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -5,7 +17,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doação ONG</title>
-    <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
+    <link rel="shortcut icon" href="../../assets/logo.png" type="image/png">
     <link rel="stylesheet" href="../../css/global.css">
     <link rel="stylesheet" href="../../css/pagina-da-ong.css">
 </head>
@@ -46,10 +58,10 @@
         <section class="donation-box">
             <h1 class="ong-name">Realizar Doação</h1>
             <div class="donation-image">
-                <img src="../../assets/ong-3.png" alt="Imagem da ONG">
+                <img src="../../assets/ong-7.gif" alt="Imagem da ONG">
             </div>
             <div class="ong-description-box">
-                <p>A ONG Cultivando a Vida atua em projetos socioambientais, promovendo práticas sustentáveis, educação ambiental e apoio à agricultura familiar. Seu objetivo é incentivar o equilíbrio entre o desenvolvimento humano e o cuidado com a natureza.</p>
+                <p>A ONG Amor Animal é dedicada ao cuidado, proteção e resgate de animais abandonados ou em situação de risco. Realiza campanhas de adoção, castração e conscientização sobre bem-estar animal, buscando lares responsáveis para seus protegidos.</p>
             </div>
 
             <div class="error-message" id="error-message" style="display: none;">
@@ -60,18 +72,17 @@
             </div>
 
             <div class="input-box">
-                <label for="ong">Nome da ONG:</label>
-                <select id="ong" name="ong" required onchange="redirectToOng()">
-                    <option value="">Selecione uma ONG</option>
-                    <option value="mao-amiga">Mão Amiga</option>
-                    <option value="amigos-do-bem">Amigos do Bem</option>
-                    <option value="cultivando-a-vida">Cultivando a Vida</option>
-                    <option value="mais-uniao">Mais União</option>
-                    <option value="amigos-da-terra">Amigos da Terra</option>
-                    <option value="amor-animal">Amor Animal</option>
+                <label for="ong">Selecione uma ONG:</label>
+                <select id="ong" name="ong" onchange="redirecionarParaOng()">
+                    <option value="" <?php echo ($ong_id == '') ? 'selected' : ''; ?>>Selecione uma ONG</option>
+                    <option value="1" <?php echo ($ong_id == 1) ? 'selected' : ''; ?>>Mão Amiga</option>
+                    <option value="2" <?php echo ($ong_id == 2) ? 'selected' : ''; ?>>Amigos do Bem</option>
+                    <option value="3" <?php echo ($ong_id == 3) ? 'selected' : ''; ?>>Cultivando a Vida</option>
+                    <option value="4" <?php echo ($ong_id == 4) ? 'selected' : ''; ?>>Mais União</option>
+                    <option value="5" <?php echo ($ong_id == 5) ? 'selected' : ''; ?>>Amigos da Terra</option>
+                    <option value="6" <?php echo ($ong_id == 6) ? 'selected' : ''; ?>>Amor Animal</option>
                 </select>
             </div>
-
 
             <div class="input-box">
                 <label for="valor">Valor (R$):</label>
@@ -100,24 +111,30 @@
     </footer>
 
     <script>
-        function redirectToOng() {
-            const ong = document.getElementById('ong').value;
-
-            // Define URLs de redirecionamento para cada ONG
-            const urls = {
-                "mao-amiga": "pagina-da-ong-1.php",
-                "amigos-do-bem": "pagina-da-ong-2.php",
-                "cultivando-a-vida": "pagina-da-ong-3.php",
-                "mais-uniao": "pagina-da-ong-4.php",
-                "amigos-da-terra": "pagina-da-ong-5.php",
-                "amor-animal": "pagina-da-ong-6.php",
-            };
-
-            if (urls[ong]) {
-                window.location.href = urls[ong];
-            }
+        function redirecionarParaOng() {
+            const ongId = document.getElementById('ong').value;
+            window.location.href = `ong-${ongId}.php`;
         }
 
+        function validateDonation() {
+            const valor = document.getElementById('valor').value;
+            const ong_id = document.getElementById('ong').value; // Captura o ID da ONG selecionada
+
+            if (valor >= 5) {
+                const taxa = (valor * 0.05).toFixed(2); // Calcula a taxa de 5% do valor
+
+                <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null) { ?>
+                    const nome_doador = '<?php echo $_SESSION['user_nome'] ?? "Anônimo"; ?>';
+                    // Redireciona para a página de pagamento, passando os parâmetros necessários
+                    window.location.href = `../doador/realizar-pagamento.php?ong=${ong_id}&valor=${valor}&taxa=${taxa}&doador=${nome_doador}`;
+                <?php } else { ?>
+                    alert('Você precisa estar logado para realizar uma doação.');
+                <?php } ?>
+            } else {
+                // Exibe a mensagem de erro se o valor for menor que R$5
+                document.getElementById('error-message').style.display = 'flex';
+            }
+        }
 
         function closeErrorPopup() {
             document.getElementById('error-message').style.display = 'none';

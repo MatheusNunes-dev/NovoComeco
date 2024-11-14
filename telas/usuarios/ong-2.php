@@ -1,3 +1,18 @@
+<?php
+session_start();
+$isLoggedIn = isset($_SESSION['user_id']); // Verifica se o usuário está logado
+$tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, caso esteja logado
+
+// Verifica e inicializa variáveis se não estiverem definidas
+$ong_id = isset($_GET['ong']) ? $_GET['ong'] : null; // ou um valor padrão, como '1'
+$valor = isset($_GET['valor']) ? $_GET['valor'] : '0.00';
+$taxa = isset($_GET['taxa']) ? $_GET['taxa'] : '0.00';
+$nome_doador = isset($_GET['doador']) ? $_GET['doador'] : 'Anônimo';
+
+$ong_id_selecionada = isset($_GET['ong']) ? $_GET['ong'] : null;
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -46,10 +61,10 @@
         <section class="donation-box">
             <h1 class="ong-name">Realizar Doação</h1>
             <div class="donation-image">
-                <img src="../../assets/ong-6.png" alt="Imagem da ONG">
+                <img src="../../assets/ong-2.png" alt="Imagem da ONG">
             </div>
             <div class="ong-description-box">
-                <p>Amigos da Terra trabalha pela preservação ambiental, com iniciativas voltadas à proteção de áreas naturais, reflorestamento e conscientização sobre o impacto das mudanças climáticas. Seu foco é construir um futuro mais sustentável para o planeta.</p>
+                <p>Amigos do Bem é uma organização focada na transformação de vidas por meio de ações educacionais, de saúde e geração de renda em comunidades carentes. Seu compromisso é reduzir as desigualdades sociais, levando esperança e oportunidades para quem mais precisa.</p>
             </div>
 
             <div class="error-message" id="error-message" style="display: none;">
@@ -60,15 +75,15 @@
             </div>
 
             <div class="input-box">
-                <label for="ong">Nome da ONG:</label>
-                <select id="ong" name="ong" required onchange="redirectToOng()">
-                    <option value="">Selecione uma ONG</option>
-                    <option value="mao-amiga">Mão Amiga</option>
-                    <option value="amigos-do-bem">Amigos do Bem</option>
-                    <option value="cultivando-a-vida">Cultivando a Vida</option>
-                    <option value="mais-uniao">Mais União</option>
-                    <option value="amigos-da-terra">Amigos da Terra</option>
-                    <option value="amor-animal">Amor Animal</option>
+                <label for="ong">Selecione uma ONG:</label>
+                <select id="ong" name="ong" onchange="redirecionarParaOng()">
+                    <option value="" <?php echo ($ong_id == '') ? 'selected' : ''; ?>>Selecione uma ONG</option>
+                    <option value="1" <?php echo ($ong_id == 1) ? 'selected' : ''; ?>>Mão Amiga</option>
+                    <option value="2" <?php echo ($ong_id == 2) ? 'selected' : ''; ?>>Amigos do Bem</option>
+                    <option value="3" <?php echo ($ong_id == 3) ? 'selected' : ''; ?>>Cultivando a Vida</option>
+                    <option value="4" <?php echo ($ong_id == 4) ? 'selected' : ''; ?>>Mais União</option>
+                    <option value="5" <?php echo ($ong_id == 5) ? 'selected' : ''; ?>>Amigos da Terra</option>
+                    <option value="6" <?php echo ($ong_id == 6) ? 'selected' : ''; ?>>Amor Animal</option>
                 </select>
             </div>
 
@@ -98,29 +113,62 @@
             <!-- Conteúdo do rodapé -->
         </div>
     </footer>
-
     <script>
-        function redirectToOng() {
-            const ong = document.getElementById('ong').value;
+        function redirecionarParaOng() {
+            const ongId = document.getElementById('ong').value;
 
-            // Define URLs de redirecionamento para cada ONG
-            const urls = {
-                "mao-amiga": "pagina-da-ong-1.php",
-                "amigos-do-bem": "pagina-da-ong-2.php",
-                "cultivando-a-vida": "pagina-da-ong-3.php",
-                "mais-uniao": "pagina-da-ong-4.php",
-                "amigos-da-terra": "pagina-da-ong-5.php",
-                "amor-animal": "pagina-da-ong-6.php",
-            };
+            // Redireciona para a página da ONG correspondente
+            window.location.href = `ong-${ongId}.php`;
+        }
 
-            if (urls[ong]) {
-                window.location.href = urls[ong];
+
+        function validateDonation() {
+            const valor = document.getElementById('valor').value;
+            const ong_id = document.getElementById('ong').value; // Exemplo: "6" para Amor Animal
+
+            if (valor >= 5) {
+                const taxa = (valor * 0.05).toFixed(2); // 5% do valor
+
+                <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) { ?>
+                    const nome_doador = '<?php echo $_SESSION['user_nome'] ?? "Anônimo"; ?>';
+                    window.location.href = `../doador/realizar-pagamento.php?ong=${ong_id}&valor=${valor}&taxa=${taxa}&doador=${nome_doador}`;
+                <?php } else { ?>
+                    alert('Você precisa estar logado para realizar uma doação.');
+                <?php } ?>
+            } else {
+                document.getElementById('error-message').style.display = 'flex';
             }
+        }
+
+
+
+        function closeErrorPopup() {
+            document.getElementById('error-message').style.display = 'none';
         }
 
 
         function closeErrorPopup() {
             document.getElementById('error-message').style.display = 'none';
+        }
+
+        function validateDonation() {
+            const valor = document.getElementById('valor').value;
+            const nome_ong = document.getElementById('ong').value;
+
+            if (valor >= 5) {
+                const taxa = (valor * 0.05).toFixed(2); // 5% do valor
+
+                // Verifica se o usuário está logado
+                <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) { ?>
+                    // Redireciona para a página de pagamento, passando as variáveis necessárias
+                    const nome_doador = '<?php echo $_SESSION['user_nome'] ?? "Anônimo"; ?>';
+                    window.location.href = `../doador/realizar-pagamento.php?ong=${nome_ong}&valor=${valor}&taxa=${taxa}&doador=${nome_doador}`;
+                <?php } else { ?>
+                    alert('Você precisa estar logado para realizar uma doação.');
+                <?php } ?>
+            } else {
+                document.getElementById('error-message').style.display = 'flex';
+            }
         }
     </script>
 </body>

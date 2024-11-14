@@ -1,7 +1,7 @@
 <?php
-    session_start();
-    $isLoggedIn = isset($_SESSION['user_id']); // Verifica se o usuário está logado
-    $tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, caso esteja logado
+session_start();
+$isLoggedIn = isset($_SESSION['user_id']); // Verifica se o usuário está logado
+$tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, caso esteja logado
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +49,7 @@
             </div>
             <div class="user">
                 <?php if ($isLoggedIn): ?>
-        <!-- Direciona para o perfil com base no tipo de usuário -->
+                    <!-- Direciona para o perfil com base no tipo de usuário -->
                     <?php if ($tipoUsuario === 'administrador'): ?>
                         <a href="../administrador/configuracoes-administrador.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
                     <?php elseif ($tipoUsuario === 'doador'): ?>
@@ -58,7 +58,7 @@
                         <a href="../ong/configuracoes-ong.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
                     <?php endif; ?>
                 <?php else: ?>
-        <!-- Se o usuário não está logado, o botão leva para a página de login -->
+                    <!-- Se o usuário não está logado, o botão leva para a página de login -->
                     <a href="login.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
                 <?php endif; ?>
             </div>
@@ -76,7 +76,7 @@
                         <img class="img-card" src="../../assets/ong-1.png">
                     </div>
                     <div class="btns-card">
-                        <a class="btn-card" href="pagina-da-ong-1.php">Doar</a>
+                        <a class="btn-card" href="ong-1.php">Doar</a>
                     </div>
                 </div>
 
@@ -85,7 +85,7 @@
                         <img class="img-card" src="../../assets/ong-2.png">
                     </div>
                     <div class="btns-card">
-                        <a class="btn-card" href="pagina-da-ong-2.php">Doar</a>
+                        <a class="btn-card" href="ong-2.php">Doar</a>
                     </div>
                 </div>
                 <div class="ong">
@@ -93,7 +93,7 @@
                         <img class="img-card" src="../../assets/ong-3.png">
                     </div>
                     <div class="btns-card">
-                        <a class="btn-card" href="pagina-da-ong-3.php">Doar</a>
+                        <a class="btn-card" href="ong-3.php">Doar</a>
                     </div>
                 </div>
                 <div class="ong">
@@ -101,7 +101,7 @@
                         <img class="img-card" src="../../assets/ong-4.png">
                     </div>
                     <div class="btns-card">
-                        <a class="btn-card" href="pagina-da-ong-4.php">Doar</a>
+                        <a class="btn-card" href="ong-4.php">Doar</a>
                     </div>
                 </div>
                 <div class="ong">
@@ -109,7 +109,7 @@
                         <img class="img-card" src="../../assets/ong-6.png">
                     </div>
                     <div class="btns-card">
-                        <a class="btn-card" href="pagina-da-ong-4.php">Doar</a>
+                        <a class="btn-card" href="ong-5.php">Doar</a>
                     </div>
                 </div>
                 <div class="ong">
@@ -117,7 +117,7 @@
                         <img class="img-card" src="../../assets/ong-7.gif">
                     </div>
                     <div class="btns-card">
-                        <a class="btn-card" href="pagina-da-ong-4.php">Doar</a>
+                        <a class="btn-card" href="ong-6.php">Doar</a>
                     </div>
                 </div>
             </div>

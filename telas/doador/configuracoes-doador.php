@@ -1,13 +1,12 @@
 <?php
 session_start();
 
-// Verificar se o usuário é um administrador
+// Verificar se o usuário está logado como doador
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'doador') {
     header("Location: /telas/usuarios/login.php");
     exit();
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -69,9 +68,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
                 <p>FOTO</p>
             </div>
             <div class="donation-details">
-                <p><strong>Usuário:</strong> Nome do Usuário</p>
-                <p><strong>E-mail:</strong> exemplo@dominio.com</p>
-                <p><strong>CPF:</strong> 000.000.000-00</p>
+                <p><strong>Usuário:</strong> <?php echo $_SESSION['user_nome']; ?></p>
+                <p><strong>E-mail:</strong> <?php echo $_SESSION['user_email']; ?></p>
             </div>
         </section>
 

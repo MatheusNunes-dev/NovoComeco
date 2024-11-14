@@ -1,33 +1,60 @@
 <?php
 session_start();
 
-// Verificar se o usuário é um administrador
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'doador') {
-    header("Location: /telas/usuarios/login.php");
+// Verifica se o usuário está logado, caso contrário, redireciona
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    echo "<script>alert('Você precisa estar logado para realizar uma doação. Redirecionando para a página de login...');</script>";
+    header("Refresh: 2; url=/telas/usuarios/login.php");
+    exit();
+}
+
+// Captura o ID da ONG da URL
+$ong_id = $_GET['ong'] ?? null; // Agora vamos pegar o ID diretamente dos parâmetros da URL
+
+// Mapeamento de ONGs: ID => Nome da ONG
+$ongs = [
+    1 => "Mão Amiga",
+    2 => "Amigos do Bem",
+    3 => "Cultivando a Vida",
+    4 => "Coração Solidário",
+    5 => "Amigos da Terra",
+    6 => "Amor Animal"
+];
+
+// Verifica se o ID é válido e obtém o nome da ONG
+$ong_selecionada = isset($ongs[$ong_id]) ? $ongs[$ong_id] : "Não especificado";
+
+// Captura outros parâmetros da URL
+$valor = $_GET['valor'] ?? 0;
+$taxa = $_GET['taxa'] ?? 0;
+$nome_doador = $_SESSION['user_nome'] ?? ($_GET['doador'] ?? 'Anônimo');
+
+// Verifica se os valores são válidos
+if ($valor <= 0 || $taxa < 0) {
+    echo "<script>alert('Valores de doação ou taxa inválidos.');</script>";
+    header("Refresh: 2; url=/telas/usuarios/pagina-quero-doar.php");
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Novo Começo</title>
-    <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
+    <title>Novo Começo - Realizar Pagamento</title>
+    <link rel="shortcut icon" href="../../assets/logo.png" type="image/png">
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/realizar-pagamento.css">
-
+    <link rel="stylesheet" href="../../css/realizar-pagamento-copy-copy.css">
 </head>
 
 <body>
     <header>
         <nav class="navbar nav-lg-screen" id="navbar">
             <button class="btn-icon-header" onclick="toggleSideBar()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list"
-                    viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                        d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
                 </svg>
             </button>
             <div>
@@ -35,15 +62,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
-                    <li>
-                        <button class="btn-icon-header" onclick="toggleSideBar()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                class="bi bi-x" viewBox="0 0 16 16">
-                                <path
-                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                            </svg>
-                        </button>
-                    </li>
+                    <li><button class="btn-icon-header" onclick="toggleSideBar()">X</button></li>
                     <li class="nav-link"><a href="../../telas/usuarios/index.php">HOME</a></li>
                     <li class="nav-link"><a href="../../telas/usuarios/pagina-quero-doar.php">ONG'S</a></li>
                     <li class="nav-link"><a href="../../telas/usuarios/sobre.php">SOBRE</a></li>
@@ -57,68 +76,43 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
             </div>
         </nav>
     </header>
+
     <div class="main-container">
-        <div class="pix-box">
-            <div class="pix-countdown">
-                <div class="pix-image">
-                    <img id="qrCode" alt="QR Code Aleatório">
-                </div>
-            </div>
-            <div>
-                <p>Chave gerada: <span id="chave"></span></p>
-            </div>
-            <div>
-                <button onclick="gerarQRCodeComChave()">Gerar QR Code com Chave Aleatória</button>
+        <!-- Seção de Resumo da Doação -->
+        <div class="summary-section">
+            <h2>Resumo da Doação</h2>
+            <div class="button-container">
+                <p><span class="fake-button"><strong>ONG Selecionada:</strong> Mão Amiga</span></p>
+                <p><span class="fake-button"><strong>Nome do Doador:</strong> Tiago</span></p>
+                <p><span class="fake-button"><strong>Valor da Doação:</strong> R$ 50,00</span></p>
+                <p><span class="fake-button"><strong>Taxa:</strong> R$ 2,50</span></p>
             </div>
         </div>
-        <div class="home-button" onclick="window.location.href='../usuarios/pagina-quero-doar.php'">
-            <p>Voltar</p>
+
+        <!-- Caixa PIX -->
+        <div class="pix-box">
+            <div class="pix-image">
+                <img id="qrCode" alt="QR Code Aleatório" />
+            </div>
+            <p>Chave gerada: <span id="chave"></span></p>
+            <button onclick="gerarQRCodeComChave()">Gerar QR Code com Chave Aleatória</button>
         </div>
     </div>
+
+    <div class="button-group">
+        <button class="btn-voltar" onclick="window.history.back()">Voltar</button>
+        <button class="btn-pronto" onclick="window.location.href='confirmacao-pagamento.php'">Pronto</button>
+    </div>
+
     <footer>
         <div class="footer">
             <div class="img-footer-start">
-                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
-            </div>
-            <div class="socias">
-                <div class="icons-col-1">
-                    <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/google.png">
-                        <p>novocomeço@gmail.com</p>
-                    </div>
-                    <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/instagram.png">
-                        <p>@novocomeço</p>
-                    </div>
-                </div>
-                <div class="icons-col-2">
-                    <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/whatsapp.png">
-                        <p>(41)99997676</p>
-                    </div>
-                    <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/facebook.png">
-                        <p>@novocomeco</p>
-                    </div>
-                </div>
-            </div>
-            <div class="img-footer-end">
-                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
+                <img class="boneco-footer" src="../../assets/img-footer.png" alt="Imagem do rodapé">
             </div>
         </div>
     </footer>
-    <script src="../../js/header.js"></script>
 
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
-    </div>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
+
 
     <script>
         // Função para gerar uma chave aleatória
@@ -139,10 +133,11 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
             document.getElementById("chave").innerText = chaveAleatoria;
         }
 
-        // Gera um QR code inicial com chave aleatória
-        gerarQRCodeComChave();
+        // Gera um QR code inicial com chave aleatória ao carregar a página
+        window.onload = function() {
+            gerarQRCodeComChave();
+        };
     </script>
-
 </body>
 
 </html>

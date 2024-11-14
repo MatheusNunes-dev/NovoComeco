@@ -1,0 +1,162 @@
+.main-container h2 {
+    font-size: 2.5rem; /* Tamanho ajustado para se alinhar com a seção principal */
+    font-weight: 700;
+    text-align: center;
+    color: #FFA114; /* Usando o tom laranja como destaque */
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Adicionando sombra leve */
+}
+
+.main-container p {
+    font-size: 1.1rem; /* Fonte similar ao tamanho do segundo estilo */
+    color: #666; /* Cor mais suave para o texto */
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+/* Destaque para os valores */
+.main-container p strong {
+    color: #FFA114; /* Mantendo a consistência nas cores */
+    font-size: 1.4rem;
+}
+
+/* Estilo do container de Resumo */
+.main-container {
+    width: 70%;
+    max-width: 1100px;
+    background: #fdf3c0; /* Cor de fundo mais suave */
+    padding: 30px 20px;
+    display: flex;
+    justify-content: space-between; /* Espaça os elementos da esquerda para a direita */
+    gap: 20px;
+    margin: 0 auto;
+    border-radius: 15px; /* Borda arredondada mais suave */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra leve */
+}
+
+/* Estilo para os "botões" não clicáveis */
+.fake-button {
+    display: inline-block;
+    padding: 8px 30px;
+    background-color: #F8E2A1;
+    border: 3px solid #FFA114; /* Borda laranja */
+    border-radius: 50px; /* Tornando os botões circulares */
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+    cursor: default; /* Removendo a interação com o mouse */
+    margin: 10px 0;
+    transition: background-color 0.3s ease, transform 0.1s ease-in-out;
+}
+
+/* Responsividade: ajustes para telas menores */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column; /* Empilha os elementos verticalmente */
+        gap: 30px; /* Aumenta o espaço entre os elementos */
+    }
+
+    .main-container h2 {
+        font-size: 2rem;
+    }
+
+    .main-container p {
+        font-size: 1rem;
+    }
+
+    .pix-box {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .pix-box button {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
+
+/* Estilo do container Pix */
+.pix-box {
+    width: 40%; /* Tamanho ajustado para ficar à direita */
+    background: #F8E2A1; /* Cor de fundo mais suave */
+    border: 6px solid #FFA114; /* Cor de borda no estilo da segunda folha */
+    border-radius: 60px; /* Borda arredondada */
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Efeito de hover para a caixa Pix */
+.pix-box:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo do botão */
+.pix-box button {
+    background-color: #FFA114; /* Cor de fundo laranja */
+    color: white; /* Texto branco para contraste */
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    border-radius: 8px; /* Bordas arredondadas */
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.1s ease-in-out;
+    margin-top: 25px;
+}
+
+.pix-box button:hover {
+    background-color: #FF8C00; /* Cor de hover mais escura */
+}
+
+.pix-box button:active {
+    transform: translateY(2px); /* Efeito de clique */
+}
+
+        /* Estilo dos botões Voltar e Pronto */
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1100px;
+            margin: 20px auto;
+        }
+
+        .btn-voltar, .btn-pronto {
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-voltar {
+            background-color: #FFA114;
+            color: white;
+        }
+
+        .btn-voltar:hover {
+            background-color: #FF8C00;
+        }
+
+
+        .btn-pronto {
+            background: #4379E3;
+            border: 1px solid #1753CA;
+        }
+        
+        .btn-pronto:hover {
+            background: #3a66c2; /* Invertendo o gradiente ao passar o mouse */
+            transform: translateY(-4px); /* Efeito de elevação ao passar o mouse */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
+        }
+
+        .btn-voltar:active, .btn-pronto:active {
+            transform: translateY(2px); /* Efeito de clique */
+        }
+
