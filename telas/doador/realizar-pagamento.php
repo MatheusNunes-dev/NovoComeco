@@ -82,10 +82,10 @@ if ($valor <= 0 || $taxa < 0) {
         <div class="summary-section">
             <h2>Resumo da Doação</h2>
             <div class="button-container">
-                <p><span class="fake-button"><strong>ONG Selecionada:</strong> Mão Amiga</span></p>
-                <p><span class="fake-button"><strong>Nome do Doador:</strong> Tiago</span></p>
-                <p><span class="fake-button"><strong>Valor da Doação:</strong> R$ 50,00</span></p>
-                <p><span class="fake-button"><strong>Taxa:</strong> R$ 2,50</span></p>
+                <p><span class="fake-button"><strong>ONG Selecionada:</strong> <?php echo $ong_selecionada; ?></span></p>
+                <p><span class="fake-button"><strong>Nome do Doador:</strong> <?php echo htmlspecialchars($nome_doador); ?></span></p>
+                <p><span class="fake-button"><strong>Valor da Doação:</strong> R$ <?php echo number_format($valor, 2, ',', '.'); ?></span></p>
+                <p><span class="fake-button"><strong>Taxa:</strong> R$ <?php echo number_format($taxa, 2, ',', '.'); ?></span></p>
             </div>
         </div>
 
