@@ -86,17 +86,17 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
 
         <section class="banner-cards-ongs">
             <div class="card-ong">
-                <img class="img-ong" src="../../assets/amigosdaterra.png">
-                <a class="btn-conhecer">CONHECER</a>
+                <img class="img-ong" src="../../assets/ong-1.png">
+                <a class="btn-conhecer" href="pagina-da-ong-1.php">CONHECER</a>
             </div>
             <div class="card-ong">
-                <img class="img-ong" src="../../assets/amoranimal.gif">
-                <a class="btn-conhecer">CONHECER</a>
+                <img class="img-ong" src="../../assets/ong-2.png">
+                <a class="btn-conhecer" href="pagina-da-ong-2.php">CONHECER</a>
             </div>
             <div class="card-ong">
-                <img class="img-ong" src="../../assets/maoamiga.png">
-                <a class="btn-conhecer">CONHECER</a>
-                </iv>
+                <img class="img-ong" src="../../assets/ong-3.png">
+                <a class="btn-conhecer" href="pagina-da-ong-3.php">CONHECER</a>
+            </div>
         </section>
 
         <section class="banner-cards-clientes">

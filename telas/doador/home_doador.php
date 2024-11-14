@@ -15,7 +15,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novo Começo</title>
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="../../css/home.css">
 </head>
 
 <body>
@@ -83,17 +83,17 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
 
         <section class="banner-cards-ongs">
             <div class="card-ong">
-                <img class="img-ong" src="../../assets/amigosdaterra.png">
-                <a class="btn-conhecer">CONHECER</a>
+                <img class="img-ong" src="../../assets/ong-1.png">
+                <a class="btn-conhecer" href="pagina-da-ong-1.php">CONHECER</a>
             </div>
             <div class="card-ong">
-                <img class="img-ong" src="../../assets/amoranimal.gif">
-                <a class="btn-conhecer">CONHECER</a>
+                <img class="img-ong" src="../../assets/ong-2.png">
+                <a class="btn-conhecer" href="pagina-da-ong-2.php">CONHECER</a>
             </div>
             <div class="card-ong">
-                <img class="img-ong" src="../../assets/maoamiga.png">
-                <a class="btn-conhecer">CONHECER</a>
-                </iv>
+                <img class="img-ong" src="../../assets/ong-3.png">
+                <a class="btn-conhecer" href="pagina-da-ong-3.php">CONHECER</a>
+            </div>
         </section>
 
         <section class="banner-cards-clientes">
@@ -128,7 +128,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
     <footer>
         <div class="footer">
             <div class="img-footer-start">
-                <img class="boneco-footer" class="img-footer" <script src="../../js/header.js"></script>>
+                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
             </div>
             <div class="socias">
                 <div class="icons-col-1">
@@ -153,7 +153,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
                 </div>
             </div>
             <div class="img-footer-end">
-                <img class="boneco-footer" class="img-footer" <script src="../../js/header.js"></script>>
+                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
             </div>
         </div>
     </footer>
