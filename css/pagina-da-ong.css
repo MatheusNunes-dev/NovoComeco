@@ -78,8 +78,10 @@
 .donation-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* A imagem será redimensionada para cobrir completamente a div sem distorção */
+    object-fit: cover; /* Faz a imagem cobrir a área sem distorção */
+    border-radius: 50%; /* Torna a imagem circular */
 }
+
 
 .note {
     font-size: 0.8vw;

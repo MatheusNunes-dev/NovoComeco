@@ -85,9 +85,10 @@
                 <div class="cancel-button" onclick="window.location.href='../usuarios/pagina-quero-doar.php'">
                     <p>Cancelar doação</p>
                 </div>
-                <div class="confirm-button" onclick="validateDonation()">
+                <div class="confirm-button" onclick="window.location.href='../doador/realizar-pagamento.php'">
                     <p>Confirmar doação</p>
                 </div>
+
             </div>
 
         </section>
