@@ -86,10 +86,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                             </svg>
                         </button></li>
-                    <li class="nav-link"><a href="../../telas/usuarios/index.php">HOME</a></li>
-                    <li class="nav-link"><a href="../../telas/usuarios/pagina-quero-doar.php">ONG'S</a></li>
-                    <li class="nav-link"><a href="../../telas/usuarios/sobre.php">SOBRE</a></li>
-                    <li class="nav-link"><a href="../../telas/usuarios/contato.php">CONTATO</a></li>
+                    <li class="nav-link"><a href="../../telas/administrador/configuracoes-administrador">CONFIGURAÇÕES DO ADMIN</a></li>
                 </ul>
             </div>
             <div class="user">

@@ -1,8 +1,10 @@
 <?php
-//include('../../protect.php');
-
-
+    session_start();
+    $isLoggedIn = isset($_SESSION['user_id']); // Verifica se o usuário está logado
+    $tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, caso esteja logado
 ?>
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -47,9 +49,19 @@
                 </ul>
             </div>
             <div class="user">
-                <a href="../../telas/usuarios/login.php">
-                    <img class="img-user" src="../../assets/user.png" alt="Usuário">
-                </a>
+                <?php if ($isLoggedIn): ?>
+        <!-- Direciona para o perfil com base no tipo de usuário -->
+                    <?php if ($tipoUsuario === 'administrador'): ?>
+                        <a href="../administrador/configuracoes-administrador.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
+                    <?php elseif ($tipoUsuario === 'doador'): ?>
+                        <a href="../doador/configuracoes-doador.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
+                    <?php elseif ($tipoUsuario === 'ong'): ?>
+                        <a href="../ong/configuracoes-ong.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
+                    <?php endif; ?>
+                <?php else: ?>
+        <!-- Se o usuário não está logado, o botão leva para a página de login -->
+                    <a href="login.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
+                <?php endif; ?>
             </div>
         </nav>
     </header>
@@ -122,38 +134,38 @@
         </section>
     </main>
 
-    <footer>
-        <div class="footer">
-            <div class="img-footer-start">
-                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
-            </div>
-            <div class="socias">
-                <div class="icons-col-1">
-                    <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/google.png">
-                        <p>novocomeço@gmail.com</p>
+        <footer>
+            <div class="footer">
+                <div class="img-footer-start">
+                    <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
+                </div>
+                <div class="socias">
+                    <div class="icons-col-1">
+                        <div class="social-footer">
+                            <img class="icon-footer" src="../../assets/google.png">
+                            <p>novocomeço@gmail.com</p>
+                        </div>
+                        <div class="social-footer">
+                            <img class="icon-footer" src="../../assets/instagram.png">
+                            <p>@novocomeço</p>
+                        </div>
                     </div>
-                    <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/instagram.png">
-                        <p>@novocomeço</p>
+                    <div class="icons-col-2">
+                        <div class="social-footer">
+                            <img class="icon-footer" src="../../assets/whatsapp.png">
+                            <p>(41)99997676</p>
+                        </div>
+                        <div class="social-footer">
+                            <img class="icon-footer" src="../../assets/facebook.png">
+                            <p>@novocomeco</p>
+                        </div>
                     </div>
                 </div>
-                <div class="icons-col-2">
-                    <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/whatsapp.png">
-                        <p>(41)99997676</p>
-                    </div>
-                    <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/facebook.png">
-                        <p>@novocomeco</p>
-                    </div>
+                <div class="img-footer-end">
+                    <img class="boneco-footer" class="img-footer" <script src="../../js/header.js"></script>>
                 </div>
             </div>
-            <div class="img-footer-end">
-                <img class="boneco-footer" class="img-footer" <script src="../../js/header.js"></script>>
-            </div>
-        </div>
-    </footer>
+        </footer>
 
     <script src="../../js/header.js"></script>
 

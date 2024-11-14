@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<div class='success-message'>Cadastro realizado com sucesso!</div>";
                 echo "<script>
                     setTimeout(function() {
-                        window.location.href = '../administrador/home_admin.php';
+                        window.location.href = '../administrador/configuracoes-administrador.php';
                     }, 2000);
                 </script>";
 

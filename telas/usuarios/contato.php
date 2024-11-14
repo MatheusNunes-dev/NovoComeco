@@ -1,3 +1,12 @@
+<?php
+    session_start();
+    $isLoggedIn = isset($_SESSION['user_id']); // Verifica se o usuário está logado
+    $tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, caso esteja logado
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -42,11 +51,20 @@
                 </ul>
             </div>
             <div class="user">
-                <a href="../../telas/usuarios/login.php">
-                    <img class="img-user" src="../../assets/user.png" alt="Usuário">
-                </a>
+                <?php if ($isLoggedIn): ?>
+        <!-- Direciona para o perfil com base no tipo de usuário -->
+                    <?php if ($tipoUsuario === 'administrador'): ?>
+                        <a href="../administrador/configuracoes-administrador.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
+                    <?php elseif ($tipoUsuario === 'doador'): ?>
+                        <a href="../doador/configuracoes-doador.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
+                    <?php elseif ($tipoUsuario === 'ong'): ?>
+                        <a href="../ong/configuracoes-ong.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
+                    <?php endif; ?>
+                <?php else: ?>
+        <!-- Se o usuário não está logado, o botão leva para a página de login -->
+                    <a href="login.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
+                <?php endif; ?>
             </div>
-        </nav>
     </header>
     <main>
         <section>
