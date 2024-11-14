@@ -1,10 +1,13 @@
-<php
+<?php
+session_start();
 
-
-
-
-
+// Verificar se o usuário é um administrador
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'administrador') {
+    header("Location: /telas/usuarios/login.php");
+    exit();
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 

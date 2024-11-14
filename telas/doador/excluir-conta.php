@@ -1,14 +1,11 @@
 <?php
-// session_start(); // Inicia a sessão
-// if (!isset($_SESSION['logged_in']) || !isset($_SESSION['user_tipo'])) {
-//     header("Location: /telas/login.php");
-//     exit();
-// // Verifica se a variável de sessão 'is_doador' está setada e é verdadeira
-// if (!isset($_SESSION['is_doador']) || $_SESSION['is_doador'] !== true) {
-//     // Se não for doador, redireciona para a página de login
-//     header('Location: login.php');
-//     exit;
-// }
+session_start();
+
+// Verificar se o usuário é um administrador
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'doador') {
+    header("Location: /telas/usuarios/login.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

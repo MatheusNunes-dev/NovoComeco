@@ -1,73 +1,73 @@
 <?php
-// include('../../db.php');
-// session_start(); // Adicionando início da sessão
+include('../../db.php');
+session_start(); // Adicionando início da sessão
 
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//     $name = $_POST['name'];
-//     $email = $_POST['email'];
-//     $phone = $_POST['phone'];
-//     $cpf = $_POST['cpf'];
-//     $cep = $_POST['cep'];
-//     $estado = $_POST['estado'];
-//     $cidade = $_POST['cidade'];
-//     $bairro = $_POST['bairro'];
-//     $rua = $_POST['rua'];
-//     $numero = $_POST['numero'];
-//     $complemento = $_POST['complemento'];
-//     $password = $_POST['password'];
-//     $confirmPassword = $_POST['confirm-password'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $cpf = $_POST['cpf'];
+    $cep = $_POST['cep'];
+    $estado = $_POST['estado'];
+    $cidade = $_POST['cidade'];
+    $bairro = $_POST['bairro'];
+    $rua = $_POST['rua'];
+    $numero = $_POST['numero'];
+    $complemento = $_POST['complemento'];
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirm-password'];
 
-//     // Variável para armazenar mensagens de erro
-//     $error_message = "";
+    // Variável para armazenar mensagens de erro
+    $error_message = "";
 
-//     // Validando se as senhas coincidem
-//     if ($password !== $confirmPassword) {
-//         $error_message = "As senhas não coincidem.";
-//     } else {
-//         // Verifica duplicidade de e-mail e CPF
-//         $email_check_query = "SELECT * FROM administrador WHERE email = '$email'";
-//         $email_result = $mysqli->query($email_check_query);
+    // Validando se as senhas coincidem
+    if ($password !== $confirmPassword) {
+        $error_message = "As senhas não coincidem.";
+    } else {
+        // Verifica duplicidade de e-mail e CPF
+        $email_check_query = "SELECT * FROM administrador WHERE email = '$email'";
+        $email_result = $mysqli->query($email_check_query);
 
-//         $cpf_check_query = "SELECT * FROM administrador WHERE cpf = '$cpf'";
-//         $cpf_result = $mysqli->query($cpf_check_query);
+        $cpf_check_query = "SELECT * FROM administrador WHERE cpf = '$cpf'";
+        $cpf_result = $mysqli->query($cpf_check_query);
 
-//         if ($email_result->num_rows > 0) {
-//             $error_message = "Já existe uma conta cadastrada com este e-mail.";
-//         } elseif ($cpf_result->num_rows > 0) {
-//             $error_message = "Já existe uma conta cadastrada com este CPF.";
-//         } else {
-//             // Inserção no banco de dados
-//             $sql_code = "INSERT INTO administrador (nome, email, senha, telefone, cpf, end_rua, end_numero, end_bairro, end_cidade, end_estado, end_complemento) 
-//                          VALUES ('$name', '$email', '$password', '$phone', '$cpf', '$rua', '$numero', '$bairro', '$cidade', '$estado', '$complemento')";
+        if ($email_result->num_rows > 0) {
+            $error_message = "Já existe uma conta cadastrada com este e-mail.";
+        } elseif ($cpf_result->num_rows > 0) {
+            $error_message = "Já existe uma conta cadastrada com este CPF.";
+        } else {
+            // Inserção no banco de dados
+            $sql_code = "INSERT INTO administrador (nome, email, senha, telefone, cpf, end_rua, end_numero, end_bairro, end_cidade, end_estado, end_complemento) 
+                         VALUES ('$name', '$email', '$password', '$phone', '$cpf', '$rua', '$numero', '$bairro', '$cidade', '$estado', '$complemento')";
 
-//             if ($mysqli->query($sql_code) === TRUE) {
-//                 // Pegando o ID do usuário recém inserido
-//                 $id_usuario = $mysqli->insert_id;
+            if ($mysqli->query($sql_code) === TRUE) {
+                // Pegando o ID do usuário recém inserido
+                $id_usuario = $mysqli->insert_id;
                 
-//                 // Criando a sessão do usuário
-//                 $_SESSION['id'] = $id_usuario;
-//                 $_SESSION['nome'] = $name;
-//                 $_SESSION['email'] = $email;
-//                 $_SESSION['tipo'] = 'administrador'; // Adicione o tipo de usuário se necessário
+                // Criando a sessão do usuário
+                $_SESSION['id'] = $id_usuario;
+                $_SESSION['nome'] = $name;
+                $_SESSION['email'] = $email;
+                $_SESSION['tipo'] = 'administrador'; // Adicione o tipo de usuário se necessário
                 
-//                 echo "<div class='success-message'>Cadastro realizado com sucesso!</div>";
-//                 echo "<script>
-//                     setTimeout(function() {
-//                         window.location.href = '../administrador/home_admin.php';
-//                     }, 2000);
-//                 </script>";
+                echo "<div class='success-message'>Cadastro realizado com sucesso!</div>";
+                echo "<script>
+                    setTimeout(function() {
+                        window.location.href = '../administrador/home_admin.php';
+                    }, 2000);
+                </script>";
 
-//             } else {
-//                 $error_message = "Erro ao cadastrar: " . $mysqli->error;
-//             }
-//         }
-//     }
+            } else {
+                $error_message = "Erro ao cadastrar: " . $mysqli->error;
+            }
+        }
+    }
 
-//     // Exibindo a mensagem de erro, se existir
-//     if (!empty($error_message)) {
-//         echo "<div class='error-message'>$error_message</div>";
-//     }
-// }
+    // Exibindo a mensagem de erro, se existir
+    if (!empty($error_message)) {
+        echo "<div class='error-message'>$error_message</div>";
+    }
+}
 ?>
 
 

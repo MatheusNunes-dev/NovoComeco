@@ -1,15 +1,11 @@
 <?php
-// session_start();
-// if (!isset($_SESSION['logged_in']) || !isset($_SESSION['user_tipo'])) {
-//     header("Location: /telas/login.php");
-//     exit();
-// }
+session_start();
 
-// // Verificação específica para cada tipo de página
-// if ($_SESSION['user_tipo'] !== 'administrador') { // ou 'doador' ou 'ong'
-//     header("Location: /telas/login.php");
-//     exit();
-// }
+// Verificar se o usuário é um administrador
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'administrador') {
+    header("Location: /telas/usuarios/login.php");
+    exit();
+}
 ?>
 
 
