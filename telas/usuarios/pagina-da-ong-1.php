@@ -7,7 +7,7 @@
     <title>Doação ONG</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/pagina-da-ongg.css">
+    <link rel="stylesheet" href="../../css/pagina-da-ong.css">
 </head>
 
 <body>
@@ -49,7 +49,7 @@
         <section class="donation-box">
             <h1 class="ong-name">Realizar Doação</h1> <!-- O título fora da donation-box -->
             <div class="donation-image">
-                <img src="../../assets/imagem-ong-1.jpg" alt="Imagem da ONG">
+                <img src="../../assets/ong-1.png" alt="Imagem da ONG">
             </div>
             <div class="ong-description-box">
                 <p>A ONG realiza várias atividades focadas no bem-estar social, educação e saúde da comunidade. A missão é melhorar as condições de vida das pessoas em situação de vulnerabilidade.</p>
