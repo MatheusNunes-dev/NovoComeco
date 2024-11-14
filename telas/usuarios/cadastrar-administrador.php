@@ -43,20 +43,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($mysqli->query($sql_code) === TRUE) {
                 // Pegando o ID do usuário recém inserido
                 $id_usuario = $mysqli->insert_id;
-                
+
                 // Criando a sessão do usuário
                 $_SESSION['id'] = $id_usuario;
                 $_SESSION['nome'] = $name;
                 $_SESSION['email'] = $email;
                 $_SESSION['tipo'] = 'administrador'; // Adicione o tipo de usuário se necessário
-                
+
                 echo "<div class='success-message'>Cadastro realizado com sucesso!</div>";
                 echo "<script>
                     setTimeout(function() {
                         window.location.href = '../administrador/configuracoes-administrador.php';
                     }, 2000);
                 </script>";
-
             } else {
                 $error_message = "Erro ao cadastrar: " . $mysqli->error;
             }
@@ -224,5 +223,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <script src="../../js/cadastro-administrador.js"></script>
 </body>
-
-</html>

@@ -7,7 +7,7 @@
     <title>Doação ONG</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/pagina-da-ongg.css">
+    <link rel="stylesheet" href="../../css/pagina-da-ong.css">
 </head>
 
 <body>
@@ -42,17 +42,14 @@
         </nav>
     </header>
 
-    <!-- Pop-up de erro -->
-
-
     <main class="container">
         <section class="donation-box">
-            <h1 class="ong-name">Realizar Doação</h1> <!-- O título fora da donation-box -->
+            <h1 class="ong-name">Realizar Doação</h1>
             <div class="donation-image">
-                <img src="../../assets/imagem-ong-1.jpg" alt="Imagem da ONG">
+                <img src="../../assets/ong-6.png" alt="Imagem da ONG">
             </div>
             <div class="ong-description-box">
-                <p>A ONG realiza várias atividades focadas no bem-estar social, educação e saúde da comunidade. A missão é melhorar as condições de vida das pessoas em situação de vulnerabilidade.</p>
+                <p>Amigos da Terra trabalha pela preservação ambiental, com iniciativas voltadas à proteção de áreas naturais, reflorestamento e conscientização sobre o impacto das mudanças climáticas. Seu foco é construir um futuro mais sustentável para o planeta.</p>
             </div>
 
             <div class="error-message" id="error-message" style="display: none;">
@@ -64,37 +61,31 @@
 
             <div class="input-box">
                 <label for="ong">Nome da ONG:</label>
-
-                <select id="ong" name="ong" required>
-                    <option value="ong1">ONG 1</option>
-                    <option value="ong2">ONG 2</option>
-                    <option value="ong3">ONG 3</option>
-                    <option value="ong4">ONG 4</option>
-                    <option value="ong5">ONG 5</option>
-                    <option value="ong6">ONG 6</option>
-                    <option value="ong7">ONG 7</option>
-                    <option value="ong8">ONG 8</option>
-                    <option value="ong9">ONG 9</option>
-                    <option value="ong10">ONG 10</option>
-                    <!-- Adicione mais opções de ONGs aqui -->
+                <select id="ong" name="ong" required onchange="redirectToOng()">
+                    <option value="">Selecione uma ONG</option>
+                    <option value="mao-amiga">Mão Amiga</option>
+                    <option value="amigos-do-bem">Amigos do Bem</option>
+                    <option value="cultivando-a-vida">Cultivando a Vida</option>
+                    <option value="mais-uniao">Mais União</option>
+                    <option value="amigos-da-terra">Amigos da Terra</option>
+                    <option value="amor-animal">Amor Animal</option>
                 </select>
             </div>
+
 
             <div class="input-box">
                 <label for="valor">Valor (R$):</label>
                 <input type="number" id="valor" name="valor" placeholder="Digite o valor da doação (somente números)" required>
             </div>
 
-            <!-- Notas ajustadas para aparecerem abaixo do campo -->
             <p class="note">*Somente PIX</p>
             <p class="note">*Minimo: R$5</p>
 
-            <!-- Container dos botões confirm e cancel -->
             <div class="button-container">
                 <div class="cancel-button" onclick="window.location.href='../usuarios/pagina-quero-doar.php'">
                     <p>Cancelar doação</p>
                 </div>
-                <div class="confirm-button" onclick="window.location.href='../doador/realizar-pagamento.php.'">
+                <div class="confirm-button" onclick="validateDonation()">
                     <p>Confirmar doação</p>
                 </div>
             </div>
@@ -104,78 +95,34 @@
 
     <footer>
         <div class="footer">
-            <div class="img-footer-start">
-                <img class="boneco-footer" src="../../assets/img-footer.png" alt="Imagem de rodapé 1" />
-            </div>
-            <div class="socias">
-                <div class="icons-col-1">
-                    <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/google.png" alt="Ícone do Google" />
-                        <p>novocomeço@gmail.com</p>
-                    </div>
-                    <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/instagram.png" alt="Ícone do Instagram" />
-                        <p>@novocomeço</p>
-                    </div>
-                </div>
-                <div class="icons-col-2">
-                    <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/whatsapp.png" alt="Ícone do WhatsApp" />
-                        <p>(41)99997676</p>
-                    </div>
-                    <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/facebook.png" alt="Ícone do Facebook" />
-                        <p>@novocomeco</p>
-                    </div>
-                </div>
-            </div>
-            <div class="img-footer-end">
-                <img class="boneco-footer" src="../../assets/img-footer.png" alt="Imagem de rodapé 2" />
-            </div>
+            <!-- Conteúdo do rodapé -->
         </div>
     </footer>
 
-    <script src="../../js/header.js"></script>
-
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
-    </div>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
+        function redirectToOng() {
+            const ong = document.getElementById('ong').value;
 
-    <script>
-        // Função para validar o valor da doação
-        function validateDonation() {
-            var valor = document.getElementById('valor').value;
+            // Define URLs de redirecionamento para cada ONG
+            const urls = {
+                "mao-amiga": "pagina-da-ong-1.php",
+                "amigos-do-bem": "pagina-da-ong-2.php",
+                "cultivando-a-vida": "pagina-da-ong-3.php",
+                "mais-uniao": "pagina-da-ong-4.php",
+                "amigos-da-terra": "pagina-da-ong-5.php",
+                "amor-animal": "pagina-da-ong-6.php",
+            };
 
-            // Verifica se o valor é menor que 5
-            if (parseFloat(valor) < 5) {
-                // Exibe o pop-up de erro
-                document.getElementById('error-message').style.display = 'flex';
-                return false; // Impede o envio do formulário
-            } else {
-                // Caso o valor seja válido, redireciona para o próximo passo
-                window.location.href = '../doador/realizar-pagamento.php';
+            if (urls[ong]) {
+                window.location.href = urls[ong];
             }
         }
 
-        // Função para fechar o pop-up
+
         function closeErrorPopup() {
             document.getElementById('error-message').style.display = 'none';
         }
-
-        // Adiciona a validação no clique do botão "Confirmar doação"
-        document.querySelector('.confirm-button').addEventListener('click', function(event) {
-            event.preventDefault(); // Impede a ação padrão do link
-            validateDonation();
-        });
     </script>
-
 </body>
 
 </html>
