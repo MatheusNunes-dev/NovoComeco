@@ -36,14 +36,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $cpf_check_query = "SELECT * FROM administrador WHERE cpf = '$cpf'";
         $cpf_result = $mysqli->query($cpf_check_query);
 
-        if ($email_result->num_rows > 0) {
-            $error_message = "Já existe uma conta cadastrada com este e-mail.";
-        } elseif ($cpf_result->num_rows > 0) {
-            $error_message = "Já existe uma conta cadastrada com este CPF.";
+        if ($email_result->num_rows > 0 || $cpf_result->num_rows > 0) {
+            // Verifica qual campo está duplicado e define a mensagem de erro
+            if ($email_result->num_rows > 0) {
+                $error_message = "Já existe uma conta cadastrada com este e-mail.";
+            } else {
+                $error_message = "Já existe uma conta cadastrada com este CPF.";
+            }
+
+            // Exibe a mensagem de erro
+            echo "<div class='error-message'>$error_message</div>";
         } else {
-            // Inserção no banco de dados
+            // Prossegue com o cadastro
             $sql_code = "INSERT INTO administrador (nome, email, senha, telefone, cpf, end_rua, end_numero, end_bairro, end_cidade, end_estado, end_complemento) 
-                         VALUES ('$name', '$email', '$password', '$phone', '$cpf', '$rua', '$numero', '$bairro', '$cidade', '$estado', '$complemento')";
+                        VALUES ('$name', '$email', '$password', '$phone', '$cpf', '$rua', '$numero', '$bairro', '$cidade', '$estado', '$complemento')";
 
             if ($mysqli->query($sql_code) === TRUE) {
                 // Armazenando informações do administrador na sessão
@@ -62,13 +68,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </script>";
             } else {
                 $error_message = "Erro ao cadastrar: " . $mysqli->error;
+                echo "<div class='error-message'>$error_message</div>";
             }
         }
-    }
-
-    // Exibindo a mensagem de erro, se existir
-    if (!empty($error_message)) {
-        echo "<div class='error-message'>$error_message</div>";
     }
 }
 ?>
