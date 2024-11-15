@@ -8,7 +8,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -16,7 +16,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
     <title>Excluir</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/desvincular.css">
+    <link rel="stylesheet" href="../../css/desvincular-copy.css">
 </head>
 
 <body>
@@ -56,19 +56,31 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
             </div>
         </nav>
     </header>
-    <div class="container">
-        <h1 class="title">Desvincular ONG</h1>
-        <div class="content-box">
-            <p>
-                Você está prestes a desvincular permanentemente a sua ONG do nosso sistema.
-            </p>
-            <p>
-                Esta ação não pode ser desfeita e todos os dados associados à sua ONG serão removidos. Tem certeza de que deseja continuar?
-            </p>
-            <button class="cancel-button">Cancelar</button>
-            <button class="confirm-button">Sim</button>
+    <main>
+        <div class="title">
+            <h1>Desvincular ONG</h1>
         </div>
-    </div>
+        <p>Você está prestes a desvincular sua ONG!</p>
+        <section class="password-change">
+            <form method="POST" action="../../desvincular-ong.php">
+                <div class="action-buttons">
+                    <!-- Botão de Excluir -->
+                    <button type="submit" class="action-button">
+                        Excluir
+                    </button>
+                </div>
+                <div class="action-buttons">
+                    <!-- Botão de Cancelar -->
+                    <button type="button" class="action-button" onclick="history.back();">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+
+
+        </section>
+
+    </main>
     <footer>
         <div class="footer">
             <div class="img-footer-start">

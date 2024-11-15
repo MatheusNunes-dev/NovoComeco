@@ -8,7 +8,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -63,10 +63,10 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
         </div>
         <p>Você está prestes a excluir sua conta!</p>
         <section class="password-change">
-            <form method="POST" action="../../telas/usuarios/excluir-conta.php">
+            <form method="POST" action="../../exclusao-doador.php">
                 <div class="action-buttons">
                     <!-- Botão de Excluir -->
-                    <button type="submit" class="action-button" formaction="../usuarios/login.php">
+                    <button type="submit" class="action-button">
                         Excluir
                     </button>
                 </div>
@@ -77,6 +77,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
                     </button>
                 </div>
             </form>
+
         </section>
 
     </main>

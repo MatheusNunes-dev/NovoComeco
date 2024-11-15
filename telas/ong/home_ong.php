@@ -16,6 +16,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
     <title>Novo Começo</title>
     <link rel="stylesheet" href="../../css/global.css">
     <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="../../css/home.css">
 </head>
 
 <body>

@@ -1,102 +1,133 @@
 <?php
-    session_start();
+session_start();
 
-    // Incluir o arquivo de conexão
-    include('../../db.php'); // O caminho para o arquivo de conexão pode variar
+// Incluir o arquivo de conexão
+include('../../db.php'); // Certifique-se de que o caminho para db.php está correto
 
-    // Verificar se o formulário foi enviado
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Obter dados do formulário
-        $email = trim($_POST['email']);
-        $senha = trim($_POST['senha']);
+// Verificar se o formulário foi enviado
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Obter dados do formulário
+    $email = trim($_POST['email']);
+    $senha = trim($_POST['senha']);
 
-        // Validação básica
-        if (empty($email) || empty($senha)) {
-            echo "<div class='error-message'>Por favor, preencha todos os campos.</div>";
-            exit();
-        }
-
-        try {
-            // Verificar na tabela de Administradores
-            $sql_admin = "SELECT id_administrador AS id, nome, email, senha FROM ADMINISTRADOR WHERE email = ?";
-            $stmt_admin = $mysqli->prepare($sql_admin);
-            $stmt_admin->bind_param("s", $email);
-            $stmt_admin->execute();
-            $result_admin = $stmt_admin->get_result();
-
-            // Verificar na tabela de Doadores
-            $sql_doador = "SELECT id_doador AS id, nome, email, senha FROM DOADOR WHERE email = ?";
-            $stmt_doador = $mysqli->prepare($sql_doador);
-            $stmt_doador->bind_param("s", $email);
-            $stmt_doador->execute();
-            $result_doador = $stmt_doador->get_result();
-
-            // Verificar na tabela de ONGs
-            $sql_ong = "SELECT id_ong AS id, nome, email, senha FROM ONG WHERE email = ?";
-            $stmt_ong = $mysqli->prepare($sql_ong);
-            $stmt_ong->bind_param("s", $email);
-            $stmt_ong->execute();
-            $result_ong = $stmt_ong->get_result();
-
-            // Verificar se o administrador existe e senha bate
-            if ($result_admin->num_rows > 0) {
-                $admin = $result_admin->fetch_assoc();
-                if ($admin['senha'] === $senha) {
-                    $_SESSION['user_id'] = $admin['id'];
-                    $_SESSION['user_nome'] = $admin['nome'];
-                    $_SESSION['user_email'] = $admin['email'];
-                    $_SESSION['user_tipo'] = 'administrador';
-                    $_SESSION['logged_in'] = true;
-                    header("Location: ../administrador/configuracoes-administrador.php");
-                    exit();
-                }
-            }
-            
-            // Verificar se o doador existe e senha bate
-            if ($result_doador->num_rows > 0) {
-                $doador = $result_doador->fetch_assoc();
-                if ($doador['senha'] === $senha) {
-                    $_SESSION['user_id'] = $doador['id'];
-                    $_SESSION['user_nome'] = $doador['nome'];
-                    $_SESSION['user_email'] = $doador['email'];
-                    $_SESSION['user_tipo'] = 'doador';
-                    $_SESSION['logged_in'] = true;
-
-                    header("Location: ../doador/home_doador.php");
-                    exit();
-                }
-            }
-
-            // Verificar se a ONG existe e senha bate
-            if ($result_ong->num_rows > 0) {
-                $ong = $result_ong->fetch_assoc();
-                if ($ong['senha'] === $senha) {
-                    $_SESSION['user_id'] = $ong['id'];
-                    $_SESSION['user_nome'] = $ong['nome'];
-                    $_SESSION['user_email'] = $ong['email'];
-                    $_SESSION['user_tipo'] = 'ong';
-                    $_SESSION['logged_in'] = true;
-                    header("Location: ../ong/home_ong.php");
-
-
-                    exit();
-                }
-            }
-
-            // Se não encontrou o usuário ou senha inválida
-            echo "<div class='error-message'>Email ou senha inválidos.</div>";
-            
-        } catch (Exception $e) {
-            echo "<div class='error-message'>Erro ao realizar login. Tente novamente mais tarde.</div>";
-        } finally {
-            // Fechar as conexões
-            if (isset($stmt_admin)) $stmt_admin->close();
-            if (isset($stmt_doador)) $stmt_doador->close();
-            if (isset($stmt_ong)) $stmt_ong->close();
-            if (isset($mysqli)) $mysqli->close();
-        }
+    // Validação básica
+    if (empty($email) || empty($senha)) {
+        echo "<div class='error-message'>Por favor, preencha todos os campos.</div>";
+        exit();
     }
+
+    try {
+        // Verificar na tabela de Administradores
+        $sql_admin = "SELECT id_administrador AS id, nome, email, senha FROM ADMINISTRADOR WHERE email = ?";
+        $stmt_admin = $mysqli->prepare($sql_admin);
+        $stmt_admin->bind_param("s", $email);
+        $stmt_admin->execute();
+        $result_admin = $stmt_admin->get_result();
+
+        // Verificar na tabela de Doadores
+        $sql_doador = "SELECT id_doador AS id, nome, email, senha, status FROM DOADOR WHERE email = ?";
+        $stmt_doador = $mysqli->prepare($sql_doador);
+        $stmt_doador->bind_param("s", $email);
+        $stmt_doador->execute();
+        $result_doador = $stmt_doador->get_result();
+
+        // Verificar na tabela de ONGs
+        $sql_ong = "SELECT id_ong AS id, nome, email, senha FROM ONG WHERE email = ?";
+        $stmt_ong = $mysqli->prepare($sql_ong);
+        $stmt_ong->bind_param("s", $email);
+        $stmt_ong->execute();
+        $result_ong = $stmt_ong->get_result();
+
+        // Verificar se o administrador existe e senha bate
+        if ($result_admin->num_rows > 0) {
+            $admin = $result_admin->fetch_assoc();
+            if ($admin['senha'] === $senha) {
+                $_SESSION['user_id'] = $admin['id'];
+                $_SESSION['user_nome'] = $admin['nome'];
+                $_SESSION['user_email'] = $admin['email'];
+                $_SESSION['user_tipo'] = 'administrador';
+                $_SESSION['logged_in'] = true;
+                header("Location: ../administrador/configuracoes-administrador.php");
+                exit();
+            }
+        }
+
+        // Verificar se o doador existe e a senha está correta
+        if ($result_doador->num_rows > 0) {
+            $doador = $result_doador->fetch_assoc();
+            if ($doador['senha'] === $senha) {
+                // Verificar o status do doador
+                if ($doador['status'] === 'desativado') {
+                    echo "<script>
+                        alert('Sua conta foi desativada. Entre em contato com o suporte.');
+                        window.location.href = 'login.php'; // Redireciona de volta para a página de login
+                    </script>";
+                    exit();
+                }
+
+                $_SESSION['user_id'] = $doador['id'];
+                $_SESSION['user_nome'] = $doador['nome'];
+                $_SESSION['user_email'] = $doador['email'];
+                $_SESSION['user_tipo'] = 'doador';
+                $_SESSION['logged_in'] = true;
+
+                header("Location: ../doador/home_doador.php");
+                exit();
+            }
+        }
+
+
+
+        // Verificar se a ONG existe e a senha está correta
+        // Verificar se a ONG existe e a senha está correta
+        if ($result_ong->num_rows > 0) {
+            $ong = $result_ong->fetch_assoc();
+
+            // Verificar se a ONG está desativada
+            if ($ong['status'] !== 'ativo') {
+                echo "<script>
+                    alert('Sua ONG foi desativada. Entre em contato com o suporte.');
+                    window.location.href = 'login.php';
+                </script>";
+                exit();
+            }
+
+            // Verificar a senha
+            if ($ong['senha'] === $senha) {
+                $_SESSION['user_id'] = $ong['id'];
+                $_SESSION['user_nome'] = $ong['nome'];
+                $_SESSION['user_email'] = $ong['email'];
+                $_SESSION['user_tipo'] = 'ong';
+                $_SESSION['logged_in'] = true;
+
+                header("Location: ../ong/home_ong.php");
+                exit();
+            } else {
+                echo "<script>
+                    alert('Senha incorreta.');
+                    window.location.href = 'login.php';
+                </script>";
+                exit();
+            }
+        }
+
+
+
+
+        // Se não encontrou o usuário ou senha inválida
+        echo "<div class='error-message'>Email ou senha inválidos.</div>";
+    } catch (Exception $e) {
+        echo "<div class='error-message'>Erro ao realizar login. Tente novamente mais tarde.</div>";
+    } finally {
+        // Fechar as conexões
+        if (isset($stmt_admin)) $stmt_admin->close();
+        if (isset($stmt_doador)) $stmt_doador->close();
+        if (isset($stmt_ong)) $stmt_ong->close();
+        if (isset($mysqli)) $mysqli->close();
+    }
+}
 ?>
+
 
 
 
@@ -184,7 +215,7 @@
                     <a href="../usuarios/cadastrar-doador.php" class="cadastrar">Doador</a> /
                     <a href="../usuarios/cadastrar-ong.php" class="cadastrar">ONG</a>
                 </p>
-            </div>            
+            </div>
         </section>
     </main>
 
