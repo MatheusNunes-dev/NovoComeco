@@ -118,12 +118,12 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
                     <label for="ong" style="font-size: 1.2em;">Selecione a ONG desejada:</label>
                     <select id="ong" name="ong" required style="font-size: 1.2em;">
                         <option value="" disabled selected>Selecione a ONG</option>
-                        <option value="ong1">ONG 1</option>
-                        <option value="ong2">ONG 2</option>
-                        <option value="ong3">ONG 3</option>
-                        <option value="ong4">ONG 4</option>
-                        <option value="ong5">ONG 5</option>
-                        <option value="ong6">ONG 6</option>
+                        <option value="ong1">Mão Amiga</option>
+                        <option value="ong2">Amigos do Bem</option>
+                        <option value="ong3">Cultivando a vida</option>
+                        <option value="ong4">Mais União</option>
+                        <option value="ong5">Amigos da Terra</option>
+                        <option value="ong6">Amor animal</option>
                     </select>
                 </div>
                 <script>
