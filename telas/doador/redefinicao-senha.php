@@ -1,3 +1,56 @@
+<?php
+session_start();
+
+// Verifica se o usuário está logado, caso contrário, redireciona
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    echo "<script>alert('Você precisa estar logado para redefinir a senha. Redirecionando para a página de login...');</script>";
+    header("Refresh: 2; url=/telas/usuarios/login.php");
+    exit();
+}
+
+include_once('../../db.php'); // Certifique-se de que o caminho está correto
+
+if ($mysqli->connect_error) {
+    die("Erro de conexão: " . $mysqli->connect_error);
+} else {
+    echo "Conexão bem-sucedida com o banco de dados.";
+}
+
+
+// Verifica se o formulário foi enviado
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nova_senha = $_POST['nova_senha'];
+    $confirmar_senha = $_POST['confirmar_senha'];
+    $email = $_SESSION['email']; // Email do usuário logado
+
+    // Verifica se as senhas coincidem
+    if ($nova_senha !== $confirmar_senha) {
+        echo "<script>alert('As senhas não coincidem.');</script>";
+        exit();
+    }
+
+    // Hash seguro da nova senha
+    $senha_hash = password_hash($nova_senha, PASSWORD_DEFAULT);
+
+    // Atualiza a senha no banco de dados
+    $sql = "UPDATE DOADOR SET senha = ? WHERE email = ?";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("ss", $senha_hash, $email);
+
+    if ($stmt->execute()) {
+        echo "<script>alert('Senha redefinida com sucesso!');</script>";
+        header("Refresh: 2; url=/telas/usuarios/dashboard.php");
+        exit();
+    } else {
+        echo "<script>alert('Erro ao atualizar a senha. Tente novamente.');</script>";
+        exit();
+    }
+}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -7,7 +60,7 @@
     <title>Alterar Senha - Novo Começo</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/redefinicao-senha.css">
+    <link rel="stylesheet" href="../../css/redefinicao-senha-copy.css">
 </head>
 
 <body>
@@ -47,25 +100,27 @@
             </div>
         </nav>
     </header>
+
     <main>
-        <div class="title-container">
+        <div class="title">
             <h1>Alterar Senha</h1>
         </div>
-        <section class="password-change-section">
-            <form action="/alterar-senha" method="POST" aria-labelledby="password-change-section">
+        <section class="password-change">
+            <form id="password-form" action="../doador/redefinicao-senha.php" method="POST" aria-labelledby="password-change-section">
                 <div class="input-group">
                     <label for="nova-senha">Nova senha</label>
-                    <input type="text" id="nova-senha" name="nova-senha" required aria-required="true">
+                    <input type="password" id="nova-senha" name="nova-senha" required aria-required="true">
                 </div>
                 <div class="input-group">
                     <label for="confirme-nova-senha">Confirme sua nova senha</label>
-                    <input type="text" id="confirme-nova-senha" name="confirme-nova-senha" required aria-required="true">
+                    <input type="password" id="confirme-nova-senha" name="confirme-nova-senha" required aria-required="true">
                 </div>
                 <div class="action-buttons">
-                    <button class="action-button">Cancelar</button>
-                    <button class="confirm-button">Confirmar</button>
+                    <button type="button" class="action-button" onclick="cancelarAlteracao()">Cancelar</button>
+                    <button type="submit" class="confirm-button">Confirmar</button>
                 </div>
             </form>
+            <div id="message-container"></div> <!-- Para exibir a mensagem de erro ou sucesso -->
         </section>
     </main>
 
@@ -103,16 +158,33 @@
     </footer>
 
     <script src="../../js/header.js"></script>
-
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
-    </div>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
+
+        // Função para validar a senha
+        document.getElementById('password-form').onsubmit = function(event) {
+            var novaSenha = document.getElementById('nova-senha').value;
+            var confirmeSenha = document.getElementById('confirme-nova-senha').value;
+            var messageContainer = document.getElementById('message-container');
+
+            // Limpar mensagens anteriores
+            messageContainer.innerHTML = '';
+
+            if (novaSenha !== confirmeSenha) {
+                // Exibir mensagem de erro
+                messageContainer.innerHTML = '<div class="error-message">As senhas não coincidem. Por favor, tente novamente.</div>';
+                event.preventDefault(); // Impede o envio do formulário
+            } else {
+                // Exibir mensagem de sucesso
+                messageContainer.innerHTML = '<div class="success-message">Senhas coincidem. A alteração será feita!</div>';
+            }
+        }
+
+        // Função para cancelar
+        function cancelarAlteracao() {
+            window.location.href = "../../telas/usuarios/index.php"; // Redireciona para a página inicial ou outra de sua escolha
+        }
     </script>
 </body>
 

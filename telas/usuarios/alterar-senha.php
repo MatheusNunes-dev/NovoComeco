@@ -7,7 +7,7 @@
     <title>Login - Novo Começo</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="image/png">
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/mudar-a-senha.css">
+    <link rel="stylesheet" href="../../css/alterar-senha.css">
 </head>
 
 <body>
@@ -53,21 +53,22 @@
             <h1>Alterar Senha</h1>
         </div>
         <section class="password-change">
-            <form action="/alterar-senha" method="POST">
+            <form action="../../enviar-email.php" method="POST">
                 <div class="input-group">
-                    <label for="new-password">Nova Senha</label>
-                    <input type="password" id="new-password" name="new-password" placeholder="Digite sua nova senha" required>
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
                 </div>
-                <div class="input-group">
-                    <label for="confirm-password">Confirmar Nova Senha</label>
-                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirme sua nova senha" required>
+                <div class="action-buttons">
+                    <button type="submit" class="action-button">Enviar E-mail de Alteração</button>
                 </div>
                 <div class="action-buttons">
                     <button type="reset" class="action-button">Cancelar</button>
-                    <button type="submit" class="action-button">Confirmar</button>
                 </div>
+
             </form>
         </section>
+    </main>
+
     </main>
 
     <footer>

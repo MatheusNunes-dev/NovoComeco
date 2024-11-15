@@ -75,7 +75,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
 
         <!-- Ações do Usuário -->
         <div class="action-buttons">
-            <button class="action-button" onclick="window.location.href='../usuarios/redefinicao_senha.php'">Alterar Senha</button>
+            <button class="action-button" onclick="window.location.href='../doador/redefinicao-senha.php'">Alterar Senha</button>
             <button class="action-button" onclick="window.location.href='excluir-conta.php'">Excluir Conta</button>
             <button class="action-button" onclick="window.location.href='historico-doacao-doador.php'">Histórico Doações</button>
             <button class="action-button" onclick="window.location.href='../../logout.php'">Logout</button>

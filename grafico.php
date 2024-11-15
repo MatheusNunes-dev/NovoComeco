@@ -6,7 +6,7 @@ $data_fim = $_GET['data_fim'] ?? date('Y-m-d');
 
 // Query para contar os status_pagamento
 $sql = "SELECT status_pagamento, COUNT(*) as total FROM boleto WHERE data_emissao BETWEEN ? AND ? GROUP BY status_pagamento";
-$stmt = $conn->prepare($sql);
+$stmt = $mysqli->prepare($sql);
 $stmt->bind_param("ss", $data_inicio, $data_fim);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -24,5 +24,4 @@ while ($row = $result->fetch_assoc()) {
 echo json_encode($dados);
 
 $stmt->close();
-$conn->close();
-?>
+$mysqli->close();
