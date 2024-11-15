@@ -83,7 +83,7 @@ $mysqli->close();
                 </ul>
             </div>
             <div class="user">
-                <a href="../../telas/doador/configuracoes-doador.php">
+                <a href="configuracoes-administrador.php">
                     <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
@@ -105,7 +105,7 @@ $mysqli->close();
 
         <!-- Ações do Usuário -->
         <div class="action-buttons">
-            <button class="action-button" onclick="window.location.href='../usuarios/redefinicao-senha.php'">Alterar Senha</button>
+            <button class="action-button" onclick="window.location.href='../administrador/adm-redefinir-senha.php'">Alterar Senha</button>
             <button class="action-button" onclick="window.location.href='historico-transferencia-adm.php'">Histórico Transferências</button>
             <button class="action-button" onclick="window.location.href='grafico-doacoes.php'">Gráfico Doações</button>
             <button class="action-button" onclick="window.location.href='../../logout.php'">Logout</button>

@@ -61,14 +61,14 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
                 </ul>
             </div>
             <div class="user">
-                <a href="../../telas/doador/configuracoes-doador.php">
+                <a href="configuracoes-administrador.php">
                     <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
         </nav>
     </header>
     <div class="container">
-        <h1 class="title">Histórico de doações</h1>
+        <h1 class="title">Histórico de Transferências</h1>
         <div class="filter-options">
             <select id="filter-ong">
                 <option value="all">Mostrar todas as ONGs</option>

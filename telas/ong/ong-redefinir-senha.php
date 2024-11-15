@@ -1,18 +1,21 @@
 <?php
 session_start();
 
-$isLoggedIn = isset($_SESSION['user_id']); // Verifica se o usuário está logado
-$tipoUsuario = $_SESSION['user_tipo'] ?? null; // Identifica o tipo de usuário
-$email = $_SESSION['user_email'] ?? null; // Obtém o email do usuário logado
+// Verifica se o usuário está logado como ONG
+$isLoggedIn = isset($_SESSION['user_id']);
+$tipoUsuario = $_SESSION['user_tipo'] ?? null;
+$email = $_SESSION['user_email'] ?? null;
 
-if (!$isLoggedIn || !$tipoUsuario || !$email) {
-    echo "<script>alert('Você precisa estar logado para alterar a senha. Redirecionando para o login...');</script>";
-    header("Refresh: 2; url=/telas/usuarios/login.php");
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $tipoUsuario !== 'ong') {
+    header("Location: /telas/usuarios/login.php");
     exit();
 }
 
 // Inclui a conexão com o banco de dados
 include_once('../../db.php');
+
+// Habilita exibição de erros para depuração
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 $error_message = "";
 $success_message = "";
@@ -26,37 +29,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif ($nova_senha !== $confirmar_senha) {
         $error_message = "As senhas não coincidem.";
     } else {
-        $senha_hash = $nova_senha; // Sem criptografia
+        // Armazena diretamente a nova senha sem criptografia
+        $senha = $nova_senha;
 
-        // Escolhe a tabela com base no tipo de usuário
-        if ($tipoUsuario === 'administrador') {
-            $sql = "UPDATE ADMINISTRADOR SET senha = ? WHERE email = ?";
-        } elseif ($tipoUsuario === 'doador') {
-            $sql = "UPDATE DOADOR SET senha = ? WHERE email = ?";
-        } elseif ($tipoUsuario === 'ong') {
-            $sql = "UPDATE ONG SET senha = ? WHERE email = ?";
-        } else {
-            $error_message = "Tipo de usuário inválido.";
-        }
+        // Atualiza a senha no banco de dados para a ONG logada
+        $sql = "UPDATE ONG SET senha = ? WHERE email = ?";
 
-        // Executa a consulta
-        if (empty($error_message)) {
-            $stmt = $mysqli->prepare($sql);
-            $stmt->bind_param("ss", $senha_hash, $email);
+        if ($stmt = $mysqli->prepare($sql)) {
+            $stmt->bind_param("ss", $senha, $email);
 
             if ($stmt->execute()) {
-                $success_message = "Senha alterada com sucesso! Redirecionando para a página inicial...";
-                header("Refresh: 2; url=/telas/usuarios/index.php");
+                // Destruir sessão após a alteração da senha
+                session_unset(); // Remove todas as variáveis da sessão
+                session_destroy(); // Destrói a sessão atual
+
+                // Redireciona para a página de login
+                header("Location: ../usuarios/login.php");
                 exit();
             } else {
                 $error_message = "Erro ao atualizar a senha: " . $stmt->error;
             }
 
             $stmt->close();
+        } else {
+            $error_message = "Erro ao preparar a consulta: " . $mysqli->error;
         }
     }
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -102,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </ul>
             </div>
             <div class="user">
-                <a href="../../telas/doador/configuracoes-doador.php">
+                <a href="configuracoes-doador.php">
                     <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
@@ -122,7 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ?>
         </div>
         <section class="password-change">
-            <form id="password-form" action="redefinicao-senha.php" method="POST" aria-labelledby="password-change-section">
+            <form id="password-form" action="" method="POST" aria-labelledby="password-change-section">
                 <div class="input-group">
                     <label for="nova-senha">Nova senha</label>
                     <input type="password" id="nova-senha" name="nova_senha" required>
@@ -136,10 +137,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <button type="submit" class="confirm-button">Confirmar</button>
                 </div>
             </form>
-            <div id="message-container">
-                <?php if (!empty($error_message)) echo "<div class='error-message'>$error_message</div>"; ?>
-                <?php if (!empty($success_message)) echo "<div class='success-message'>$success_message</div>"; ?>
-            </div>
         </section>
     </main>
 

@@ -4,6 +4,11 @@ session_start();
 // Incluir o arquivo de conexão
 include('../../db.php'); // Certifique-se de que o caminho para db.php está correto
 
+if (isset($_GET['message']) && $_GET['message'] === 'senha_alterada') {
+    echo "<p style='color: green;'>Senha alterada com sucesso. Faça login novamente.</p>";
+}
+
+
 // Verificar se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obter dados do formulário

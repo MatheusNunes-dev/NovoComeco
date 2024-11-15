@@ -1,50 +1,86 @@
 <?php
 session_start();
 
-// Verificar se o usuário é uma ONG
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'ong') {
+// Verifica se o usuário está logado como ONG
+$isLoggedIn = isset($_SESSION['user_id']);
+$tipoUsuario = $_SESSION['user_tipo'] ?? null;
+$email = $_SESSION['user_email'] ?? null;
+
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $tipoUsuario !== 'ong') {
     header("Location: /telas/usuarios/login.php");
     exit();
 }
 
-// Incluir conexão com o banco de dados
-include('../../db.php');
+// Inclui a conexão com o banco de dados
+include_once('../../db.php');
 
-// Obter o ID da ONG logada
-$user_id = $_SESSION['user_id'];
+// Habilita exibição de erros para depuração
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-// Buscar informações da ONG no banco de dados
-$nome_ong = $email_ong = $cnpj_ong = '';
+$nome_ong = "";
+$email_ong = "";
+$cnpj_ong = "";
+
 try {
-    $sql = "SELECT nome, email, cnpj FROM ONG WHERE id_ong = ?";
-    $stmt = $mysqli->prepare($sql);
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        $ong = $result->fetch_assoc();
-        $nome_ong = $ong['nome'];
-        $email_ong = $ong['email'];
-        $cnpj_ong = $ong['cnpj'];
+    // Busca os detalhes da ONG logada no banco de dados
+    $sql = "SELECT nome, email, cnpj FROM ONG WHERE email = ?";
+    if ($stmt = $mysqli->prepare($sql)) {
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt->bind_result($nome_ong, $email_ong, $cnpj_ong);
+        $stmt->fetch();
+        $stmt->close();
     } else {
-        echo "<script>
-            alert('Não foi possível carregar os dados da ONG. Por favor, tente novamente.');
-            window.location.href = '/telas/usuarios/login.php';
-        </script>";
-        exit();
+        throw new Exception("Erro ao preparar consulta: " . $mysqli->error);
     }
 } catch (Exception $e) {
-    echo "<script>
-        alert('Erro ao buscar informações da ONG: " . addslashes($e->getMessage()) . "');
-        window.location.href = '/telas/usuarios/login.php';
-    </script>";
-    exit();
-} finally {
-    if (isset($stmt)) $stmt->close();
-    if (isset($mysqli)) $mysqli->close();
+    die("Erro: " . $e->getMessage());
+}
+
+// Habilita exibição de erros para depuração
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+$error_message = "";
+$success_message = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nova_senha = trim($_POST['nova_senha']);
+    $confirmar_senha = trim($_POST['confirmar_senha']);
+
+    if (empty($nova_senha) || empty($confirmar_senha)) {
+        $error_message = "Todos os campos são obrigatórios.";
+    } elseif ($nova_senha !== $confirmar_senha) {
+        $error_message = "As senhas não coincidem.";
+    } else {
+        // Armazena diretamente a nova senha sem criptografia
+        $senha = $nova_senha;
+
+        // Atualiza a senha no banco de dados para a ONG logada
+        $sql = "UPDATE ONG SET senha = ? WHERE email = ?";
+
+        if ($stmt = $mysqli->prepare($sql)) {
+            $stmt->bind_param("ss", $senha, $email);
+
+            if ($stmt->execute()) {
+                // Destruir sessão após a alteração da senha
+                session_unset(); // Remove todas as variáveis da sessão
+                session_destroy(); // Destrói a sessão atual
+
+                // Redireciona para a página de login
+                header("Location: ../usuarios/login.php");
+                exit();
+            } else {
+                $error_message = "Erro ao atualizar a senha: " . $stmt->error;
+            }
+
+            $stmt->close();
+        } else {
+            $error_message = "Erro ao preparar a consulta: " . $mysqli->error;
+        }
+    }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -113,7 +149,7 @@ try {
 
         <!-- Ações do Usuário -->
         <div class="action-buttons">
-            <button class="action-button" onclick="window.location.href='../usuarios/redefinicao-senha.php'">Redefinir Senha</button>
+            <button class="action-button" onclick="window.location.href='../ong/ong-redefinir-senha.php'">Redefinir Senha</button>
             <button class="action-button" onclick="window.location.href='desvincular-ong.php'">Desvincular ONG</button>
             <button class="action-button" onclick="window.location.href='../../logout.php'">Logout</button>
         </div>

@@ -120,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["image"])) {
             </ul>
         </div>
         <div class="user">
-            <a href="../../telas/doador/configuracoes-doador.php">
+            <a href="configuracoes-administrador.php">
                 <img class="img-user" src="../../assets/user.png" alt="Usuário">
             </a>
         </div>

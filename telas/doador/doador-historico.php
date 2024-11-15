@@ -10,32 +10,19 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
 // Incluir o arquivo de conexão com o banco de dados
 require '../../db.php';
 
-// Preparar a consulta com filtros, se existirem
-$query = "SELECT * FROM doacoes WHERE doador_id = ?";
+// Preparar a consulta para obter o histórico do doador logado
+$query = "SELECT d.valor_total, d.data_hora, o.nome AS nome_ong
+          FROM DOACAO d
+          INNER JOIN ONG o ON d.id_ong = o.id_ong
+          WHERE d.id_doador = ?
+          ORDER BY d.data_hora DESC";
 
-// Verificar se há filtros aplicados
-$filters = [];
-if (isset($_GET['ong']) && $_GET['ong'] !== 'all') {
-    $query .= " AND ong_nome = ?";
-    $filters[] = $_GET['ong'];
-}
-
-if (isset($_GET['start_date']) && isset($_GET['end_date'])) {
-    $query .= " AND data BETWEEN ? AND ?";
-    $filters[] = $_GET['start_date'];
-    $filters[] = $_GET['end_date'];
-}
-
-// Preparar a consulta
 $stmt = $mysqli->prepare($query);
-$filters = array_merge([$stmt, "i", $_SESSION['user_id']], $filters); // Adicionando o ID do doador e os filtros
-$stmt->bind_param(...$filters);
-
-// Executar a consulta
+$stmt->bind_param("i", $_SESSION['user_id']);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Processar os resultados e exibir na página
+// Processar os resultados
 $donations = [];
 while ($row = $result->fetch_assoc()) {
     $donations[] = $row;
@@ -52,9 +39,8 @@ $mysqli->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Histórico de Doação</title>
-    <link rel="shortcut icon" href="../../assets/logo.png" type="image/png">
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/historico-doacoes.css">
+    <link rel="stylesheet" href="../../css/doacoes-historico.css">
 </head>
 
 <body>
@@ -70,6 +56,7 @@ $mysqli->close();
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
+                    <li><button class="btn-icon-header" onclick="toggleSideBar()">X</button></li>
                     <li class="nav-link"><a href="../../telas/usuarios/index.php">HOME</a></li>
                     <li class="nav-link"><a href="../../telas/usuarios/pagina-quero-doar.php">ONG'S</a></li>
                     <li class="nav-link"><a href="../../telas/usuarios/sobre.php">SOBRE</a></li>
@@ -77,7 +64,7 @@ $mysqli->close();
                 </ul>
             </div>
             <div class="user">
-                <a href="../../telas/doador/configuracoes-doador.php">
+                <a href="configuracoes-doador.php">
                     <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
@@ -85,82 +72,52 @@ $mysqli->close();
     </header>
 
     <div class="container">
-        <h1 class="title">Histórico de doações</h1>
-        <div class="filter-options">
-            <select id="filter-ong" onchange="filterDonations()">
-                <option value="all">Mostrar todas as ONGs</option>
-                <!-- Preencher dinamicamente as ONGs -->
-                <?php
-                $ongs = ["ONG 1", "ONG 2", "ONG 3", "ONG 4", "ONG 5", "ONG 6"];
-                foreach ($ongs as $ong) {
-                    echo "<option value='$ong'>$ong</option>";
-                }
-                ?>
-            </select>
-
-            <div class="date-filters">
-                <label for="start-date">De:</label>
-                <input type="date" id="start-date">
-                <label for="end-date">Até:</label>
-                <input type="date" id="end-date">
-                <button class="filter-btn" onclick="filterDonations()">Filtrar</button>
-            </div>
-        </div>
-
-        <!-- Exibição das doações -->
+        <h1>Histórico de Doações</h1>
         <?php if (count($donations) > 0): ?>
             <?php foreach ($donations as $donation): ?>
-                <div class="donation-box" data-ong="<?= htmlspecialchars($donation['ong_nome']) ?>" data-date="<?= htmlspecialchars($donation['data']) ?>">
-                    <div class="circle">
-                        <p>ONG: <?= htmlspecialchars($donation['ong_nome']) ?></p>
-                    </div>
-                    <div class="donation-details">
-                        <p>Doação para a ONG <?= htmlspecialchars($donation['ong_nome']) ?></p>
-                        <p>Data de doação: <?= htmlspecialchars($donation['data']) ?></p>
-                        <p>Valor da doação: R$ <?= number_format($donation['valor'], 2, ',', '.') ?></p>
-                    </div>
+                <div class="donation-box">
+                    <p><strong>ONG:</strong> <?= htmlspecialchars($donation['nome_ong']) ?></p>
+                    <p><strong>Data:</strong> <?= htmlspecialchars($donation['data_hora']) ?></p>
+                    <p><strong>Valor:</strong> R$ <?= number_format($donation['valor_total'], 2, ',', '.') ?></p>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
-            <p>Você ainda não fez doações ou não há doações para exibir com os filtros selecionados.</p>
+            <p>Você ainda não realizou doações.</p>
         <?php endif; ?>
     </div>
 
     <footer>
         <div class="footer">
             <div class="img-footer-start">
-                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
+                <img class="boneco-footer img-footer" src="../../assets/img-footer.png" alt="Boneco do rodapé">
             </div>
             <div class="socias">
                 <div class="icons-col-1">
                     <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/google.png">
+                        <img class="icon-footer" src="../../assets/google.png" alt="Google">
                         <p>novocomeço@gmail.com</p>
                     </div>
                     <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/instagram.png">
+                        <img class="icon-footer" src="../../assets/instagram.png" alt="Instagram">
                         <p>@novocomeço</p>
                     </div>
                 </div>
                 <div class="icons-col-2">
                     <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/whatsapp.png">
-                        <p>(41)99997676</p>
+                        <img class="icon-footer" src="../../assets/whatsapp.png" alt="Whatsapp">
+                        <p>(41) 99997-6767</p>
                     </div>
                     <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/facebook.png">
+                        <img class="icon-footer" src="../../assets/facebook.png" alt="Facebook">
                         <p>@novocomeco</p>
                     </div>
                 </div>
             </div>
             <div class="img-footer-end">
-                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
+                <img class="boneco-footer img-footer" src="../../assets/img-footer.png" alt="Boneco do rodapé">
             </div>
         </div>
     </footer>
-
-    <script src="../../js/header.js"></script>
-    <script src="../../js/doacoes.js"></script>
 </body>
 
 </html>
