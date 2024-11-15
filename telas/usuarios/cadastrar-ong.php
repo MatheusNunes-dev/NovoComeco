@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                       end_rua, end_numero, end_bairro, end_cidade, end_estado, end_complemento, banco, agencia, conta_corrente, chave_pix, data_cadastro) 
                          VALUES ('$name', '$email', '$password', '$phone', '$cnpj', 'pendente', '$constituicao', '$comprobatorio', '$estatuto', 
                                  '$rua', '$numero', '$bairro', '$cidade', '$estado', '$complemento', '$banco', '$agencia', '$conta_corrente', '$pix_key', now())";
-            
+
             if ($mysqli->query($sql_code) === TRUE) {
                 // Armazenando as informações da ONG na sessão
                 $_SESSION['user_id'] = $mysqli->insert_id;  // ID da ONG recém-criada

@@ -1,17 +1,45 @@
 <?php
+
 session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 // Verifica se o usuário está logado, caso contrário, redireciona
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     echo "<script>alert('Você precisa estar logado para realizar uma doação. Redirecionando para a página de login...');</script>";
-    header("Refresh: 2; url=/telas/usuarios/login.php");
+    header("Refresh: 2; url=../usuarios/index.php");
     exit();
 }
 
-// Captura o ID da ONG da URL
-$ong_id = $_GET['ong'] ?? null; // Agora vamos pegar o ID diretamente dos parâmetros da URL
+// Verifica se o usuário é doador
+if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'doador') { // Ajuste 'doador' conforme sua lógica de identificação
+    echo "<script>alert('Acesso restrito: Somente doadores podem acessar esta página.');</script>";
+    header("Refresh: 2; url=../usuarios/index.php");
+    exit();
+}
 
-// Mapeamento de ONGs: ID => Nome da ONG
+
+// Inclui o arquivo de conexão com o banco de dados
+require __DIR__ . '../../../db.php'; // Ajuste o caminho conforme necessário
+
+// Captura a URL da página anterior
+$referer = $_SERVER['HTTP_REFERER'] ?? null;
+
+// Inicializa variáveis
+$ong_id = null;
+$ong_selecionada = "Não especificada";
+$chave_pix = "Chave PIX não encontrada";
+
+// Verifica se o referer está definido e extrai o ID da ONG da URL
+if ($referer) {
+    preg_match('/ong-(\d+)/', $referer, $matches);
+    if (isset($matches[1])) {
+        $ong_id = (int)$matches[1]; // ID da ONG
+    }
+}
+
+// Mapeamento de ONGs: ID => Nome da ONG (pode ser substituído por uma busca no banco de dados)
 $ongs = [
     1 => "Mão Amiga",
     2 => "Amigos do Bem",
@@ -22,7 +50,37 @@ $ongs = [
 ];
 
 // Verifica se o ID é válido e obtém o nome da ONG
-$ong_selecionada = isset($ongs[$ong_id]) ? $ongs[$ong_id] : "Não especificado";
+// Verifica se o ID é válido e obtém o nome da ONG
+if ($ong_id && isset($ongs[$ong_id])) {
+    $ong_selecionada = $ongs[$ong_id];
+    error_log("ONG Selecionada: " . $ong_selecionada);
+
+    // Consulta para buscar a chave PIX no banco de dados
+    $sql = "SELECT chave_pix FROM ONG WHERE id_ong = ?";
+    $stmt = $mysqli->prepare($sql);
+    if ($stmt) {
+        $stmt->bind_param("i", $ong_id); // "i" para inteiro (id_ong)
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result && $row = $result->fetch_assoc()) {
+            $chave_pix = $row['chave_pix']; // chave_pix é VARCHAR
+            error_log("Chave PIX encontrada: " . $chave_pix);
+        } else {
+            error_log("Nenhum resultado encontrado para o ID: " . $ong_id);
+            $chave_pix = "Chave PIX não encontrada para este ID.";
+        }
+        $stmt->close();
+    } else {
+        error_log("Erro ao preparar consulta: " . $mysqli->error);
+        $chave_pix = "Erro ao preparar consulta.";
+    }
+} else {
+    error_log("ID da ONG inválido ou não encontrado.");
+    $chave_pix = "ID da ONG inválido ou não encontrado.";
+}
+
+
+
 
 // Captura outros parâmetros da URL
 $valor = $_GET['valor'] ?? 0;
@@ -37,6 +95,7 @@ if ($valor <= 0 || $taxa < 0) {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -46,7 +105,7 @@ if ($valor <= 0 || $taxa < 0) {
     <title>Novo Começo - Realizar Pagamento</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="image/png">
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/realizar-pagamento-copy-copy.css">
+    <link rel="stylesheet" href="../../css/realizar-pagamento.css">
 </head>
 
 <body>
@@ -70,7 +129,7 @@ if ($valor <= 0 || $taxa < 0) {
                 </ul>
             </div>
             <div class="user">
-                <a href="../../telas/doador/configuracoes-doador.php">
+                <a href="configuracoes-doador.php">
                     <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
@@ -92,16 +151,18 @@ if ($valor <= 0 || $taxa < 0) {
         <!-- Caixa PIX -->
         <div class="pix-box">
             <div class="pix-image">
-                <img id="qrCode" alt="QR Code Aleatório" />
+                <img src="../../assets/pix.png" alt="PIX" style="width: 100%; height: auto; object-fit: contain;">
             </div>
-            <p>Chave gerada: <span id="chave"></span></p>
-            <button onclick="gerarQRCodeComChave()">Gerar QR Code com Chave Aleatória</button>
+            <p>Chave da ONG: <span id="chave"><?= htmlspecialchars($chave_pix); ?></span></p>
         </div>
+
     </div>
 
     <div class="button-group">
-        <button class="btn-voltar" onclick="window.history.back()">Voltar</button>
-        <button class="btn-pronto" onclick="window.location.href='confirmacao-pagamento.php'">Pronto</button>
+        <div class="button-group">
+            <button class="btn-voltar" onclick="window.history.back()">Voltar</button>
+            <button class="btn-voltar" onclick="window.location.href='home_doador.php'">Pronto</button>
+        </div>
     </div>
 
     <footer>
@@ -115,28 +176,6 @@ if ($valor <= 0 || $taxa < 0) {
 
 
     <script>
-        // Função para gerar uma chave aleatória
-        function gerarChaveAleatoria(tamanho = 16) {
-            const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let chave = '';
-            for (let i = 0; i < tamanho; i++) {
-                chave += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
-            }
-            return chave;
-        }
-
-        // Função para gerar e exibir o QR code com a chave aleatória
-        function gerarQRCodeComChave() {
-            const chaveAleatoria = gerarChaveAleatoria();
-            const url = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(chaveAleatoria)}`;
-            document.getElementById("qrCode").src = url;
-            document.getElementById("chave").innerText = chaveAleatoria;
-        }
-
-        // Gera um QR code inicial com chave aleatória ao carregar a página
-        window.onload = function() {
-            gerarQRCodeComChave();
-        };
     </script>
 </body>
 

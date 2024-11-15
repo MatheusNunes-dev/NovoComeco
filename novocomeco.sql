@@ -44,11 +44,13 @@ CREATE TABLE ONG (
 -- Tabela DOACAO
 CREATE TABLE DOACAO (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome_doador VARCHAR(255),
-    ong_id INT,
-    valor DECIMAL(10, 2),
-    taxa DECIMAL(10, 2),
-    data_doacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    id_ong INT NULL,
+    id_doador INT NULL,
+    valor_total DECIMAL(10, 2) NOT NULL,
+    valor_taxa DECIMAL(10, 2) NOT NULL,
+    comprovante_pix BLOB NULL,
+    data_hora DATETIME NOT NULL,
+    status ENUM('realizado', 'pendente', 'cancelado') NULL
 );
 -- Tabela ADMINISTRADOR
 CREATE TABLE ADMINISTRADOR (

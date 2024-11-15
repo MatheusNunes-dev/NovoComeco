@@ -96,15 +96,6 @@ $mysqli->close();
 
         <!-- Detalhes do Usuário -->
         <section class="donation-box">
-            <div class="circle" onclick="window.location.href='upload-foto.php'" style="cursor: pointer;">
-                <?php if (!empty($admin['foto'])): ?>
-                    <img src="../../uploads/<?php echo htmlspecialchars($admin['foto']); ?>" alt="Foto do Usuário" style="width: 100%; height: 100%; border-radius: 50%;">
-                <?php else: ?>
-                    <p>FOTO</p>
-                <?php endif; ?>
-            </div>
-
-
             <div class="donation-details">
                 <p><strong>Usuário:</strong> <?php echo htmlspecialchars($user_nome); ?></p>
                 <p><strong>E-mail:</strong> <?php echo htmlspecialchars($user_email); ?></p>
@@ -116,7 +107,7 @@ $mysqli->close();
         <div class="action-buttons">
             <button class="action-button" onclick="window.location.href='../usuarios/redefinicao-senha.php'">Alterar Senha</button>
             <button class="action-button" onclick="window.location.href='historico-transferencia-adm.php'">Histórico Transferências</button>
-            <button class="action-button" onclick="window.location.href='x'">Gráfico Transferências</button>
+            <button class="action-button" onclick="window.location.href='grafico-doacoes.php'">Gráfico Doações</button>
             <button class="action-button" onclick="window.location.href='../../logout.php'">Logout</button>
         </div>
     </main>

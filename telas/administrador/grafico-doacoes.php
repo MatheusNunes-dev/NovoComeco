@@ -63,7 +63,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
         <div class="container">
             <div class="filters">
                 <label>Data Inicial:
-                    <input type="date" id="data_inicio" value="<?php echo date('Y-m-d', strtotime('-30 days')); ?>">
+                    <input type="date" id="data_inicio" value="<?php echo date('Y-m-d', strtotime('-50 days')); ?>">
                 </label>
                 <label style="margin-left: 20px;">Data Final:
                     <input type="date" id="data_fim" value="<?php echo date('Y-m-d'); ?>">

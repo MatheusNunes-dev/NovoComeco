@@ -1,10 +1,48 @@
 <?php
 session_start();
 
-// Verificar se o usuário é um administrador
+// Verificar se o usuário é uma ONG
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'ong') {
     header("Location: /telas/usuarios/login.php");
     exit();
+}
+
+// Incluir conexão com o banco de dados
+include('../../db.php');
+
+// Obter o ID da ONG logada
+$user_id = $_SESSION['user_id'];
+
+// Buscar informações da ONG no banco de dados
+$nome_ong = $email_ong = $cnpj_ong = '';
+try {
+    $sql = "SELECT nome, email, cnpj FROM ONG WHERE id_ong = ?";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $ong = $result->fetch_assoc();
+        $nome_ong = $ong['nome'];
+        $email_ong = $ong['email'];
+        $cnpj_ong = $ong['cnpj'];
+    } else {
+        echo "<script>
+            alert('Não foi possível carregar os dados da ONG. Por favor, tente novamente.');
+            window.location.href = '/telas/usuarios/login.php';
+        </script>";
+        exit();
+    }
+} catch (Exception $e) {
+    echo "<script>
+        alert('Erro ao buscar informações da ONG: " . addslashes($e->getMessage()) . "');
+        window.location.href = '/telas/usuarios/login.php';
+    </script>";
+    exit();
+} finally {
+    if (isset($stmt)) $stmt->close();
+    if (isset($mysqli)) $mysqli->close();
 }
 ?>
 <!DOCTYPE html>
@@ -14,7 +52,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novo Começo - Configurações</title>
-    <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
+    <link rel="shortcut icon" href="../../assets/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/global.css">
     <link rel="stylesheet" href="../../css/configuracoes.css">
     <link rel="stylesheet" href="../../css/configuracoes-ong.css">
@@ -67,15 +105,15 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
                 <p>FOTO</p>
             </div>
             <div class="donation-details">
-                <p><strong>ONG:</strong> Nome da ONG</p>
-                <p><strong>E-mail:</strong> exemplo@dominio.com</p>
-                <p><strong>CNPJ:</strong> XXX/0001-XX</p>
+                <p><strong>ONG:</strong> <?= htmlspecialchars($nome_ong) ?></p>
+                <p><strong>E-mail:</strong> <?= htmlspecialchars($email_ong) ?></p>
+                <p><strong>CNPJ:</strong> <?= htmlspecialchars($cnpj_ong) ?></p>
             </div>
         </section>
 
         <!-- Ações do Usuário -->
         <div class="action-buttons">
-            <button class="action-button" onclick="window.location.href='../usuarios/redefinicao_senha.php'">Redefinir Senha</button>
+            <button class="action-button" onclick="window.location.href='../usuarios/redefinicao-senha.php'">Redefinir Senha</button>
             <button class="action-button" onclick="window.location.href='desvincular-ong.php'">Desvincular ONG</button>
             <button class="action-button" onclick="window.location.href='../../logout.php'">Logout</button>
         </div>
@@ -116,17 +154,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
     </footer>
 
     <script src="../../js/header.js"></script>
-
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
-    </div>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
 </body>
 
 </html>

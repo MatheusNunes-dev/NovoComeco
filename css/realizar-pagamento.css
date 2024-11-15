@@ -76,6 +76,8 @@
     }
 }
 
+
+
 /* Estilo do container Pix */
 .pix-box {
     width: 40%; /* Tamanho ajustado para ficar à direita */
@@ -94,6 +96,10 @@
 /* Efeito de hover para a caixa Pix */
 .pix-box:hover {
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.pix-box img {
+    width: 50%;
 }
 
 /* Estilo do botão */
@@ -159,4 +165,3 @@
         .btn-voltar:active, .btn-pronto:active {
             transform: translateY(2px); /* Efeito de clique */
         }
-

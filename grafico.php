@@ -1,27 +1,54 @@
 <?php
+// Exibir erros para depuração
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
-include('db.php');
-$data_inicio = $_GET['data_inicio'] ?? '2023-01-01';
-$data_fim = $_GET['data_fim'] ?? date('Y-m-d');
+// Incluir a conexão com o banco de dados
+include('db.php'); // ou o caminho correto para o seu db.php
 
-// Query para contar os status_pagamento
-$sql = "SELECT status_pagamento, COUNT(*) as total FROM boleto WHERE data_emissao BETWEEN ? AND ? GROUP BY status_pagamento";
-$stmt = $mysqli->prepare($sql);
-$stmt->bind_param("ss", $data_inicio, $data_fim);
-$stmt->execute();
-$result = $stmt->get_result();
-
-// Organiza os dados para o gráfico
-$dados = ["realizado" => 0, "pendente" => 0];
-while ($row = $result->fetch_assoc()) {
-    if ($row['status_pagamento'] == 'realizado') {
-        $dados["realizado"] = $row['total'];
-    } elseif ($row['status_pagamento'] == 'pendente') {
-        $dados["pendente"] = $row['total'];
-    }
+// Verificar se a conexão foi estabelecida corretamente
+if (!$mysqli) {
+    die("Erro de conexão: " . $mysqli->connect_error);
 }
 
-echo json_encode($dados);
+// Obter os parâmetros de data
+$data_inicio = $_GET['data_inicio']; // Exemplo: 2024-10-16
+$data_fim = $_GET['data_fim']; // Exemplo: 2024-11-15
 
-$stmt->close();
-$mysqli->close();
+// Ajustar as datas para incluir hora
+$data_inicio .= " 00:00:00"; // Definir como 00:00:00
+$data_fim .= " 23:59:59"; // Definir como 23:59:59
+
+// Preparar a consulta SQL
+$sql = "SELECT ONG.nome, SUM(DOACAO.valor_total) AS valor_total
+        FROM DOACAO
+        JOIN ONG ON DOACAO.id_ong = ONG.id_ong
+        WHERE DOACAO.data_hora BETWEEN ? AND ?
+        GROUP BY ONG.nome";
+
+$stmt = $mysqli->prepare($sql);
+if (!$stmt) {
+    die("Erro ao preparar a consulta: " . $mysqli->error);
+}
+
+// Bind dos parâmetros
+$stmt->bind_param('ss', $data_inicio, $data_fim);
+
+// Executar a consulta
+if (!$stmt->execute()) {
+    die("Erro ao executar a consulta: " . $stmt->error);
+}
+
+// Obter os resultados
+$result = $stmt->get_result();
+if ($result->num_rows > 0) {
+    $dados = [];
+    while ($row = $result->fetch_assoc()) {
+        $dados[] = $row;
+    }
+    // Retornar os dados como JSON
+    echo json_encode($dados);
+} else {
+    // Caso não haja resultados
+    echo json_encode([]);
+}

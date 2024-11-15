@@ -64,9 +64,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
 
         <!-- Detalhes do Usuário -->
         <section class="donation-box">
-            <div class="circle">
-                <p>FOTO</p>
-            </div>
             <div class="donation-details">
                 <p><strong>Usuário:</strong> <?php echo $_SESSION['user_nome']; ?></p>
                 <p><strong>E-mail:</strong> <?php echo $_SESSION['user_email']; ?></p>
