@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result_doador = $stmt_doador->get_result();
 
         // Verificar na tabela de ONGs
-        $sql_ong = "SELECT id_ong AS id, nome, email, senha FROM ONG WHERE email = ?";
+        $sql_ong = "SELECT id_ong AS id, nome, email, senha, status FROM ONG WHERE email = ?";
         $stmt_ong = $mysqli->prepare($sql_ong);
         $stmt_ong->bind_param("s", $email);
         $stmt_ong->execute();
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['user_email'] = $admin['email'];
                 $_SESSION['user_tipo'] = 'administrador';
                 $_SESSION['logged_in'] = true;
-                header("Location: ../administrador/configuracoes-administrador.php");
+                header("Location: index.php");
                 exit();
             }
         }
@@ -71,20 +71,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['user_tipo'] = 'doador';
                 $_SESSION['logged_in'] = true;
 
-                header("Location: ../doador/home_doador.php");
+                header("Location: index.php");
                 exit();
             }
         }
 
-
-
-        // Verificar se a ONG existe e a senha está correta
         // Verificar se a ONG existe e a senha está correta
         if ($result_ong->num_rows > 0) {
             $ong = $result_ong->fetch_assoc();
 
             // Verificar se a ONG está desativada
-            if ($ong['status'] !== 'ativo') {
+            if ($ong['status'] == 'inativo') {
                 echo "<script>
                     alert('Sua ONG foi desativada. Entre em contato com o suporte.');
                     window.location.href = 'login.php';
@@ -100,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['user_tipo'] = 'ong';
                 $_SESSION['logged_in'] = true;
 
-                header("Location: ../ong/home_ong.php");
+                header("Location: index.php");
                 exit();
             } else {
                 echo "<script>

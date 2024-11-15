@@ -32,9 +32,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
                 </svg>
             </button>
             <div>
-                <a href="../telas/index.php">
-                    <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo">
-                </a>
+                <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo">
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
@@ -54,7 +52,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
                 </ul>
             </div>
             <div class="user">
-                <a href="../../telas/administrador/configuracoes-administrador.php">
+                <a href="../../telas/doador/configuracoes-doador.php">
                     <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>

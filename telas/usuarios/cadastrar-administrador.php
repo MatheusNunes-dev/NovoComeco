@@ -4,6 +4,7 @@ session_start(); // Inicia a sessão
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Coletando os dados do formulário
+    $verificationCode = $_POST['verification-code']; // Novo campo de verificação
     $name = $_POST['name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
@@ -21,8 +22,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Variável para armazenar mensagens de erro
     $error_message = "";
 
-    // Validando se as senhas coincidem
-    if ($password !== $confirmPassword) {
+    // Validação do Código de Verificação
+    if ($verificationCode !== "000") {
+        $error_message = "Código de verificação inválido.";
+    } elseif ($password !== $confirmPassword) {
+        // Validando se as senhas coincidem
         $error_message = "As senhas não coincidem.";
     } else {
         // Verifica duplicidade de e-mail e CPF
@@ -126,6 +130,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p>Crie sua conta e ajude o próximo!</p>
             <form action="cadastrar-administrador.php" method="POST">
                 <!-- Informações Pessoais -->
+                <div class="input-group">
+                    <input type="text" id="verification-code" name="verification-code" placeholder="Código de Verificação" required>
+                </div>
                 <div class="input-group">
                     <input type="text" id="name" name="name" placeholder="Nome Completo" required>
                 </div>

@@ -32,9 +32,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
                 </svg>
             </button>
             <div>
-                <a href="../telas/index.php">
-                    <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo">
-                </a>
+                <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo">
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
@@ -47,11 +45,14 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
                             </svg>
                         </button>
                     </li>
-                    <li class="nav-link"><a href="../../telas/administrador/configuracoes-administrador.php">CONFIGURAÇÕES DO ADMIN</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/index.php">HOME</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/pagina-quero-doar.php">ONG'S</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/sobre.php">SOBRE</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/contato.php">CONTATO</a></li>
                 </ul>
             </div>
             <div class="user">
-                <a href="../../telas/usuarios/login.php">
+                <a href="../../telas/doador/configuracoes-doador.php">
                     <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
@@ -59,20 +60,20 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
     </header>
     <main>
         <h1 class="title">Gráfico de transferências</h1>
-    <div class="container">
-        <div class="filters">
-            <label>Data Inicial:
-                <input type="date" id="data_inicio" value="<?php echo date('Y-m-d', strtotime('-30 days')); ?>">
-            </label>
-            <label style="margin-left: 20px;">Data Final:
-                <input type="date" id="data_fim" value="<?php echo date('Y-m-d'); ?>">
-            </label>
-            <button onclick="atualizarGrafico()" style="margin-left: 20px;">Filtrar</button>
+        <div class="container">
+            <div class="filters">
+                <label>Data Inicial:
+                    <input type="date" id="data_inicio" value="<?php echo date('Y-m-d', strtotime('-30 days')); ?>">
+                </label>
+                <label style="margin-left: 20px;">Data Final:
+                    <input type="date" id="data_fim" value="<?php echo date('Y-m-d'); ?>">
+                </label>
+                <button onclick="atualizarGrafico()" style="margin-left: 20px;">Filtrar</button>
+            </div>
+            <div>
+                <canvas id="meuGrafico"></canvas>
+            </div>
         </div>
-        <div>
-        <canvas id="meuGrafico"></canvas>
-        </div>
-    </div>
     </main>
 
     <footer>

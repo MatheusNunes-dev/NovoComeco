@@ -1,14 +1,42 @@
 <?php
 session_start();
+require('../../db.php'); // Inclui a conexão com o banco
+
+// Função para formatar CPF
+function formatarCPF($cpf)
+{
+    return preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "$1.$2.$3-$4", $cpf);
+}
 
 // Verificar se o usuário é um administrador
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'administrador') {
     header("Location: /telas/usuarios/login.php");
     exit();
 }
+
+// Inicializar variáveis
+$user_nome = "";
+$user_email = "";
+$user_cpf = "";
+
+// Buscar informações do administrador logado
+$user_id = $_SESSION['user_id'];
+$sql = "SELECT nome, email, cpf FROM administrador WHERE id_administrador = ?";
+$stmt = $mysqli->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $admin = $result->fetch_assoc();
+    $user_nome = $admin['nome'];
+    $user_email = $admin['email'];
+    $user_cpf = $admin['cpf'];
+}
+
+$stmt->close();
+$mysqli->close();
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -35,22 +63,27 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
                 </svg>
             </button>
             <div>
-                <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo da Novo Começo">
+                <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo">
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
                     <li>
                         <button class="btn-icon-header" onclick="toggleSideBar()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-x" viewBox="0 0 16 16">
+                                <path
+                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                             </svg>
                         </button>
                     </li>
-                    <li class="nav-link"><a href="configuracoes-administrador.php">CONFIGURAÇÕES DO ADMIN</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/index.php">HOME</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/pagina-quero-doar.php">ONG'S</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/sobre.php">SOBRE</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/contato.php">CONTATO</a></li>
                 </ul>
             </div>
             <div class="user">
-                <a href="../../telas/administrador/configuracoes-administrador.php">
+                <a href="../../telas/doador/configuracoes-doador.php">
                     <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
@@ -63,13 +96,19 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
 
         <!-- Detalhes do Usuário -->
         <section class="donation-box">
-            <div class="circle">
-                <p>FOTO</p>
+            <div class="circle" onclick="window.location.href='upload-foto.php'" style="cursor: pointer;">
+                <?php if (!empty($admin['foto'])): ?>
+                    <img src="../../uploads/<?php echo htmlspecialchars($admin['foto']); ?>" alt="Foto do Usuário" style="width: 100%; height: 100%; border-radius: 50%;">
+                <?php else: ?>
+                    <p>FOTO</p>
+                <?php endif; ?>
             </div>
+
+
             <div class="donation-details">
-                <p><strong>Usuário:</strong> Nome do Usuário</p>
-                <p><strong>E-mail:</strong> exemplo@dominio.com</p>
-                <p><strong>CPF:</strong> 000.000.000-00</p>
+                <p><strong>Usuário:</strong> <?php echo htmlspecialchars($user_nome); ?></p>
+                <p><strong>E-mail:</strong> <?php echo htmlspecialchars($user_email); ?></p>
+                <p><strong>CPF:</strong> <?php echo htmlspecialchars(formatarCPF($user_cpf)); ?></p>
             </div>
         </section>
 

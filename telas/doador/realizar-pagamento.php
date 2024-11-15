@@ -70,7 +70,7 @@ if ($valor <= 0 || $taxa < 0) {
                 </ul>
             </div>
             <div class="user">
-                <a href="../../telas/doador/configuracoes.doador.php">
+                <a href="../../telas/doador/configuracoes-doador.php">
                     <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
