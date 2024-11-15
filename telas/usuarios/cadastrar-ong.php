@@ -1,13 +1,13 @@
 <?php
 include('../../db.php');
-session_start(); // Inicia a sessão
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Coletando os dados do formulário
     $name = $_POST['name'];
-    $cnpj = $_POST['cnpj'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
+    $cnpj = $_POST['cnpj'];
     $constituicao = $_POST['constituicao'];
     $comprobatorio = $_POST['comprobatorio'];
     $estatuto = $_POST['estatuto'];
@@ -28,23 +28,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Variável para armazenar mensagens de erro
     $error_message = "";
 
-    // Validando se as senhas coincidem
+    // Validação das senhas
     if ($password !== $confirmPassword) {
         $error_message = "As senhas não coincidem.";
     } else {
-        // Verifica duplicidade de e-mail e CNPJ
-        $email_check_query = "SELECT * FROM ong WHERE email = '$email'";
-        $email_result = $mysqli->query($email_check_query);
+        // Verifica email/cnpj e    m administrador
+        $check_admin = "SELECT * FROM administrador WHERE email = '$email'";
+        $result_admin = $mysqli->query($check_admin);
 
-        $cnpj_check_query = "SELECT * FROM ong WHERE cnpj = '$cnpj'";
-        $cnpj_result = $mysqli->query($cnpj_check_query);
+        // Verifica email/cnpj em doador
+        $check_doador = "SELECT * FROM doador WHERE email = '$email'";
+        $result_doador = $mysqli->query($check_doador);
 
-        if ($email_result->num_rows > 0) {
-            $error_message = "Já existe uma conta cadastrada com este e-mail.";
-        } elseif ($cnpj_result->num_rows > 0) {
-            $error_message = "Já existe uma conta cadastrada com este CNPJ.";
+        // Verifica email/cnpj em ong
+        $check_ong = "SELECT * FROM ong WHERE email = '$email' OR cnpj = '$cnpj'";
+        $result_ong = $mysqli->query($check_ong);
+
+        if ($result_admin->num_rows > 0) {
+            $error_message = "Email já cadastrado como administrador.";
+        } elseif ($result_doador->num_rows > 0) {
+            $error_message = "Email já cadastrado como doador.";
+        } elseif ($result_ong->num_rows > 0) {
+            $error_message = "Email ou CNPJ já cadastrado como ONG.";
         } else {
-            // Inserção no banco de dados
+            // Prossegue com o cadastro
             $sql_code = "INSERT INTO ong (nome, email, senha, telefone, cnpj, status, constituicao, comprobatorio, estatuto_social, 
                                       end_rua, end_numero, end_bairro, end_cidade, end_estado, end_complemento, banco, agencia, conta_corrente, chave_pix, data_cadastro) 
                          VALUES ('$name', '$email', '$password', '$phone', '$cnpj', 'pendente', '$constituicao', '$comprobatorio', '$estatuto', 
@@ -52,17 +59,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($mysqli->query($sql_code) === TRUE) {
                 // Armazenando as informações da ONG na sessão
-                $_SESSION['user_id'] = $mysqli->insert_id;  // ID da ONG recém-criada
+                $_SESSION['user_id'] = $mysqli->insert_id;
                 $_SESSION['user_nome'] = $name;
                 $_SESSION['user_email'] = $email;
-                $_SESSION['user_tipo'] = 'ong';  // Tipo de usuário: ONG
+                $_SESSION['user_tipo'] = 'ong';
                 $_SESSION['logged_in'] = true;
 
-                // Exibindo a mensagem de sucesso e redirecionando
                 echo "<div class='success-message'>Cadastro realizado com sucesso!</div>";
                 echo "<script>
                     setTimeout(function() {
-                        window.location.href = 'index.php';  // Redireciona para a página inicial da ONG
+                        window.location.href = 'index.php';
                     }, 2000);
                 </script>";
             } else {
@@ -77,8 +83,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
-
 
 
 

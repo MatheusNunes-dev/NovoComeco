@@ -25,35 +25,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($password !== $confirmPassword) {
         $error_message = "As senhas não coincidem.";
     } else {
-        // Verifica duplicidade de e-mail e CPF
-        $email_check_query = "SELECT * FROM DOADOR WHERE email = '$email'";
-        $email_result = $mysqli->query($email_check_query);
+        // Verifica email/cpf em DOADOR
+        $check_doador = "SELECT * FROM DOADOR WHERE email = '$email' OR cpf = '$cpf'";
+        $result_doador = $mysqli->query($check_doador);
 
-        $cpf_check_query = "SELECT * FROM DOADOR WHERE cpf = '$cpf'";
-        $cpf_result = $mysqli->query($cpf_check_query);
+        // Verifica email/cpf em administrador
+        $check_admin = "SELECT * FROM administrador WHERE email = '$email' OR cpf = '$cpf'";
+        $result_admin = $mysqli->query($check_admin);
 
-        if ($email_result->num_rows > 0) {
-            $error_message = "Já existe uma conta cadastrada com este e-mail.";
-        } elseif ($cpf_result->num_rows > 0) {
-            $error_message = "Já existe uma conta cadastrada com este CPF.";
+        // Verifica email em ONG
+        $check_ong = "SELECT * FROM ONG WHERE email = '$email'";
+        $result_ong = $mysqli->query($check_ong);
+
+        if ($result_doador->num_rows > 0) {
+            $error_message = "Email ou CPF já cadastrado como doador.";
+        } elseif ($result_admin->num_rows > 0) {
+            $error_message = "Email ou CPF já cadastrado como administrador.";
+        } elseif ($result_ong->num_rows > 0) {
+            $error_message = "Email já cadastrado como ONG.";
         } else {
             // Inserção no banco de dados
-            $sql_code = "INSERT INTO DOADOR (nome, email, senha, telefone, cpf, data_cadastro, end_rua, end_numero, end_bairro, end_cidade, end_estado, end_complemento) 
-                         VALUES ('$name', '$email', '$password', '$phone', '$cpf', NOW(), '$rua', '$numero', '$bairro', '$cidade', '$estado', '$complemento')";
+            $sql_code = "INSERT INTO DOADOR (nome, email, senha, telefone, cpf, data_cadastro, 
+                        end_rua, end_numero, end_bairro, end_cidade, end_estado, end_complemento) 
+                        VALUES ('$name', '$email', '$password', '$phone', '$cpf', NOW(), 
+                        '$rua', '$numero', '$bairro', '$cidade', '$estado', '$complemento')";
 
             if ($mysqli->query($sql_code) === TRUE) {
                 // Armazenando informações do usuário na sessão
-                $_SESSION['user_id'] = $mysqli->insert_id;  // ID do usuário recém-criado
+                $_SESSION['user_id'] = $mysqli->insert_id;  // Corrigido o erro de sintaxe aqui
                 $_SESSION['user_nome'] = $name;
                 $_SESSION['user_email'] = $email;
-                $_SESSION['user_tipo'] = 'doador';  // Aqui, você define o tipo de usuário conforme necessário
+                $_SESSION['user_tipo'] = 'doador';
                 $_SESSION['logged_in'] = true;
 
-                // Redirecionamento após sucesso no cadastro
                 echo "<div class='success-message'>Cadastro realizado com sucesso!</div>";
                 echo "<script>
                     setTimeout(function() {
-                        window.location.href = 'index.php';  
+                        window.location.href = 'index.php';
                     }, 2000);
                 </script>";
             } else {
@@ -68,13 +76,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
-
-
-
-
-
-
 
 
 <!DOCTYPE html>

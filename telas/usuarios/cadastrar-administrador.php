@@ -1,10 +1,10 @@
 <?php
 include('../../db.php');
-session_start(); // Inicia a sessão
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Coletando os dados do formulário
-    $verificationCode = $_POST['verification-code']; // Novo campo de verificação
+    $verificationCode = $_POST['verification-code'];
     $name = $_POST['name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
@@ -22,30 +22,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Variável para armazenar mensagens de erro
     $error_message = "";
 
+    // Debug: Verifique se o verificationCode está sendo recebido corretamente
+    // echo "Verification Code: " . $verificationCode;  // Para depuração
+
     // Validação do Código de Verificação
     if ($verificationCode !== "000") {
         $error_message = "Código de verificação inválido.";
     } elseif ($password !== $confirmPassword) {
-        // Validando se as senhas coincidem
         $error_message = "As senhas não coincidem.";
     } else {
-        // Verifica duplicidade de e-mail e CPF
-        $email_check_query = "SELECT * FROM administrador WHERE email = '$email'";
-        $email_result = $mysqli->query($email_check_query);
+        // Verifica email/cpf em administrador
+        $check_admin = "SELECT * FROM administrador WHERE email = '$email' OR cpf = '$cpf'";
+        $result_admin = $mysqli->query($check_admin);
 
-        $cpf_check_query = "SELECT * FROM administrador WHERE cpf = '$cpf'";
-        $cpf_result = $mysqli->query($cpf_check_query);
+        // Verifica email/cpf em doador
+        $check_doador = "SELECT * FROM doador WHERE email = '$email' OR cpf = '$cpf'";
+        $result_doador = $mysqli->query($check_doador);
 
-        if ($email_result->num_rows > 0 || $cpf_result->num_rows > 0) {
-            // Verifica qual campo está duplicado e define a mensagem de erro
-            if ($email_result->num_rows > 0) {
-                $error_message = "Já existe uma conta cadastrada com este e-mail.";
-            } else {
-                $error_message = "Já existe uma conta cadastrada com este CPF.";
-            }
+        // Verifica email em ong
+        $check_ong = "SELECT * FROM ong WHERE email = '$email'";
+        $result_ong = $mysqli->query($check_ong);
 
-            // Exibe a mensagem de erro
-            echo "<div class='error-message'>$error_message</div>";
+        if ($result_admin->num_rows > 0) {
+            $error_message = "Email ou CPF já cadastrado como administrador.";
+        } elseif ($result_doador->num_rows > 0) {
+            $error_message = "Email ou CPF já cadastrado como doador.";
+        } elseif ($result_ong->num_rows > 0) {
+            $error_message = "Email já cadastrado como ONG.";
         } else {
             // Prossegue com o cadastro
             $sql_code = "INSERT INTO administrador (nome, email, senha, telefone, cpf, end_rua, end_numero, end_bairro, end_cidade, end_estado, end_complemento) 
@@ -53,17 +56,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($mysqli->query($sql_code) === TRUE) {
                 // Armazenando informações do administrador na sessão
-                $_SESSION['user_id'] = $mysqli->insert_id;  // ID do usuário recém-criado
+                $_SESSION['user_id'] = $mysqli->insert_id;
                 $_SESSION['user_nome'] = $name;
                 $_SESSION['user_email'] = $email;
-                $_SESSION['user_tipo'] = 'administrador';  // Tipo de usuário: administrador
+                $_SESSION['user_tipo'] = 'administrador';
                 $_SESSION['logged_in'] = true;
 
-                // Exibindo a mensagem de sucesso e redirecionando
                 echo "<div class='success-message'>Cadastro realizado com sucesso!</div>";
                 echo "<script>
                     setTimeout(function() {
-                        window.location.href = 'index.php';  
+                        window.location.href = 'index.php';
                     }, 2000);
                 </script>";
             } else {
@@ -71,6 +73,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<div class='error-message'>$error_message</div>";
             }
         }
+    }
+
+    // Exibindo a mensagem de erro, se existir
+    if (!empty($error_message)) {
+        echo "<div class='error-message'>$error_message</div>";
     }
 }
 ?>
