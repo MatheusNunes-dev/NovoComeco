@@ -1,15 +1,43 @@
 <?php
 session_start();
-$isLoggedIn = isset($_SESSION['user_id']); // Verifica se o usuário está logado
-$tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, caso esteja logado
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-// Verifica e inicializa variáveis se não estiverem definidas
-$ong_id = isset($_GET['ong']) ? $_GET['ong'] : null; // ou um valor padrão, como '1'
-$valor = isset($_GET['valor']) ? $_GET['valor'] : '0.00';
-$taxa = isset($_GET['taxa']) ? $_GET['taxa'] : '0.00';
-$nome_doador = isset($_GET['doador']) ? $_GET['doador'] : 'Anônimo';
 
-$ong_id_selecionada = isset($_GET['ong']) ? $_GET['ong'] : null;
+include('../../db.php'); // Caminho para o arquivo db.php
+
+// Captura o nome do arquivo da URL
+$current_url = $_SERVER['REQUEST_URI'];
+
+// Usa uma expressão regular para capturar o número após "ong-" no nome do arquivo
+if (preg_match('/ong-(\d+)\.php/', $current_url, $matches)) {
+    $ong_id = $matches[1];  // O número após "ong-" será o ID da ONG
+}
+// Verifica se o ID da ONG foi encontrado
+if (isset($ong_id)) {
+
+
+    $sql = "SELECT id_ong, nome, chave_pix FROM ONG WHERE id_ong = ?";
+    $stmt = $mysqli->prepare($sql);
+    if ($stmt) {
+        $stmt->bind_param("i", $ong_id); // "i" para inteiro (id_ong)
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Verifica se a ONG foi encontrada
+        if ($result && $row = $result->fetch_assoc()) {
+            $nome_ong = $row['nome']; // Nome da ONG
+            $chave_pix = $row['chave_pix']; // Chave PIX da ONG
+        } else {
+            echo "ONG não encontrada.";
+        }
+    } else {
+        echo "Erro na consulta SQL.";
+    }
+} else {
+    echo "ID da ONG não especificado.";
+}
 ?>
 
 
@@ -75,20 +103,6 @@ $ong_id_selecionada = isset($_GET['ong']) ? $_GET['ong'] : null;
             </div>
 
             <div class="input-box">
-                <label for="ong">Selecione uma ONG:</label>
-                <select id="ong" name="ong" onchange="redirecionarParaOng()">
-                    <option value="" <?php echo ($ong_id == '') ? 'selected' : ''; ?>>Selecione uma ONG</option>
-                    <option value="1" <?php echo ($ong_id == 1) ? 'selected' : ''; ?>>Mão Amiga</option>
-                    <option value="2" <?php echo ($ong_id == 2) ? 'selected' : ''; ?>>Amigos do Bem</option>
-                    <option value="3" <?php echo ($ong_id == 3) ? 'selected' : ''; ?>>Cultivando a Vida</option>
-                    <option value="4" <?php echo ($ong_id == 4) ? 'selected' : ''; ?>>Mais União</option>
-                    <option value="5" <?php echo ($ong_id == 5) ? 'selected' : ''; ?>>Amigos da Terra</option>
-                    <option value="6" <?php echo ($ong_id == 6) ? 'selected' : ''; ?>>Amor Animal</option>
-                </select>
-            </div>
-
-
-            <div class="input-box">
                 <label for="valor">Valor (R$):</label>
                 <input type="number" id="valor" name="valor" placeholder="Digite o valor da doação (somente números)" required>
             </div>
@@ -114,61 +128,29 @@ $ong_id_selecionada = isset($_GET['ong']) ? $_GET['ong'] : null;
         </div>
     </footer>
     <script>
-        function redirecionarParaOng() {
-            const ongId = document.getElementById('ong').value;
-
-            // Redireciona para a página da ONG correspondente
-            window.location.href = `ong-${ongId}.php`;
-        }
-
-
         function validateDonation() {
             const valor = document.getElementById('valor').value;
-            const ong_id = document.getElementById('ong').value; // Exemplo: "6" para Amor Animal
+            const ong_id = <?php echo $ong_id; ?>; // A ONG já está definida na URL
 
             if (valor >= 5) {
-                const taxa = (valor * 0.05).toFixed(2); // 5% do valor
+                const taxa = (valor * 0.05).toFixed(2); // Calcula a taxa de 5% do valor
 
-                <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) { ?>
-                    const nome_doador = '<?php echo $_SESSION['user_nome'] ?? "Anônimo"; ?>';
-                    window.location.href = `../doador/realizar-pagamento.php?ong=${ong_id}&valor=${valor}&taxa=${taxa}&doador=${nome_doador}`;
-                <?php } else { ?>
-                    alert('Você precisa estar logado para realizar uma doação.');
-                <?php } ?>
+                if (ong_id !== "") {
+                    <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null) { ?>
+                        const nome_doador = '<?php echo $_SESSION['user_nome'] ?? "Anônimo"; ?>';
+                        // Redireciona para a página de pagamento, passando os parâmetros necessários
+                        window.location.href = `../doador/realizar-pagamento.php?ong=${ong_id}&valor=${valor}&taxa=${taxa}&doador=${nome_doador}`;
+                    <?php } else { ?>
+                        window.location.href = `../usuarios/login.php`;
+                    <?php } ?>
+                }
             } else {
-                document.getElementById('error-message').style.display = 'flex';
+                document.getElementById("error-message").style.display = "block";
             }
         }
 
-
-
         function closeErrorPopup() {
-            document.getElementById('error-message').style.display = 'none';
-        }
-
-
-        function closeErrorPopup() {
-            document.getElementById('error-message').style.display = 'none';
-        }
-
-        function validateDonation() {
-            const valor = document.getElementById('valor').value;
-            const nome_ong = document.getElementById('ong').value;
-
-            if (valor >= 5) {
-                const taxa = (valor * 0.05).toFixed(2); // 5% do valor
-
-                // Verifica se o usuário está logado
-                <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) { ?>
-                    // Redireciona para a página de pagamento, passando as variáveis necessárias
-                    const nome_doador = '<?php echo $_SESSION['user_nome'] ?? "Anônimo"; ?>';
-                    window.location.href = `../doador/realizar-pagamento.php?ong=${nome_ong}&valor=${valor}&taxa=${taxa}&doador=${nome_doador}`;
-                <?php } else { ?>
-                    alert('Você precisa estar logado para realizar uma doação.');
-                <?php } ?>
-            } else {
-                document.getElementById('error-message').style.display = 'flex';
-            }
+            document.getElementById("error-message").style.display = "none";
         }
     </script>
 </body>

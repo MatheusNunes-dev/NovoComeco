@@ -43,14 +43,14 @@ CREATE TABLE ONG (
 );
 -- Tabela DOACAO
 CREATE TABLE DOACAO (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    id_ong INT NULL,
-    id_doador INT NULL,
-    valor_total DECIMAL(10, 2) NOT NULL,
-    valor_taxa DECIMAL(10, 2) NOT NULL,
-    comprovante_pix BLOB NULL,
-    data_hora DATETIME NOT NULL,
-    status ENUM('realizado', 'pendente', 'cancelado') NULL
+    id_doacao INT AUTO_INCREMENT PRIMARY KEY,
+    id_ong INT,
+    id_doador INT,
+    valor_total DECIMAL(10, 2),
+    valor_taxa DECIMAL(10, 2),
+    data_hora DATETIME,
+    status ENUM('pendente', 'confirmado', 'cancelado'),
+    FOREIGN KEY (id_ong) REFERENCES ONG(id_ong) -- Definindo a chave estrangeira
 );
 -- Tabela ADMINISTRADOR
 CREATE TABLE ADMINISTRADOR (

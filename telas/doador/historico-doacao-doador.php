@@ -1,11 +1,30 @@
 <?php
 session_start();
 
-// Verificar se o usuário é um administrador
+// Verificar se o usuário está logado como doador
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'doador') {
     header("Location: /telas/usuarios/login.php");
     exit();
 }
+
+// Incluir o arquivo de conexão com o banco de dados
+require_once '../../db.php';
+
+// Sua lógica para buscar os dados do histórico de doações, por exemplo:
+$query = "SELECT * FROM doacoes WHERE doador_id = ?";
+$stmt = $mysqli->prepare($query);
+$stmt->bind_param("i", $_SESSION['user_id']);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Processar os resultados e exibir na página
+while ($row = $result->fetch_assoc()) {
+    echo "Doação para: " . $row['ong_nome'] . " - Valor: " . $row['valor'] . " - Data: " . $row['data'] . "<br>";
+}
+
+// Fechar a conexão
+$stmt->close();
+$mysqli->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">

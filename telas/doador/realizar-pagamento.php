@@ -1,29 +1,19 @@
 <?php
-
 session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Verifica se o usuário está logado, caso contrário, redireciona
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    echo "<script>alert('Você precisa estar logado para realizar uma doação. Redirecionando para a página de login...');</script>";
-    header("Refresh: 2; url=../usuarios/index.php");
+// Verifica se o usuário está logado e redireciona se não estiver
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'doador') {
+    header("Location: /telas/usuarios/login.php");
     exit();
 }
-
-// Verifica se o usuário é doador
-if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'doador') { // Ajuste 'doador' conforme sua lógica de identificação
-    echo "<script>alert('Acesso restrito: Somente doadores podem acessar esta página.');</script>";
-    header("Refresh: 2; url=../usuarios/index.php");
-    exit();
-}
-
 
 // Inclui o arquivo de conexão com o banco de dados
 require __DIR__ . '../../../db.php'; // Ajuste o caminho conforme necessário
 
-// Captura a URL da página anterior
+// Captura a URL da página anterior (referer)
 $referer = $_SERVER['HTTP_REFERER'] ?? null;
 
 // Inicializa variáveis
@@ -31,56 +21,36 @@ $ong_id = null;
 $ong_selecionada = "Não especificada";
 $chave_pix = "Chave PIX não encontrada";
 
-// Verifica se o referer está definido e extrai o ID da ONG da URL
-if ($referer) {
-    preg_match('/ong-(\d+)/', $referer, $matches);
-    if (isset($matches[1])) {
-        $ong_id = (int)$matches[1]; // ID da ONG
-    }
+// Captura o ID da ONG da URL (query string)
+if (isset($_GET['ong'])) {
+    $ong_id = (int)$_GET['ong']; // Captura o ID da ONG diretamente da URL
 }
 
-// Mapeamento de ONGs: ID => Nome da ONG (pode ser substituído por uma busca no banco de dados)
-$ongs = [
-    1 => "Mão Amiga",
-    2 => "Amigos do Bem",
-    3 => "Cultivando a Vida",
-    4 => "Coração Solidário",
-    5 => "Amigos da Terra",
-    6 => "Amor Animal"
-];
-
-// Verifica se o ID é válido e obtém o nome da ONG
-// Verifica se o ID é válido e obtém o nome da ONG
-if ($ong_id && isset($ongs[$ong_id])) {
-    $ong_selecionada = $ongs[$ong_id];
-    error_log("ONG Selecionada: " . $ong_selecionada);
-
-    // Consulta para buscar a chave PIX no banco de dados
-    $sql = "SELECT chave_pix FROM ONG WHERE id_ong = ?";
+// Verifica se o ID da ONG é válido
+if ($ong_id) {
+    // Consulta para buscar o nome e a chave PIX da ONG no banco de dados
+    $sql = "SELECT id_ong, nome, chave_pix FROM ONG WHERE id_ong = ?";
     $stmt = $mysqli->prepare($sql);
     if ($stmt) {
         $stmt->bind_param("i", $ong_id); // "i" para inteiro (id_ong)
         $stmt->execute();
         $result = $stmt->get_result();
+
+        // Verifica se a ONG foi encontrada
         if ($result && $row = $result->fetch_assoc()) {
-            $chave_pix = $row['chave_pix']; // chave_pix é VARCHAR
-            error_log("Chave PIX encontrada: " . $chave_pix);
+            $ong_selecionada = $row['nome']; // Nome da ONG
+            $chave_pix = $row['chave_pix']; // Chave PIX da ONG
+            $id_ong = $row['id_ong']; // ID da ONG
         } else {
-            error_log("Nenhum resultado encontrado para o ID: " . $ong_id);
-            $chave_pix = "Chave PIX não encontrada para este ID.";
+            echo "ONG não encontrada para id_ong: $ong_id"; // Depuração
         }
         $stmt->close();
     } else {
-        error_log("Erro ao preparar consulta: " . $mysqli->error);
-        $chave_pix = "Erro ao preparar consulta.";
+        echo "Erro na consulta: " . $stmt->error; // Depuração
     }
 } else {
-    error_log("ID da ONG inválido ou não encontrado.");
-    $chave_pix = "ID da ONG inválido ou não encontrado.";
+    echo "ID da ONG não encontrado."; // Depuração
 }
-
-
-
 
 // Captura outros parâmetros da URL
 $valor = $_GET['valor'] ?? 0;
@@ -92,6 +62,42 @@ if ($valor <= 0 || $taxa < 0) {
     echo "<script>alert('Valores de doação ou taxa inválidos.');</script>";
     header("Refresh: 2; url=/telas/usuarios/pagina-quero-doar.php");
     exit();
+}
+
+if (isset($_POST['finalizar_doacao'])) {
+    // Define o fuso horário para Brasília
+    date_default_timezone_set('America/Sao_Paulo');
+
+    // Captura a data e hora atual no horário de Brasília
+    $data_hora = date('Y-m-d H:i:s'); // Formato: '2024-11-15 13:45:00'
+
+    // Define os parâmetros da doação
+    $id_ong = $ong_id; // ID da ONG selecionada
+    $id_doador = $_SESSION['user_id']; // ID do doador, capturado da sessão
+    $valor_total = $valor;
+    $valor_taxa = $taxa;
+    $status = 'realizado'; // Inicialmente marcada como pendente
+
+    // Consulta SQL para inserir os dados na tabela DOACAO
+    $sql = "INSERT INTO DOACAO (id_ong, id_doador, valor_total, valor_taxa, data_hora, status) 
+            VALUES (?, ?, ?, ?, ?, ?)";
+
+    $stmt = $mysqli->prepare($sql);
+    if ($stmt) {
+        $stmt->bind_param("iiddss", $id_ong, $id_doador, $valor_total, $valor_taxa, $data_hora, $status);
+        if ($stmt->execute()) {
+            echo "<script>alert('Doação registrada com sucesso!');</script>";
+            header("Location: home_doador.php"); // Redireciona após a inserção
+            exit();
+        } else {
+            echo "<script>alert('Erro ao registrar a doação.');</script>";
+            // Verifique o erro
+            echo "Erro: " . $stmt->error;
+        }
+        $stmt->close();
+    } else {
+        echo "<script>alert('Erro na preparação da consulta.');</script>";
+    }
 }
 ?>
 
@@ -159,24 +165,13 @@ if ($valor <= 0 || $taxa < 0) {
     </div>
 
     <div class="button-group">
-        <div class="button-group">
-            <button class="btn-voltar" onclick="window.history.back()">Voltar</button>
-            <button class="btn-voltar" onclick="window.location.href='home_doador.php'">Pronto</button>
-        </div>
+        <button class="btn-voltar" onclick="window.history.back()">Voltar</button>
+        <form method="post">
+            <button type="submit" name="finalizar_doacao" class="btn-voltar">Pronto</button>
+        </form>
     </div>
 
     <footer>
         <div class="footer">
             <div class="img-footer-start">
-                <img class="boneco-footer" src="../../assets/img-footer.png" alt="Imagem do rodapé">
-            </div>
-        </div>
-    </footer>
-
-
-
-    <script>
-    </script>
-</body>
-
-</html>
+                <img class="boneco-footer" src="../../assets/img-footer.png" alt="Imagem
