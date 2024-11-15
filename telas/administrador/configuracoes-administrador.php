@@ -105,9 +105,12 @@ $mysqli->close();
 
         <!-- Ações do Usuário -->
         <div class="action-buttons">
-            <button class="action-button" onclick="window.location.href='../administrador/adm-redefinir-senha.php'">Alterar Senha</button>
-            <button class="action-button" onclick="window.location.href='historico-transferencia-adm.php'">Histórico Transferências</button>
             <button class="action-button" onclick="window.location.href='grafico-doacoes.php'">Gráfico Doações</button>
+            <button class="action-button" onclick="window.location.href='transferir.php'">Transferir</button>
+            <button class="action-button" onclick="window.location.href='historico-transferencia-adm.php'">Histórico Transferências</button>
+        </div>
+        <div class="action-buttons">
+            <button class="action-button" onclick="window.location.href='../administrador/adm-redefinir-senha.php'">Alterar Senha</button>
             <button class="action-button" onclick="window.location.href='../../logout.php'">Logout</button>
         </div>
     </main>
