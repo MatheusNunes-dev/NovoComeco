@@ -1,8 +1,9 @@
 <?php
 include('../../db.php');
-session_start(); // Adicionando início da sessão
+session_start(); // Inicia a sessão
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Coletando os dados do formulário
     $name = $_POST['name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
@@ -41,22 +42,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                          VALUES ('$name', '$email', '$password', '$phone', '$cpf', '$rua', '$numero', '$bairro', '$cidade', '$estado', '$complemento')";
 
             if ($mysqli->query($sql_code) === TRUE) {
-                // Pegando o ID do usuário recém inserido
-                $id_usuario = $mysqli->insert_id;
-                
-                // Criando a sessão do usuário
-                $_SESSION['id'] = $id_usuario;
-                $_SESSION['nome'] = $name;
-                $_SESSION['email'] = $email;
-                $_SESSION['tipo'] = 'administrador'; // Adicione o tipo de usuário se necessário
-                
+                // Armazenando informações do administrador na sessão
+                $_SESSION['user_id'] = $mysqli->insert_id;  // ID do usuário recém-criado
+                $_SESSION['user_nome'] = $name;
+                $_SESSION['user_email'] = $email;
+                $_SESSION['user_tipo'] = 'administrador';  // Tipo de usuário: administrador
+                $_SESSION['logged_in'] = true;
+
+                // Exibindo a mensagem de sucesso e redirecionando
                 echo "<div class='success-message'>Cadastro realizado com sucesso!</div>";
                 echo "<script>
                     setTimeout(function() {
-                        window.location.href = '../administrador/configuracoes-administrador.php';
+                        window.location.href = 'index.php';  
                     }, 2000);
                 </script>";
-
             } else {
                 $error_message = "Erro ao cadastrar: " . $mysqli->error;
             }
@@ -69,6 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -224,5 +224,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <script src="../../js/cadastro-administrador.js"></script>
 </body>
-
-</html>

@@ -1,62 +1,72 @@
 <?php
-// include('../../db.php');
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//     // Coletando os dados do formulário
-//     $name = $_POST['name'];
-//     $email = $_POST['email'];
-//     $phone = $_POST['phone'];
-//     $cpf = $_POST['cpf'];
-//     $cep = $_POST['cep'];
-//     $estado = $_POST['estado'];
-//     $cidade = $_POST['cidade'];
-//     $bairro = $_POST['bairro'];
-//     $rua = $_POST['rua'];
-//     $numero = $_POST['numero'];
-//     $complemento = $_POST['complemento'];
-//     $password = $_POST['password'];
-//     $confirmPassword = $_POST['confirm-password'];
+include('../../db.php');
+session_start();
 
-//     // Variável para armazenar mensagens de erro
-//     $error_message = "";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Coletando os dados do formulário
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $cpf = $_POST['cpf'];
+    $cep = $_POST['cep'];
+    $estado = $_POST['estado'];
+    $cidade = $_POST['cidade'];
+    $bairro = $_POST['bairro'];
+    $rua = $_POST['rua'];
+    $numero = $_POST['numero'];
+    $complemento = $_POST['complemento'];
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirm-password'];
 
-//     // Validando se as senhas coincidem
-//     if ($password !== $confirmPassword) {
-//         $error_message = "As senhas não coincidem.";
-//     } else {
-//         // Verifica duplicidade de e-mail e CPF
-//         $email_check_query = "SELECT * FROM DOADOR WHERE email = '$email'";
-//         $email_result = $mysqli->query($email_check_query);
+    // Variável para armazenar mensagens de erro
+    $error_message = "";
 
-//         $cpf_check_query = "SELECT * FROM DOADOR WHERE cpf = '$cpf'";
-//         $cpf_result = $mysqli->query($cpf_check_query);
+    // Validando se as senhas coincidem
+    if ($password !== $confirmPassword) {
+        $error_message = "As senhas não coincidem.";
+    } else {
+        // Verifica duplicidade de e-mail e CPF
+        $email_check_query = "SELECT * FROM DOADOR WHERE email = '$email'";
+        $email_result = $mysqli->query($email_check_query);
 
-//         if ($email_result->num_rows > 0) {
-//             $error_message = "Já existe uma conta cadastrada com este e-mail.";
-//         } elseif ($cpf_result->num_rows > 0) {
-//             $error_message = "Já existe uma conta cadastrada com este CPF.";
-//         } else {
-//             // Inserção no banco de dados
-//             $sql_code = "INSERT INTO DOADOR (nome, email, senha, telefone, cpf, data_cadastro, end_rua, end_numero, end_bairro, end_cidade, end_estado, end_complemento) 
-//                          VALUES ('$name', '$email', '$password', '$phone', '$cpf', NOW(), '$rua', '$numero', '$bairro', '$cidade', '$estado', '$complemento')";
+        $cpf_check_query = "SELECT * FROM DOADOR WHERE cpf = '$cpf'";
+        $cpf_result = $mysqli->query($cpf_check_query);
 
-//             if ($mysqli->query($sql_code) === TRUE) {
-//                 echo "<div class='success-message'>Cadastro realizado com sucesso!</div>";
-//                 echo "<script>
-//                     setTimeout(function() {
-//                         window.location.href = '../doador/home_doador.php';
-//                     }, 2000);
-//                 </script>";
-//             } else {
-//                 $error_message = "Erro ao cadastrar: " . $mysqli->error;
-//             }
-//         }
-//     }
+        if ($email_result->num_rows > 0) {
+            $error_message = "Já existe uma conta cadastrada com este e-mail.";
+        } elseif ($cpf_result->num_rows > 0) {
+            $error_message = "Já existe uma conta cadastrada com este CPF.";
+        } else {
+            // Inserção no banco de dados
+            $sql_code = "INSERT INTO DOADOR (nome, email, senha, telefone, cpf, data_cadastro, end_rua, end_numero, end_bairro, end_cidade, end_estado, end_complemento) 
+                         VALUES ('$name', '$email', '$password', '$phone', '$cpf', NOW(), '$rua', '$numero', '$bairro', '$cidade', '$estado', '$complemento')";
 
-//     // Exibindo a mensagem de erro, se existir
-//     if (!empty($error_message)) {
-//         echo "<div class='error-message'>$error_message</div>";
-//     }
-// }
+            if ($mysqli->query($sql_code) === TRUE) {
+                // Armazenando informações do usuário na sessão
+                $_SESSION['user_id'] = $mysqli->insert_id;  // ID do usuário recém-criado
+                $_SESSION['user_nome'] = $name;
+                $_SESSION['user_email'] = $email;
+                $_SESSION['user_tipo'] = 'doador';  // Aqui, você define o tipo de usuário conforme necessário
+                $_SESSION['logged_in'] = true;
+
+                // Redirecionamento após sucesso no cadastro
+                echo "<div class='success-message'>Cadastro realizado com sucesso!</div>";
+                echo "<script>
+                    setTimeout(function() {
+                        window.location.href = 'index.php';  
+                    }, 2000);
+                </script>";
+            } else {
+                $error_message = "Erro ao cadastrar: " . $mysqli->error;
+            }
+        }
+    }
+
+    // Exibindo a mensagem de erro, se existir
+    if (!empty($error_message)) {
+        echo "<div class='error-message'>$error_message</div>";
+    }
+}
 ?>
 
 
@@ -110,7 +120,7 @@
                 </ul>
             </div>
             <div class="user">
-                <a href="../../telas/usuarios/login.php">
+                <a href="../../e">
                     <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
