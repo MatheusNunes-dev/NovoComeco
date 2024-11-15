@@ -54,9 +54,7 @@ main {
 }
 
 .action-buttons {
-    margin: 1.5rem 0;
     display: flex;
-    gap: 1rem;
     justify-content: center;
 }
 
@@ -76,6 +74,7 @@ main {
 .action-button:hover {
     background: #667eea;
 }
+
 
 @media (max-width: 768px) {
     main {

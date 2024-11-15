@@ -1,3 +1,55 @@
+<?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php'; // Certifique-se de que o autoload está correto
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $mail = new PHPMailer(true);
+
+        try {
+            // Configurações do servidor SMTP
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com'; // Servidor SMTP do Gmail
+            $mail->SMTPAuth = true;
+            $mail->Username = 'seuemail@gmail.com'; // Seu endereço de e-mail
+            $mail->Password = 'suasenha'; // Sua senha de e-mail ou senha de aplicativo
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+
+            // Configurações do e-mail
+            $mail->setFrom('seuemail@gmail.com', 'Novo Começo');
+            $mail->addAddress($email); // E-mail do destinatário inserido no formulário
+
+            // Conteúdo do e-mail
+            $mail->isHTML(true);
+            $mail->Subject = 'Alteração de Senha - Novo Começo';
+            $mail->Body = '
+                <h1>Alteração de Senha</h1>
+                <p>Olá,</p>
+                <p>Recebemos uma solicitação para alterar sua senha. Clique no link abaixo para redefini-la:</p>
+                <a href="https://seusite.com/redefinir-senha.php?email=' . urlencode($email) . '">Redefinir Senha</a>
+                <p>Se você não solicitou a alteração, ignore este e-mail.</p>
+            ';
+
+            // Enviar e-mail
+            $mail->send();
+            echo '<p>E-mail enviado com sucesso para ' . htmlspecialchars($email) . '</p>';
+        } catch (Exception $e) {
+            echo '<p>Erro ao enviar o e-mail: ' . $mail->ErrorInfo . '</p>';
+        }
+    } else {
+        echo '<p>E-mail inválido.</p>';
+    }
+} else {
+    echo '<p>Método inválido.</p>';
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -7,7 +59,7 @@
     <title>Login - Novo Começo</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="image/png">
     <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/alterar-senha.css">
+    <link rel="stylesheet" href="../../css/alterar-senha-copy.css">
 </head>
 
 <body>
@@ -66,6 +118,7 @@
                 </div>
 
             </form>
+
         </section>
     </main>
 

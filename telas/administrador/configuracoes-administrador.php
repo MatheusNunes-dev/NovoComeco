@@ -75,7 +75,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
 
         <!-- Ações do Usuário -->
         <div class="action-buttons">
-            <button class="action-button" onclick="window.location.href='../usuarios/alterar-senha.php'">Alterar Senha</button>
+            <button class="action-button" onclick="window.location.href='../usuarios/redefinicao-senha.php'">Alterar Senha</button>
             <button class="action-button" onclick="window.location.href='historico-transferencia-adm.php'">Histórico Transferências</button>
             <button class="action-button" onclick="window.location.href='x'">Gráfico Transferências</button>
             <button class="action-button" onclick="window.location.href='../../logout.php'">Logout</button>
