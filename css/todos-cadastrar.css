@@ -138,7 +138,7 @@ form {
     transform: translateY(0);
 }
 
-/* Agrupamento de campos relacionados */
+
 .input-group[id^="banco"],
 .input-group[id^="agencia"],
 .input-group[id^="conta"],
@@ -148,7 +148,7 @@ form {
     border-radius: 8px;
 }
 
-/* Responsividade */
+
 @media (max-width: 1024px) {
     .container {
         max-width: 900px;
@@ -238,7 +238,7 @@ form {
     padding-bottom: 1rem;
 }
 
-/* Linha decorativa abaixo do título */
+
 .title::after {
     content: '';
     position: absolute;
@@ -251,7 +251,7 @@ form {
     border-radius: 2px;
 }
 
-/* Responsividade */
+
 @media (max-width: 768px) {
     .title {
         font-size: 1.5rem;
@@ -273,7 +273,7 @@ form {
     }
 }
 
-/* Estilos base para as mensagens */
+
 .success-message,
 .error-message {
     width: 100%;
@@ -291,7 +291,7 @@ form {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Mensagem de Sucesso */
+
 .success-message {
     background-color: #e6f4ea;
     color: #1e7e34;
@@ -304,7 +304,7 @@ form {
     font-weight: bold;
 }
 
-/* Mensagem de Erro */
+
 .error-message {
     background-color: #ffeaea;
     color: #dc3545;
@@ -317,7 +317,7 @@ form {
     font-weight: bold;
 }
 
-/* Animação de entrada */
+
 @keyframes slideDown {
     from {
         transform: translateY(-20px);
@@ -330,14 +330,14 @@ form {
     }
 }
 
-/* Hover effect */
+
 .success-message:hover,
 .error-message:hover {
     transform: translateY(-2px);
     transition: transform 0.2s ease;
 }
 
-/* Responsividade */
+
 @media (max-width: 768px) {
 
     .success-message,

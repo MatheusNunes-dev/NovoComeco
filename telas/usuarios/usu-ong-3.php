@@ -1,12 +1,9 @@
 <?php
 session_start();
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 include('../../db.php');
 
-// Captura o ID da ONG a partir da URL
+
 $current_url = $_SERVER['REQUEST_URI'];
 if (preg_match('/ong-(\d+)\.php/', $current_url, $matches)) {
     $ong_id = $matches[1];

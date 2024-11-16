@@ -25,13 +25,13 @@ main {
 .password-change form {
     display: flex;
     flex-direction: column;
-    gap: 2rem; /* Aumentei o espaçamento entre os campos */
+    gap: 2rem; 
 }
 
 .input-group {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem; /* Aumentei o espaçamento entre o rótulo e o campo de input */
+    gap: 0.75rem; 
 }
 
 

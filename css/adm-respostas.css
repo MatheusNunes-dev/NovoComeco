@@ -1,4 +1,4 @@
-/* Container principal */
+
 .container {
     max-width: 1200px;
     margin: 40px auto;
@@ -8,7 +8,7 @@
     border-radius: 12px;
 }
 
-/* Título */
+
 h1 {
     font-size: 2.5rem;
     color: #333;
@@ -17,7 +17,7 @@ h1 {
     font-family: 'Arial', sans-serif;
 }
 
-/* Caixa de mensagem */
+
 .message-box {
     display: flex;
     flex-direction: column;
@@ -63,14 +63,14 @@ h1 {
 }
 
 .btn-submit:hover {
-    background-color: #FF8C00; /* Cor de fundo ao passar o mouse */
-    transform: scale(1.05); /* Efeito de aumento ao passar o mouse */
+    background-color: #FF8C00; 
+    transform: scale(1.05); 
 }
 
 
 .btn-submit {
-    position: relative; /* Para garantir que o z-index funcione */
-    z-index: 1; /* Mantém o botão acima, se necessário */
+    position: relative; 
+    z-index: 1; 
 }
 /* Botões */
 .btn-status {
@@ -88,7 +88,7 @@ h1 {
     background-color: #0056b3;
 }
 
-/* Responsividade */
+
 @media (max-width: 768px) {
     .container {
         padding: 15px;

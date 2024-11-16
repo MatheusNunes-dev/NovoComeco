@@ -26,7 +26,7 @@ main {
 .password-change form {
     display: flex;
     flex-direction: column;
-    gap: 2rem; /* Espaçamento entre os campos */
+    gap: 2rem; 
     width: 100%;
 }
 

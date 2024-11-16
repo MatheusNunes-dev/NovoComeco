@@ -10,10 +10,10 @@ form {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 3px solid #FFA114;  /* Adicionando borda ao formulário */
+    border: 3px solid #FFA114;
 }
 
-/* Título do formulário */
+
 .title-form {
     font-weight: 700;
     color: #FFA114;
@@ -22,31 +22,30 @@ form {
     text-align: center;
 }
 
-/* Input e Textarea */
+
 .input,
 .text-area {
     font-size: 1rem;
     font-weight: 500;
-    background: #fff;  /* Cor de fundo original */
-    border: 3px solid #FFA114;  /* Cor de borda original */
+    background: #fff;
+    border: 3px solid #FFA114;  
     border-radius: 1rem;
     padding: 0.8rem 1.2rem;
-    width: 90%;  /* Ajuste para garantir que o campo não ultrapasse a box */
-    max-width: 500px;  /* Limita a largura máxima do campo */
+    width: 90%;  
+    max-width: 500px;  
     margin-bottom: 1.5rem;
     transition: all 0.3s ease;
 }
 
 .input:focus,
 .text-area:focus {
-    border-color: #FF8C00;  /* Cor do foco com transição */
-    box-shadow: 0 0 8px rgba(255, 140, 0, 0.5);  /* Sombra de foco */
+    border-color: #FF8C00;  
+    box-shadow: 0 0 8px rgba(255, 140, 0, 0.5);  
 }
 
-/* Textarea com altura maior */
 .text-area {
-    width: 30rem;  /* Aumentando a altura da textarea */
-    height: 15rem;  /* Aumentando a altura da textarea */
+    width: 30rem;  
+    height: 15rem;  
     resize: vertical;
 }
 
@@ -54,6 +53,10 @@ form {
     background-color: #e6f4ea;
     color: #1e7e34;
     border: 1px solid #c3e6cb;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 5px;
+    font-size: 14px;
 }
 
 .success-message::before {
@@ -62,11 +65,15 @@ form {
     font-weight: bold;
 }
 
-/* Mensagem de Erro */
+
 .error-message {
     background-color: #ffeaea;
     color: #dc3545;
     border: 1px solid #f5c6cb;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 14px;
 }
 
 .error-message::before {
@@ -74,7 +81,6 @@ form {
     margin-right: 10px;
     font-weight: bold;
 }
-
 
 @keyframes fadeIn {
     from {
@@ -88,7 +94,7 @@ form {
 }
 
 
-/* Botão de envio */
+
 .btn-submit {
     padding: 12px 24px;
         border: 3px solid #FFA114;
@@ -110,7 +116,7 @@ form {
     transform: translateY(1px);
 }
 
-/* Responsividade */
+
 @media (max-width: 768px) {
     .input, .text-area {
         width: 100%;

@@ -1,4 +1,4 @@
-/* Estilos principais */
+
 .container {
     max-width: 1200px;
     margin: 40px auto;
@@ -8,7 +8,7 @@
     border-radius: 12px;
 }
 
-/* Título */
+
 h1 {
     font-size: 2.5rem;
     color: #333;
@@ -17,7 +17,7 @@ h1 {
     font-family: 'Arial', sans-serif;
 }
 
-/* Doação Box */
+
 .donation-box {
     display: flex;
     flex-direction: column;
@@ -30,13 +30,13 @@ h1 {
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-/* Efeito hover */
+
 .donation-box:hover {
     transform: scale(1.02);
     box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Informações */
+
 .donation-box p {
     font-size: 1.1rem;
     margin: 0;
@@ -44,13 +44,13 @@ h1 {
     line-height: 1.5;
 }
 
-/* Títulos em negrito */
+
 .donation-box p strong {
     color: #333;
     font-weight: bold;
 }
 
-/* Formulário de filtros */
+
 .filter-form {
     display: flex;
     flex-wrap: wrap;
@@ -96,7 +96,7 @@ h1 {
     background-color: #0056b3;
 }
 
-/* Botão de voltar */
+
 .btn-submit {
     padding: 12px 24px;
     border: 3px solid #FFA114;
@@ -110,11 +110,11 @@ h1 {
 }
 
 .btn-submit:hover {
-    background-color: #FF8C00; /* Cor de fundo ao passar o mouse */
-    transform: scale(1.05); /* Efeito de aumento ao passar o mouse */
+    background-color: #FF8C00; 
+    transform: scale(1.05); 
 }
 
-/* Responsividade */
+
 @media (max-width: 768px) {
     .container {
         padding: 15px;
@@ -133,10 +133,10 @@ h1 {
     }
 
     .filter-form div {
-        flex: 1 1 100%; /* Ajusta os filtros para ocupar a largura total */
+        flex: 1 1 100%; 
     }
 
     .btn-submit {
-        width: 100%; /* Botão ocupa largura total em telas menores */
+        width: 100%; 
     }
 }

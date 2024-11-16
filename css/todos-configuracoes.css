@@ -18,17 +18,17 @@
 .donation-box {
     width: 50%;
     max-width: 1000px;
-    background: white; /* Fundo branco para destacar a box */
+    background: white; 
     border: 3px solid #FFA114;
     border-radius: 30px;
     display: flex;
-    flex-direction: row; /* Ajustado para organizar o conteúdo lado a lado */
+    flex-direction: row; 
     align-items: center;
     justify-content: space-between;
     padding: 2vw;
     margin: 1.5vw 0;
     text-align: left;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombras sutis para dar destaque */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
 }
 
 .circle {
@@ -54,7 +54,7 @@
     font-size: 1.2vw;
     line-height: 1.8vw;
     color: #333;
-    flex-grow: 1; /* Permite que o texto ocupe o restante do espaço */
+    flex-grow: 1;
 }
 
 .donation-details p {
@@ -76,22 +76,22 @@
     background-color: white;
     color: #000000;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.3s ease; /* Transição suave nos botões */
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para as bordas */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.3s ease; 
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .action-button:hover {
     background-color: #FFA114;
     color: #ffffff8f;
     border-color: #e59400;
-    transform: translateY(-5px); /* Movimento de 5px para cima ao passar o mouse */
+    transform: translateY(-5px); 
 }
 
 .action-button:active {
-    transform: scale(0.98); /* Efeito de clique */
+    transform: scale(0.98); 
 }
 
-/* Responsividade */
+
 @media (max-width: 768px) {
     .title {
         font-size: 6vw;
@@ -111,8 +111,8 @@
     .donation-box {
         width: 90%;
         padding: 5vw;
-        flex-direction: column; /* Alinha o conteúdo verticalmente em telas menores */
-        text-align: center; /* Alinha o texto ao centro em telas menores */
+        flex-direction: column; 
+        text-align: center; 
     }
 
     .donation-details {

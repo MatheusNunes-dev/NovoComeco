@@ -13,8 +13,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px; /* Adiciona espaçamento nas bordas */
-    box-sizing: border-box; /* Garante que o padding não afete o tamanho da box */
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .donation-box {
@@ -28,20 +28,20 @@
     background-color: #F9F9F9;
     align-items: center;
     gap: 30px;
-    margin-top: 25%; /* Espaço superior */
+    margin-top: 25%; 
 }
 .ong-description-box {
     width: 100%;
     max-width: 600px;
-    background-color: #FFA114; /* Cor de fundo para a box */
-    padding: 20px; /* Adiciona espaçamento interno */
-    border-radius: 10px; /* Arredondamento das bordas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra leve para a box */
-    color: #333; /* Cor do texto */
+    background-color: #FFA114; 
+    padding: 20px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    color: #333; 
     font-size: 1vw;
     text-align: center;
     line-height: 1.6;
-    margin-top: 20px; /* Adiciona um pequeno espaçamento */
+    margin-top: 20px; 
 }
 
 .ong-description-box p {
@@ -54,7 +54,7 @@
     font-weight: 700;
     text-align: center;
     width: 100%;
-    margin-bottom: 5px; /* Reduzir a margem inferior para diminuir o espaço para o parágrafo */
+    margin-bottom: 5px; 
 }
 
 
@@ -75,10 +75,10 @@
 
 
 .donation-image img {
-    width: 280px; /* Ajuste o tamanho conforme necessário */
-    height: 280px; /* Garante que a altura seja igual à largura para manter a forma circular */
-    border-radius: 50%; /* Faz a borda da imagem ficar arredondada (circular) */
-    object-fit: cover; /* Faz a imagem preencher todo o espaço sem distorcer */
+    width: 280px; 
+    height: 280px; 
+    border-radius: 50%; 
+    object-fit: cover; 
 }
 
 
@@ -92,23 +92,23 @@
 
 .button-container {
     display: flex;
-    gap: 20px; /* Adiciona espaçamento entre os botões */
-    justify-content: center; /* Alinha os botões ao centro */
+    gap: 20px; 
+    justify-content: center; 
     width: 100%;
     max-width: 800px;
-    margin-top: 20px; /* Espaço superior */
+    margin-top: 20px; 
 }
 
 .confirm-button, .cancel-button {
-    width: 45%; /* Ajusta a largura dos botões */
+    width: 45%; 
     padding: 15px;
-    border-radius: 30px; /* Reduzindo o raio da borda para um efeito mais suave */
+    border-radius: 30px; 
     text-align: center;
     color: white;
     font-size: 1.1vw;
     cursor: pointer;
-    transition: all 0.3s ease; /* Adicionando transições mais suaves */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adicionando sombra suave */
+    transition: all 0.3s ease; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .confirm-button {
@@ -117,48 +117,48 @@
 }
 
 .confirm-button:hover {
-    background: #3a66c2; /* Invertendo o gradiente ao passar o mouse */
-    transform: translateY(-4px); /* Efeito de elevação ao passar o mouse */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
+    background: #3a66c2; 
+    transform: translateY(-4px); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .confirm-button:active {
-    transform: translateY(2px); /* Efeito de pressionamento */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra reduzida no clique */
+    transform: translateY(2px); 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 .cancel-button {
     background: #FFA114;
-    border: 2px solid #FF8C00; /* Adicionando borda contrastante */
+    border: 2px solid #FF8C00; 
 }
 
 .cancel-button:hover {
     background: #FF8C00;
-    transform: translateY(-4px); /* Efeito de elevação ao passar o mouse */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
 }
 
 .cancel-button:active {
-    transform: translateY(2px); /* Efeito de pressionamento */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra reduzida no clique */
+    transform: translateY(2px); 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
     .button-container {
-        flex-direction: column; /* Para telas menores, os botões ficam empilhados */
+        flex-direction: column; 
         gap: 10px;
     }
 
     .confirm-button, .cancel-button {
-        width: 100%; /* A largura dos botões ocupa toda a largura disponível */
-        font-size: 4vw; /* Ajusta o tamanho da fonte */
+        width: 100%; 
+        font-size: 4vw;
     }
 }
 
 
 
-/* Box que agrupa os campos de valor e ONG */
+
 .donation-input-box {
     width: 100%;
     background-color: #F9F9F9;
@@ -181,7 +181,7 @@
     color: black;
     text-align: left;
     padding-left: 20px;
-    font-weight: 300; /* Fonte mais fina */
+    font-weight: 300; 
 }
 
 #valor {
@@ -227,11 +227,11 @@ select {
     padding: 20px;
     border-radius: 8px;
     max-width: 400px;
-    width: 100%;  /* Garante que a largura se ajuste de maneira responsiva */
+    width: 100%; 
     text-align: center;
     position: relative;
-    max-height: 80%; /* Impede que o pop-up ultrapasse a altura da tela */
-    overflow-y: auto; /* Se necessário, habilita rolagem */
+    max-height: 80%; 
+    overflow-y: auto; 
 }
 
 .close-btn {
@@ -253,7 +253,7 @@ select {
 /* Responsividade */
 @media (max-width: 768px) {
     .container {
-        padding: 10px; /* Ajuste no padding para telas menores */
+        padding: 10px; 
     }
 
     .donation-box {
@@ -300,7 +300,7 @@ label {
 input {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;  /* Aumenta o espaçamento entre as caixas */
+    margin-bottom: 15px; 
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 1em;
@@ -319,7 +319,7 @@ input:disabled {
     text-align: center;
     font-size: 0.8vw;
     font-weight: 300;
-    margin-top: 25%; /* Adiciona uma margem superior */
+    margin-top: 25%; 
 }
 
 
@@ -329,15 +329,15 @@ input:disabled {
 }
 
 .confirm-button:hover {
-    background: #3a66c2; /* Invertendo o gradiente ao passar o mouse */
-    transform: translateY(-4px); /* Efeito de elevação ao passar o mouse */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
+    background: #3a66c2; 
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
 }
 
 .confirm-button:active {
-    transform: translateY(2px); /* Efeito de    <link rel="stylesheet" href="../../css/todos-pagina-ong-copy.css">
- pressionamento */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra reduzida no clique */
+    transform: translateY(2px); 
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .popup-overlay {
@@ -351,7 +351,7 @@ input:disabled {
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    display: none; /* Oculto por padrão */
+    display: none; 
 }
 
 .popup-box {
@@ -394,16 +394,16 @@ input:disabled {
 
 .cancel-button {
     background: #FFA114;
-    border: 2px solid #FF8C00; /* Adicionando borda contrastante */
+    border: 2px solid #FF8C00;
 }
 
 .cancel-button:hover {
     background: #FF8C00;
-    transform: translateY(-4px); /* Efeito de elevação ao passar o mouse */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .cancel-button:active {
-    transform: translateY(2px); /* Efeito de pressionamento */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra reduzida no clique */
+    transform: translateY(2px); 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
