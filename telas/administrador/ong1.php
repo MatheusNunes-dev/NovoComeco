@@ -40,6 +40,57 @@ if (isset($ong_id)) {
 } else {
     echo "ID da ONG não especificado.";
 }
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get form data
+    $valor = floatval($_POST['valor']);
+    $valor_taxa = $valor * 0.05; // 5% fee
+    $cpf_admin = $_POST['cpf_admin'];
+    $data_emissao = $_POST['data_emissao'];
+    $data_vencimento = $_POST['data_vencimento'];
+    $metodo_pagamento = $_POST['metodo_pagamento'];
+    
+    // Get id_administrador based on CPF
+    $sql_admin = "SELECT id_administrador FROM ADMINISTRADOR WHERE cpf = ?";
+    $stmt_admin = $mysqli->prepare($sql_admin);
+    $stmt_admin->bind_param("s", $cpf_admin);
+    $stmt_admin->execute();
+    $result_admin = $stmt_admin->get_result();
+    $admin_row = $result_admin->fetch_assoc();
+    $id_administrador = $admin_row['id_administrador'];
+
+    // Insert into BOLETO table
+    $sql_insert = "INSERT INTO BOLETO (
+        id_ong,
+        id_administrador,
+        valor_taxa,
+        data_emissao,
+        data_vencimento,
+        status_pagamento,
+        metodo_pagamento,
+        mes_referencia
+    ) VALUES (?, ?, ?, ?, ?, 'pendente', ?, DATE_FORMAT(NOW(), '%Y-%m'))";
+
+    $stmt_insert = $mysqli->prepare($sql_insert);
+    $stmt_insert->bind_param(
+        "iidsss",
+        $ong_id,
+        $id_administrador,
+        $valor_taxa,
+        $data_emissao,
+        $data_vencimento,
+        $metodo_pagamento
+    );
+
+    if ($stmt_insert->execute()) {
+        echo "Boleto registrado com sucesso!";
+    } else {
+        echo "Erro ao registrar boleto: " . $mysqli->error;
+    }
+
+    $stmt_admin->close();
+    $stmt_insert->close();
+}
 ?>
 
 <!DOCTYPE html>
@@ -103,46 +154,41 @@ if (isset($ong_id)) {
                 </div>
             </div>
 
-            <div class="error-message" id="error-message" style="display: none;">
-                <div class="error-popup">
-                    <p><strong>Erro:</strong> O valor da doação deve ser no mínimo R$5.</p>
-                    <button class="close-btn" onclick="closeErrorPopup()">X</button>
+            <form method="POST" action="" onsubmit="return validateDonation()">
+                <div class="input-box">
+                    <label for="valor">Valores acima de R$5:</label>
+                    <input type="number" id="valor" name="valor" placeholder="Digite o valor da doação (somente números)" required>
                 </div>
-            </div>
+                <div class="input-box">
+                    <label for="nome_ong">Nome da ONG:</label>
+                    <input type="text" id="nome_ong" name="nome_ong" value="Mão Amiga" readonly>
+                </div>
+                <div class="input-box">
+                    <label for="cpf_admin">CPF do Administrador:</label>
+                    <input type="text" id="cpf_admin" name="cpf_admin" placeholder="XXX-XXX-XXX-XX" required>
+                </div>
+                <div class="input-box">
+                    <label for="data_emissao">Data de Emissão:</label>
+                    <input type="date" id="data_emissao" name="data_emissao" value="<?php echo date('Y-m-d'); ?>" readonly>
+                </div>
+                <div class="input-box">
+                    <label for="data_vencimento">Data de Vencimento:</label>
+                    <input type="date" id="data_vencimento" name="data_vencimento" value="<?php echo date('Y-m-d', strtotime('+7 days')); ?>" readonly>
+                </div>
+                <div class="input-box">
+                    <label for="metodo_pagamento">Método de Pagamento:</label>
+                    <input type="text" id="metodo_pagamento" name="metodo_pagamento" value="PIX" readonly>
+                </div>
 
-            <div class="input-box">
-                <label for="valor">Valores acima de R$5:</label>
-                <input type="number" id="valor" name="valor" placeholder="Digite o valor da doação (somente números)" required>
-            </div>
-            <div class="input-box">
-                <label for="nome_ong">Nome da ONG:</label>
-                <input type="text" id="nome_ong" name="nome_ong" value="Mão Amiga" readonly>
-            </div>
-            <div class="input-box">
-                <label for="cpf_admin">CPF do Administrador:</label>
-                <input type="text" id="cpf_admin" name="cpf_admin" placeholder="XXX-XXX-XXX-XX">
-            </div>
-            <div class="input-box">
-                <label for="data_emissao">Data de Emissão:</label>
-                <input type="date" id="data_emissao" name="data_emissao" value="<?php echo date('Y-m-d'); ?>" readonly>
-            </div>
-            <div class="input-box">
-                <label for="data_vencimento">Data de Vencimento:</label>
-                <input type="date" id="data_vencimento" name="data_vencimento" value="<?php echo date('Y-m-d', strtotime('+7 days')); ?>" readonly>
-            </div>
-            <div class="input-box">
-                <label for="metodo_pagamento">Método de Pagamento:</label>
-                <input type="text" id="metodo_pagamento" name="metodo_pagamento" value="PIX" readonly>
-            </div>
-
-            <div class="button-container">
-                <div class="cancel-button" onclick="window.location.href='../usuarios/pagina-quero-doar.php'">
-                    <p>Cancelar doação</p>
+                <div class="button-container">
+                    <div class="cancel-button" onclick="window.location.href='../usuarios/pagina-quero-doar.php'">
+                        <p>Cancelar doação</p>
+                    </div>
+                    <button type="submit" class="confirm-button">
+                        <p>Confirmar doação</p>
+                    </button>
                 </div>
-                <div class="confirm-button" onclick="validateDonation()">
-                    <p>Confirmar doação</p>
-                </div>
-            </div>
+            </form>
 
         </section>
     </main>
