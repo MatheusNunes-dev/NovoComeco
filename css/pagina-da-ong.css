@@ -28,8 +28,7 @@
     background-color: #F9F9F9;
     align-items: center;
     gap: 30px;
-    margin-top: 20px; /* Espaço superior */
-    margin-bottom: 20px; /* Espaço inferior */
+    margin-top: 25%; /* Espaço superior */
 }
 .ong-description-box {
     width: 100%;
@@ -283,4 +282,14 @@ select {
     .donation-input-box {
         gap: 15px;
     }
+}
+
+.footer {
+    background-color: #FFA114;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    font-size: 0.8vw;
+    font-weight: 300;
+    margin-top: 25%; /* Adiciona uma margem superior */
 }

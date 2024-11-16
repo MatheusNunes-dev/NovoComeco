@@ -105,12 +105,29 @@ if (isset($ong_id)) {
             </div>
 
             <div class="input-box">
-                <label for="valor">Valor (R$):</label>
+                <label for="valor">Valores acima de R$5:</label>
                 <input type="number" id="valor" name="valor" placeholder="Digite o valor da doação (somente números)" required>
             </div>
-
-            <p class="note">*Somente PIX</p>
-            <p class="note">*Minimo: R$5</p>
+            <div class="input-box">
+                <label for="nome_ong">Nome da ONG:</label>
+                <input type="text" id="nome_ong" name="nome_ong" value="Mais União" readonly>
+            </div>
+            <div class="input-box">
+                <label for="cpf_admin">CPF do Administrador:</label>
+                <input type="text" id="cpf_admin" name="cpf_admin" placeholder="XXX-XXX-XXX-XX">
+            </div>
+            <div class="input-box">
+                <label for="data_emissao">Data de Emissão:</label>
+                <input type="date" id="data_emissao" name="data_emissao" value="<?php echo date('Y-m-d'); ?>" readonly>
+            </div>
+            <div class="input-box">
+                <label for="data_vencimento">Data de Vencimento:</label>
+                <input type="date" id="data_vencimento" name="data_vencimento" value="<?php echo date('Y-m-d', strtotime('+7 days')); ?>" readonly>
+            </div>
+            <div class="input-box">
+                <label for="metodo_pagamento">Método de Pagamento:</label>
+                <input type="text" id="metodo_pagamento" name="metodo_pagamento" value="PIX" readonly>
+            </div>
 
             <div class="button-container">
                 <div class="cancel-button" onclick="window.location.href='../usuarios/pagina-quero-doar.php'">
