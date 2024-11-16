@@ -3,19 +3,14 @@ session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
 include('../../db.php');
 
-// Verifica se o administrador está logado
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'administrador') {
     header("Location: /telas/usuarios/usu-login.php");
     exit();
 }
 
-// Recupera o ID do administrador da sessão
 $admin_id = $_SESSION['user_id'];
-
-// Consulta o CPF do administrador no banco de dados
 $cpf_admin = 'Não disponível';
 $sql_admin = "SELECT cpf FROM administrador WHERE id_administrador = ?";
 $stmt_admin = $mysqli->prepare($sql_admin);
@@ -29,7 +24,6 @@ if ($stmt_admin) {
     $stmt_admin->close();
 }
 
-// Verifica se o ID da ONG foi fornecido na URL
 if (isset($_GET['id_ong'])) {
     $id_ong = intval($_GET['id_ong']);
     $sql = "SELECT id_ong, nome, chave_pix FROM ONG WHERE id_ong = ?";
@@ -56,28 +50,20 @@ if (isset($_GET['id_ong'])) {
     exit();
 }
 
-// Configura o fuso horário para garantir que as datas sejam corretas
 date_default_timezone_set('America/Sao_Paulo');
-
-// Data de emissão (hoje)
 $data_emissao = date('Y-m-d');
-
-// Data de vencimento (7 dias após hoje)
 $data_vencimento = date('Y-m-d', strtotime('+7 days'));
 
-// Insere os dados na tabela BOLETO
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $valor_transferencia = $_POST['valor_transferencia'];
     $metodo_pagamento = 'PIX';
     $status_pagamento = 'pendente';
-
-    $sql_boleto = "INSERT INTO BOLETO (id_ong, id_administrador, valor_transferencia, data_emissao, data_vencimento, status_pagamento, metodo_pagamento)
-                   VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql_boleto = "INSERT INTO BOLETO (id_ong, id_administrador, valor_transferencia, data_emissao, data_vencimento, status_pagamento, metodo_pagamento) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt_boleto = $mysqli->prepare($sql_boleto);
     if ($stmt_boleto) {
         $stmt_boleto->bind_param("iisssss", $ong_id, $admin_id, $valor_transferencia, $data_emissao, $data_vencimento, $status_pagamento, $metodo_pagamento);
         if ($stmt_boleto->execute()) {
-            header("Location: adm-configuracoes.php"); // Redireciona após o sucesso
+            header("Location: adm-configuracoes.php");
             exit();
         } else {
             echo "Erro ao registrar o boleto: " . $stmt_boleto->error;
@@ -88,13 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -146,7 +125,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="donation-image">
                 <img src="../../assets/ong-<?php echo $ong_id; ?>.png" alt="Imagem da ONG">
             </div>
-
             <div class="input-box">
                 <p>ONG: <?php echo htmlspecialchars($nome_ong); ?></p>
             </div>
@@ -154,24 +132,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p>CPF do Administrador: <?php echo htmlspecialchars($cpf_admin); ?></p>
             </div>
             <form>
-
-
                 <label for="valor">Valor (R$):</label>
                 <input type="text" id="valor" name="valor" placeholder="Digite o valor da doação (somente números)">
-
                 <label for="dataEmissao">Data de Emissão:</label>
-                <input type="date" id="dataEmissao" name="dataEmissao" value="2024-11-15" disabled>
-
+                <input type="date" id="dataEmissao" name="dataEmissao" value="<?php echo $data_emissao; ?>" disabled>
                 <label for="dataVencimento">Data de Vencimento:</label>
-                <input type="date" id="dataVencimento" name="dataVencimento" value="2024-11-22" disabled>
-
+                <input type="date" id="dataVencimento" name="dataVencimento" value="<?php echo $data_vencimento; ?>" disabled>
                 <label for="metodoPagamento">Método de Pagamento:</label>
                 <input type="text" id="metodoPagamento" name="metodoPagamento" value="PIX" disabled>
             </form>
-
         </section>
     </main>
-
 
     <footer>
         <div class="footer">
@@ -205,34 +176,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
     </footer>
-    <script>
-        function validateDonation() {
-            const valor = document.getElementById('valor').value;
-            const ong_id = <?php echo $ong_id; ?>; // A ONG já está definida na URL
-
-            if (valor >= 5) {
-                const taxa = (valor * 0.05).toFixed(2); // Calcula a taxa de 5% do valor
-
-                if (ong_id !== "") {
-                    <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null) { ?>
-                        const nome_doador = '<?php echo $_SESSION['user_nome'] ?? "Anônimo"; ?>';
-
-                        // Redireciona para a tela de cadastro de administradores
-                        window.location.href = 'adm-configuracoes.php';
-                    <?php } else { ?>
-                        window.location.href = '../usuarios/usu-login.php';
-                    <?php } ?>
-                }
-            } else {
-                document.getElementById("error-message").style.display = "block";
-            }
-        }
-
-        function closeErrorPopup() {
-            document.getElementById("error-message").style.display = "none";
-        }
-    </script>
-
 </body>
 
 </html>

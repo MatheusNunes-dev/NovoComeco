@@ -113,20 +113,30 @@ CREATE TABLE BOLETO (
 );
 -- Tabela HISTORICO_BOLETOS
 CREATE TABLE HISTORICO_BOLETOS (
-    id_historico_boletos INT AUTO_INCREMENT PRIMARY KEY, -- Identificador único do histórico
-    id_boleto INT,                                      -- Referência ao boleto
-    id_ong INT NOT NULL,                                -- Referência à ONG
-    id_administrador INT NOT NULL,                     -- Referência ao administrador
-    valor_transferencia DECIMAL(10, 2) NOT NULL,        -- Valor da transferência
-    data_emissao DATE NOT NULL,                         -- Data de emissão do boleto
-    data_pagamento DATE,                                -- Data efetiva do pagamento
-    status ENUM('realizado', 'pendente', 'cancelado') DEFAULT 'pendente', -- Status do pagamento
-    metodo_transferencia VARCHAR(30) NOT NULL,         -- Método utilizado na transferência
-    FOREIGN KEY (id_boleto) REFERENCES BOLETO(id_boleto), -- Chave estrangeira para a tabela BOLETO
-    FOREIGN KEY (id_ong) REFERENCES ONG(id_ong),         -- Chave estrangeira para a tabela ONG
+    id_historico_boletos INT AUTO_INCREMENT PRIMARY KEY,
+    -- Identificador único do histórico
+    id_boleto INT,
+    -- Referência ao boleto
+    id_ong INT NOT NULL,
+    -- Referência à ONG
+    id_administrador INT NOT NULL,
+    -- Referência ao administrador
+    valor_transferencia DECIMAL(10, 2) NOT NULL,
+    -- Valor da transferência
+    data_emissao DATE NOT NULL,
+    -- Data de emissão do boleto
+    data_pagamento DATE,
+    -- Data efetiva do pagamento
+    status ENUM('realizado', 'pendente', 'cancelado') DEFAULT 'pendente',
+    -- Status do pagamento
+    metodo_transferencia VARCHAR(30) NOT NULL,
+    -- Método utilizado na transferência
+    FOREIGN KEY (id_boleto) REFERENCES BOLETO(id_boleto),
+    -- Chave estrangeira para a tabela BOLETO
+    FOREIGN KEY (id_ong) REFERENCES ONG(id_ong),
+    -- Chave estrangeira para a tabela ONG
     FOREIGN KEY (id_administrador) REFERENCES ADMINISTRADOR(id_administrador) -- Chave estrangeira para a tabela ADMINISTRADOR
 );
-
 -- Tabela CATEGORIA
 CREATE TABLE CATEGORIA (
     id_categoria INT AUTO_INCREMENT PRIMARY KEY,
@@ -134,6 +144,13 @@ CREATE TABLE CATEGORIA (
     categoria_status ENUM('ativa', 'inativa') DEFAULT 'ativa',
     descricao VARCHAR(300) NOT NULL,
     imagem VARCHAR(255)
+);
+CREATE TABLE contato_mensagens (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    mensagem TEXT NOT NULL,
+    data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 -- Tabela PARCEIRO
 CREATE TABLE PARCEIRO (

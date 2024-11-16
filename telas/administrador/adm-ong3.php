@@ -3,33 +3,23 @@ session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+include('../../db.php');
 
-
-include('../../db.php'); // Caminho para o arquivo db.php
-
-// Captura o nome do arquivo da URL
 $current_url = $_SERVER['REQUEST_URI'];
-
-// Usa uma expressão regular para capturar o número após "ong-" no nome do arquivo
 if (preg_match('/ong-(\d+)\.php/', $current_url, $matches)) {
-    $ong_id = $matches[1];  // O número após "ong-" será o ID da ONG
+    $ong_id = $matches[1];
 }
 
-// Verifica se o ID da ONG foi encontrado
 if (isset($ong_id)) {
-
-
     $sql = "SELECT id_ong, nome, chave_pix FROM ONG WHERE id_ong = ?";
     $stmt = $mysqli->prepare($sql);
     if ($stmt) {
-        $stmt->bind_param("i", $ong_id); // "i" para inteiro (id_ong)
+        $stmt->bind_param("i", $ong_id);
         $stmt->execute();
         $result = $stmt->get_result();
-
-        // Verifica se a ONG foi encontrada
         if ($result && $row = $result->fetch_assoc()) {
-            $nome_ong = $row['nome']; // Nome da ONG
-            $chave_pix = $row['chave_pix']; // Chave PIX da ONG
+            $nome_ong = $row['nome'];
+            $chave_pix = $row['chave_pix'];
         } else {
             echo "ONG não encontrada.";
         }
@@ -89,26 +79,24 @@ if (isset($ong_id)) {
         <section class="donation-box">
             <h1 class="ong-name">Realizar Doação</h1>
             <div class="donation-image">
-                <img src="../../assets/ong-3.png" alt="Imagem da ONG">
+                <img src="../../assets/ong-<?php echo $ong_id; ?>.png" alt="Imagem da ONG">
             </div>
             <div class="ong-description-box">
                 <p>A ONG Cultivando a Vida atua em projetos socioambientais, promovendo práticas sustentáveis, educação ambiental e apoio à agricultura familiar. Seu objetivo é incentivar o equilíbrio entre o desenvolvimento humano e o cuidado com a natureza.</p>
             </div>
-
             <div class="error-message" id="error-message" style="display: none;">
                 <div class="error-popup">
                     <p><strong>Erro:</strong> O valor da doação deve ser no mínimo R$5.</p>
                     <button class="close-btn" onclick="closeErrorPopup()">X</button>
                 </div>
             </div>
-
             <div class="input-box">
                 <label for="valor">Valores acima de R$5:</label>
                 <input type="number" id="valor" name="valor" placeholder="Digite o valor da doação (somente números)" required>
             </div>
             <div class="input-box">
                 <label for="nome_ong">Nome da ONG:</label>
-                <input type="text" id="nome_ong" name="nome_ong" value="Cultivando a Vida" readonly>
+                <input type="text" id="nome_ong" name="nome_ong" value="<?php echo htmlspecialchars($nome_ong); ?>" readonly>
             </div>
             <div class="input-box">
                 <label for="cpf_admin">CPF do Administrador:</label>
@@ -126,7 +114,6 @@ if (isset($ong_id)) {
                 <label for="metodo_pagamento">Método de Pagamento:</label>
                 <input type="text" id="metodo_pagamento" name="metodo_pagamento" value="PIX" readonly>
             </div>
-
             <div class="button-container">
                 <div class="cancel-button" onclick="window.location.href='../usuarios/usu-ongs.php'">
                     <p>Cancelar doação</p>
@@ -135,7 +122,6 @@ if (isset($ong_id)) {
                     <p>Confirmar doação</p>
                 </div>
             </div>
-
         </section>
     </main>
 
@@ -174,20 +160,15 @@ if (isset($ong_id)) {
     <script>
         function validateDonation() {
             const valor = document.getElementById('valor').value;
-            const ong_id = <?php echo $ong_id; ?>; // A ONG já está definida na URL
-
+            const ong_id = <?php echo $ong_id; ?>;
             if (valor >= 5) {
-                const taxa = (valor * 0.05).toFixed(2); // Calcula a taxa de 5% do valor
-
-                if (ong_id !== "") {
-                    <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null) { ?>
-                        const nome_doador = '<?php echo $_SESSION['user_nome'] ?? "Anônimo"; ?>';
-                        // Redireciona para a página de pagamento, passando os parâmetros necessários
-                        window.location.href = `../doador/doador-doacao.php?ong=${ong_id}&valor=${valor}&taxa=${taxa}&doador=${nome_doador}`;
-                    <?php } else { ?>
-                        window.location.href = `../usuarios/usu-login.php`;
-                    <?php } ?>
-                }
+                const taxa = (valor * 0.05).toFixed(2);
+                <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null) { ?>
+                    const nome_doador = '<?php echo $_SESSION['user_nome'] ?? "Anônimo"; ?>';
+                    window.location.href = `../doador/doador-doacao.php?ong=${ong_id}&valor=${valor}&taxa=${taxa}&doador=${nome_doador}`;
+                <?php } else { ?>
+                    window.location.href = `../usuarios/usu-login.php`;
+                <?php } ?>
             } else {
                 document.getElementById("error-message").style.display = "block";
             }

@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Verifica se o usuário está logado como doador
 $isLoggedIn = isset($_SESSION['user_id']);
 $tipoUsuario = $_SESSION['user_tipo'] ?? null;
 $email = $_SESSION['user_email'] ?? null;
@@ -11,10 +10,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $tipoUs
     exit();
 }
 
-// Inclui a conexão com o banco de dados
 include_once('../../db.php');
 
-// Habilita exibição de erros para depuração
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 $error_message = "";
@@ -29,21 +26,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif ($nova_senha !== $confirmar_senha) {
         $error_message = "As senhas não coincidem.";
     } else {
-        // Armazena diretamente a nova senha sem criptografia
         $senha = $nova_senha;
 
-        // Atualiza a senha no banco de dados para o usuário logado
         $sql = "UPDATE DOADOR SET senha = ? WHERE email = ?";
 
         if ($stmt = $mysqli->prepare($sql)) {
             $stmt->bind_param("ss", $senha, $email);
 
             if ($stmt->execute()) {
-                // Destruir sessão após a alteração da senha
-                session_unset(); // Remove todas as variáveis da sessão
-                session_destroy(); // Destrói a sessão atual
+                session_unset();
+                session_destroy();
 
-                // Redireciona para a página de login
                 header("Location: ../usuarios/usu-login.php");
                 exit();
             } else {
@@ -57,13 +50,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -169,7 +155,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <script>
         function cancelarAlteracao() {
-            window.location.href = "doador-configuracoes.php"; // Redireciona para a página inicial ou outra de sua escolha
+            window.location.href = "doador-configuracoes.php";
         }
     </script>
 
@@ -178,8 +164,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
 </body>
-
-</html>
-
 
 </html>

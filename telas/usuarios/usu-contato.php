@@ -1,10 +1,48 @@
 <?php
 session_start();
-$isLoggedIn = isset($_SESSION['user_id']); // Verifica se o usuário está logado
-$tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, caso esteja logado
+require('../../db.php'); // Conexão com o banco de dados
+
+// Habilitar exibição de erros para depuração
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+$successMessage = $errorMessage = "";
+
+// Verifica se o formulário foi enviado
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Captura os dados do formulário
+    $nome = trim($_POST['nome']);
+    $email = trim($_POST['email']);
+    $mensagem = trim($_POST['mensagem']);
+
+    // Valida os dados
+    if (empty($nome)) {
+        $errorMessage = "O campo Nome está vazio.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errorMessage = "O e-mail é inválido.";
+    } elseif (empty($mensagem)) {
+        $errorMessage = "O campo Mensagem está vazio.";
+    } else {
+        // Prepara a consulta para inserir os dados na tabela contato
+        $sql = "INSERT INTO contato (nome, email, mensagem, status) VALUES (?, ?, ?, 'nao_lido')";
+        $stmt = $mysqli->prepare($sql);
+
+        if ($stmt) {
+            $stmt->bind_param("sss", $nome, $email, $mensagem);
+
+            if ($stmt->execute()) {
+                $successMessage = "Mensagem enviada com sucesso!";
+            } else {
+                $errorMessage = "Erro ao executar a consulta. Tente novamente.";
+            }
+            $stmt->close();
+        } else {
+            $errorMessage = "Erro ao preparar a consulta. Tente novamente.";
+        }
+    }
+}
 ?>
-
-
 
 
 <!DOCTYPE html>
@@ -14,7 +52,7 @@ $tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, c
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
+    <link rel="shortcut icon" href="../../assets/logo.png" type="image/png">
     <link rel="stylesheet" href="../../css/todos-global.css">
     <link rel="stylesheet" href="../../css/usuario-contato.css">
     <title>Novo Começo</title>
@@ -35,15 +73,6 @@ $tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, c
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
-                    <li>
-                        <button class="btn-icon-header" onclick="toggleSideBar()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                class="bi bi-x" viewBox="0 0 16 16">
-                                <path
-                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                            </svg>
-                        </button>
-                    </li>
                     <li class="nav-link"><a href="../../telas/usuarios/usu-index.php">HOME</a></li>
                     <li class="nav-link"><a href="../../telas/usuarios/usu-ongs.php">ONG'S</a></li>
                     <li class="nav-link"><a href="../../telas/usuarios/usu-sobre.php">SOBRE</a></li>
@@ -51,89 +80,36 @@ $tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, c
                 </ul>
             </div>
             <div class="user">
-                <?php if ($isLoggedIn): ?>
-                    <!-- Direciona para o perfil com base no tipo de usuário -->
-                    <?php if ($tipoUsuario === 'administrador'): ?>
-                        <a href="../administrador/adm-configuracoes.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
-                    <?php elseif ($tipoUsuario === 'doador'): ?>
-                        <a href="../doador/doador-configuracoes.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
-                    <?php elseif ($tipoUsuario === 'ong'): ?>
-                        <a href="../ong/ong-configuracoes.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
-                    <?php endif; ?>
-                <?php else: ?>
-                    <!-- Se o usuário não está logado, o botão leva para a página de login -->
-                    <a href="usu-login.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
-                <?php endif; ?>
+                <a href="usu-login.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
             </div>
+        </nav>
     </header>
     <main>
         <section>
-            <form class="form" action="https://usebasin.com/f/3a0bd8f96b66" method="post">
+            <?php if (!empty($successMessage)): ?>
+                <p class="success-message"><?= htmlspecialchars($successMessage); ?></p>
+            <?php endif; ?>
+            <?php if (!empty($errorMessage)): ?>
+                <p class="error-message"><?= htmlspecialchars($errorMessage); ?></p>
+            <?php endif; ?>
+
+            <form class="form" method="post">
                 <div class="title-form">
                     <h1 class="title-form-text">ENTRE EM CONTATO</h1>
                 </div>
                 <div>
-                    <input class="input" type="text" name="name" placeholder="Nome:" id="name">
+                    <input class="input" type="text" name="nome" placeholder="Nome:" id="nome" required>
                 </div>
                 <div>
-                    <input class="input" type="email" name="email" placeholder="E-mail:" id="email">
+                    <input class="input" type="email" name="email" placeholder="E-mail:" id="email" required>
                 </div>
                 <div>
-                    <textarea class="text-area" placeholder="Mensagem:" type="message" name="message" id="mensagem"></textarea>
+                    <textarea class="text-area" placeholder="Mensagem:" name="mensagem" id="mensagem" required></textarea>
                 </div>
-                <button type="submit" class="btn-submit">
-                    Enviar
-                </button>
+                <button type="submit" class="btn-submit">Enviar</button>
             </form>
         </section>
     </main>
-
-    <footer>
-        <div class="footer">
-            <div class="img-footer-start">
-                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
-            </div>
-
-            <div class="socias">
-                <div class="icons-col-1">
-                    <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/google.png">
-                        <p>novocomeço@gmail.com</p>
-                    </div>
-                    <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/instagram.png">
-                        <p>@novocomeço</p>
-                    </div>
-                </div>
-                <div class="icons-col-2">
-                    <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/whatsapp.png">
-                        <p>(41)99997676</p>
-                    </div>
-                    <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/facebook.png">
-                        <p>@novocomeco</p>
-                    </div>
-                </div>
-            </div>
-            <div class="img-footer-end">
-                <img class="boneco-footer" class="img-footer" src="assets/img-footer.png">
-            </div>
-        </div>
-    </footer>
-    <script src="../../js/header.js"></script>
-
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
-    </div>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
-
 </body>
 
 </html>

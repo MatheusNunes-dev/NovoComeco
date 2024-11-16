@@ -50,6 +50,44 @@ form {
     resize: vertical;
 }
 
+.success-message {
+    background-color: #e6f4ea;
+    color: #1e7e34;
+    border: 1px solid #c3e6cb;
+}
+
+.success-message::before {
+    content: '✓';
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+/* Mensagem de Erro */
+.error-message {
+    background-color: #ffeaea;
+    color: #dc3545;
+    border: 1px solid #f5c6cb;
+}
+
+.error-message::before {
+    content: '✕';
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
 /* Botão de envio */
 .btn-submit {
     padding: 12px 24px;

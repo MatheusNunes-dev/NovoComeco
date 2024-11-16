@@ -1,14 +1,11 @@
 <?php
 session_start();
 
-// Verificar se o usuário é um administrador
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'administrador') {
     header("Location: /telas/usuarios/usu-login.php");
     exit();
 }
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -100,7 +97,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
         <section class="banner-cards-clientes">
             <div class="card-doador">
                 <div>
-
                 </div>
                 <p>
                     "A solidariedade é um ato poderoso que transforma vidas. Contribuir com amor e compaixão é um
@@ -114,7 +110,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
                     vida me motiva a
                     continuar ajudando!"<br>Tiago Gorri
                 </p>
-
             </div>
             <div class="card-doador">
                 <p>
@@ -154,7 +149,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
                 </div>
             </div>
             <div class="img-footer-end">
-                <img class="boneco-footer" class="img-footer" <script src="../../js/header.js"></script>>
+                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
             </div>
         </div>
     </footer>

@@ -161,17 +161,17 @@ if (isset($ong_id)) {
             const ong_id = <?php echo $ong_id; ?>; // A ONG já está definida na URL
 
             if (valor >= 5) {
-                const taxa = (valor * 0.05).toFixed(2); // Calcula a taxa de 5% do valor
+                const taxa = (valor * 0.05).toFixed(2); // Calcula a taxa de 5%
 
-                if (ong_id !== "") {
-                    <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null) { ?>
-                        const nome_doador = '<?php echo $_SESSION['user_nome'] ?? "Anônimo"; ?>';
-                        // Redireciona para a página de pagamento, passando os parâmetros necessários
-                        window.location.href = `../doador/doador-doacao.php?ong=${ong_id}&valor=${valor}&taxa=${taxa}&doador=${nome_doador}`;
-                    <?php } else { ?>
-                        window.location.href = `../usuarios/usu-login.php`;
-                    <?php } ?>
-                }
+                <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null) { ?>
+                    const nome_doador = '<?php echo $_SESSION['user_nome'] ?? "Anônimo"; ?>';
+                    // Redireciona para a página de pagamento
+                    window.location.href = `../doador/doador-doacao.php?ong=${ong_id}&valor=${valor}&taxa=${taxa}&doador=${nome_doador}`;
+                <?php } else { ?>
+                    // Exibe mensagem de alerta e redireciona para login
+                    alert("Você precisa estar logado como doador para doar.");
+                    window.location.href = "usu-login.php";
+                <?php } ?>
             } else {
                 document.getElementById("error-message").style.display = "block";
             }

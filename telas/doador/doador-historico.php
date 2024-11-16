@@ -1,39 +1,24 @@
 <?php
 session_start();
-
-// Verificar se o usuário está logado como doador
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'doador') {
     header("Location: /telas/usuarios/usu-login.php");
     exit();
 }
-
-// Incluir o arquivo de conexão com o banco de dados
 require '../../db.php';
-
-// Preparar a consulta para obter o histórico do doador logado
-$query = "SELECT d.valor_total, d.data_hora, o.nome AS nome_ong
-          FROM DOACAO d
-          INNER JOIN ONG o ON d.id_ong = o.id_ong
-          WHERE d.id_doador = ?
-          ORDER BY d.data_hora DESC";
-
+$query = "SELECT d.valor_total, d.data_hora, o.nome AS nome_ong FROM DOACAO d INNER JOIN ONG o ON d.id_ong = o.id_ong WHERE d.id_doador = ? ORDER BY d.data_hora DESC";
 $stmt = $mysqli->prepare($query);
 $stmt->bind_param("i", $_SESSION['user_id']);
 $stmt->execute();
 $result = $stmt->get_result();
-
-// Processar os resultados
 $donations = [];
 while ($row = $result->fetch_assoc()) {
     $donations[] = $row;
 }
-
-// Fechar a conexão
 $stmt->close();
 $mysqli->close();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -70,7 +55,6 @@ $mysqli->close();
             </div>
         </nav>
     </header>
-
     <div class="container">
         <h1>Histórico de Doações</h1>
         <?php if (count($donations) > 0): ?>
@@ -85,7 +69,6 @@ $mysqli->close();
             <p>Você ainda não realizou doações.</p>
         <?php endif; ?>
     </div>
-
     <footer>
         <div class="footer">
             <div class="img-footer-start">
@@ -118,11 +101,11 @@ $mysqli->close();
             </div>
         </div>
     </footer>
-
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
+    <script src="../../js/header.js"></script>
 </body>
 
 </html>

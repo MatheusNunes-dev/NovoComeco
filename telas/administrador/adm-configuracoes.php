@@ -1,25 +1,21 @@
 <?php
 session_start();
-require('../../db.php'); // Inclui a conexão com o banco
+require('../../db.php');
 
-// Função para formatar CPF
 function formatarCPF($cpf)
 {
     return preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "$1.$2.$3-$4", $cpf);
 }
 
-// Verificar se o usuário é um administrador
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'administrador') {
     header("Location: /telas/usuarios/usu-login.php");
     exit();
 }
 
-// Inicializar variáveis
 $user_nome = "";
 $user_email = "";
 $user_cpf = "";
 
-// Buscar informações do administrador logado
 $user_id = $_SESSION['user_id'];
 $sql = "SELECT nome, email, cpf FROM administrador WHERE id_administrador = ?";
 $stmt = $mysqli->prepare($sql);
@@ -52,7 +48,6 @@ $mysqli->close();
 </head>
 
 <body>
-    <!-- Cabeçalho -->
     <header>
         <nav class="navbar nav-lg-screen" id="navbar">
             <button class="btn-icon-header" onclick="toggleSideBar()">
@@ -90,11 +85,9 @@ $mysqli->close();
         </nav>
     </header>
 
-    <!-- Conteúdo Principal -->
     <main class="container">
         <h1 class="title">Configurações</h1>
 
-        <!-- Detalhes do Usuário -->
         <section class="donation-box">
             <div class="donation-details">
                 <p><strong>Usuário:</strong> <?php echo htmlspecialchars($user_nome); ?></p>
@@ -103,11 +96,11 @@ $mysqli->close();
             </div>
         </section>
 
-        <!-- Ações do Usuário -->
         <div class="action-buttons">
             <button class="action-button" onclick="window.location.href='adm-grafico.php'">Gráfico Doações</button>
             <button class="action-button" onclick="window.location.href='adm-transferir.php'">Transferir</button>
             <button class="action-button" onclick="window.location.href='adm-historico-transf.php'">Histórico Transferências</button>
+            <button class="action-button" onclick="window.location.href='adm-responder.php'">Responder</button>
         </div>
         <div class="action-buttons">
             <button class="action-button" onclick="window.location.href='../administrador/adm-redefinir-senha.php'">Alterar Senha</button>
@@ -115,7 +108,6 @@ $mysqli->close();
         </div>
     </main>
 
-    <!-- Rodapé -->
     <footer>
         <div class="footer">
             <div class="img-footer-start">

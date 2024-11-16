@@ -1,47 +1,42 @@
 <?php
 session_start();
-include('../../db.php');
+require('../../db.php'); // Conexão com o banco de dados
 
+// Verifica se o usuário é administrador
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'administrador') {
     header("Location: /telas/usuarios/usu-login.php");
     exit();
 }
 
-$query = "
-    SELECT 
-        B.id_boleto, 
-        ONG.nome AS nome_ong, 
-        B.valor_transferencia, 
-        B.data_emissao, 
-        B.data_vencimento, 
-        B.status_pagamento, 
-        B.metodo_pagamento 
-    FROM BOLETO B
-    INNER JOIN ONG ON B.id_ong = ONG.id_ong
-    ORDER BY B.data_emissao DESC";
+// Atualizar o status de uma mensagem
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_mensagem'], $_POST['novo_status'])) {
+    $id_mensagem = intval($_POST['id_mensagem']);
+    $novo_status = $_POST['novo_status'];
 
-$stmt = $mysqli->prepare($query);
-$stmt->execute();
-$result = $stmt->get_result();
+    $sql = "UPDATE contato SET status = ? WHERE id = ?";
+    $stmt = $mysqli->prepare($sql);
 
-$transferencias = [];
-while ($row = $result->fetch_assoc()) {
-    $transferencias[] = $row;
+    if ($stmt) {
+        $stmt->bind_param("si", $novo_status, $id_mensagem);
+        $stmt->execute();
+        $stmt->close();
+    }
 }
 
-$stmt->close();
-$mysqli->close();
+// Buscar apenas mensagens com status "não lido"
+$sql = "SELECT id, nome, email, mensagem, status, data_envio FROM contato WHERE status = 'nao_lido' ORDER BY data_envio DESC";
+$result = $mysqli->query($sql);
+$mensagens = $result->fetch_all(MYSQLI_ASSOC);
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Histórico de Transferências</title>
+    <title>Gerenciar Mensagens</title>
     <link rel="stylesheet" href="../../css/todos-global.css">
-    <link rel="stylesheet" href="../../css/adm-historico-transferencias.css">
+    <link rel="stylesheet" href="../../css/adm-responder.css">
 </head>
 
 <body>
@@ -73,21 +68,23 @@ $mysqli->close();
     </header>
 
     <div class="container">
-        <h1>Histórico de Transferências</h1>
-        <?php if (count($transferencias) > 0): ?>
-            <?php foreach ($transferencias as $transferencia): ?>
-                <div class="transferencias-box">
-                    <p><strong>ID do Boleto:</strong> <?= htmlspecialchars($transferencia['id_boleto']) ?></p>
-                    <p><strong>ONG:</strong> <?= htmlspecialchars($transferencia['nome_ong']) ?></p>
-                    <p><strong>Valor:</strong> R$ <?= number_format($transferencia['valor_transferencia'], 2, ',', '.') ?></p>
-                    <p><strong>Data de Emissão:</strong> <?= date('d/m/Y', strtotime($transferencia['data_emissao'])) ?></p>
-                    <p><strong>Data de Vencimento:</strong> <?= date('d/m/Y', strtotime($transferencia['data_vencimento'])) ?></p>
-                    <p><strong>Status:</strong> <?= ucfirst($transferencia['status_pagamento']) ?></p>
-                    <p><strong>Método de Pagamento:</strong> <?= htmlspecialchars($transferencia['metodo_pagamento']) ?></p>
+        <h1>Gerenciar Mensagens</h1>
+        <?php if (!empty($mensagens)): ?>
+            <?php foreach ($mensagens as $mensagem): ?>
+                <div class="message-box">
+                    <p><strong>Nome:</strong> <?= htmlspecialchars($mensagem['nome']); ?></p>
+                    <p><strong>E-mail:</strong> <?= htmlspecialchars($mensagem['email']); ?></p>
+                    <p><strong>Mensagem:</strong> <?= nl2br(htmlspecialchars($mensagem['mensagem'])); ?></p>
+                    <p><strong>Data:</strong> <?= date('d/m/Y H:i', strtotime($mensagem['data_envio'])); ?></p>
+
+                    <form method="post">
+                        <input type="hidden" name="id_mensagem" value="<?= $mensagem['id']; ?>">
+                        <button class="btn-status" type="submit" name="novo_status" value="lido">Marcar como Lido</button>
+                    </form>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
-            <p>Nenhuma transferência encontrada.</p>
+            <p>Nenhuma mensagem encontrada.</p>
         <?php endif; ?>
     </div>
 
@@ -118,11 +115,13 @@ $mysqli->close();
                     </div>
                 </div>
             </div>
-            <div class="img-footer-end">
-                <img class="boneco-footer img-footer" src="../../assets/img-footer.png" alt="Boneco do rodapé">
-            </div>
         </div>
     </footer>
+
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 </body>
 
 </html>
