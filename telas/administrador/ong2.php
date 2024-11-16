@@ -153,36 +153,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="input-box">
                 <p>CPF do Administrador: <?php echo htmlspecialchars($cpf_admin); ?></p>
             </div>
-            <form method="post">
-                <div class="input-box">
-                    <label for="valor_transferencia">Valor (R$):</label>
-                    <input type="number" id="valor_transferencia" name="valor_transferencia" placeholder="Digite o valor da doação (somente números)" required>
-                </div>
-                <div class="input-box">
-                    <p>Data de Emissão: <?php echo date('d/m/Y', strtotime($data_emissao)); ?></p>
-                </div>
-                <div class="input-box">
-                    <p>Data de Vencimento: <?php echo date('d/m/Y', strtotime($data_vencimento)); ?></p>
-                </div>
-                <div class="input-box">
-                    <p>Método de Pagamento: PIX</p>
-                </div>
-                <div class="button-container">
-                    <div class="cancel-button" onclick="window.location.href='../usuarios/pagina-quero-doar.php'">
-                        <p>Cancelar doação</p>
-                    </div>
-                    <button type="submit" class="confirm-button">
-                        <p>Confirmar doação</p>
-                    </button>
-                </div>
+            <form>
+
+
+                <label for="valor">Valor (R$):</label>
+                <input type="text" id="valor" name="valor" placeholder="Digite o valor da doação (somente números)">
+
+                <label for="dataEmissao">Data de Emissão:</label>
+                <input type="date" id="dataEmissao" name="dataEmissao" value="2024-11-15" disabled>
+
+                <label for="dataVencimento">Data de Vencimento:</label>
+                <input type="date" id="dataVencimento" name="dataVencimento" value="2024-11-22" disabled>
+
+                <label for="metodoPagamento">Método de Pagamento:</label>
+                <input type="text" id="metodoPagamento" name="metodoPagamento" value="PIX" disabled>
             </form>
+
         </section>
     </main>
 
 
     <footer>
         <div class="footer">
-            <!-- Conteúdo do rodapé -->
+            <div class="img-footer-start">
+                <img class="boneco-footer img-footer" src="../../assets/img-footer.png" alt="Boneco do rodapé">
+            </div>
+            <div class="socias">
+                <div class="icons-col-1">
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/google.png" alt="Google">
+                        <p>novocomeço@gmail.com</p>
+                    </div>
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/instagram.png" alt="Instagram">
+                        <p>@novocomeço</p>
+                    </div>
+                </div>
+                <div class="icons-col-2">
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/whatsapp.png" alt="Whatsapp">
+                        <p>(41) 99997-6767</p>
+                    </div>
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/facebook.png" alt="Facebook">
+                        <p>@novocomeco</p>
+                    </div>
+                </div>
+            </div>
+            <div class="img-footer-end">
+                <img class="boneco-footer img-footer" src="../../assets/img-footer.png" alt="Boneco do rodapé">
+            </div>
         </div>
     </footer>
     <script>

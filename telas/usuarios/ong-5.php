@@ -124,7 +124,34 @@ if (isset($ong_id)) {
 
     <footer>
         <div class="footer">
-            <!-- Conteúdo do rodapé -->
+            <div class="img-footer-start">
+                <img class="boneco-footer img-footer" src="../../assets/img-footer.png" alt="Boneco do rodapé">
+            </div>
+            <div class="socias">
+                <div class="icons-col-1">
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/google.png" alt="Google">
+                        <p>novocomeço@gmail.com</p>
+                    </div>
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/instagram.png" alt="Instagram">
+                        <p>@novocomeço</p>
+                    </div>
+                </div>
+                <div class="icons-col-2">
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/whatsapp.png" alt="Whatsapp">
+                        <p>(41) 99997-6767</p>
+                    </div>
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/facebook.png" alt="Facebook">
+                        <p>@novocomeco</p>
+                    </div>
+                </div>
+            </div>
+            <div class="img-footer-end">
+                <img class="boneco-footer img-footer" src="../../assets/img-footer.png" alt="Boneco do rodapé">
+            </div>
         </div>
     </footer>
     <script>

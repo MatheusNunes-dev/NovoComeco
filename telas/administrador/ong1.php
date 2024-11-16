@@ -4,94 +4,97 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+include('../../db.php');
 
-include('../../db.php'); // Caminho para o arquivo db.php
-
-// Captura o nome do arquivo da URL
-$current_url = $_SERVER['REQUEST_URI'];
-
-// Usa uma expressão regular para capturar o número após "ong-" no nome do arquivo
-if (preg_match('/ong-(\d+)\.php/', $current_url, $matches)) {
-    $ong_id = $matches[1];  // O número após "ong-" será o ID da ONG
-    echo "ID da ONG capturado: " . $ong_id . "<br>";
+// Verifica se o administrador está logado
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'administrador') {
+    header("Location: /telas/usuarios/login.php");
+    exit();
 }
 
-// Verifica se o ID da ONG foi encontrado
-if (isset($ong_id)) {
+// Recupera o ID do administrador da sessão
+$admin_id = $_SESSION['user_id'];
 
+// Consulta o CPF do administrador no banco de dados
+$cpf_admin = 'Não disponível';
+$sql_admin = "SELECT cpf FROM administrador WHERE id_administrador = ?";
+$stmt_admin = $mysqli->prepare($sql_admin);
+if ($stmt_admin) {
+    $stmt_admin->bind_param("i", $admin_id);
+    $stmt_admin->execute();
+    $result_admin = $stmt_admin->get_result();
+    if ($result_admin && $row_admin = $result_admin->fetch_assoc()) {
+        $cpf_admin = $row_admin['cpf'];
+    }
+    $stmt_admin->close();
+}
 
+// Verifica se o ID da ONG foi fornecido na URL
+if (isset($_GET['id_ong'])) {
+    $id_ong = intval($_GET['id_ong']);
     $sql = "SELECT id_ong, nome, chave_pix FROM ONG WHERE id_ong = ?";
     $stmt = $mysqli->prepare($sql);
     if ($stmt) {
-        $stmt->bind_param("i", $ong_id); // "i" para inteiro (id_ong)
+        $stmt->bind_param("i", $id_ong);
         $stmt->execute();
         $result = $stmt->get_result();
-
-        // Verifica se a ONG foi encontrada
         if ($result && $row = $result->fetch_assoc()) {
-            $nome_ong = $row['nome']; // Nome da ONG
-            $chave_pix = $row['chave_pix']; // Chave PIX da ONG
+            $ong_id = $row['id_ong'];
+            $nome_ong = $row['nome'];
+            $chave_pix = $row['chave_pix'];
         } else {
             echo "ONG não encontrada.";
+            exit();
         }
+        $stmt->close();
     } else {
         echo "Erro na consulta SQL.";
+        exit();
     }
 } else {
     echo "ID da ONG não especificado.";
+    exit();
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get form data
-    $valor = floatval($_POST['valor']);
-    $valor_taxa = $valor * 0.05; // 5% fee
-    $cpf_admin = $_POST['cpf_admin'];
-    $data_emissao = $_POST['data_emissao'];
-    $data_vencimento = $_POST['data_vencimento'];
-    $metodo_pagamento = $_POST['metodo_pagamento'];
+// Configura o fuso horário para garantir que as datas sejam corretas
+date_default_timezone_set('America/Sao_Paulo');
 
-    // Get id_administrador based on CPF
-    $sql_admin = "SELECT id_administrador FROM ADMINISTRADOR WHERE cpf = ?";
-    $stmt_admin = $mysqli->prepare($sql_admin);
-    $stmt_admin->bind_param("s", $cpf_admin);
-    $stmt_admin->execute();
-    $result_admin = $stmt_admin->get_result();
-    $admin_row = $result_admin->fetch_assoc();
-    $id_administrador = $admin_row['id_administrador'];
+// Data de emissão (hoje)
+$data_emissao = date('Y-m-d');
 
-    // Insert into BOLETO table
-    $sql_insert = "INSERT INTO BOLETO (
-        id_ong,
-        id_administrador,
-        valor_taxa,
-        data_emissao,
-        data_vencimento,
-        status_pagamento,
-        metodo_pagamento,
-        mes_referencia
-    ) VALUES (?, ?, ?, ?, ?, 'pendente', ?, DATE_FORMAT(NOW(), '%Y-%m'))";
+// Data de vencimento (7 dias após hoje)
+$data_vencimento = date('Y-m-d', strtotime('+7 days'));
 
-    $stmt_insert = $mysqli->prepare($sql_insert);
-    $stmt_insert->bind_param(
-        "iidsss",
-        $ong_id,
-        $id_administrador,
-        $valor_taxa,
-        $data_emissao,
-        $data_vencimento,
-        $metodo_pagamento
-    );
+// Insere os dados na tabela BOLETO
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $valor_transferencia = $_POST['valor_transferencia'];
+    $metodo_pagamento = 'PIX';
+    $status_pagamento = 'pendente';
 
-    if ($stmt_insert->execute()) {
-        echo "Boleto registrado com sucesso!";
+    $sql_boleto = "INSERT INTO BOLETO (id_ong, id_administrador, valor_transferencia, data_emissao, data_vencimento, status_pagamento, metodo_pagamento)
+                   VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $stmt_boleto = $mysqli->prepare($sql_boleto);
+    if ($stmt_boleto) {
+        $stmt_boleto->bind_param("iisssss", $ong_id, $admin_id, $valor_transferencia, $data_emissao, $data_vencimento, $status_pagamento, $metodo_pagamento);
+        if ($stmt_boleto->execute()) {
+            header("Location: configuracoes-administrador.php"); // Redireciona após o sucesso
+            exit();
+        } else {
+            echo "Erro ao registrar o boleto: " . $stmt_boleto->error;
+        }
+        $stmt_boleto->close();
     } else {
-        echo "Erro ao registrar boleto: " . $mysqli->error;
+        echo "Erro na preparação da consulta de boleto.";
     }
-
-    $stmt_admin->close();
-    $stmt_insert->close();
 }
 ?>
+
+
+
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -103,6 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/todos-global.css">
     <link rel="stylesheet" href="../../css/todos-pagina-ong.css">
+
 </head>
 
 <body>
@@ -130,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </ul>
             </div>
             <div class="user">
-                <a href="../../telas/usuarios/login.php">
+                <a href="configuracoes-administrador.php">
                     <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
@@ -139,47 +143,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <main class="container">
         <section class="donation-box">
-            <h1 class="ong-name">Realizar Transferência</h1>
+            <h1 class="ong-name"><?php echo htmlspecialchars($nome_ong); ?></h1>
             <div class="donation-image">
-                <img src="../../assets/ong-1.png" alt="Imagem da ONG">
-            </div>
-            <div class="ong-description-box">
-                <p>A ONG Mão Amiga é dedicada a oferecer assistência a comunidades em situação de vulnerabilidade social, fornecendo alimentos, roupas e suporte educacional. A organização acredita no poder da solidariedade e trabalha para promover dignidade e oportunidades para todos.</p>
+                <img src="../../assets/ong-<?php echo $ong_id; ?>.png" alt="Imagem da ONG">
             </div>
 
-            <div class="error-message" id="error-message" style="display: none;">
-                <div class="error-popup">
-                    <p><strong>Erro:</strong> O valor da doação deve ser no mínimo R$5.</p>
-                    <button class="close-btn" onclick="closeErrorPopup()">X</button>
-                </div>
+            <div class="input-box">
+                <p>ONG: <?php echo htmlspecialchars($nome_ong); ?></p>
             </div>
-
-            <form method="POST" action="" onsubmit="return validateDonation()">
+            <div class="input-box">
+                <p>CPF do Administrador: <?php echo htmlspecialchars($cpf_admin); ?></p>
+            </div>
+            <form method="post">
                 <div class="input-box">
-                    <label for="valor">Valores acima de R$5:</label>
-                    <input type="number" id="valor" name="valor" placeholder="Digite o valor da doação (somente números)" required>
+                    <label for="valor_transferencia">Valor (R$):</label>
+                    <input type="number" id="valor_transferencia" name="valor_transferencia" placeholder="Digite o valor da doação (somente números)" required>
                 </div>
                 <div class="input-box">
-                    <label for="nome_ong">Nome da ONG:</label>
-                    <input type="text" id="nome_ong" name="nome_ong" value="Mão Amiga" readonly>
+                    <p>Data de Emissão: <?php echo date('d/m/Y', strtotime($data_emissao)); ?></p>
                 </div>
                 <div class="input-box">
-                    <label for="cpf_admin">CPF do Administrador:</label>
-                    <input type="text" id="cpf_admin" name="cpf_admin" placeholder="XXX-XXX-XXX-XX" required>
+                    <p>Data de Vencimento: <?php echo date('d/m/Y', strtotime($data_vencimento)); ?></p>
                 </div>
                 <div class="input-box">
-                    <label for="data_emissao">Data de Emissão:</label>
-                    <input type="date" id="data_emissao" name="data_emissao" value="<?php echo date('Y-m-d'); ?>" readonly>
+                    <p>Método de Pagamento: PIX</p>
                 </div>
-                <div class="input-box">
-                    <label for="data_vencimento">Data de Vencimento:</label>
-                    <input type="date" id="data_vencimento" name="data_vencimento" value="<?php echo date('Y-m-d', strtotime('+7 days')); ?>" readonly>
-                </div>
-                <div class="input-box">
-                    <label for="metodo_pagamento">Método de Pagamento:</label>
-                    <input type="text" id="metodo_pagamento" name="metodo_pagamento" value="PIX" readonly>
-                </div>
-
                 <div class="button-container">
                     <div class="cancel-button" onclick="window.location.href='../usuarios/pagina-quero-doar.php'">
                         <p>Cancelar doação</p>
@@ -189,9 +177,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </button>
                 </div>
             </form>
-
         </section>
     </main>
+
 
     <footer>
         <div class="footer">
@@ -204,26 +192,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             const ong_id = <?php echo $ong_id; ?>; // A ONG já está definida na URL
 
             if (valor >= 5) {
-                const taxa = (valor * 0.05).toFixed(2); // Calcula a taxa de 5% do valor
+                const taxa = (valor * 0.05).toFixed(2); // Calcula a taxa de 5%
 
-                if (ong_id !== "") {
-                    <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null) { ?>
-                        const nome_doador = '<?php echo $_SESSION['user_nome'] ?? "Anônimo"; ?>';
-                        // Redireciona para a página de pagamento, passando os parâmetros necessários
-                        window.location.href = `../doador/realizar-pagamento.php?ong=${ong_id}&valor=${valor}&taxa=${taxa}&doador=${nome_doador}`;
-                    <?php } else { ?>
-                        window.location.href = `../usuarios/login.php`;
-                    <?php } ?>
-                }
+                <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null) { ?>
+                    const nome_doador = '<?php echo $_SESSION['user_nome'] ?? "Anônimo"; ?>';
+                    // Redireciona para a página de pagamento
+                    window.location.href = `../doador/realizar-pagamento.php?ong=${ong_id}&valor=${valor}&taxa=${taxa}&doador=${nome_doador}`;
+                <?php } else { ?>
+                    // Exibe mensagem de erro e redireciona para login
+                    document.getElementById("error-message").style.display = "block";
+                    document.getElementById("error-message").innerHTML = `<div class="error-popup">
+                <p><strong>Erro:</strong> Você precisa estar logado como doador para realizar a doação.</p>
+                <button class="close-btn" onclick="closeErrorPopup()">X</button>
+            </div>`;
+                    setTimeout(function() {
+                        window.location.href = "login.php";
+                    }, 3000); // Redireciona após 3 segundos
+                <?php } ?>
             } else {
                 document.getElementById("error-message").style.display = "block";
             }
         }
 
+
         function closeErrorPopup() {
             document.getElementById("error-message").style.display = "none";
         }
     </script>
+
 </body>
 
 </html>

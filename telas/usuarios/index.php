@@ -74,7 +74,7 @@ $tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, c
                         <span class="tittle-banner">NOVO</span>
                     </div>
                     <div class="a">
-                        <a class="btn-quero-doar" href="../usuarios/pagina-quero-doar.php">QUERO DOAR!</a>
+                        <a class="btn-quero-doar" href="pagina-quero-doar.php">QUERO DOAR!</a>
                     </div>
                 </div>
                 <div>
@@ -92,15 +92,15 @@ $tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, c
         <section class="banner-cards-ongs">
             <div class="card-ong">
                 <img class="img-ong" src="../../assets/ong-1.png">
-                <a class="btn-conhecer" href="pagina-da-ong-1.php">CONHECER</a>
+                <a class="btn-conhecer" href="ong-1.php">CONHECER</a>
             </div>
             <div class="card-ong">
                 <img class="img-ong" src="../../assets/ong-2.png">
-                <a class="btn-conhecer" href="pagina-da-ong-2.php">CONHECER</a>
+                <a class="btn-conhecer" href="ong-2.php">CONHECER</a>
             </div>
             <div class="card-ong">
                 <img class="img-ong" src="../../assets/ong-3.png">
-                <a class="btn-conhecer" href="pagina-da-ong-3.php">CONHECER</a>
+                <a class="btn-conhecer" href="ong-3.php">CONHECER</a>
             </div>
         </section>
 

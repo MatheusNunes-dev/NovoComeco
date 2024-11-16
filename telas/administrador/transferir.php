@@ -82,7 +82,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
                 <script>
                     document.getElementById('ong').addEventListener('change', function() {
                         const selectedOngId = this.value; // Obtém o ID da ONG selecionada
-                        window.location.href = `../../telas/administrador/ong2.php?id_ong=${selectedOngId}`; // Redireciona com o ID
+                        window.location.href = `../../telas/administrador/ong1.php?id_ong=${selectedOngId}`; // Redireciona com o ID
                     });
                 </script>
             </section>
@@ -124,13 +124,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
 
     <script src="../../js/header.js"></script>
 
-    <!-- Pop-up de erro -->
-    <div id="errorModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <p>O valor mínimo para doação é R$5,00. Por favor, insira um valor válido.</p>
-        </div>
-    </div>
+
 
     <script>
         function confirmDonation() {

@@ -18,54 +18,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/todos-global.css">
     <link rel="stylesheet" href="../../css/transferencia.css">
-    <style>
-        /* O Modal */
-        .modal {
-            display: none;
-            /* Esconde o modal por padrão */
-            position: fixed;
-            z-index: 1;
-            /* Fica sobre o conteúdo */
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-            /* Fundo semitransparente */
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* O conteúdo do Modal */
-        .modal-content {
-            background-color: #fff;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 400px;
-            text-align: center;
-            border-radius: 10px;
-            position: relative;
-        }
-
-        /* O botão de fechar */
-        .close {
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
-            position: absolute;
-            top: 10px;
-            right: 25px;
-            cursor: pointer;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-        }
-    </style>
 </head>
 
 <body>

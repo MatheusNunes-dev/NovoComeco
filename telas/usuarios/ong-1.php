@@ -13,7 +13,6 @@ $current_url = $_SERVER['REQUEST_URI'];
 // Usa uma expressão regular para capturar o número após "ong-" no nome do arquivo
 if (preg_match('/ong-(\d+)\.php/', $current_url, $matches)) {
     $ong_id = $matches[1];  // O número após "ong-" será o ID da ONG
-    echo "ID da ONG capturado: " . $ong_id . "<br>";
 }
 
 // Verifica se o ID da ONG foi encontrado
@@ -51,7 +50,7 @@ if (isset($ong_id)) {
     <title>Doação ONG</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/todos-global.css">
-    <link rel="stylesheet" href="../../css/todos-pagina-ong.css">
+    <link rel="stylesheet" href="../../css/todos-pagina-ong-copy.css">
 </head>
 
 <body>
@@ -125,7 +124,34 @@ if (isset($ong_id)) {
 
     <footer>
         <div class="footer">
-            <!-- Conteúdo do rodapé -->
+            <div class="img-footer-start">
+                <img class="boneco-footer img-footer" src="../../assets/img-footer.png" alt="Boneco do rodapé">
+            </div>
+            <div class="socias">
+                <div class="icons-col-1">
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/google.png" alt="Google">
+                        <p>novocomeço@gmail.com</p>
+                    </div>
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/instagram.png" alt="Instagram">
+                        <p>@novocomeço</p>
+                    </div>
+                </div>
+                <div class="icons-col-2">
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/whatsapp.png" alt="Whatsapp">
+                        <p>(41) 99997-6767</p>
+                    </div>
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/facebook.png" alt="Facebook">
+                        <p>@novocomeco</p>
+                    </div>
+                </div>
+            </div>
+            <div class="img-footer-end">
+                <img class="boneco-footer img-footer" src="../../assets/img-footer.png" alt="Boneco do rodapé">
+            </div>
         </div>
     </footer>
     <script>
@@ -134,17 +160,17 @@ if (isset($ong_id)) {
             const ong_id = <?php echo $ong_id; ?>; // A ONG já está definida na URL
 
             if (valor >= 5) {
-                const taxa = (valor * 0.05).toFixed(2); // Calcula a taxa de 5% do valor
+                const taxa = (valor * 0.05).toFixed(2); // Calcula a taxa de 5%
 
-                if (ong_id !== "") {
-                    <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null) { ?>
-                        const nome_doador = '<?php echo $_SESSION['user_nome'] ?? "Anônimo"; ?>';
-                        // Redireciona para a página de pagamento, passando os parâmetros necessários
-                        window.location.href = `../doador/realizar-pagamento.php?ong=${ong_id}&valor=${valor}&taxa=${taxa}&doador=${nome_doador}`;
-                    <?php } else { ?>
-                        window.location.href = `../usuarios/login.php`;
-                    <?php } ?>
-                }
+                <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null) { ?>
+                    const nome_doador = '<?php echo $_SESSION['user_nome'] ?? "Anônimo"; ?>';
+                    // Redireciona para a página de pagamento
+                    window.location.href = `../doador/realizar-pagamento.php?ong=${ong_id}&valor=${valor}&taxa=${taxa}&doador=${nome_doador}`;
+                <?php } else { ?>
+                    // Exibe mensagem de alerta e redireciona para login
+                    alert("Você precisa estar logado como doador para doar.");
+                    window.location.href = "login.php";
+                <?php } ?>
             } else {
                 document.getElementById("error-message").style.display = "block";
             }

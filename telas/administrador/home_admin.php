@@ -67,7 +67,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
                         <span class="tittle-banner">NOVO</span>
                     </div>
                     <div class="a">
-                        <a class="btn-quero-doar" href="../telas/pagina-quero-doar.php">QUERO DOAR!</a>
+                        <a class="btn-quero-doar" href="../usuarios/pagina-quero-doar">QUERO DOAR!</a>
                     </div>
                 </div>
                 <div>
@@ -85,15 +85,15 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
         <section class="banner-cards-ongs">
             <div class="card-ong">
                 <img class="img-ong" src="../../assets/ong-1.png">
-                <a class="btn-conhecer" href="pagina-da-ong-1.php">CONHECER</a>
+                <a class="btn-conhecer" href="../usuarios/ong-1.php">CONHECER</a>
             </div>
             <div class="card-ong">
                 <img class="img-ong" src="../../assets/ong-2.png">
-                <a class="btn-conhecer" href="pagina-da-ong-2.php">CONHECER</a>
+                <a class="btn-conhecer" href="../usuarios/ong-2.php">CONHECER</a>
             </div>
             <div class="card-ong">
                 <img class="img-ong" src="../../assets/ong-3.png">
-                <a class="btn-conhecer" href="pagina-da-ong-3.php">CONHECER</a>
+                <a class="btn-conhecer" href="../usuarios/ong-3.php">CONHECER</a>
             </div>
         </section>
 
