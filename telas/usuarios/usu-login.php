@@ -6,16 +6,13 @@ error_reporting(E_ALL);
 
 include('../../db.php');
 
-if (isset($_GET['message']) && $_GET['message'] === 'senha_alterada') {
-    echo "<p style='color: green;'>Senha alterada com sucesso. Faça login novamente.</p>";
-}
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
     $senha = trim($_POST['senha']);
 
     if (empty($email) || empty($senha)) {
-        echo "<div class='error-message'>Por favor, preencha todos os campos.</div>";
+        $_SESSION['error_message'] = 'Por favor, preencha todos os campos.';
+        header("Location: usu-login.php");
         exit();
     }
 
@@ -55,10 +52,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $doador = $result_doador->fetch_assoc();
             if ($doador['senha'] === $senha) {
                 if ($doador['status'] === 'desativado') {
-                    echo "<script>
-                        alert('Sua conta foi desativada. Entre em contato com o suporte.');
-                        window.location.href = 'usu-login.php';
-                    </script>";
+                    $_SESSION['error_message'] = 'Sua conta foi desativada. Entre em contato com o suporte.';
+                    header("Location: usu-login.php");
                     exit();
                 }
 
@@ -77,10 +72,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $ong = $result_ong->fetch_assoc();
 
             if ($ong['status'] == 'inativo') {
-                echo "<script>
-                    alert('Sua ONG foi desativada. Entre em contato com o suporte.');
-                    window.location.href = 'usu-login.php';
-                </script>";
+                $_SESSION['error_message'] = 'Sua ONG foi desativada. Entre em contato com o suporte.';
+                header("Location: usu-login.php");
                 exit();
             }
 
@@ -93,18 +86,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 header("Location: usu-index.php");
                 exit();
-            } else {
-                echo "<script>
-                    alert('Senha incorreta.');
-                    window.location.href = 'usu-login.php';
-                </script>";
-                exit();
             }
         }
 
-        echo "<div class='error-message'>Email ou senha inválidos.</div>";
+        $_SESSION['error_message'] = '✕ Email ou senha inválidos.';
+        header("Location: usu-login.php");
+        exit();
     } catch (Exception $e) {
-        echo "<div class='error-message'>Erro ao realizar login. Tente novamente mais tarde.</div>";
+        $_SESSION['error_message'] = 'Erro ao realizar login. Tente novamente mais tarde.';
+        header("Location: usu-login.php");
+        exit();
     } finally {
         if (isset($stmt_admin)) $stmt_admin->close();
         if (isset($stmt_doador)) $stmt_doador->close();
@@ -166,6 +157,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </nav>
     </header>
+
+    <div id="message-container" style="width: 50%; max-width: 500px; text-align: center; margin: 0 auto; margin-bottom: 1%;">
+        <?php
+        if (isset($_SESSION['error_message'])) {
+            echo '<div class="error-message" style="background-color: #ffeaea; color: #dc3545; border: 1px solid #f5c6cb; padding: 10px; margin-top: 10px; border-radius: 5px; font-size: 14px;">' . $_SESSION['error_message'] . '</div>';
+            unset($_SESSION['error_message']);
+        }
+
+        if (isset($_SESSION['success_message'])) {
+            echo '<div class="success-message">' . $_SESSION['success_message'] . '</div>';
+            unset($_SESSION['success_message']);
+        }
+        ?>
+    </div>
 
     <main>
         <h1 class="title">LOGIN</h1>
@@ -234,6 +239,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </footer>
 
     <script src="../../js/header.js"></script>
+    <script>
+        function setupMessageRemoval() {
+            const messages = document.querySelectorAll('.error-message, .success-message');
+            messages.forEach(message => {
+                setTimeout(() => {
+                    message.style.transition = 'opacity 0.5s ease-in-out';
+                    message.style.opacity = '0';
+                    setTimeout(() => {
+                        if (message.parentNode) {
+                            message.parentNode.removeChild(message);
+                        }
+                    }, 500);
+                }, 3000);
+            });
+        }
+
+        // Executar quando o documento carregar
+        document.addEventListener('DOMContentLoaded', setupMessageRemoval);
+    </script>
 </body>
 
 </html>
