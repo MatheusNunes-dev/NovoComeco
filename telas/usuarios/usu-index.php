@@ -1,9 +1,8 @@
 <?php
 session_start();
-$isLoggedIn = isset($_SESSION['user_id']); // Verifica se o usuário está logado
-$tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, caso esteja logado
+$isLoggedIn = isset($_SESSION['user_id']);
+$tipoUsuario = $_SESSION['user_tipo'] ?? null;
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -20,10 +19,8 @@ $tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, c
     <header>
         <nav class="navbar nav-lg-screen" id="navbar">
             <button class="btn-icon-header" onclick="toggleSideBar()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list"
-                    viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                        d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
                 </svg>
             </button>
             <div>
@@ -35,10 +32,8 @@ $tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, c
                 <ul>
                     <li>
                         <button class="btn-icon-header" onclick="toggleSideBar()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                class="bi bi-x" viewBox="0 0 16 16">
-                                <path
-                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                             </svg>
                         </button>
                     </li>
@@ -50,7 +45,6 @@ $tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, c
             </div>
             <div class="user">
                 <?php if ($isLoggedIn): ?>
-                    <!-- Direciona para o perfil com base no tipo de usuário -->
                     <?php if ($tipoUsuario === 'administrador'): ?>
                         <a href="../administrador/adm-configuracoes.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
                     <?php elseif ($tipoUsuario === 'doador'): ?>
@@ -59,7 +53,6 @@ $tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, c
                         <a href="../ong/ong-configuracoes.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
                     <?php endif; ?>
                 <?php else: ?>
-                    <!-- Se o usuário não está logado, o botão leva para a página de login -->
                     <a href="usu-login.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
                 <?php endif; ?>
             </div>
@@ -104,31 +97,20 @@ $tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, c
             </div>
         </section>
 
-
         <section class="banner-cards-clientes">
             <div class="card-doador">
-                <div>
-
-                </div>
                 <p>
-                    "A solidariedade é um ato poderoso que transforma vidas. Contribuir com amor e compaixão é um
-                    pequeno gesto que pode
-                    criar um impacto enorme!"<br>Cesar Yoshio
+                    "A solidariedade é um ato poderoso que transforma vidas. Contribuir com amor e compaixão é um pequeno gesto que pode criar um impacto enorme!"<br>Cesar Yoshio
                 </p>
             </div>
             <div class="card-doador">
                 <p>
-                    A doação é uma maneira simples de espalhar esperança. Saber que minha contribuição pode mudar uma
-                    vida me motiva a
-                    continuar ajudando!"<br>Tiago Gorri
+                    A doação é uma maneira simples de espalhar esperança. Saber que minha contribuição pode mudar uma vida me motiva a continuar ajudando!"<br>Tiago Gorri
                 </p>
-
             </div>
             <div class="card-doador">
                 <p>
-                    "Ao ajudar o próximo, plantamos sementes de esperança. Cada doação traz um pouco mais de luz e faz a
-                    diferença no
-                    caminho de alguém."<br>Matheus Muller
+                    "Ao ajudar o próximo, plantamos sementes de esperança. Cada doação traz um pouco mais de luz e faz a diferença no caminho de alguém."<br>Matheus Muller
                 </p>
             </div>
         </section>
@@ -162,7 +144,7 @@ $tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, c
                 </div>
             </div>
             <div class="img-footer-end">
-                <img class="boneco-footer" class="img-footer" <script src="../../js/header.js"></script>>
+                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
             </div>
         </div>
     </footer>
@@ -179,7 +161,6 @@ $tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, c
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
-
 </body>
 
 </html>

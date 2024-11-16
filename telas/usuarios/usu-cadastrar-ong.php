@@ -3,7 +3,6 @@ include('../../db.php');
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Coletando os dados do formulário
     $name = $_POST['name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
@@ -25,22 +24,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm-password'];
 
-    // Variável para armazenar mensagens de erro
     $error_message = "";
 
-    // Validação das senhas
     if ($password !== $confirmPassword) {
         $error_message = "As senhas não coincidem.";
     } else {
-        // Verifica email/cnpj e    m administrador
         $check_admin = "SELECT * FROM administrador WHERE email = '$email'";
         $result_admin = $mysqli->query($check_admin);
 
-        // Verifica email/cnpj em doador
         $check_doador = "SELECT * FROM doador WHERE email = '$email'";
         $result_doador = $mysqli->query($check_doador);
 
-        // Verifica email/cnpj em ong
         $check_ong = "SELECT * FROM ong WHERE email = '$email' OR cnpj = '$cnpj'";
         $result_ong = $mysqli->query($check_ong);
 
@@ -51,14 +45,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } elseif ($result_ong->num_rows > 0) {
             $error_message = "Email ou CNPJ já cadastrado como ONG.";
         } else {
-            // Prossegue com o cadastro
             $sql_code = "INSERT INTO ong (nome, email, senha, telefone, cnpj, status, constituicao, comprobatorio, estatuto_social, 
                                       end_rua, end_numero, end_bairro, end_cidade, end_estado, end_complemento, banco, agencia, conta_corrente, chave_pix, data_cadastro) 
                          VALUES ('$name', '$email', '$password', '$phone', '$cnpj', 'pendente', '$constituicao', '$comprobatorio', '$estatuto', 
                                  '$rua', '$numero', '$bairro', '$cidade', '$estado', '$complemento', '$banco', '$agencia', '$conta_corrente', '$pix_key', now())";
 
             if ($mysqli->query($sql_code) === TRUE) {
-                // Armazenando as informações da ONG na sessão
                 $_SESSION['user_id'] = $mysqli->insert_id;
                 $_SESSION['user_nome'] = $name;
                 $_SESSION['user_email'] = $email;
@@ -77,15 +69,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Exibindo a mensagem de erro, se existir
     if (!empty($error_message)) {
         echo "<div class='error-message'>$error_message</div>";
     }
 }
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -141,7 +129,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <section class="register-section">
             <p class="title">Adicione sua ong em nosso site!</p>
             <form action="usu-cadastrar-ong.php" method="POST">
-                <!-- Informações Básicas -->
                 <div class="input-group">
                     <input type="text" id="name" name="name" placeholder="Nome ONG" required>
                 </div>
@@ -154,8 +141,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="input-group">
                     <input type="tel" id="phone" name="phone" placeholder="Telefone (XX-XXXXXXXXX)" required>
                 </div>
-
-                <!-- Documentos -->
                 <div class="input-group">
                     <input type="text" id="constituicao" name="constituicao" placeholder="Constituição" required>
                 </div>
@@ -165,8 +150,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="input-group">
                     <input type="text" id="estatuto" name="estatuto" placeholder="Estatuto Social" required>
                 </div>
-
-                <!-- Endereço -->
                 <div class="input-group">
                     <input type="text" id="cep" name="cep" placeholder="CEP (XXXXX-XXX)" required maxlength="10">
                 </div>
@@ -188,8 +171,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="input-group">
                     <input type="text" id="complemento" name="complemento" placeholder="Complemento">
                 </div>
-
-                <!-- Informações Bancárias -->
                 <div class="input-group">
                     <input type="text" id="banco" name="banco" placeholder="Banco" required>
                 </div>
@@ -202,8 +183,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="input-group">
                     <input type="text" id="chave_pix" name="chave_pix" placeholder="Chave Pix" required>
                 </div>
-
-                <!-- Senha -->
                 <div class="input-group">
                     <input type="password" id="password" name="password" placeholder="Senha" required>
                 </div>
@@ -213,7 +192,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <button type="submit" class="register-button">Criar conta</button>
             </form>
-
         </section>
     </div>
     <footer>
@@ -249,7 +227,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </footer>
     <script src="../../js/header.js"></script>
-
     <div vw class="enabled">
         <div vw-access-button class="active"></div>
         <div vw-plugin-wrapper>
@@ -260,7 +237,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
-
     <script src="../../js/cadastro-ong.js"></script>
 </body>
 

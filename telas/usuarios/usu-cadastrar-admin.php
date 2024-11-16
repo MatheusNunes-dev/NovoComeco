@@ -3,7 +3,6 @@ include('../../db.php');
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Coletando os dados do formulário
     $verificationCode = $_POST['verification-code'];
     $name = $_POST['name'];
     $email = $_POST['email'];
@@ -19,27 +18,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm-password'];
 
-    // Variável para armazenar mensagens de erro
     $error_message = "";
 
-    // Debug: Verifique se o verificationCode está sendo recebido corretamente
-    // echo "Verification Code: " . $verificationCode;  // Para depuração
-
-    // Validação do Código de Verificação
     if ($verificationCode !== "000") {
         $error_message = "Código de verificação inválido.";
     } elseif ($password !== $confirmPassword) {
         $error_message = "As senhas não coincidem.";
     } else {
-        // Verifica email/cpf em administrador
         $check_admin = "SELECT * FROM administrador WHERE email = '$email' OR cpf = '$cpf'";
         $result_admin = $mysqli->query($check_admin);
 
-        // Verifica email/cpf em doador
         $check_doador = "SELECT * FROM doador WHERE email = '$email' OR cpf = '$cpf'";
         $result_doador = $mysqli->query($check_doador);
 
-        // Verifica email em ong
         $check_ong = "SELECT * FROM ong WHERE email = '$email'";
         $result_ong = $mysqli->query($check_ong);
 
@@ -50,12 +41,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } elseif ($result_ong->num_rows > 0) {
             $error_message = "Email já cadastrado como ONG.";
         } else {
-            // Prossegue com o cadastro
             $sql_code = "INSERT INTO administrador (nome, email, senha, telefone, cpf, end_rua, end_numero, end_bairro, end_cidade, end_estado, end_complemento) 
                         VALUES ('$name', '$email', '$password', '$phone', '$cpf', '$rua', '$numero', '$bairro', '$cidade', '$estado', '$complemento')";
 
             if ($mysqli->query($sql_code) === TRUE) {
-                // Armazenando informações do administrador na sessão
                 $_SESSION['user_id'] = $mysqli->insert_id;
                 $_SESSION['user_nome'] = $name;
                 $_SESSION['user_email'] = $email;
@@ -75,14 +64,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Exibindo a mensagem de erro, se existir
     if (!empty($error_message)) {
         echo "<div class='error-message'>$error_message</div>";
     }
 }
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -138,7 +124,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h1>Criar conta</h1>
             <p>Crie sua conta e ajude o próximo!</p>
             <form action="usu-cadastrar-admin.php" method="POST">
-                <!-- Informações Pessoais -->
                 <div class="input-group">
                     <input type="text" id="verification-code" name="verification-code" placeholder="Código de Verificação" required>
                 </div>
@@ -154,12 +139,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="input-group">
                     <input type="text" id="cpf" name="cpf" placeholder="CPF (XXX.XXX.XXX-XX)" required>
                 </div>
-
-                <!-- Endereço -->
                 <div class="input-group">
                     <input type="text" id="cep" name="cep" placeholder="CEP (XXXXX-XXX)" required maxlength="10">
                 </div>
-
                 <div class="input-group">
                     <input type="text" id="estado" name="estado" placeholder="Estado" required readonly>
                 </div>
@@ -178,8 +160,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="input-group">
                     <input type="text" id="complemento" name="complemento" placeholder="Complemento">
                 </div>
-
-                <!-- Separação para senha -->
                 <div class="password-section">
                     <div class="input-group">
                         <input type="password" id="password" name="password" placeholder="Senha" required>
@@ -188,7 +168,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirmar Senha" required>
                     </div>
                 </div>
-
                 <button type="submit" class="register-button">Criar conta</button>
             </form>
         </section>
@@ -226,7 +205,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </footer>
     <script src="../../js/header.js"></script>
-
     <div vw class="enabled">
         <div vw-access-button class="active"></div>
         <div vw-plugin-wrapper>
@@ -237,6 +215,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
-
     <script src="../../js/cadastro-administrador.js"></script>
 </body>
+
+</html>

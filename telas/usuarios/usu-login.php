@@ -1,49 +1,43 @@
 <?php
 session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-// Incluir o arquivo de conexão
-include('../../db.php'); // Certifique-se de que o caminho para db.php está correto
+include('../../db.php');
 
 if (isset($_GET['message']) && $_GET['message'] === 'senha_alterada') {
     echo "<p style='color: green;'>Senha alterada com sucesso. Faça login novamente.</p>";
 }
 
-
-// Verificar se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Obter dados do formulário
     $email = trim($_POST['email']);
     $senha = trim($_POST['senha']);
 
-    // Validação básica
     if (empty($email) || empty($senha)) {
         echo "<div class='error-message'>Por favor, preencha todos os campos.</div>";
         exit();
     }
 
     try {
-        // Verificar na tabela de Administradores
         $sql_admin = "SELECT id_administrador AS id, nome, email, senha FROM ADMINISTRADOR WHERE email = ?";
         $stmt_admin = $mysqli->prepare($sql_admin);
         $stmt_admin->bind_param("s", $email);
         $stmt_admin->execute();
         $result_admin = $stmt_admin->get_result();
 
-        // Verificar na tabela de Doadores
         $sql_doador = "SELECT id_doador AS id, nome, email, senha, status FROM DOADOR WHERE email = ?";
         $stmt_doador = $mysqli->prepare($sql_doador);
         $stmt_doador->bind_param("s", $email);
         $stmt_doador->execute();
         $result_doador = $stmt_doador->get_result();
 
-        // Verificar na tabela de ONGs
         $sql_ong = "SELECT id_ong AS id, nome, email, senha, status FROM ONG WHERE email = ?";
         $stmt_ong = $mysqli->prepare($sql_ong);
         $stmt_ong->bind_param("s", $email);
         $stmt_ong->execute();
         $result_ong = $stmt_ong->get_result();
 
-        // Verificar se o administrador existe e senha bate
         if ($result_admin->num_rows > 0) {
             $admin = $result_admin->fetch_assoc();
             if ($admin['senha'] === $senha) {
@@ -57,15 +51,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
-        // Verificar se o doador existe e a senha está correta
         if ($result_doador->num_rows > 0) {
             $doador = $result_doador->fetch_assoc();
             if ($doador['senha'] === $senha) {
-                // Verificar o status do doador
                 if ($doador['status'] === 'desativado') {
                     echo "<script>
                         alert('Sua conta foi desativada. Entre em contato com o suporte.');
-                        window.location.href = 'usu-login.php'; // Redireciona de volta para a página de login
+                        window.location.href = 'usu-login.php';
                     </script>";
                     exit();
                 }
@@ -81,11 +73,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
-        // Verificar se a ONG existe e a senha está correta
         if ($result_ong->num_rows > 0) {
             $ong = $result_ong->fetch_assoc();
 
-            // Verificar se a ONG está desativada
             if ($ong['status'] == 'inativo') {
                 echo "<script>
                     alert('Sua ONG foi desativada. Entre em contato com o suporte.');
@@ -94,7 +84,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 exit();
             }
 
-            // Verificar a senha
             if ($ong['senha'] === $senha) {
                 $_SESSION['user_id'] = $ong['id'];
                 $_SESSION['user_nome'] = $ong['nome'];
@@ -113,15 +102,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
-
-
-
-        // Se não encontrou o usuário ou senha inválida
         echo "<div class='error-message'>Email ou senha inválidos.</div>";
     } catch (Exception $e) {
         echo "<div class='error-message'>Erro ao realizar login. Tente novamente mais tarde.</div>";
     } finally {
-        // Fechar as conexões
         if (isset($stmt_admin)) $stmt_admin->close();
         if (isset($stmt_doador)) $stmt_doador->close();
         if (isset($stmt_ong)) $stmt_ong->close();
@@ -129,10 +113,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -210,7 +190,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </form>
 
-
             <div class="secondary-action div-cadastrar">
                 <p>Não tem uma conta? Cadastrar-se como
                     <a href="../usuarios/usu-cadastrar-admin.php" class="cadastrar">Administrador</a> /
@@ -255,7 +234,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </footer>
 
     <script src="../../js/header.js"></script>
-
 </body>
 
 </html>

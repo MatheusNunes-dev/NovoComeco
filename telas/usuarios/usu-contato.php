@@ -1,22 +1,18 @@
 <?php
 session_start();
-require('../../db.php'); // Conexão com o banco de dados
+require('../../db.php');
 
-// Habilitar exibição de erros para depuração
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 $successMessage = $errorMessage = "";
 
-// Verifica se o formulário foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Captura os dados do formulário
     $nome = trim($_POST['nome']);
     $email = trim($_POST['email']);
     $mensagem = trim($_POST['mensagem']);
 
-    // Valida os dados
     if (empty($nome)) {
         $errorMessage = "O campo Nome está vazio.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -24,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (empty($mensagem)) {
         $errorMessage = "O campo Mensagem está vazio.";
     } else {
-        // Prepara a consulta para inserir os dados na tabela contato
         $sql = "INSERT INTO contato (nome, email, mensagem, status) VALUES (?, ?, ?, 'nao_lido')";
         $stmt = $mysqli->prepare($sql);
 
@@ -43,8 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 

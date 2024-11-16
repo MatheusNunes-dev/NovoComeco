@@ -4,32 +4,25 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+include('../../db.php');
 
-include('../../db.php'); // Caminho para o arquivo db.php
-
-// Captura o nome do arquivo da URL
 $current_url = $_SERVER['REQUEST_URI'];
 
-// Usa uma expressão regular para capturar o número após "ong-" no nome do arquivo
 if (preg_match('/ong-(\d+)\.php/', $current_url, $matches)) {
-    $ong_id = $matches[1];  // O número após "ong-" será o ID da ONG
+    $ong_id = $matches[1];
 }
 
-// Verifica se o ID da ONG foi encontrado
 if (isset($ong_id)) {
-
-
     $sql = "SELECT id_ong, nome, chave_pix FROM ONG WHERE id_ong = ?";
     $stmt = $mysqli->prepare($sql);
     if ($stmt) {
-        $stmt->bind_param("i", $ong_id); // "i" para inteiro (id_ong)
+        $stmt->bind_param("i", $ong_id);
         $stmt->execute();
         $result = $stmt->get_result();
 
-        // Verifica se a ONG foi encontrada
         if ($result && $row = $result->fetch_assoc()) {
-            $nome_ong = $row['nome']; // Nome da ONG
-            $chave_pix = $row['chave_pix']; // Chave PIX da ONG
+            $nome_ong = $row['nome'];
+            $chave_pix = $row['chave_pix'];
         } else {
             echo "ONG não encontrada.";
         }
@@ -40,7 +33,6 @@ if (isset($ong_id)) {
     echo "ID da ONG não especificado.";
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -158,17 +150,15 @@ if (isset($ong_id)) {
     <script>
         function validateDonation() {
             const valor = document.getElementById('valor').value;
-            const ong_id = <?php echo $ong_id; ?>; // A ONG já está definida na URL
+            const ong_id = <?php echo $ong_id; ?>;
 
             if (valor >= 5) {
-                const taxa = (valor * 0.05).toFixed(2); // Calcula a taxa de 5%
+                const taxa = (valor * 0.05).toFixed(2);
 
                 <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null) { ?>
                     const nome_doador = '<?php echo $_SESSION['user_nome'] ?? "Anônimo"; ?>';
-                    // Redireciona para a página de pagamento
                     window.location.href = `../doador/doador-doacao.php?ong=${ong_id}&valor=${valor}&taxa=${taxa}&doador=${nome_doador}`;
                 <?php } else { ?>
-                    // Exibe mensagem de alerta e redireciona para login
                     alert("Você precisa estar logado como doador para doar.");
                     window.location.href = "usu-login.php";
                 <?php } ?>
