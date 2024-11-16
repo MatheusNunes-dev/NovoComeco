@@ -36,7 +36,7 @@ $mensagens = $result->fetch_all(MYSQLI_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciar Mensagens</title>
     <link rel="stylesheet" href="../../css/todos-global.css">
-    <link rel="stylesheet" href="../../css/adm-responder.css">
+    <link rel="stylesheet" href="../../css/adm-respostas.css">
 </head>
 
 <body>
@@ -69,8 +69,12 @@ $mensagens = $result->fetch_all(MYSQLI_ASSOC);
 
     <div class="container">
         <h1>Gerenciar Mensagens</h1>
+        <a href="adm-configuracoes.php" class="btn-submit">Voltar para Configurações</a>
+
         <?php if (!empty($mensagens)): ?>
+
             <?php foreach ($mensagens as $mensagem): ?>
+
                 <div class="message-box">
                     <p><strong>Nome:</strong> <?= htmlspecialchars($mensagem['nome']); ?></p>
                     <p><strong>E-mail:</strong> <?= htmlspecialchars($mensagem['email']); ?></p>

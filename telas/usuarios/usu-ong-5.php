@@ -6,8 +6,8 @@ error_reporting(E_ALL);
 
 include('../../db.php');
 
+// Captura o ID da ONG a partir da URL
 $current_url = $_SERVER['REQUEST_URI'];
-
 if (preg_match('/ong-(\d+)\.php/', $current_url, $matches)) {
     $ong_id = $matches[1];
 }
@@ -43,7 +43,7 @@ if (isset($ong_id)) {
     <title>Doação ONG</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/todos-global.css">
-    <link rel="stylesheet" href="../../css/todos-pagina-ong.css">
+    <link rel="stylesheet" href="../../css/todos-ong.css">
 </head>
 
 <body>
@@ -82,7 +82,7 @@ if (isset($ong_id)) {
         <section class="donation-box">
             <h1 class="ong-name">Realizar Doação</h1>
             <div class="donation-image">
-                <img src="../../assets/ong-6.png" alt="Imagem da ONG">
+                <img src="../../assets/ong-5.png" alt="Imagem da ONG">
             </div>
             <div class="ong-description-box">
                 <p>Amigos da Terra trabalha pela preservação ambiental, com iniciativas voltadas à proteção de áreas naturais, reflorestamento e conscientização sobre o impacto das mudanças climáticas. Seu foco é construir um futuro mais sustentável para o planeta.</p>
@@ -114,6 +114,13 @@ if (isset($ong_id)) {
 
         </section>
     </main>
+    <div class="popup-overlay" id="popup-error">
+        <div class="popup-box">
+            <h2>Erro</h2>
+            <p>Somente doadores podem realizar doações. Você será redirecionado para a página inicial.</p>
+            <button class="popup-btn" onclick="redirectToHome()">OK</button>
+        </div>
+    </div>
 
     <footer>
         <div class="footer">
@@ -147,6 +154,8 @@ if (isset($ong_id)) {
             </div>
         </div>
     </footer>
+
+
     <script>
         function validateDonation() {
             const valor = document.getElementById('valor').value;
@@ -155,20 +164,20 @@ if (isset($ong_id)) {
             if (valor >= 5) {
                 const taxa = (valor * 0.05).toFixed(2);
 
-                <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null) { ?>
+                <?php if (isset($_SESSION['user_tipo']) && $_SESSION['user_tipo'] === 'doador') { ?>
                     const nome_doador = '<?php echo $_SESSION['user_nome'] ?? "Anônimo"; ?>';
                     window.location.href = `../doador/doador-doacao.php?ong=${ong_id}&valor=${valor}&taxa=${taxa}&doador=${nome_doador}`;
                 <?php } else { ?>
-                    alert("Você precisa estar logado como doador para doar.");
-                    window.location.href = "usu-login.php";
+                    document.getElementById('popup-error').style.display = 'flex';
                 <?php } ?>
             } else {
-                document.getElementById("error-message").style.display = "block";
+                alert("O valor mínimo para doação é R$5.");
             }
         }
 
-        function closeErrorPopup() {
-            document.getElementById("error-message").style.display = "none";
+        function redirectToHome() {
+            document.getElementById('popup-error').style.display = 'none';
+            window.location.href = '../../telas/usuarios/usu-index.php';
         }
     </script>
 </body>

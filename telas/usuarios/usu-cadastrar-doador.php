@@ -199,6 +199,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </footer>
+    <script>
+        document.getElementById('cep').addEventListener('blur', function() {
+            let cep = this.value.replace(/\D/g, '');
+            if (cep.length === 8) {
+                fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.erro) {
+                            alert('CEP não encontrado!');
+                        } else {
+                            document.getElementById('estado').value = data.uf || '';
+                            document.getElementById('cidade').value = data.localidade || '';
+                            document.getElementById('bairro').value = data.bairro || '';
+                            document.getElementById('rua').value = data.logradouro || '';
+                        }
+                    })
+                    .catch(error => console.error('Erro ao buscar o CEP:', error));
+            } else {
+                alert('CEP inválido! Por favor, digite um CEP com 8 dígitos.');
+            }
+        });
+    </script>
     <script src="../../js/header.js"></script>
     <div vw class="enabled">
         <div vw-access-button class="active"></div>

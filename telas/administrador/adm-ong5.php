@@ -40,7 +40,7 @@ if (isset($ong_id)) {
     <title>Doação ONG</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="image/png">
     <link rel="stylesheet" href="../../css/todos-global.css">
-    <link rel="stylesheet" href="../../css/todos-pagina-ong.css">
+    <link rel="stylesheet" href="../../css/todos-ong.css">
 </head>
 
 <body>
@@ -77,7 +77,7 @@ if (isset($ong_id)) {
         <section class="donation-box">
             <h1 class="ong-name">Realizar Doação</h1>
             <div class="donation-image">
-                <img src="../../assets/ong-6.png" alt="Imagem da ONG">
+                <img src="../../assets/ong-5.png" alt="Imagem da ONG">
             </div>
             <div class="ong-description-box">
                 <p>Amigos da Terra trabalha pela preservação ambiental, com iniciativas voltadas à proteção de áreas naturais, reflorestamento e conscientização sobre o impacto das mudanças climáticas. Seu foco é construir um futuro mais sustentável para o planeta.</p>

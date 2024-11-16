@@ -50,6 +50,7 @@ h1 {
     font-weight: bold;
 }
 
+/* Formulário de filtros */
 .filter-form {
     display: flex;
     flex-wrap: wrap;
@@ -95,6 +96,23 @@ h1 {
     background-color: #0056b3;
 }
 
+/* Botão de voltar */
+.btn-submit {
+    padding: 12px 24px;
+    border: 3px solid #FFA114;
+    border-radius: 2rem;
+    background: #FFA114;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-submit:hover {
+    background-color: #FF8C00; /* Cor de fundo ao passar o mouse */
+    transform: scale(1.05); /* Efeito de aumento ao passar o mouse */
+}
 
 /* Responsividade */
 @media (max-width: 768px) {
@@ -112,5 +130,13 @@ h1 {
 
     .donation-box p {
         font-size: 1rem;
+    }
+
+    .filter-form div {
+        flex: 1 1 100%; /* Ajusta os filtros para ocupar a largura total */
+    }
+
+    .btn-submit {
+        width: 100%; /* Botão ocupa largura total em telas menores */
     }
 }

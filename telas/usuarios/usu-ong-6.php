@@ -6,8 +6,8 @@ error_reporting(E_ALL);
 
 include('../../db.php');
 
+// Captura o ID da ONG a partir da URL
 $current_url = $_SERVER['REQUEST_URI'];
-
 if (preg_match('/ong-(\d+)\.php/', $current_url, $matches)) {
     $ong_id = $matches[1];
 }
@@ -33,6 +33,7 @@ if (isset($ong_id)) {
     echo "ID da ONG não especificado.";
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -42,27 +43,25 @@ if (isset($ong_id)) {
     <title>Doação ONG</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="image/png">
     <link rel="stylesheet" href="../../css/todos-global.css">
-    <link rel="stylesheet" href="../../css/todos-pagina-ong.css">
+    <link rel="stylesheet" href="../../css/todos-ong.css">
 </head>
 
 <body>
     <header>
-        <nav class="navbar nav-lg-screen" id="navbar" aria-label="Menu principal">
-            <button class="btn-icon-header" onclick="toggleSideBar()" aria-label="Abrir menu lateral">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+        <nav class="navbar nav-lg-screen" id="navbar">
+            <button class="btn-icon-header" onclick="toggleSideBar()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list"
+                    viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
                 </svg>
             </button>
             <div>
-                <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo da ONG" />
+                <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo">
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
-                    <li><button class="btn-icon-header" onclick="toggleSideBar()" aria-label="Fechar menu lateral">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                            </svg>
-                        </button></li>
+                    <li><button class="btn-icon-header" onclick="toggleSideBar()">X</button></li>
                     <li class="nav-link"><a href="../../telas/usuarios/usu-index.php">HOME</a></li>
                     <li class="nav-link"><a href="../../telas/usuarios/usu-ongs.php">ONG'S</a></li>
                     <li class="nav-link"><a href="../../telas/usuarios/usu-sobre.php">SOBRE</a></li>
@@ -81,17 +80,10 @@ if (isset($ong_id)) {
         <section class="donation-box">
             <h1 class="ong-name">Realizar Doação</h1>
             <div class="donation-image">
-                <img src="../../assets/ong-7.gif" alt="Imagem da ONG">
+                <img src="../../assets/ong-1.png" alt="Imagem da ONG">
             </div>
             <div class="ong-description-box">
-                <p>A ONG Amor Animal é dedicada ao cuidado, proteção e resgate de animais abandonados ou em situação de risco. Realiza campanhas de adoção, castração e conscientização sobre bem-estar animal, buscando lares responsáveis para seus protegidos.</p>
-            </div>
-
-            <div class="error-message" id="error-message" style="display: none;">
-                <div class="error-popup">
-                    <p><strong>Erro:</strong> O valor da doação deve ser no mínimo R$5.</p>
-                    <button class="close-btn" onclick="closeErrorPopup()">X</button>
-                </div>
+                <p>A ONG Mão Amiga é dedicada a oferecer assistência a comunidades em situação de vulnerabilidade social, fornecendo alimentos, roupas e suporte educacional. A organização acredita no poder da solidariedade e trabalha para promover dignidade e oportunidades para todos.</p>
             </div>
 
             <div class="input-box">
@@ -100,7 +92,7 @@ if (isset($ong_id)) {
             </div>
 
             <p class="note">*Somente PIX</p>
-            <p class="note">*Minimo: R$5</p>
+            <p class="note">*Mínimo: R$5</p>
 
             <div class="button-container">
                 <div class="cancel-button" onclick="window.location.href='../usuarios/usu-ongs.php'">
@@ -110,9 +102,16 @@ if (isset($ong_id)) {
                     <p>Confirmar doação</p>
                 </div>
             </div>
-
         </section>
     </main>
+
+    <div class="popup-overlay" id="popup-error">
+        <div class="popup-box">
+            <h2>Erro</h2>
+            <p>Somente doadores podem realizar doações. Você será redirecionado para a página inicial.</p>
+            <button class="popup-btn" onclick="redirectToHome()">OK</button>
+        </div>
+    </div>
 
     <footer>
         <div class="footer">
@@ -147,6 +146,7 @@ if (isset($ong_id)) {
         </div>
     </footer>
 
+
     <script>
         function validateDonation() {
             const valor = document.getElementById('valor').value;
@@ -155,23 +155,22 @@ if (isset($ong_id)) {
             if (valor >= 5) {
                 const taxa = (valor * 0.05).toFixed(2);
 
-                <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null) { ?>
+                <?php if (isset($_SESSION['user_tipo']) && $_SESSION['user_tipo'] === 'doador') { ?>
                     const nome_doador = '<?php echo $_SESSION['user_nome'] ?? "Anônimo"; ?>';
                     window.location.href = `../doador/doador-doacao.php?ong=${ong_id}&valor=${valor}&taxa=${taxa}&doador=${nome_doador}`;
                 <?php } else { ?>
-                    alert("Você precisa estar logado como doador para doar.");
-                    window.location.href = "usu-login.php";
+                    document.getElementById('popup-error').style.display = 'flex';
                 <?php } ?>
             } else {
-                document.getElementById("error-message").style.display = "block";
+                alert("O valor mínimo para doação é R$5.");
             }
         }
 
-        function closeErrorPopup() {
-            document.getElementById("error-message").style.display = "none";
+        function redirectToHome() {
+            document.getElementById('popup-error').style.display = 'none';
+            window.location.href = '../../telas/usuarios/usu-index.php';
         }
     </script>
-
 </body>
 
 </html>

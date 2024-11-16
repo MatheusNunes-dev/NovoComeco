@@ -1,10 +1,38 @@
 <?php
 session_start();
+require('../../db.php');
+
+function formatarCPF($cpf)
+{
+    return preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "$1.$2.$3-$4", $cpf);
+}
+
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'doador') {
     header("Location: /telas/usuarios/usu-login.php");
     exit();
 }
+
+$user_nome = $_SESSION['user_nome'];
+$user_email = $_SESSION['user_email'];
+$user_cpf = "";
+
+// Busca o CPF do doador no banco de dados
+$user_id = $_SESSION['user_id'];
+$sql = "SELECT cpf FROM doador WHERE id_doador = ?";
+$stmt = $mysqli->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $doador = $result->fetch_assoc();
+    $user_cpf = $doador['cpf'];
+}
+
+$stmt->close();
+$mysqli->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -47,8 +75,9 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
         <h1 class="title">Configurações</h1>
         <section class="donation-box">
             <div class="donation-details">
-                <p><strong>Usuário:</strong> <?php echo $_SESSION['user_nome']; ?></p>
-                <p><strong>E-mail:</strong> <?php echo $_SESSION['user_email']; ?></p>
+                <p><strong>Usuário:</strong> <?php echo htmlspecialchars($user_nome); ?></p>
+                <p><strong>E-mail:</strong> <?php echo htmlspecialchars($user_email); ?></p>
+                <p><strong>CPF:</strong> <?php echo htmlspecialchars(formatarCPF($user_cpf)); ?></p>
             </div>
         </section>
         <div class="action-buttons">

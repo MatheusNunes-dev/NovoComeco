@@ -30,6 +30,8 @@ h1 {
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
+
+
 .message-box:hover {
     transform: scale(1.02);
     box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
@@ -47,6 +49,29 @@ h1 {
     font-weight: bold;
 }
 
+
+.btn-submit {
+    padding: 12px 24px;
+    border: 3px solid #FFA114;
+    border-radius: 2rem;
+    background: #FFA114;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-submit:hover {
+    background-color: #FF8C00; /* Cor de fundo ao passar o mouse */
+    transform: scale(1.05); /* Efeito de aumento ao passar o mouse */
+}
+
+
+.btn-submit {
+    position: relative; /* Para garantir que o z-index funcione */
+    z-index: 1; /* Mantém o botão acima, se necessário */
+}
 /* Botões */
 .btn-status {
     padding: 10px 15px;

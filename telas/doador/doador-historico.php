@@ -5,15 +5,63 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
     exit();
 }
 require '../../db.php';
-$query = "SELECT d.valor_total, d.data_hora, o.nome AS nome_ong FROM DOACAO d INNER JOIN ONG o ON d.id_ong = o.id_ong WHERE d.id_doador = ? ORDER BY d.data_hora DESC";
+
+$filter_condition = "";
+$params = [];
+
+if (isset($_POST['ong_filter']) && $_POST['ong_filter'] !== "") {
+    $ong_filter = $_POST['ong_filter'];
+    $filter_condition .= " AND d.id_ong = ?";
+    $params[] = $ong_filter;
+}
+
+if (isset($_POST['data_filter_de']) && isset($_POST['data_filter_ate']) && $_POST['data_filter_de'] !== "" && $_POST['data_filter_ate'] !== "") {
+    $data_filter_de = $_POST['data_filter_de'];
+    $data_filter_ate = $_POST['data_filter_ate'];
+
+    if (strtotime($data_filter_ate) < strtotime($data_filter_de)) {
+        echo "<script>alert('A data \"Até\" não pode ser anterior à data \"De\".');</script>";
+    } else {
+        $filter_condition .= " AND d.data_hora BETWEEN ? AND ?";
+        $params[] = $data_filter_de;
+        $params[] = $data_filter_ate;
+    }
+}
+
+$query = "
+    SELECT 
+        d.valor_total, 
+        d.data_hora, 
+        o.nome AS nome_ong 
+    FROM DOACAO d
+    INNER JOIN ONG o ON d.id_ong = o.id_ong
+    WHERE d.id_doador = ?" . $filter_condition . "
+    ORDER BY d.data_hora DESC
+";
+
 $stmt = $mysqli->prepare($query);
-$stmt->bind_param("i", $_SESSION['user_id']);
+
+$params = array_merge([$_SESSION['user_id']], $params);
+if (!empty($params)) {
+    $types = str_repeat('s', count($params));
+    $stmt->bind_param($types, ...$params);
+}
+
 $stmt->execute();
 $result = $stmt->get_result();
 $donations = [];
 while ($row = $result->fetch_assoc()) {
     $donations[] = $row;
 }
+
+$ongs_query = "SELECT id_ong, nome FROM ONG";
+$ongs_result = $mysqli->query($ongs_query);
+
+$ongs = [];
+while ($row = $ongs_result->fetch_assoc()) {
+    $ongs[] = $row;
+}
+
 $stmt->close();
 $mysqli->close();
 ?>
@@ -23,7 +71,7 @@ $mysqli->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Histórico de Doação</title>
+    <title>Histórico de Doações</title>
     <link rel="stylesheet" href="../../css/todos-global.css">
     <link rel="stylesheet" href="../../css/doador-historico-doacoes.css">
 </head>
@@ -55,13 +103,39 @@ $mysqli->close();
             </div>
         </nav>
     </header>
+
     <div class="container">
         <h1>Histórico de Doações</h1>
+
+        <form method="POST" action="" class="filter-form">
+            <div>
+                <label for="ong_filter">Filtrar por ONG:</label>
+                <select id="ong_filter" name="ong_filter">
+                    <option value="">Selecione</option>
+                    <?php foreach ($ongs as $ong): ?>
+                        <option value="<?= $ong['id_ong'] ?>" <?= isset($ong_filter) && $ong_filter == $ong['id_ong'] ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($ong['nome']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div>
+                <label for="data_filter_de">Filtrar por Data (De):</label>
+                <input type="date" id="data_filter_de" name="data_filter_de" value="<?= $data_filter_de ?? '' ?>">
+            </div>
+            <div>
+                <label for="data_filter_ate">Filtrar por Data (Até):</label>
+                <input type="date" id="data_filter_ate" name="data_filter_ate" value="<?= $data_filter_ate ?? '' ?>">
+            </div>
+            <button type="submit">Filtrar</button>
+            <a href="doador-configuracoes.php" class="btn-submit">Voltar</a>
+        </form>
+
         <?php if (count($donations) > 0): ?>
             <?php foreach ($donations as $donation): ?>
                 <div class="donation-box">
                     <p><strong>ONG:</strong> <?= htmlspecialchars($donation['nome_ong']) ?></p>
-                    <p><strong>Data:</strong> <?= htmlspecialchars($donation['data_hora']) ?></p>
+                    <p><strong>Data:</strong> <?= date('d/m/Y H:i', strtotime($donation['data_hora'])) ?></p>
                     <p><strong>Valor:</strong> R$ <?= number_format($donation['valor_total'], 2, ',', '.') ?></p>
                 </div>
             <?php endforeach; ?>
@@ -69,6 +143,7 @@ $mysqli->close();
             <p>Você ainda não realizou doações.</p>
         <?php endif; ?>
     </div>
+
     <footer>
         <div class="footer">
             <div class="img-footer-start">

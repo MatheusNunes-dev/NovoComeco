@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Doação ONG</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/todos-global.css">
-    <link rel="stylesheet" href="../../css/todos-pagina-ong.css">
+    <link rel="stylesheet" href="../../css/todos-ong.css">
 </head>
 
 <body>
@@ -147,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <p>Método de Pagamento: PIX</p>
                 </div>
                 <div class="button-container">
-                    <div class="cancel-button" onclick="window.location.href='../usuarios/usu-ongs.php'">
+                    <div class="cancel-button" onclick="window.location.href='adm-configuracoes.php'">
                         <p>Cancelar doação</p>
                     </div>
                     <button type="submit" class="confirm-button">
@@ -158,7 +158,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </section>
     </main>
     <footer>
-        <div class="footer"></div>
+        <div class="footer">
+            <div class="img-footer-start">
+                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
+            </div>
+            <div class="socias">
+                <div class="icons-col-1">
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/google.png">
+                        <p>novocomeço@gmail.com</p>
+                    </div>
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/instagram.png">
+                        <p>@novocomeço</p>
+                    </div>
+                </div>
+                <div class="icons-col-2">
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/whatsapp.png">
+                        <p>(41)99997676</p>
+                    </div>
+                    <div class="social-footer">
+                        <img class="icon-footer" src="../../assets/facebook.png">
+                        <p>@novocomeco</p>
+                    </div>
+                </div>
+            </div>
+            <div class="img-footer-end">
+                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png">
+            </div>
+        </div>
     </footer>
 </body>
 

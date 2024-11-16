@@ -104,7 +104,7 @@ $tipoUsuario = $_SESSION['user_tipo'] ?? null;
                 </div>
                 <div class="ong">
                     <div class="img-cards">
-                        <img class="img-card" src="../../assets/ong-6.png">
+                        <img class="img-card" src="../../assets/ong-5.png">
                     </div>
                     <div class="btns-card">
                         <a class="btn-card" href="usu-ong-5.php">Doar</a>

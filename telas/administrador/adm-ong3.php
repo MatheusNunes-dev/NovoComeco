@@ -40,7 +40,7 @@ if (isset($ong_id)) {
     <title>Doação ONG</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/todos-global.css">
-    <link rel="stylesheet" href="../../css/todos-pagina-ong.css">
+    <link rel="stylesheet" href="../../css/todos-ong.css">
 </head>
 
 <body>
@@ -115,7 +115,7 @@ if (isset($ong_id)) {
                 <input type="text" id="metodo_pagamento" name="metodo_pagamento" value="PIX" readonly>
             </div>
             <div class="button-container">
-                <div class="cancel-button" onclick="window.location.href='../usuarios/usu-ongs.php'">
+                <div class="cancel-button" onclick="window.location.href='adm-configuracoes.php'">
                     <p>Cancelar doação</p>
                 </div>
                 <div class="confirm-button" onclick="validateDonation()">
