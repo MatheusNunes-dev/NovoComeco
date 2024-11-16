@@ -49,7 +49,7 @@
             <h1>Alterar Senha</h1>
         </div>
         <section class="password-change">
-            <form action="enviar-email.php" method="POST">
+            <form action="https://usebasin.com/f/3a0bd8f96b66" method="POST">
                 <div class="input-group">
                     <label for="email">E-mail</label>
                     <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
