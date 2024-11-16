@@ -126,6 +126,7 @@ $mensagens = $result->fetch_all(MYSQLI_ASSOC);
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
+
 </body>
 
 </html>

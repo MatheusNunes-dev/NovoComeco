@@ -96,12 +96,12 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
             <div class="img-footer-end"><img class="boneco-footer" src="../../assets/img-footer.png" alt="Imagem de rodapé 2"></div>
         </div>
     </footer>
-
-    <script src="../../js/header.js"></script>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
+    <script src="../../js/header.js"></script>
+
 </body>
 
 </html>

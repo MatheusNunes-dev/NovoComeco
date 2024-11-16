@@ -145,27 +145,27 @@ $mysqli->close();
         <div class="pending-ongs">
             <h2>ONGs Pendentes:</h2>
             <table>
-            <thead>
-                <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Ação</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($pending_ongs as $pending_ong): ?>
-                <tr>
-                    <td><?= htmlspecialchars($pending_ong['id_ong']) ?></td>
-                    <td><?= htmlspecialchars($pending_ong['nome']) ?></td>
-                    <td>
-                    <form method="POST" action="">
-                        <input type="hidden" name="accept_ong_id" value="<?= $pending_ong['id_ong'] ?>">
-                        <button type="submit">Aceitar</button>
-                    </form>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($pending_ongs as $pending_ong): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($pending_ong['id_ong']) ?></td>
+                            <td><?= htmlspecialchars($pending_ong['nome']) ?></td>
+                            <td>
+                                <form method="POST" action="">
+                                    <input type="hidden" name="accept_ong_id" value="<?= $pending_ong['id_ong'] ?>">
+                                    <button type="submit">Aceitar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
             </table>
         </div>
     </div>
@@ -202,6 +202,11 @@ $mysqli->close();
             </div>
         </div>
     </footer>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 </body>
+
 
 </html>

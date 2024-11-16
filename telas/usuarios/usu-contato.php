@@ -145,5 +145,10 @@ if (isset($_SESSION['user_tipo']) && $_SESSION['user_tipo'] === 'administrador')
         if (errorMessage) errorMessage.style.display = 'none';
     }, 3000);
 </script>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
+
 
 </html>
