@@ -104,6 +104,7 @@ $mysqli->close();
         </div>
         <div class="action-buttons">
             <button class="action-button" onclick="window.location.href='../administrador/adm-redefinir-senha.php'">Alterar Senha</button>
+            <button class="action-button" onclick="window.location.href='adm-aprovar-ong.php'">Aprovar ONGs</button>
             <button class="action-button" onclick="window.location.href='../../logout.php'">Logout</button>
         </div>
     </main>
