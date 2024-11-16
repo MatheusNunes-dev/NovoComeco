@@ -9,7 +9,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accept_ong_id'])) {
     $accept_ong_id = $_POST['accept_ong_id'];
-    $update_query = "UPDATE ONG SET status = 'aprovado' WHERE id_ong = ?";
+    $update_query = "UPDATE ONG SET status = 'ativo' WHERE id_ong = ?";
     $stmt = $mysqli->prepare($update_query);
     $stmt->bind_param('i', $accept_ong_id);
     $stmt->execute();
