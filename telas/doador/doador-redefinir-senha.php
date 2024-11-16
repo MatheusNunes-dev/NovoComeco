@@ -7,7 +7,7 @@ $tipoUsuario = $_SESSION['user_tipo'] ?? null;
 $email = $_SESSION['user_email'] ?? null;
 
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $tipoUsuario !== 'doador') {
-    header("Location: /telas/usuarios/login.php");
+    header("Location: /telas/usuarios/usu-login.php");
     exit();
 }
 
@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 session_destroy(); // Destrói a sessão atual
 
                 // Redireciona para a página de login
-                header("Location: ../usuarios/login.php");
+                header("Location: ../usuarios/usu-login.php");
                 exit();
             } else {
                 $error_message = "Erro ao atualizar a senha: " . $stmt->error;
@@ -90,14 +90,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="nav-links" id="nav-links">
                 <ul>
                     <li><button class="btn-icon-header" onclick="toggleSideBar()">X</button></li>
-                    <li class="nav-link"><a href="../../telas/usuarios/index.php">HOME</a></li>
-                    <li class="nav-link"><a href="../../telas/usuarios/pagina-quero-doar.php">ONG'S</a></li>
-                    <li class="nav-link"><a href="../../telas/usuarios/sobre.php">SOBRE</a></li>
-                    <li class="nav-link"><a href="../../telas/usuarios/contato.php">CONTATO</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/usu-index.php">HOME</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/usu-ongs.php">ONG'S</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/usu-sobre.php">SOBRE</a></li>
+                    <li class="nav-link"><a href="../../telas/usuarios/usu-contato.php">CONTATO</a></li>
                 </ul>
             </div>
             <div class="user">
-                <a href="configuracoes-doador.php">
+                <a href="doador-configuracoes.php">
                     <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
@@ -169,8 +169,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <script>
         function cancelarAlteracao() {
-            window.location.href = "configuracoes-doador.php"; // Redireciona para a página inicial ou outra de sua escolha
+            window.location.href = "doador-configuracoes.php"; // Redireciona para a página inicial ou outra de sua escolha
         }
+    </script>
+
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
 </body>
 

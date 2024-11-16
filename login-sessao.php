@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['admin_id'] = $admin['id_administrador'];
         $_SESSION['admin_nome'] = $admin['nome'];
         $_SESSION['user_tipo'] = 'admin';
-        header("Location: /telas/usuarios/index.php");
+        header("Location: /telas/usuarios/usu-index.php");
         exit();
     }
 
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['doador_id'] = $doador['id_doador'];
         $_SESSION['doador_nome'] = $doador['nome'];
         $_SESSION['user_tipo'] = 'doador';
-        header("Location: /telas/usuarios/index.php");
+        header("Location: /telas/usuarios/usu-index.php");
         exit();
     }
 
@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['ong_id'] = $ong['id_ong'];
             $_SESSION['ong_nome'] = $ong['nome'];
             $_SESSION['user_tipo'] = 'ong';
-            header("Location: /telas/usuarios/index.php");
+            header("Location: /telas/usuarios/usu-index.php");
             exit();
         } else {
             // ONG está desativada

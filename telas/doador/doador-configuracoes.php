@@ -6,57 +6,44 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
     header("Location: /telas/usuarios/usu-login.php");
     exit();
 }
-
-// Incluir o arquivo de conexão com o banco de dados
-require '../../db.php';
-
-// Preparar a consulta para obter o histórico do doador logado
-$query = "SELECT d.valor_total, d.data_hora, o.nome AS nome_ong
-          FROM DOACAO d
-          INNER JOIN ONG o ON d.id_ong = o.id_ong
-          WHERE d.id_doador = ?
-          ORDER BY d.data_hora DESC";
-
-$stmt = $mysqli->prepare($query);
-$stmt->bind_param("i", $_SESSION['user_id']);
-$stmt->execute();
-$result = $stmt->get_result();
-
-// Processar os resultados
-$donations = [];
-while ($row = $result->fetch_assoc()) {
-    $donations[] = $row;
-}
-
-// Fechar a conexão
-$stmt->close();
-$mysqli->close();
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Histórico de Doação</title>
+    <title>Novo Começo - Configurações</title>
+    <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
     <link rel="stylesheet" href="../../css/todos-global.css">
-    <link rel="stylesheet" href="../../css/doador-historico-doacoes.css">
+    <link rel="stylesheet" href="../../css/todos-configuracoes.css">
+    <link rel="stylesheet" href="../../css/configuracoes-doador.css">
 </head>
 
 <body>
+    <!-- Cabeçalho -->
     <header>
         <nav class="navbar nav-lg-screen" id="navbar">
             <button class="btn-icon-header" onclick="toggleSideBar()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list"
+                    viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
                 </svg>
             </button>
             <div>
-                <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo">
+                <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo da Novo Começo">
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
-                    <li><button class="btn-icon-header" onclick="toggleSideBar()">X</button></li>
+                    <li>
+                        <button class="btn-icon-header" onclick="toggleSideBar()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                            </svg>
+                        </button>
+                    </li>
                     <li class="nav-link"><a href="../../telas/usuarios/usu-index.php">HOME</a></li>
                     <li class="nav-link"><a href="../../telas/usuarios/usu-ongs.php">ONG'S</a></li>
                     <li class="nav-link"><a href="../../telas/usuarios/usu-sobre.php">SOBRE</a></li>
@@ -64,28 +51,35 @@ $mysqli->close();
                 </ul>
             </div>
             <div class="user">
-                <a href="doador-configuracoes.php">
+                <a href="../../telas/usuarios/configuracoes-doador.php">
                     <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
         </nav>
     </header>
 
-    <div class="container">
-        <h1>Histórico de Doações</h1>
-        <?php if (count($donations) > 0): ?>
-            <?php foreach ($donations as $donation): ?>
-                <div class="donation-box">
-                    <p><strong>ONG:</strong> <?= htmlspecialchars($donation['nome_ong']) ?></p>
-                    <p><strong>Data:</strong> <?= htmlspecialchars($donation['data_hora']) ?></p>
-                    <p><strong>Valor:</strong> R$ <?= number_format($donation['valor_total'], 2, ',', '.') ?></p>
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p>Você ainda não realizou doações.</p>
-        <?php endif; ?>
-    </div>
+    <!-- Conteúdo Principal -->
+    <main class="container">
+        <h1 class="title">Configurações</h1>
 
+        <!-- Detalhes do Usuário -->
+        <section class="donation-box">
+            <div class="donation-details">
+                <p><strong>Usuário:</strong> <?php echo $_SESSION['user_nome']; ?></p>
+                <p><strong>E-mail:</strong> <?php echo $_SESSION['user_email']; ?></p>
+            </div>
+        </section>
+
+        <!-- Ações do Usuário -->
+        <div class="action-buttons">
+            <button class="action-button" onclick="window.location.href='../doador/doador-redefinir-senha.php'">Alterar Senha</button>
+            <button class="action-button" onclick="window.location.href='doador-excluir-conta.php'">Excluir Conta</button>
+            <button class="action-button" onclick="window.location.href='doador-historico.php'">Histórico Doações</button>
+            <button class="action-button" onclick="window.location.href='../../logout.php'">Logout</button>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
     <footer>
         <div class="footer">
             <div class="img-footer-start">
@@ -119,10 +113,18 @@ $mysqli->close();
         </div>
     </footer>
 
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
+
+    <script src="../../js/header.js"></script>
 </body>
 
 </html>

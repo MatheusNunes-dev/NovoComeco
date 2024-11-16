@@ -8,7 +8,7 @@ require __DIR__ . '/db.php'; // Verifique o caminho correto
 
 // Verificar se o usuário está logado e é ONG
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'ong') {
-    header("Location: telas/usuarios/login.php");
+    header("Location: telas/usuarios/usu-login.php");
     exit();
 }
 
@@ -28,7 +28,7 @@ try {
 
     if ($row['status'] === 'desativado') {
         session_destroy();
-        header("Location: telas/usuarios/login.php?msg=ong_ja_desativada");
+        header("Location: telas/usuarios/usu-login.php?msg=ong_ja_desativada");
         exit();
     }
 
@@ -50,7 +50,7 @@ try {
         session_destroy();
         echo "<script>
             alert('Sua ONG foi desativada com sucesso.');
-            window.location.href = 'telas/usuarios/login.php';
+            window.location.href = 'telas/usuarios/usu-login.php';
         </script>";
         exit();
     } catch (Exception $e) {
@@ -64,7 +64,7 @@ try {
 
     // Destruir a sessão e redirecionar para login
     session_destroy();
-    header("Location: telas/usuarios/login.php?msg=ong_desativada");
+    header("Location: telas/usuarios/usu-login.php?msg=ong_desvinculada");
     exit();
 } catch (Exception $e) {
     echo "<script>

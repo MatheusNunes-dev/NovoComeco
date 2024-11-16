@@ -17,6 +17,29 @@ include_once('../../db.php');
 // Habilita exibição de erros para depuração
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
+$nome_ong = "";
+$email_ong = "";
+$cnpj_ong = "";
+
+try {
+    // Busca os detalhes da ONG logada no banco de dados
+    $sql = "SELECT nome, email, cnpj FROM ONG WHERE email = ?";
+    if ($stmt = $mysqli->prepare($sql)) {
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt->bind_result($nome_ong, $email_ong, $cnpj_ong);
+        $stmt->fetch();
+        $stmt->close();
+    } else {
+        throw new Exception("Erro ao preparar consulta: " . $mysqli->error);
+    }
+} catch (Exception $e) {
+    die("Erro: " . $e->getMessage());
+}
+
+// Habilita exibição de erros para depuração
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
 $error_message = "";
 $success_message = "";
 
@@ -58,24 +81,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-
-
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alterar Senha - Novo Começo</title>
-    <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
+    <title>Novo Começo - Configurações</title>
+    <link rel="shortcut icon" href="../../assets/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/todos-global.css">
-    <link rel="stylesheet" href="../../css/todos-redefinir-senha.css">
+    <link rel="stylesheet" href="../../css/todos-configuracoes.css">
+    <link rel="stylesheet" href="../../css/configuracoes-ong.css">
 </head>
 
 <body>
+    <!-- Cabeçalho -->
     <header>
         <nav class="navbar nav-lg-screen" id="navbar">
-            <button class="btn-icon-header" onclick="toggleSideBar()" aria-label="Abrir menu">
+            <button class="btn-icon-header" onclick="toggleSideBar()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list"
                     viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
@@ -83,16 +106,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </svg>
             </button>
             <div>
-                <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo do Novo Começo">
+                <img class="img-logo" id="logo" src="../../assets/logo.png" alt="Logo da Novo Começo">
             </div>
             <div class="nav-links" id="nav-links">
                 <ul>
                     <li>
-                        <button class="btn-icon-header" onclick="toggleSideBar()" aria-label="Fechar menu">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                class="bi bi-x" viewBox="0 0 16 16">
-                                <path
-                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                        <button class="btn-icon-header" onclick="toggleSideBar()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                             </svg>
                         </button>
                     </li>
@@ -103,109 +124,72 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </ul>
             </div>
             <div class="user">
-                <a href="doador-configuracoes.php">
+                <a href="../../telas/ong/configuracoes-ong.php">
                     <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
         </nav>
     </header>
 
-    <main>
-        <div class="title">
-            <h1>Redefinir Senha</h1>
-            <?php
-            if (!empty($error_message)) {
-                echo "<p style='color: red;'>$error_message</p>";
-            }
-            if (!empty($success_message)) {
-                echo "<p style='color: green;'>$success_message</p>";
-            }
-            ?>
-        </div>
-        <section class="password-change">
-            <form id="password-form" action="" method="POST" aria-labelledby="password-change-section">
-                <div class="input-group">
-                    <label for="nova-senha">Nova senha</label>
-                    <input type="password" id="nova-senha" name="nova_senha" required>
-                </div>
-                <div class="input-group">
-                    <label for="confirme-nova-senha">Confirme sua nova senha</label>
-                    <input type="password" id="confirme-nova-senha" name="confirmar_senha" required>
-                </div>
-                <div class="action-buttons">
-                    <button type="button" class="action-button" onclick="cancelarAlteracao()">Cancelar</button>
-                    <button type="submit" class="confirm-button">Confirmar</button>
-                </div>
-            </form>
+    <!-- Conteúdo Principal -->
+    <main class="container">
+        <h1 class="title">Configurações</h1>
+
+        <!-- Detalhes do Usuário -->
+        <section class="donation-box">
+            <div class="circle">
+                <p>FOTO</p>
+            </div>
+            <div class="donation-details">
+                <p><strong>ONG:</strong> <?= htmlspecialchars($nome_ong) ?></p>
+                <p><strong>E-mail:</strong> <?= htmlspecialchars($email_ong) ?></p>
+                <p><strong>CNPJ:</strong> <?= htmlspecialchars($cnpj_ong) ?></p>
+            </div>
         </section>
+
+        <!-- Ações do Usuário -->
+        <div class="action-buttons">
+            <button class="action-button" onclick="window.location.href='../ong/ong-redefinir-senha.php'">Redefinir Senha</button>
+            <button class="action-button" onclick="window.location.href='ong-desvincular.php'">Desvincular ONG</button>
+            <button class="action-button" onclick="window.location.href='../../logout.php'">Logout</button>
+        </div>
     </main>
 
+    <!-- Rodapé -->
     <footer>
         <div class="footer">
             <div class="img-footer-start">
-                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png" alt="Personagem do rodapé">
+                <img class="boneco-footer img-footer" src="../../assets/img-footer.png" alt="Boneco do rodapé">
             </div>
             <div class="socias">
                 <div class="icons-col-1">
                     <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/google.png" alt="Ícone Google">
+                        <img class="icon-footer" src="../../assets/google.png" alt="Google">
                         <p>novocomeço@gmail.com</p>
                     </div>
                     <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/instagram.png" alt="Ícone Instagram">
+                        <img class="icon-footer" src="../../assets/instagram.png" alt="Instagram">
                         <p>@novocomeço</p>
                     </div>
                 </div>
                 <div class="icons-col-2">
                     <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/whatsapp.png" alt="Ícone WhatsApp">
-                        <p>(41)99997676</p>
+                        <img class="icon-footer" src="../../assets/whatsapp.png" alt="Whatsapp">
+                        <p>(41) 99997-6767</p>
                     </div>
                     <div class="social-footer">
-                        <img class="icon-footer" src="../../assets/facebook.png" alt="Ícone Facebook">
+                        <img class="icon-footer" src="../../assets/facebook.png" alt="Facebook">
                         <p>@novocomeco</p>
                     </div>
                 </div>
             </div>
             <div class="img-footer-end">
-                <img class="boneco-footer" class="img-footer" src="../../assets/img-footer.png" alt="Personagem do rodapé">
+                <img class="boneco-footer img-footer" src="../../assets/img-footer.png" alt="Boneco do rodapé">
             </div>
         </div>
     </footer>
 
     <script src="../../js/header.js"></script>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-
-        // Função para validar a senha
-        document.getElementById('password-form').onsubmit = function(event) {
-            var novaSenha = document.getElementById('nova-senha').value;
-            var confirmeSenha = document.getElementById('confirme-nova-senha').value;
-            var messageContainer = document.getElementById('message-container');
-
-            // Limpar mensagens anteriores
-            messageContainer.innerHTML = '';
-
-            if (novaSenha !== confirmeSenha) {
-                // Exibir mensagem de erro
-                messageContainer.innerHTML = '<div class="error-message">As senhas não coincidem. Por favor, tente novamente.</div>';
-                event.preventDefault(); // Impede o envio do formulário
-            } else {
-                // Exibir mensagem de sucesso
-                messageContainer.innerHTML = '<div class="success-message">Senhas coincidem. A alteração será feita!</div>';
-            }
-        }
-
-        // Função para cancelar
-        function cancelarAlteracao() {
-            window.location.href = "../../telas/usuarios/usu-index.php"; // Redireciona para a página inicial ou outra de sua escolha
-        }
-
-        setTimeout(() => {
-            messageContainer.innerHTML = '';
-        }, 5000); // Remove a mensagem após 5 segundos
-    </script>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');

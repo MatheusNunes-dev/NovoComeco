@@ -1,46 +1,51 @@
 <?php
 session_start();
+include('../../db.php');
 
-// Verificar se o usuário está logado como doador
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'doador') {
+// Verificar se o usuário está logado como administrador
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'administrador') {
     header("Location: /telas/usuarios/usu-login.php");
     exit();
 }
 
-// Incluir o arquivo de conexão com o banco de dados
-require '../../db.php';
-
-// Preparar a consulta para obter o histórico do doador logado
-$query = "SELECT d.valor_total, d.data_hora, o.nome AS nome_ong
-          FROM DOACAO d
-          INNER JOIN ONG o ON d.id_ong = o.id_ong
-          WHERE d.id_doador = ?
-          ORDER BY d.data_hora DESC";
+// Preparar a consulta para obter o histórico de transferências
+$query = "
+    SELECT 
+        B.id_boleto, 
+        ONG.nome AS nome_ong, 
+        B.valor_transferencia, 
+        B.data_emissao, 
+        B.data_vencimento, 
+        B.status_pagamento, 
+        B.metodo_pagamento 
+    FROM BOLETO B
+    INNER JOIN ONG ON B.id_ong = ONG.id_ong
+    ORDER BY B.data_emissao DESC";
 
 $stmt = $mysqli->prepare($query);
-$stmt->bind_param("i", $_SESSION['user_id']);
 $stmt->execute();
 $result = $stmt->get_result();
 
 // Processar os resultados
-$donations = [];
+$transferencias = [];
 while ($row = $result->fetch_assoc()) {
-    $donations[] = $row;
+    $transferencias[] = $row;
 }
 
 // Fechar a conexão
 $stmt->close();
 $mysqli->close();
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Histórico de Doação</title>
+    <title>Histórico de Transferências</title>
     <link rel="stylesheet" href="../../css/todos-global.css">
-    <link rel="stylesheet" href="../../css/doador-historico-doacoes.css">
+    <link rel="stylesheet" href="../../css/adm-historico-transferencias.css">
 </head>
 
 <body>
@@ -64,7 +69,7 @@ $mysqli->close();
                 </ul>
             </div>
             <div class="user">
-                <a href="doador-configuracoes.php">
+                <a href="adm-configuracoes.php">
                     <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
@@ -72,17 +77,21 @@ $mysqli->close();
     </header>
 
     <div class="container">
-        <h1>Histórico de Doações</h1>
-        <?php if (count($donations) > 0): ?>
-            <?php foreach ($donations as $donation): ?>
-                <div class="donation-box">
-                    <p><strong>ONG:</strong> <?= htmlspecialchars($donation['nome_ong']) ?></p>
-                    <p><strong>Data:</strong> <?= htmlspecialchars($donation['data_hora']) ?></p>
-                    <p><strong>Valor:</strong> R$ <?= number_format($donation['valor_total'], 2, ',', '.') ?></p>
+        <h1>Histórico de Transferências</h1>
+        <?php if (count($transferencias) > 0): ?>
+            <?php foreach ($transferencias as $transferencia): ?>
+                <div class="transferencias-box">
+                    <p><strong>ID do Boleto:</strong> <?= htmlspecialchars($transferencia['id_boleto']) ?></p>
+                    <p><strong>ONG:</strong> <?= htmlspecialchars($transferencia['nome_ong']) ?></p>
+                    <p><strong>Valor:</strong> R$ <?= number_format($transferencia['valor_transferencia'], 2, ',', '.') ?></p>
+                    <p><strong>Data de Emissão:</strong> <?= date('d/m/Y', strtotime($transferencia['data_emissao'])) ?></p>
+                    <p><strong>Data de Vencimento:</strong> <?= date('d/m/Y', strtotime($transferencia['data_vencimento'])) ?></p>
+                    <p><strong>Status:</strong> <?= ucfirst($transferencia['status_pagamento']) ?></p>
+                    <p><strong>Método de Pagamento:</strong> <?= htmlspecialchars($transferencia['metodo_pagamento']) ?></p>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
-            <p>Você ainda não realizou doações.</p>
+            <p>Nenhuma transferência encontrada.</p>
         <?php endif; ?>
     </div>
 
@@ -118,11 +127,6 @@ $mysqli->close();
             </div>
         </div>
     </footer>
-
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
 </body>
 
 </html>

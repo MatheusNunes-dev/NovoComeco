@@ -4,7 +4,7 @@ require __DIR__ . '/db.php'; // Inclui a conexão com o banco
 
 // Verificar se o usuário está logado e é doador
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'doador') {
-    header("Location: telas/usuarios/login.php");
+    header("Location: telas/usuarios/usu-login.php");
     exit();
 }
 
@@ -22,7 +22,7 @@ try {
     if ($row['status'] === 'desativado') {
         echo "<p>Conta já está desativada.</p>";
         session_destroy();
-        header("Location: telas/usuarios/login.php?msg=conta_ja_desativada");
+        header("Location: telas/usuarios/usu-login.php?msg=conta_ja_desativada");
         exit();
     }
 
@@ -37,7 +37,7 @@ try {
     }
 
     session_destroy();
-    header("Location: telas/usuarios/login.php?msg=conta_desativada");
+    header("Location: telas/usuarios/usu-login.php?msg=conta_desativada");
     exit();
 } catch (Exception $e) {
     echo "<p>Erro ao processar a solicitação: " . $e->getMessage() . "</p>";
