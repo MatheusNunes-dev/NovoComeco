@@ -16,7 +16,6 @@ $user_nome = $_SESSION['user_nome'];
 $user_email = $_SESSION['user_email'];
 $user_cpf = "";
 
-// Busca o CPF do doador no banco de dados
 $user_id = $_SESSION['user_id'];
 $sql = "SELECT cpf FROM doador WHERE id_doador = ?";
 $stmt = $mysqli->prepare($sql);

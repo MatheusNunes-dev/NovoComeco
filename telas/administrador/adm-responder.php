@@ -1,14 +1,12 @@
 <?php
 session_start();
-require('../../db.php'); // Conexão com o banco de dados
+require('../../db.php'); 
 
-// Verifica se o usuário é administrador
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'administrador') {
     header("Location: /telas/usuarios/usu-login.php");
     exit();
 }
 
-// Atualizar o status de uma mensagem
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_mensagem'], $_POST['novo_status'])) {
     $id_mensagem = intval($_POST['id_mensagem']);
     $novo_status = $_POST['novo_status'];
@@ -23,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_mensagem'], $_POST
     }
 }
 
-// Buscar apenas mensagens com status "não lido"
 $sql = "SELECT id, nome, email, mensagem, status, data_envio FROM contato WHERE status = 'nao_lido' ORDER BY data_envio DESC";
 $result = $mysqli->query($sql);
 $mensagens = $result->fetch_all(MYSQLI_ASSOC);

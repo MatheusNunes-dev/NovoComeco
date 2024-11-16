@@ -255,7 +255,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             });
         }
 
-        // Executar quando o documento carregar
         document.addEventListener('DOMContentLoaded', setupMessageRemoval);
     </script>
 </body>

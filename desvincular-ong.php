@@ -4,18 +4,16 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require __DIR__ . '/db.php'; // Verifique o caminho correto
+require __DIR__ . '/db.php'; 
 
-// Verificar se o usuário está logado e é ONG
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'ong') {
     header("Location: telas/usuarios/usu-login.php");
     exit();
 }
 
-$user_id = (int) $_SESSION['user_id']; // ID da ONG logada
+$user_id = (int) $_SESSION['user_id']; 
 
 try {
-    // Verificar o status atual da ONG
     $check_sql = "SELECT status FROM ONG WHERE id_ong = ?";
     $check_stmt = $mysqli->prepare($check_sql);
     if (!$check_stmt) {
@@ -32,9 +30,7 @@ try {
         exit();
     }
 
-    // Atualizar o status para desativado
     try {
-        // Atualizar o status para 'inativo' (valor permitido)
         $sql = "UPDATE ONG SET status = 'inativo' WHERE id_ong = ?";
         $stmt = $mysqli->prepare($sql);
         if (!$stmt) {
@@ -46,7 +42,6 @@ try {
             throw new Exception("Erro ao executar a consulta: " . $stmt->error);
         }
 
-        // Destruir a sessão e redirecionar
         session_destroy();
         echo "<script>
             alert('Sua ONG foi desativada com sucesso.');
@@ -62,7 +57,6 @@ try {
 
 
 
-    // Destruir a sessão e redirecionar para login
     session_destroy();
     header("Location: telas/usuarios/usu-login.php?msg=ong_desvinculada");
     exit();

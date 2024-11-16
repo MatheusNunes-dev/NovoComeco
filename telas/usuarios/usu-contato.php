@@ -137,7 +137,6 @@ if (isset($_SESSION['user_tipo']) && $_SESSION['user_tipo'] === 'administrador')
 </body>
 
 <script>
-    // Remove mensagens após 5 segundos
     setTimeout(() => {
         const successMessage = document.querySelector('.success-message');
         const errorMessage = document.querySelector('.error-message');

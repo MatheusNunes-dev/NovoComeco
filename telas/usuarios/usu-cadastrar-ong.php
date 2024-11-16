@@ -235,7 +235,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     <script>
         document.getElementById('cep').addEventListener('blur', function() {
-            let cep = this.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+            let cep = this.value.replace(/\D/g, ''); 
             if (cep.length === 8) {
                 fetch(`https://viacep.com.br/ws/${cep}/json/`)
                     .then(response => response.json())

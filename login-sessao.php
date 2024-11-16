@@ -1,15 +1,13 @@
 <?php
 session_start();
-require '../../db.php'; // Verifique o caminho correto do arquivo de conexão
+require '../../db.php'; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
     $senha = trim($_POST['senha']);
 
-    // Remover dados de sessão anteriores
     unset($_SESSION['admin_id'], $_SESSION['doador_id'], $_SESSION['ong_id'], $_SESSION['user_tipo']);
 
-    // Verificar login para Administradores
     $sql_admin = "SELECT * FROM ADMINISTRADOR WHERE email = ? AND senha = ?";
     $stmt = $conn->prepare($sql_admin);
     $stmt->bind_param("ss", $email, $senha);
@@ -25,7 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // Verificar login para Doadores
     $sql_doador = "SELECT * FROM DOADOR WHERE email = ? AND senha = ?";
     $stmt2 = $conn->prepare($sql_doador);
     $stmt2->bind_param("ss", $email, $senha);
@@ -41,7 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // Verificar login para ONGs
     $sql_ong = "SELECT * FROM ONG WHERE email = ? AND senha = ?";
     $stmt3 = $conn->prepare($sql_ong);
     $stmt3->bind_param("ss", $email, $senha);
@@ -51,7 +47,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result_ong->num_rows > 0) {
         $ong = $result_ong->fetch_assoc();
 
-        // Verificar o status da ONG
         if (strtolower($ong['status']) === 'ativo') {
             $_SESSION['ong_id'] = $ong['id_ong'];
             $_SESSION['ong_nome'] = $ong['nome'];
@@ -59,17 +54,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: /telas/usuarios/usu-index.php");
             exit();
         } else {
-            // ONG está desativada
             echo "<div class='error-message'>Sua ONG foi desativada. Entre em contato com o suporte.</div>";
             exit();
         }
     }
 
-    // Caso nenhuma conta seja encontrada
     echo "<div class='error-message'>Email ou senha inválidos.</div>";
 }
 
-// Fechar conexões
 if (isset($stmt)) $stmt->close();
 if (isset($stmt2)) $stmt2->close();
 if (isset($stmt3)) $stmt3->close();

@@ -6,13 +6,11 @@ function validateFilters() {
     const startDate = document.getElementById('start-date').value;
     const endDate = document.getElementById('end-date').value;
 
-    // Verificar se a data de início é posterior à data de término
     if (startDate && endDate && !isValidDateRange(startDate, endDate)) {
         showErrorMessage('A data de início não pode ser posterior à data de término.');
-        return; // Impede a aplicação do filtro com erro
+        return; 
     }
 
-    // Executa o filtro se as datas forem válidas
     filterDonations();
 }
 
@@ -28,19 +26,17 @@ function filterDonations() {
     const endDate = document.getElementById('end-date').value;
     const donationBoxes = document.querySelectorAll('.donation-box');
 
-    let anyVisible = false; // Flag para verificar se alguma doação será exibida
+    let anyVisible = false; 
 
     donationBoxes.forEach(box => {
         let show = true;
         const donationDate = box.getAttribute('data-date');
         const donationOng = box.getAttribute('data-ong');
 
-        // Filtra por ONG
         if (selectedOng !== 'all' && selectedOng !== donationOng) {
             show = false;
         }
 
-        // Filtra por data de início e término
         if (startDate && new Date(donationDate) < new Date(startDate)) {
             show = false;
         }
@@ -49,10 +45,9 @@ function filterDonations() {
         }
 
         box.style.display = show ? 'block' : 'none';
-        if (show) anyVisible = true; // Define a flag como verdadeira se algum elemento é visível
+        if (show) anyVisible = true; 
     });
 
-    // Exibe um erro se nenhum resultado for encontrado
     if (!anyVisible) {
         showErrorMessage('Nenhuma doação encontrada para os filtros selecionados.');
     }
@@ -62,7 +57,7 @@ function showErrorMessage(message) {
     const errorMessageDiv = document.getElementById('error-message');
     const errorText = document.getElementById('error-text');
     errorText.textContent = message;
-    errorMessageDiv.style.display = 'block'; // Exibe a mensagem de erro
+    errorMessageDiv.style.display = 'block';
 }
 
 function hideErrorMessage() {

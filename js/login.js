@@ -2,82 +2,29 @@ document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('form');
     const emailInput = document.querySelector('#email');
     const senhaInput = document.querySelector('#password');
-<<<<<<< HEAD
     const submitButton = document.querySelector('.action-button');
     
-    // Função de validação do formulário
     function validateForm(event) {
         let valid = true;
         
-        // Validações de email
         if (emailInput.value === '') {
-            emailInput.style.borderColor = '#FF4D4D'; // Vermelho
+            emailInput.style.borderColor = '#FF4D4D'; 
             valid = false;
         } else {
-            emailInput.style.borderColor = '#ccc'; // Resetando a borda
+            emailInput.style.borderColor = '#ccc'; 
         }
         
-        // Validações de senha
         if (senhaInput.value === '') {
-            senhaInput.style.borderColor = '#FF4D4D'; // Vermelho
+            senhaInput.style.borderColor = '#FF4D4D'; 
             valid = false;
         } else {
-            senhaInput.style.borderColor = '#ccc'; // Resetando a borda
+            senhaInput.style.borderColor = '#ccc'; 
         }
         
         if (!valid) {
             event.preventDefault();
-=======
-    const emailError = document.createElement('p');
-    const senhaError = document.createElement('p');
-    
-    // Adiciona os elementos de erro ao DOM
-    emailError.style.color = '#FF4D4D';
-    senhaError.style.color = '#FF4D4D';
-    emailInput.parentElement.appendChild(emailError);
-    senhaInput.parentElement.appendChild(senhaError);
-
-    // Função de validação do formulário
-    function validateForm(event) {
-        let valid = true;
-
-        // Normaliza o email para letras minúsculas
-        emailInput.value = emailInput.value.toLowerCase().trim();
-
-        // Validações de email
-        if (emailInput.value === '') {
-            emailError.textContent = 'O campo de email é obrigatório.';
-            emailInput.style.borderColor = '#FF4D4D'; // Vermelho
-            valid = false;
-        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
-            emailError.textContent = 'Insira um email válido.';
-            emailInput.style.borderColor = '#FF4D4D';
-            valid = false;
-        } else {
-            emailError.textContent = ''; // Limpa mensagem de erro
-            emailInput.style.borderColor = '#ccc'; // Resetando a borda
-        }
-
-        // Validações de senha
-        if (senhaInput.value === '') {
-            senhaError.textContent = 'O campo de senha é obrigatório.';
-            senhaInput.style.borderColor = '#FF4D4D'; // Vermelho
-            valid = false;
-        } else if (senhaInput.value.length < 6) {
-            senhaError.textContent = 'A senha deve ter pelo menos 6 caracteres.';
-            senhaInput.style.borderColor = '#FF4D4D';
-            valid = false;
-        } else {
-            senhaError.textContent = ''; // Limpa mensagem de erro
-            senhaInput.style.borderColor = '#ccc'; // Resetando a borda
-        }
-
-        if (!valid) {
-            event.preventDefault(); // Impede o envio do formulário se houver erro
->>>>>>> 137f6d9cad2eb70cc142f14f9226d3d37d4ce5f1
         }
     }
 
-    // Aplica a validação ao submeter o formulário
     form.addEventListener('submit', validateForm);
 });
