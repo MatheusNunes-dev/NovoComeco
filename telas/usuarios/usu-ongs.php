@@ -1,7 +1,7 @@
 <?php
 session_start();
-$isLoggedIn = isset($_SESSION['user_id']); // Verifica se o usuário está logado
-$tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, caso esteja logado
+$isLoggedIn = isset($_SESSION['user_id']);
+$tipoUsuario = $_SESSION['user_tipo'] ?? null;
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +11,7 @@ $tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, c
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
+    <link rel="shortcut icon" href="../../assets/logo.png" type="image/png">
     <link rel="stylesheet" href="../../css/todos-global.css">
     <link rel="stylesheet" href="../../css/usuario-pagina-ongs.css">
     <title>Novo Começo</title>
@@ -49,7 +49,6 @@ $tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, c
             </div>
             <div class="user">
                 <?php if ($isLoggedIn): ?>
-                    <!-- Direciona para o perfil com base no tipo de usuário -->
                     <?php if ($tipoUsuario === 'administrador'): ?>
                         <a href="../administrador/adm-configuracoes.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
                     <?php elseif ($tipoUsuario === 'doador'): ?>
@@ -58,7 +57,6 @@ $tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, c
                         <a href="../ong/ong-configuracoes.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
                     <?php endif; ?>
                 <?php else: ?>
-                    <!-- Se o usuário não está logado, o botão leva para a página de login -->
                     <a href="usu-login.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
                 <?php endif; ?>
             </div>
@@ -125,8 +123,6 @@ $tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, c
         </section>
     </main>
 
-
-
     <footer>
         <div class="footer">
             <div class="img-footer-start">
@@ -172,7 +168,6 @@ $tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, c
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
-
 
 </body>
 

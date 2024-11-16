@@ -7,6 +7,28 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
     exit();
 }
 
+$filter_condition = "";
+$params = [];
+
+if (isset($_POST['ong_filter']) && $_POST['ong_filter'] !== "") {
+    $ong_filter = $_POST['ong_filter'];
+    $filter_condition .= " AND B.id_ong = ?";
+    $params[] = $ong_filter;
+}
+
+if (isset($_POST['data_filter_de']) && isset($_POST['data_filter_ate']) && $_POST['data_filter_de'] !== "" && $_POST['data_filter_ate'] !== "") {
+    $data_filter_de = $_POST['data_filter_de'];
+    $data_filter_ate = $_POST['data_filter_ate'];
+
+    if (strtotime($data_filter_ate) < strtotime($data_filter_de)) {
+        echo "<script>alert('A data \"Até\" não pode ser anterior à data \"De\".');</script>";
+    } else {
+        $filter_condition .= " AND B.data_emissao BETWEEN ? AND ?";
+        $params[] = $data_filter_de;
+        $params[] = $data_filter_ate;
+    }
+}
+
 $query = "
     SELECT 
         B.id_boleto, 
@@ -18,9 +40,17 @@ $query = "
         B.metodo_pagamento 
     FROM BOLETO B
     INNER JOIN ONG ON B.id_ong = ONG.id_ong
-    ORDER BY B.data_emissao DESC";
+    WHERE 1=1" . $filter_condition . "
+    ORDER BY B.data_emissao DESC
+";
 
 $stmt = $mysqli->prepare($query);
+
+if (!empty($params)) {
+    $types = str_repeat('s', count($params));
+    $stmt->bind_param($types, ...$params);
+}
+
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -29,10 +59,17 @@ while ($row = $result->fetch_assoc()) {
     $transferencias[] = $row;
 }
 
+$ongs_query = "SELECT id_ong, nome FROM ONG";
+$ongs_result = $mysqli->query($ongs_query);
+
+$ongs = [];
+while ($row = $ongs_result->fetch_assoc()) {
+    $ongs[] = $row;
+}
+
 $stmt->close();
 $mysqli->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -74,6 +111,29 @@ $mysqli->close();
 
     <div class="container">
         <h1>Histórico de Transferências</h1>
+
+        <form method="POST" action="" class="filter-form">
+            <div>
+                <label for="ong_filter">Filtrar por ONG:</label>
+                <select id="ong_filter" name="ong_filter">
+                    <option value="">Selecione</option>
+                    <?php foreach ($ongs as $ong): ?>
+                        <option value="<?= $ong['id_ong'] ?>" <?= isset($ong_filter) && $ong_filter == $ong['id_ong'] ? 'selected' : '' ?>><?= htmlspecialchars($ong['nome']) ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div>
+                <label for="data_filter_de">Filtrar por Data (De):</label>
+                <input type="date" id="data_filter_de" name="data_filter_de" value="<?= $data_filter_de ?? '' ?>">
+            </div>
+            <div>
+                <label for="data_filter_ate">Filtrar por Data (Até):</label>
+                <input type="date" id="data_filter_ate" name="data_filter_ate" value="<?= $data_filter_ate ?? '' ?>">
+            </div>
+            <button type="submit">Filtrar</button>
+            <a href="adm-configuracoes.php" class="btn-submit">Voltar para Configurações</a>
+        </form>
+
         <?php if (count($transferencias) > 0): ?>
             <?php foreach ($transferencias as $transferencia): ?>
                 <div class="transferencias-box">
