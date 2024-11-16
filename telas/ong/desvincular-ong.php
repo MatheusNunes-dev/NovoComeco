@@ -15,8 +15,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Excluir</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
-    <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/desvincular-copy.css">
+    <link rel="stylesheet" href="../../css/todos-global.css">
+    <link rel="stylesheet" href="../../css/ong-desvincular.css">
 </head>
 
 <body>

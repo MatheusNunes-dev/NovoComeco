@@ -1,7 +1,7 @@
 <?php
-    session_start();
-    $isLoggedIn = isset($_SESSION['user_id']); // Verifica se o usuário está logado
-    $tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, caso esteja logado
+session_start();
+$isLoggedIn = isset($_SESSION['user_id']); // Verifica se o usuário está logado
+$tipoUsuario = $_SESSION['user_tipo'] ?? null; // Armazena o tipo de usuário, caso esteja logado
 ?>
 
 <!DOCTYPE html>
@@ -13,8 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novo Começo</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
-    <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/sobre.css">
+    <link rel="stylesheet" href="../../css/todos-global.css">
+    <link rel="stylesheet" href="../../css/todos-sobre.css">
 </head>
 
 <body>
@@ -49,7 +49,7 @@
             </div>
             <div class="user">
                 <?php if ($isLoggedIn): ?>
-        <!-- Direciona para o perfil com base no tipo de usuário -->
+                    <!-- Direciona para o perfil com base no tipo de usuário -->
                     <?php if ($tipoUsuario === 'administrador'): ?>
                         <a href="../administrador/configuracoes-administrador.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
                     <?php elseif ($tipoUsuario === 'doador'): ?>
@@ -58,7 +58,7 @@
                         <a href="../ong/configuracoes-ong.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
                     <?php endif; ?>
                 <?php else: ?>
-        <!-- Se o usuário não está logado, o botão leva para a página de login -->
+                    <!-- Se o usuário não está logado, o botão leva para a página de login -->
                     <a href="login.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
                 <?php endif; ?>
             </div>

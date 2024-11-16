@@ -143,8 +143,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="description" content="Página de login do Novo Começo. Faça login para acessar sua conta.">
     <title>Login - Novo Começo</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/login.css">
+    <link rel="stylesheet" href="../../css/todos-global.css">
+    <link rel="stylesheet" href="../../css/usuario-login.css">
 </head>
 
 <body>

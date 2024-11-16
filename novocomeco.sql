@@ -99,32 +99,34 @@ CREATE TABLE NOTIFICACAO (
     data_hora DATETIME NOT NULL,
     FOREIGN KEY (id_doacao) REFERENCES DOACAO(id_doacao)
 );
--- Tabela BOLETO
 CREATE TABLE BOLETO (
     id_boleto INT AUTO_INCREMENT PRIMARY KEY,
     id_ong INT,
     id_administrador INT,
-    valor_taxa DECIMAL(10, 2) NOT NULL,
+    valor_transferencia DECIMAL(10, 2) NOT NULL,
     data_emissao DATE NOT NULL,
     data_vencimento DATE NOT NULL,
     status_pagamento ENUM('realizado', 'pendente', 'cancelado') DEFAULT 'pendente',
-    mes_referencia VARCHAR(7),
     metodo_pagamento VARCHAR(50),
     FOREIGN KEY (id_ong) REFERENCES ONG(id_ong),
     FOREIGN KEY (id_administrador) REFERENCES ADMINISTRADOR(id_administrador)
 );
 -- Tabela HISTORICO_BOLETOS
 CREATE TABLE HISTORICO_BOLETOS (
-    id_historico_boletos INT AUTO_INCREMENT PRIMARY KEY,
-    id_boleto INT,
-    valor_total DECIMAL(10, 2) NOT NULL,
-    data_emissao DATE NOT NULL,
-    data_pagamento DATE,
-    status ENUM('realizado', 'pendente') DEFAULT 'pendente',
-    comprovante_transferencia BLOB NOT NULL,
-    metodo_transferencia VARCHAR(30) NOT NULL,
-    FOREIGN KEY (id_boleto) REFERENCES BOLETO(id_boleto)
+    id_historico_boletos INT AUTO_INCREMENT PRIMARY KEY, -- Identificador único do histórico
+    id_boleto INT,                                      -- Referência ao boleto
+    id_ong INT NOT NULL,                                -- Referência à ONG
+    id_administrador INT NOT NULL,                     -- Referência ao administrador
+    valor_transferencia DECIMAL(10, 2) NOT NULL,        -- Valor da transferência
+    data_emissao DATE NOT NULL,                         -- Data de emissão do boleto
+    data_pagamento DATE,                                -- Data efetiva do pagamento
+    status ENUM('realizado', 'pendente', 'cancelado') DEFAULT 'pendente', -- Status do pagamento
+    metodo_transferencia VARCHAR(30) NOT NULL,         -- Método utilizado na transferência
+    FOREIGN KEY (id_boleto) REFERENCES BOLETO(id_boleto), -- Chave estrangeira para a tabela BOLETO
+    FOREIGN KEY (id_ong) REFERENCES ONG(id_ong),         -- Chave estrangeira para a tabela ONG
+    FOREIGN KEY (id_administrador) REFERENCES ADMINISTRADOR(id_administrador) -- Chave estrangeira para a tabela ADMINISTRADOR
 );
+
 -- Tabela CATEGORIA
 CREATE TABLE CATEGORIA (
     id_categoria INT AUTO_INCREMENT PRIMARY KEY,

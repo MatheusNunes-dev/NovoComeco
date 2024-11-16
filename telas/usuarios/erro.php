@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="../css/error.css">
+    <link rel="stylesheet" href="../css/usuario-error.css">
 </head>
 
 <body>
@@ -15,7 +15,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Acesso Negado</title>
-        <link rel="stylesheet" href="caminho/para/error.css">
+        <link rel="stylesheet" href="caminho/para/usuario-error.css">
     </head>
 
     <body>

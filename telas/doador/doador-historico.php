@@ -39,8 +39,8 @@ $mysqli->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Histórico de Doação</title>
-    <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/doacoes-historico.css">
+    <link rel="stylesheet" href="../../css/todos-global.css">
+    <link rel="stylesheet" href="../../css/doador-historico-doacoes.css">
 </head>
 
 <body>

@@ -86,8 +86,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criar Conta - Novo Começo</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
-    <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/cadastrar.css">
+    <link rel="stylesheet" href="../../css/todos-global.css">
+    <link rel="stylesheet" href="../../css/todos-cadastrar.css">
 </head>
 
 <body>

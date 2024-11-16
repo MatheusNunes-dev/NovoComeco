@@ -16,56 +16,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doação ONG</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
-    <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/transferencia.css">
-    <style>
-        /* O Modal */
-        .modal {
-            display: none;
-            /* Esconde o modal por padrão */
-            position: fixed;
-            z-index: 1;
-            /* Fica sobre o conteúdo */
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-            /* Fundo semitransparente */
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* O conteúdo do Modal */
-        .modal-content {
-            background-color: #fff;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 400px;
-            text-align: center;
-            border-radius: 10px;
-            position: relative;
-        }
-
-        /* O botão de fechar */
-        .close {
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
-            position: absolute;
-            top: 10px;
-            right: 25px;
-            cursor: pointer;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-        }
-    </style>
+    <link rel="stylesheet" href="../../css/todos-global.css">
+    <link rel="stylesheet" href="../../css/transferencias.css">
 </head>
 
 <body>
@@ -117,19 +69,20 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
                 <div class="input-box" style="text-align: center; width: 70%; margin: 0 auto;">
                     <label for="ong" style="font-size: 1.2em;">Selecione a ONG desejada:</label>
                     <select id="ong" name="ong" required style="font-size: 1.2em;">
-                        <option value="" disabled selected>Selecione a ONG</option>
-                        <option value="ong1">Mão Amiga</option>
-                        <option value="ong2">Amigos do Bem</option>
-                        <option value="ong3">Cultivando a vida</option>
-                        <option value="ong4">Mais União</option>
-                        <option value="ong5">Amigos da Terra</option>
-                        <option value="ong6">Amor animal</option>
+                        <option value="" disabled selected></option>
+                        <option value="1">Mão Amiga</option>
+                        <option value="2">Amigos do Bem</option>
+                        <option value="3">Cultivando a Vida</option>
+                        <option value="4">Mais União</option>
+                        <option value="5">Amigos da Terra</option>
+                        <option value="6">Amor Animal</option>
                     </select>
                 </div>
+
                 <script>
                     document.getElementById('ong').addEventListener('change', function() {
-                        var selectedOng = this.value;
-                        window.location.href = '../../telas/administrador/' + selectedOng + '.php';
+                        const selectedOngId = this.value; // Obtém o ID da ONG selecionada
+                        window.location.href = `../../telas/administrador/ong2.php?id_ong=${selectedOngId}`; // Redireciona com o ID
                     });
                 </script>
             </section>

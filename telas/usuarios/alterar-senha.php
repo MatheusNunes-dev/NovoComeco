@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Novo Começo</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="image/png">
-    <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/alterar-senha-copy.css">
+    <link rel="stylesheet" href="../../css/todos-global.css">
+    <link rel="stylesheet" href="../../css/todos-alterar-senha.css">
 </head>
 
 <body>

@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data_emissao = $_POST['data_emissao'];
     $data_vencimento = $_POST['data_vencimento'];
     $metodo_pagamento = $_POST['metodo_pagamento'];
-    
+
     // Get id_administrador based on CPF
     $sql_admin = "SELECT id_administrador FROM ADMINISTRADOR WHERE cpf = ?";
     $stmt_admin = $mysqli->prepare($sql_admin);
@@ -101,8 +101,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doação ONG</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="Alegrinho">
-    <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/pagina-da-ong.css">
+    <link rel="stylesheet" href="../../css/todos-global.css">
+    <link rel="stylesheet" href="../../css/todos-pagina-ong.css">
 </head>
 
 <body>
@@ -139,7 +139,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <main class="container">
         <section class="donation-box">
-            <h1 class="ong-name">Realizar Doação</h1>
+            <h1 class="ong-name">Realizar Transferência</h1>
             <div class="donation-image">
                 <img src="../../assets/ong-1.png" alt="Imagem da ONG">
             </div>
