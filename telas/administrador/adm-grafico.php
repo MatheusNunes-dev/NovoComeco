@@ -1,11 +1,51 @@
 <?php
 session_start();
-
+include('../../db.php');
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'administrador') {
     header("Location: /telas/usuarios/usu-login.php");
     exit();
 }
+
+$data_inicio = isset($_GET['data_inicio']) ? $_GET['data_inicio'] : '';
+$data_fim = isset($_GET['data_fim']) ? $_GET['data_fim'] : '';
+$nome_doador = isset($_GET['nome_doador']) ? $_GET['nome_doador'] : '';
+$nome_ong = isset($_GET['nome_ong']) ? $_GET['nome_ong'] : '';
+
+// Montar a query com base nos filtros
+$sql = "SELECT DOACAO.id_doacao, DOACAO.valor_total, DOACAO.valor_taxa, DOACAO.data_hora, DOACAO.status, 
+            DOADOR.nome AS nome_doador, ONG.nome AS nome_ong
+        FROM DOACAO
+        JOIN DOADOR ON DOACAO.id_doador = DOADOR.id_doador
+        JOIN ONG ON DOACAO.id_ong = ONG.id_ong
+        WHERE DOACAO.status = 'realizado'";
+
+if ($data_inicio && $data_fim) {
+    $sql .= " AND DOACAO.data_hora BETWEEN '$data_inicio' AND '$data_fim'";
+}
+
+if ($nome_doador) {
+    $sql .= " AND DOADOR.nome LIKE '%$nome_doador%'";
+}
+
+if ($nome_ong) {
+    $sql .= " AND ONG.nome LIKE '%$nome_ong%'";
+}
+
+$sql .= " ORDER BY DOACAO.data_hora DESC";
+
+// Executar a consulta
+$result = $mysqli->query($sql);
+$dados = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $dados[] = $row;
+    }
+} else {
+    $dados = [];
+}
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -14,7 +54,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novo Começo</title>
-    <link rel="shortcut icon" href="../../assets/logo.png" type="image/png">
     <link rel="stylesheet" href="../../css/todos-global.css">
     <link rel="stylesheet" href="../../css/adm-grafico-transferencias.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -58,8 +97,58 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
         </nav>
     </header>
     <main>
-        <h1 class="title">Gráfico de transferências</h1>
+        <div class="relatorio">
+            <h1 class="title">Relatório de Doações</h1>
+
+            <form method="GET" action="">
+                <div class="filtros">
+                    <label>Data Inicial:
+                        <input type="date" name="data_inicio" value="<?php echo $data_inicio; ?>">
+                    </label>
+                    <label>Data Final:
+                        <input type="date" name="data_fim" value="<?php echo $data_fim; ?>">
+                    </label>
+                    <label>Nome do Doador:
+                        <input type="text" name="nome_doador" placeholder="Nome do Doador" value="<?php echo $nome_doador; ?>">
+                    </label>
+                    <label>Nome da ONG:
+                        <input type="text" name="nome_ong" placeholder="Nome da ONG" value="<?php echo $nome_ong; ?>">
+                    </label>
+                    <button type="submit">Filtrar</button>
+                </div>
+            </form>
+
+            <?php if (!empty($dados)) : ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID Doação</th>
+                            <th>Nome da ONG</th>
+                            <th>Nome do Doador</th>
+                            <th>Valor Total</th>
+                            <th>Valor da Taxa</th>
+                            <th>Data e Hora</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($dados as $row) : ?>
+                            <tr>
+                                <td><?php echo $row['id_doacao']; ?></td>
+                                <td><?php echo $row['nome_ong']; ?></td>
+                                <td><?php echo $row['nome_doador']; ?></td>
+                                <td><?php echo number_format($row['valor_total'], 2, ',', '.'); ?></td>
+                                <td><?php echo number_format($row['valor_taxa'], 2, ',', '.'); ?></td>
+                                <td><?php echo date('d/m/Y H:i', strtotime($row['data_hora'])); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <p>Nenhuma doação encontrada para o período selecionado.</p>
+            <?php endif; ?>
+        </div>
         <div class="container">
+            <h1 class="title">Gráfico de Doações para ONGs</h1>
             <div class="filters">
                 <label>Data Inicial:
                     <input type="date" id="data_inicio" value="<?php echo date('Y-m-d', strtotime('-50 days')); ?>">

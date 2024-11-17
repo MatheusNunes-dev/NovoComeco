@@ -97,14 +97,15 @@ $mysqli->close();
         </section>
 
         <div class="action-buttons">
-            <button class="action-button" onclick="window.location.href='adm-grafico.php'">Gráfico Doações</button>
-            <button class="action-button" onclick="window.location.href='adm-transferir.php'">Transferir</button>
+            <button class="action-button" onclick="window.location.href='adm-grafico.php'">Doações</button>
+            <button class="action-button" onclick="window.location.href='adm-transferencia.php'">Transferir</button>
             <button class="action-button" onclick="window.location.href='adm-historico-transf.php'">Histórico Transferências</button>
             <button class="action-button" onclick="window.location.href='adm-responder.php'">Responder</button>
         </div>
         <div class="action-buttons">
             <button class="action-button" onclick="window.location.href='../administrador/adm-redefinir-senha.php'">Alterar Senha</button>
             <button class="action-button" onclick="window.location.href='adm-aprovar-ong.php'">Aprovar ONGs</button>
+            <button class="action-button" onclick="window.location.href='adm-ongs.php'">Ver ONGs</button>
             <button class="action-button" onclick="window.location.href='../../logout.php'">Logout</button>
         </div>
     </main>

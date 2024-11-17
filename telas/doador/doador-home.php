@@ -41,7 +41,9 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
                     <li class="nav-link"><a href="../../telas/usuarios/usu-contato.php">CONTATO</a></li>
                 </ul>
             </div>
-            <div class="user"><a href="../../telas/doador/doador-configuracoes.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a></div>
+            <div class="user">
+                <a href="doador-configuracoes.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
+            </div>        
         </nav>
     </header>
     <main tabindex="0" class="content" id="content" onclick="closeSideBar()">

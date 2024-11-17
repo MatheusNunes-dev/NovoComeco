@@ -103,9 +103,7 @@ if (isset($_POST['finalizar_doacao'])) {
                 </ul>
             </div>
             <div class="user">
-                <a href="doador-configuracoes.php">
-                    <img class="img-user" src="../../assets/user.png" alt="Usuário">
-                </a>
+                <a href="doador-configuracoes.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
             </div>
         </nav>
     </header>
@@ -116,7 +114,8 @@ if (isset($_POST['finalizar_doacao'])) {
                 <p><span class="fake-button"><strong>ONG Selecionada:</strong> <?php echo $ong_selecionada; ?></span></p>
                 <p><span class="fake-button"><strong>Nome do Doador:</strong> <?php echo htmlspecialchars($nome_doador); ?></span></p>
                 <p><span class="fake-button"><strong>Valor da Doação:</strong> R$ <?php echo number_format($valor, 2, ',', '.'); ?></span></p>
-                <p><span class="fake-button"><strong>Taxa:</strong> R$ <?php echo number_format($taxa, 2, ',', '.'); ?></span></p>
+                <p><span class="fake-button"><strong>Taxa sobre o Valor Total:</strong> R$ <?php echo number_format($taxa, 2, ',', '.'); ?></span></p>
+                <span>*Taxa inclusa no valor da doação</span>
             </div>
         </div>
         <div class="pix-box">

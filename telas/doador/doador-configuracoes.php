@@ -67,7 +67,9 @@ $mysqli->close();
                     <li class="nav-link"><a href="../../telas/usuarios/usu-contato.php">CONTATO</a></li>
                 </ul>
             </div>
-            <div class="user"><a href="../../telas/usuarios/configuracoes-doador.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a></div>
+            <div class="user">
+                <a href="doador-configuracoes.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
+            </div>
         </nav>
     </header>
     <main class="container">
@@ -88,26 +90,26 @@ $mysqli->close();
     </main>
     <footer>
         <div class="footer">
-            <div class="img-footer-start"><img class="boneco-footer img-footer" src="../../assets/img-footer.png" alt="Boneco do rodapé"></div>
-            <div class="sociais">
+            <div class="img-footer-start"><img class="boneco-footer img-footer" src="../../assets/img-footer.png"></div>
+            <div class="socias">
                 <div class="icons-col-1">
-                    <div class="social-footer"><img class="icon-footer" src="../../assets/google.png" alt="Google">
+                    <div class="social-footer"><img class="icon-footer" src="../../assets/google.png">
                         <p>novocomeço@gmail.com</p>
                     </div>
-                    <div class="social-footer"><img class="icon-footer" src="../../assets/instagram.png" alt="Instagram">
+                    <div class="social-footer"><img class="icon-footer" src="../../assets/instagram.png">
                         <p>@novocomeço</p>
                     </div>
                 </div>
                 <div class="icons-col-2">
-                    <div class="social-footer"><img class="icon-footer" src="../../assets/whatsapp.png" alt="Whatsapp">
-                        <p>(41) 99997-6767</p>
+                    <div class="social-footer"><img class="icon-footer" src="../../assets/whatsapp.png">
+                        <p>(41)99997676</p>
                     </div>
-                    <div class="social-footer"><img class="icon-footer" src="../../assets/facebook.png" alt="Facebook">
+                    <div class="social-footer"><img class="icon-footer" src="../../assets/facebook.png">
                         <p>@novocomeco</p>
                     </div>
                 </div>
             </div>
-            <div class="img-footer-end"><img class="boneco-footer img-footer" src="../../assets/img-footer.png" alt="Boneco do rodapé"></div>
+            <div class="img-footer-end"><img class="boneco-footer img-footer" src="../../assets/img-footer.png"></div>
         </div>
     </footer>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>

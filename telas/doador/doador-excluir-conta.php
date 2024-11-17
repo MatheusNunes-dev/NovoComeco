@@ -43,9 +43,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
                 </ul>
             </div>
             <div class="user">
-                <a href="../../telas/doador/doador-configuracoes.php">
-                    <img class="img-user" src="../../assets/user.png" alt="Usuário">
-                </a>
+                <a href="doador-configuracoes.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
             </div>
         </nav>
     </header>
