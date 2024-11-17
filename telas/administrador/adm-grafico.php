@@ -11,7 +11,6 @@ $data_fim = isset($_GET['data_fim']) ? $_GET['data_fim'] : '';
 $nome_doador = isset($_GET['nome_doador']) ? $_GET['nome_doador'] : '';
 $nome_ong = isset($_GET['nome_ong']) ? $_GET['nome_ong'] : '';
 
-// Montar a query com base nos filtros
 $sql = "SELECT DOACAO.id_doacao, DOACAO.valor_total, DOACAO.valor_taxa, DOACAO.data_hora, DOACAO.status, 
             DOADOR.nome AS nome_doador, ONG.nome AS nome_ong
         FROM DOACAO
@@ -33,7 +32,6 @@ if ($nome_ong) {
 
 $sql .= " ORDER BY DOACAO.data_hora DESC";
 
-// Executar a consulta
 $result = $mysqli->query($sql);
 $dados = [];
 if ($result->num_rows > 0) {

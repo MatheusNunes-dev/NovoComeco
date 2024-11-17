@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Verifica se o usuário está logado e se é administrador
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'administrador') {
     header("Location: /telas/usuarios/usu-login.php");
     exit();
@@ -9,11 +8,9 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
 
 include('../../db.php');
 
-// Verifica se foi fornecido o ID da ONG a ser editada
 if (isset($_GET['id_ong'])) {
     $id_ong = $_GET['id_ong'];
 
-    // Busca os dados da ONG no banco de dados
     $sql = "SELECT * FROM ONG WHERE id_ong = ?";
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("i", $id_ong);
@@ -23,19 +20,16 @@ if (isset($_GET['id_ong'])) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
     } else {
-        // Se a ONG não for encontrada, redireciona
         header("Location: adm-ongs.php");
         exit();
     }
 
     $stmt->close();
 } else {
-    // Se o ID não for passado, redireciona
     header("Location: adm-ongs.php");
     exit();
 }
 
-// Atualiza os dados da ONG se o formulário for submetido
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = $_POST['nome'];
     $telefone = $_POST['telefone'];
@@ -59,7 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conta_corrente = $_POST['conta_corrente'];
     $chave_pix = $_POST['chave_pix'];
 
-    // Atualiza os dados no banco de dados
     $sql_update = "UPDATE ONG SET nome = ?, telefone = ?, senha = ?, email = ?, data_validacao = ?, data_cadastro = ?, cnpj = ?, status = ?, constituicao = ?, comprobatorio = ?, estatuto_social = ?, end_rua = ?, end_numero = ?, end_bairro = ?, end_cidade = ?, end_estado = ?, end_complemento = ?, banco = ?, agencia = ?, conta_corrente = ?, chave_pix = ? WHERE id_ong = ?";
     $stmt_update = $mysqli->prepare($sql_update);
     $stmt_update->bind_param("sssssssssssssssssssssi", $nome, $telefone, $senha, $email, $data_validacao, $data_cadastro, $cnpj, $status, $constituicao, $comprobatorio, $estatuto_social, $end_rua, $end_numero, $end_bairro, $end_cidade, $end_estado, $end_complemento, $banco, $agencia, $conta_corrente, $chave_pix, $id_ong);
@@ -116,11 +109,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <main>
         <h1 class="title">Editar ONG</h1>
-        
+
         <?php if (isset($msg)) : ?>
             <p><?php echo $msg; ?></p>
         <?php endif; ?>
-        
+
         <form action="adm-editar-ong.php?id_ong=<?php echo $row['id_ong']; ?>" method="POST">
             <label for="nome">Nome:</label>
             <input type="text" name="nome" value="<?php echo $row['nome']; ?>" required>
