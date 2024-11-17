@@ -14,6 +14,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novo Começo</title>
+    <link rel="shortcut icon" href="../../assets/logo.png" type="image/png">
     <link rel="stylesheet" href="../../css/todos-global.css">
     <link rel="stylesheet" href="../../css/adm-grafico-transferencias.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

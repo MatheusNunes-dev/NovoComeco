@@ -112,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Página de login do Novo Começo. Faça login para acessar sua conta.">
-    <title>Login - Novo Começo</title>
+    <title>Novo Começo</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/todos-global.css">
     <link rel="stylesheet" href="../../css/usuario-login.css">

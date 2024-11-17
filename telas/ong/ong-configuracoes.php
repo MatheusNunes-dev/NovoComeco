@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Novo Começo - Configurações</title>
+    <title>Novo Começo</title>
     <link rel="shortcut icon" href="../../assets/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/todos-global.css">
     <link rel="stylesheet" href="../../css/todos-configuracoes.css">
@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </ul>
             </div>
             <div class="user">
-                <a href="../../telas/ong/configuracoes-ong.php">
+                <a href="../../telas/ong/ong-configuracoes.php">
                     <img class="img-user" src="../../assets/user.png" alt="Usuário">
                 </a>
             </div>
@@ -130,6 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </section>
         <div class="action-buttons">
+            <button class="action-button" onclick="window.location.href='../ong/ong-historico-transf.php'">Histórico de Transferências Recebidas</button>
             <button class="action-button" onclick="window.location.href='../ong/ong-redefinir-senha.php'">Redefinir Senha</button>
             <button class="action-button" onclick="window.location.href='ong-desvincular.php'">Desvincular ONG</button>
             <button class="action-button" onclick="window.location.href='../../logout.php'">Logout</button>

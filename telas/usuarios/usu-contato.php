@@ -1,5 +1,7 @@
 <?php
 session_start();
+$isLoggedIn = isset($_SESSION['user_id']);
+$tipoUsuario = $_SESSION['user_tipo'] ?? null;
 require('../../db.php');
 
 $successMessage = $errorMessage = "";
@@ -72,7 +74,17 @@ if (isset($_SESSION['user_tipo']) && $_SESSION['user_tipo'] === 'administrador')
                 </ul>
             </div>
             <div class="user">
-                <a href="usu-login.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
+                <?php if ($isLoggedIn): ?>
+                    <?php if ($tipoUsuario === 'administrador'): ?>
+                        <a href="../administrador/adm-configuracoes.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
+                    <?php elseif ($tipoUsuario === 'doador'): ?>
+                        <a href="../doador/doador-configuracoes.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
+                    <?php elseif ($tipoUsuario === 'ong'): ?>
+                        <a href="../ong/ong-configuracoes.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <a href="usu-login.php"><img class="img-user" src="../../assets/user.png" alt="Usuário"></a>
+                <?php endif; ?>
             </div>
         </nav>
     </header>

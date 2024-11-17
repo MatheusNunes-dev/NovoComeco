@@ -2,20 +2,20 @@
 session_start();
 include('../../db.php');
 
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'administrador') {
+// Verifica se o usuário está logado e é uma ONG
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'ong') {
     header("Location: /telas/usuarios/usu-login.php");
     exit();
 }
 
-$filter_condition = "";
-$params = [];
+// Obtém o ID da ONG logada
+$id_ong = $_SESSION['user_id'];
 
-if (isset($_POST['ong_filter']) && $_POST['ong_filter'] !== "") {
-    $ong_filter = $_POST['ong_filter'];
-    $filter_condition .= " AND B.id_ong = ?";
-    $params[] = $ong_filter;
-}
+// Condição e parâmetros para filtros
+$filter_condition = " AND B.id_ong = ?";
+$params = [$id_ong];
 
+// Filtro por data, se fornecido
 if (isset($_POST['data_filter_de']) && isset($_POST['data_filter_ate']) && $_POST['data_filter_de'] !== "" && $_POST['data_filter_ate'] !== "") {
     $data_filter_de = $_POST['data_filter_de'];
     $data_filter_ate = $_POST['data_filter_ate'];
@@ -29,17 +29,16 @@ if (isset($_POST['data_filter_de']) && isset($_POST['data_filter_ate']) && $_POS
     }
 }
 
+// Consulta de transferências para a ONG logada
 $query = "
     SELECT 
         B.id_boleto, 
-        ONG.nome AS nome_ong, 
         B.valor_transferencia, 
         B.data_emissao, 
         B.data_vencimento, 
         B.status_pagamento, 
         B.metodo_pagamento 
     FROM BOLETO B
-    INNER JOIN ONG ON B.id_ong = ONG.id_ong
     WHERE 1=1" . $filter_condition . "
     ORDER BY B.data_emissao DESC
 ";
@@ -59,17 +58,10 @@ while ($row = $result->fetch_assoc()) {
     $transferencias[] = $row;
 }
 
-$ongs_query = "SELECT id_ong, nome FROM ONG";
-$ongs_result = $mysqli->query($ongs_query);
-
-$ongs = [];
-while ($row = $ongs_result->fetch_assoc()) {
-    $ongs[] = $row;
-}
-
 $stmt->close();
 $mysqli->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -109,48 +101,39 @@ $mysqli->close();
             </div>
         </nav>
     </header>
+    <main>
+        <div class="container">
+            <h1>Histórico de Transferências Recebidas</h1>
 
-    <div class="container">
-        <h1>Histórico de Transferências</h1>
-
-        <form method="POST" action="" class="filter-form">
-            <div>
-                <label for="ong_filter">Filtrar por ONG:</label>
-                <select id="ong_filter" name="ong_filter">
-                    <option value="">Selecione</option>
-                    <?php foreach ($ongs as $ong): ?>
-                        <option value="<?= $ong['id_ong'] ?>" <?= isset($ong_filter) && $ong_filter == $ong['id_ong'] ? 'selected' : '' ?>><?= htmlspecialchars($ong['nome']) ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <div>
-                <label for="data_filter_de">Filtrar por Data (De):</label>
-                <input type="date" id="data_filter_de" name="data_filter_de" value="<?= $data_filter_de ?? '' ?>">
-            </div>
-            <div>
-                <label for="data_filter_ate">Filtrar por Data (Até):</label>
-                <input type="date" id="data_filter_ate" name="data_filter_ate" value="<?= $data_filter_ate ?? '' ?>">
-            </div>
-            <button type="submit">Filtrar</button>
-            <a href="adm-configuracoes.php" class="btn-submit">Voltar para Configurações</a>
-        </form>
-
-        <?php if (count($transferencias) > 0): ?>
-            <?php foreach ($transferencias as $transferencia): ?>
-                <div class="transferencias-box">
-                    <p><strong>ID do Boleto:</strong> <?= htmlspecialchars($transferencia['id_boleto']) ?></p>
-                    <p><strong>ONG:</strong> <?= htmlspecialchars($transferencia['nome_ong']) ?></p>
-                    <p><strong>Valor:</strong> R$ <?= number_format($transferencia['valor_transferencia'], 2, ',', '.') ?></p>
-                    <p><strong>Data de Emissão:</strong> <?= date('d/m/Y', strtotime($transferencia['data_emissao'])) ?></p>
-                    <p><strong>Data de Vencimento:</strong> <?= date('d/m/Y', strtotime($transferencia['data_vencimento'])) ?></p>
-                    <p><strong>Status:</strong> <?= ucfirst($transferencia['status_pagamento']) ?></p>
-                    <p><strong>Método de Pagamento:</strong> <?= htmlspecialchars($transferencia['metodo_pagamento']) ?></p>
+            <form method="POST" action="" class="filter-form">
+                <div>
+                    <label for="data_filter_de">Filtrar por Data (De):</label>
+                    <input type="date" id="data_filter_de" name="data_filter_de" value="<?= $data_filter_de ?? '' ?>">
                 </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p>Nenhuma transferência encontrada.</p>
-        <?php endif; ?>
-    </div>
+                <div>
+                    <label for="data_filter_ate">Filtrar por Data (Até):</label>
+                    <input type="date" id="data_filter_ate" name="data_filter_ate" value="<?= $data_filter_ate ?? '' ?>">
+                </div>
+                <button type="submit">Filtrar</button>
+                <a href="ong-configuracoes.php" class="btn-submit">Voltar para Configurações</a>
+            </form>
+
+            <?php if (count($transferencias) > 0): ?>
+                <?php foreach ($transferencias as $transferencia): ?>
+                    <div class="transferencias-box">
+                        <p><strong>ID do Boleto:</strong> <?= htmlspecialchars($transferencia['id_boleto']) ?></p>
+                        <p><strong>Valor:</strong> R$ <?= number_format($transferencia['valor_transferencia'], 2, ',', '.') ?></p>
+                        <p><strong>Data de Emissão:</strong> <?= date('d/m/Y', strtotime($transferencia['data_emissao'])) ?></p>
+                        <p><strong>Data de Vencimento:</strong> <?= date('d/m/Y', strtotime($transferencia['data_vencimento'])) ?></p>
+                        <p><strong>Status:</strong> <?= ucfirst($transferencia['status_pagamento']) ?></p>
+                        <p><strong>Método de Pagamento:</strong> <?= htmlspecialchars($transferencia['metodo_pagamento']) ?></p>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Nenhuma transferência encontrada.</p>
+            <?php endif; ?>
+        </div>  
+    </main>
 
     <footer>
         <div class="footer">
