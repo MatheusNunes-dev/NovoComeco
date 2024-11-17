@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_ong'])) {
     $sql = "DELETE FROM ONG WHERE id_ong = ?";
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("i", $id_ong);
-    
+
     $stmt->close();
 }
 
@@ -33,7 +33,7 @@ $result = $mysqli->query($sql);
     <link rel="stylesheet" href="../../css/todos-global.css">
     <link rel="stylesheet" href="../../css/teste.css">
     <link rel="stylesheet" href="../../css/adm-ongs.css"
-</head>
+        </head>
 
 <body>
     <header>
@@ -84,7 +84,6 @@ $result = $mysqli->query($sql);
                                 <td><?php echo $row['status']; ?></td>
                                 <td>
                                     <a href="adm-editar-ong.php?id_ong=<?php echo $row['id_ong']; ?>">Editar</a> |
-                                    <!-- Formulário de exclusão -->
                                     <form action="adm-ongs.php" method="POST" style="display:inline;">
                                         <input type="hidden" name="id_ong" value="<?php echo $row['id_ong']; ?>">
                                         <button class="btn-excluir" type="submit" onclick="return confirm('Tem certeza que deseja excluir esta ONG?')">Excluir</button>

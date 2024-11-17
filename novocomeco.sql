@@ -1,6 +1,5 @@
 CREATE DATABASE novocomeco;
 USE novocomeco;
--- Tabela DOADOR
 CREATE TABLE DOADOR (
     id_doador INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -16,7 +15,6 @@ CREATE TABLE DOADOR (
     end_estado VARCHAR(2) NOT NULL,
     end_completento varchar(50)
 );
--- Tabela ONG
 CREATE TABLE ONG (
     id_ong INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -41,7 +39,6 @@ CREATE TABLE ONG (
     conta_corrente VARCHAR(20) NOT NULL,
     chave_pix VARCHAR(100) NOT NULL
 );
--- Tabela DOACAO
 CREATE TABLE DOACAO (
     id_doacao INT AUTO_INCREMENT PRIMARY KEY,
     id_ong INT,
@@ -50,9 +47,8 @@ CREATE TABLE DOACAO (
     valor_taxa DECIMAL(10, 2),
     data_hora DATETIME,
     status ENUM('pendente', 'confirmado', 'cancelado'),
-    FOREIGN KEY (id_ong) REFERENCES ONG(id_ong) -- Definindo a chave estrangeira
+    FOREIGN KEY (id_ong) REFERENCES ONG(id_ong)
 );
--- Tabela ADMINISTRADOR
 CREATE TABLE ADMINISTRADOR (
     id_administrador INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -67,7 +63,6 @@ CREATE TABLE ADMINISTRADOR (
     end_completento varchar(50),
     cpf VARCHAR(14) UNIQUE
 );
--- Tabela DOACOES_ACUMULADAS
 CREATE TABLE DOACOES_ACUMULADAS (
     id_doacoes_acumuladas INT AUTO_INCREMENT PRIMARY KEY,
     id_administrador INT,
@@ -77,7 +72,6 @@ CREATE TABLE DOACOES_ACUMULADAS (
     FOREIGN KEY (id_administrador) REFERENCES ADMINISTRADOR(id_administrador),
     FOREIGN KEY (id_doacao) REFERENCES DOACAO(id_doacao)
 );
--- Tabela HISTORICO_DOACAO
 CREATE TABLE HISTORICO_DOACAO (
     id_historico_doacao INT AUTO_INCREMENT PRIMARY KEY,
     id_doacao INT,
@@ -90,7 +84,6 @@ CREATE TABLE HISTORICO_DOACAO (
     status ENUM('realizado', 'pendente', 'cancelado') DEFAULT 'pendente',
     FOREIGN KEY (id_doacao) REFERENCES DOACAO(id_doacao)
 );
--- Tabela NOTIFICACAO
 CREATE TABLE NOTIFICACAO (
     id_notificacao INT AUTO_INCREMENT PRIMARY KEY,
     id_doacao INT,
@@ -111,33 +104,20 @@ CREATE TABLE BOLETO (
     FOREIGN KEY (id_ong) REFERENCES ONG(id_ong),
     FOREIGN KEY (id_administrador) REFERENCES ADMINISTRADOR(id_administrador)
 );
--- Tabela HISTORICO_BOLETOS
 CREATE TABLE HISTORICO_BOLETOS (
     id_historico_boletos INT AUTO_INCREMENT PRIMARY KEY,
-    -- Identificador único do histórico
-    id_boleto INT,
-    -- Referência ao boleto
+    Identificador único do histórico id_boleto INT,
     id_ong INT NOT NULL,
-    -- Referência à ONG
     id_administrador INT NOT NULL,
-    -- Referência ao administrador
     valor_transferencia DECIMAL(10, 2) NOT NULL,
-    -- Valor da transferência
     data_emissao DATE NOT NULL,
-    -- Data de emissão do boleto
     data_pagamento DATE,
-    -- Data efetiva do pagamento
     status ENUM('realizado', 'pendente', 'cancelado') DEFAULT 'pendente',
-    -- Status do pagamento
     metodo_transferencia VARCHAR(30) NOT NULL,
-    -- Método utilizado na transferência
     FOREIGN KEY (id_boleto) REFERENCES BOLETO(id_boleto),
-    -- Chave estrangeira para a tabela BOLETO
     FOREIGN KEY (id_ong) REFERENCES ONG(id_ong),
-    -- Chave estrangeira para a tabela ONG
-    FOREIGN KEY (id_administrador) REFERENCES ADMINISTRADOR(id_administrador) -- Chave estrangeira para a tabela ADMINISTRADOR
+    FOREIGN KEY (id_administrador) REFERENCES ADMINISTRADOR(id_administrador)
 );
--- Tabela CATEGORIA
 CREATE TABLE CATEGORIA (
     id_categoria INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -152,7 +132,6 @@ CREATE TABLE contato_mensagens (
     mensagem TEXT NOT NULL,
     data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
--- Tabela PARCEIRO
 CREATE TABLE PARCEIRO (
     id_parceiro INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -167,7 +146,6 @@ CREATE TABLE PARCEIRO (
     id_ong INT,
     FOREIGN KEY (id_ong) REFERENCES ONG(id_ong)
 );
--- Consultar os doadores
 SELECT *
 FROM doador;
 SELECT *

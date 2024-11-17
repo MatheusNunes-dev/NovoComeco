@@ -95,7 +95,6 @@ form {
     color: #999;
 }
 
-/* Campos que devem ocupar linha inteira */
 .input-group:has(input[type="email"]),
 .input-group:has(input[type="password"]),
 .input-group:has(input#cnpj),
@@ -105,7 +104,6 @@ form {
     grid-column: 1 / -1;
 }
 
-/* Seção de senha */
 .password-section {
     grid-column: 1 / -1;
     display: grid;
@@ -113,7 +111,6 @@ form {
     margin-top: 1rem;
 }
 
-/* Botão de registro */
 .register-button {
     grid-column: 1 / -1;
     background-color: #FFA114;
@@ -211,7 +208,6 @@ form {
     }
 }
 
-/* Animações */
 @keyframes fadeIn {
     from {
         opacity: 0;

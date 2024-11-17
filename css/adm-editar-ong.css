@@ -14,7 +14,6 @@ h1.title {
     text-align: center;
 }
 
-/* Estilos do formulário */
 form {
     display: flex;
     flex-direction: column;
@@ -47,7 +46,6 @@ input[type="date"]:focus {
     outline: none;
 }
 
-/* Botões */
 button {
     padding: 10px 20px;
     font-size: 16px;

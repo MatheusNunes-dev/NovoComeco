@@ -1,7 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cutive+Mono&family=Inconsolata:wght@200..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
-/* Reset do css */
 
 html,
 body,
@@ -94,7 +93,6 @@ video {
 }
 
 
-/* HTML5 display-role reset for older browsers */
 article,
 aside,
 details,
@@ -155,7 +153,6 @@ a {
 }
 
 
-/* Header */
 header {
     font-family: Oswald;
 }
@@ -394,7 +391,6 @@ header {
 }
 
 
-/* Fonts */
 @font-face {
     font-family: 'Oswald';
     src: url('/assets/fonts/Oswald/static/Oswald-ExtraLight.ttf') format('truetype');

@@ -6,7 +6,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
     exit();
 }
 
-include('../../db.php'); 
+include('../../db.php');
 
 $id_ong = $_POST['id_ong'] ?? null;
 $valor = $_POST['total_doacoes'] ?? 0;
@@ -56,9 +56,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar_transferenc
 
             $id_administrador = $_SESSION['user_id'];
             $data_emissao = date("Y-m-d H:i:s");
-            $data_vencimento = date("Y-m-d H:i:s", strtotime("+7 days")); 
-            $metodo_pagamento = "PIX"; 
-            $status_pagamento = "realizado"; 
+            $data_vencimento = date("Y-m-d H:i:s", strtotime("+7 days"));
+            $metodo_pagamento = "PIX";
+            $status_pagamento = "realizado";
             $valor_pago = str_replace(',', '.', str_replace('.', '', $valor_pago));
             $valor_pago = floatval($valor_pago);
 
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar_transferenc
                 $data_vencimento,
                 $metodo_pagamento,
                 $status_pagamento,
-                $valor_pago   
+                $valor_pago
             );
 
             if ($stmtInsert->execute()) {
@@ -95,6 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar_transferenc
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -140,12 +141,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar_transferenc
             <p><strong>Chave PIX da ONG:</strong> <?php echo htmlspecialchars($chave_pix); ?></p>
         </div>
         <form method="POST">
-            <input type="hidden" name="valor_pago" value="<?php echo $valor_pago; ?>">  <!-- Corrigido para enviar o valor correto -->
-            <input type="hidden" name="id_ong" value="<?php echo $id_ong; ?>">  <!-- Corrigido para enviar o valor correto -->
+            <input type="hidden" name="valor_pago" value="<?php echo $valor_pago; ?>">
+            <input type="hidden" name="id_ong" value="<?php echo $id_ong; ?>">
             <button type="submit" name="finalizar_transferencia">Confirmar Transferência</button>
         </form>
     </main>
- 
+
     <footer>
         <div class="footer">
             <div class="img-footer-start">
@@ -183,4 +184,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar_transferenc
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
 </body>
+
 </html>
