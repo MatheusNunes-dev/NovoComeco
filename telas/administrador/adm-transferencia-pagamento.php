@@ -39,10 +39,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar_transferenc
         $sql = "UPDATE DOACAO SET transferida = 'sim' WHERE id_ong = ? AND transferida = 'não'";
         $stmt = $mysqli->prepare($sql);
         $stmt->bind_param("i", $id_ong);
+
         if ($stmt->execute()) {
-            echo "<script>alert('Transferência realizada com sucesso!');</script>";
-            header("Location: adm-transferencia.php"); 
-            exit();
+            $sqlInsert = "INSERT INTO boleto (
+                id_ong,
+                id_administrador,
+                data_emissao,
+                data_vencimento,
+                metodo_pagamento,
+                status_pagamento,
+                valor_transferencia
+            ) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+            $stmtInsert = $mysqli->prepare($sqlInsert);
+
+
+            $id_administrador = $_SESSION['user_id'];
+            $data_emissao = date("Y-m-d H:i:s");
+            $data_vencimento = date("Y-m-d H:i:s", strtotime("+7 days")); 
+            $metodo_pagamento = "PIX"; 
+            $status_pagamento = "realizado"; 
+            $valor_pago = str_replace(',', '.', str_replace('.', '', $valor_pago));
+            $valor_pago = floatval($valor_pago);
+
+            $stmtInsert->bind_param(
+                "iissssd",
+                $id_ong,
+                $id_administrador,
+                $data_emissao,
+                $data_vencimento,
+                $metodo_pagamento,
+                $status_pagamento,
+                $valor_pago   
+            );
+
+            if ($stmtInsert->execute()) {
+                echo "<script>alert('Transferência e registro realizados com sucesso!');</script>";
+                header("Location: adm-transferencia.php");
+                exit();
+            } else {
+                echo "<script>alert('Transferência realizada, mas falha ao registrar.');</script>";
+            }
+
+            $stmtInsert->close();
         } else {
             echo "<script>alert('Erro ao realizar a transferência.');</script>";
         }
@@ -51,6 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar_transferenc
         echo "<script>alert('ID da ONG não fornecida.');</script>";
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -100,6 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar_transferenc
             <p><strong>Chave PIX da ONG:</strong> <?php echo htmlspecialchars($chave_pix); ?></p>
         </div>
         <form method="POST">
+            <input type="hidden" name="valor_pago" value="<?php echo $valor_pago; ?>">  <!-- Corrigido para enviar o valor correto -->
             <input type="hidden" name="id_ong" value="<?php echo $id_ong; ?>">  <!-- Corrigido para enviar o valor correto -->
             <button type="submit" name="finalizar_transferencia">Confirmar Transferência</button>
         </form>
