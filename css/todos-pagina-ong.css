@@ -143,6 +143,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Responsividade */
 @media (max-width: 768px) {
     .button-container {
         flex-direction: column; 
@@ -249,6 +250,7 @@ select {
 }
 
 
+/* Responsividade */
 @media (max-width: 768px) {
     .container {
         padding: 10px; 

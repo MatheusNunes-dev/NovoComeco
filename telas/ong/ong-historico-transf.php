@@ -2,16 +2,20 @@
 session_start();
 include('../../db.php');
 
+// Verifica se o usuário está logado e é uma ONG
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_tipo'] !== 'ong') {
     header("Location: /telas/usuarios/usu-login.php");
     exit();
 }
 
+// Obtém o ID da ONG logada
 $id_ong = $_SESSION['user_id'];
 
+// Condição e parâmetros para filtros
 $filter_condition = " AND B.id_ong = ?";
 $params = [$id_ong];
 
+// Filtro por data, se fornecido
 if (isset($_POST['data_filter_de']) && isset($_POST['data_filter_ate']) && $_POST['data_filter_de'] !== "" && $_POST['data_filter_ate'] !== "") {
     $data_filter_de = $_POST['data_filter_de'];
     $data_filter_ate = $_POST['data_filter_ate'];
@@ -25,6 +29,7 @@ if (isset($_POST['data_filter_de']) && isset($_POST['data_filter_ate']) && $_POS
     }
 }
 
+// Consulta de transferências para a ONG logada
 $query = "
     SELECT 
         B.id_boleto, 
@@ -127,7 +132,7 @@ $mysqli->close();
             <?php else: ?>
                 <p>Nenhuma transferência encontrada.</p>
             <?php endif; ?>
-        </div>
+        </div>  
     </main>
 
     <footer>

@@ -142,6 +142,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Responsividade */
 @media (max-width: 768px) {
     .button-container {
         flex-direction: column; 
@@ -156,6 +157,7 @@
 
 
 
+/* Box que agrupa os campos de valor e ONG */
 .donation-input-box {
     width: 100%;
     background-color: #F9F9F9;
@@ -247,6 +249,7 @@ select {
 }
 
 
+/* Responsividade */
 @media (max-width: 768px) {
     .container {
         padding: 10px; 
@@ -346,7 +349,7 @@ input:disabled {
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    display: none; 
+    display: none; /* Oculto por padrão */
 }
 
 .popup-box {
